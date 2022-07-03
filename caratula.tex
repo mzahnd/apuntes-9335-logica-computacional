@@ -1,0 +1,61 @@
+% Special geometry for the titlepage
+\newgeometry{%
+    top=25mm,%
+    bottom=25mm,%
+    right=25mm,%
+    left=25mm
+}
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+    \vspace*{1cm}
+    
+    \Huge
+    \textbf{\thetitle}
+    
+    \vspace{0.25cm}
+    \large
+    \codigomateria \\
+    \vspace{0.25cm}
+    \Large
+    \cuatrimestre
+
+    \vspace{0.25cm}
+    \tiny
+    Última modificación: \thedate
+
+    
+    \vspace{1.5cm}
+    
+    \normalsize
+    \textbf{\theauthor}
+
+    \medskip
+
+    Con la colaboración de:
+
+    Abril Vilamowski%
+    \\%
+    David Wischñevsky%
+    \\%
+    Jonathan Liu%
+    % \\%
+    % Juan Pepe%
+    
+    \vfill
+    
+    \vspace{0.8cm}
+    \includegraphics[width=0.25\textwidth]{itba_logo.png}
+    
+    \vspace{0.8cm}
+    
+    Instituto Tecnológico de Buenos Aires\\
+    
+    
+\end{center}
+
+\end{titlepage}
+
+\restoregeometry % Ends geometry for the titlepage

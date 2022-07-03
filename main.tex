@@ -1,0 +1,605 @@
+%% Copyright (c) 2022 Martín E. Zahnd
+%%
+%% This code is licensed under MIT license (see LICENSE.txt for details)
+%%
+\documentclass[11pt,a4paper]{book}
+
+% Encodings
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% Español
+\usepackage[spanish,es-nodecimaldot,es-tabla,es-noquoting]{babel}
+
+\usepackage{geometry}   % Márgenes
+\usepackage{marginnote} % Notas al margen
+\usepackage{fancyhdr}   % Encabezado
+\usepackage{ragged2e}   % Text alignment: 
+                        % \RaggedRight , \RaggedLeft , \Centering , 
+                        % \justifying 
+\usepackage{titlesec}   % Personalización de capítulos y secciones
+
+\usepackage{xcolor}     % Colores
+%\usepackage{background} % Línea separadora entre el margen y el texto
+\usepackage{eso-pic}    % Línea separadora entre el margen y el texto
+\usepackage{ifthen}     % Línea separadora entre el margen y el texto
+\usepackage{tikz}       % Línea separadora entre el margen y el texto
+                        % Círculo alrededor del número en listas.
+\usepackage{wrapfig}    % wrap figure
+
+\usepackage{multicol}
+
+\usepackage{enumitem}   % Para listas enumeradas con un círculo
+% Usage:
+%   \begin{enumerate}[label=\protect\circled{\arabic*}]
+%   \item First item
+%   \item Second item
+%   \end{enumerate}
+
+\usepackage{calc}       % \widthof
+
+\usepackage{fancyvrb}   % \Verb macro
+
+\usepackage{amsthm, amssymb, mathtools, bm, MnSymbol} % Matemáticas
+\usepackage{dashbox}    % Dashed boxes. Para resultados intermedios
+\usepackage{nicefrac}   % Fracciones en la misma línea de texto
+\usepackage{tcolorbox}  % Colorear caja de teoremas
+\usepackage{etoolbox}   % Espaciado entre ecuaciones y texto
+\usepackage{pifont}     % ding: checkmark, crossmark
+
+\usepackage{cancel}     % Tachar texto
+
+\usepackage{accents}    % Para dot más grande en resta truncada
+
+% Document properties
+% Title, author, date reuse
+\usepackage{titling}
+
+\usepackage{hyperref}   % Referencias
+\usepackage{cleveref}   % Referencias entre defs., teoremas, corolarios, lemas
+
+\usepackage{float}      % Posicionar imágenes y tablas
+
+\usepackage{pdfpages}   % Incluir PDFs
+
+\selectspanish
+% Nombre de la materia
+\newcommand{\materia}{Lógica Computacional}
+% Código
+\newcommand{\codigomateria}{93.35}
+% Cuatrimestre de cursada
+\newcommand{\cuatrimestre}{1\textsuperscript{er.} cuatrimestre 2022} 
+
+\title{Las Sagradas Escrituras de \materia}
+% ¿Modificaste el archivo? ¡Agregate en la carátula y aparecé en la portada!
+%   https://youtu.be/zonh7sISE_s
+%
+\author{%
+Martín E. Zahnd%
+}
+\date{\today}
+
+
+% Márgenes
+\newdimen\pageRightMargin
+\newdimen\pageLeftMargin
+\newdimen\pageMarginWidth
+\newdimen\pageMarginWidthSeparation
+
+\setlength{\pageRightMargin}{20mm}
+\setlength{\pageLeftMargin}{60mm}
+\setlength{\pageMarginWidth}{40mm}
+\setlength{\pageMarginWidthSeparation}{3mm}
+
+\newgeometry{               % Geometría para el índice y la introducción
+    top=30mm,               % Encabezado + separación + 10mm
+    left=\pageRightMargin,
+    right=\pageRightMargin,
+    bottom=30mm,
+    headheight=15mm,        % Encabezado
+    headsep=5mm,            % Espacio entre el encabezado y el texto
+    footskip=7mm,
+}
+\savegeometry{Indice-Introduccion-Anexo}
+
+\newgeometry{               % Geometría para el contenido del documento
+    top=30mm,               % Encabezado + separación + 10mm
+    left=\pageLeftMargin,
+    right=\pageRightMargin,
+    bottom=15mm,
+    headheight=15mm,        % Encabezado
+    headsep=5mm,            % Espacio entre el encabezado y el texto
+    marginparwidth=%        % Notas al margen
+        \pageMarginWidth-\pageMarginWidthSeparation,%
+    marginparsep=%          % Espacio entre margen y texto
+        \pageMarginWidthSeparation,% 
+    footskip=7mm,
+    asymmetric=true
+}
+\savegeometry{Contenido}
+
+% https://tex.stackexchange.com/a/472882
+\makeatletter
+\long\def\@mn@@@marginnote[#1]#2[#3]{%
+  \begingroup
+    \ifmmode\mn@strut\let\@tempa\mn@vadjust\else
+      \if@inlabel\leavevmode\fi
+      \ifhmode\mn@strut\let\@tempa\mn@vadjust\else\let\@tempa\mn@vlap\fi
+    \fi
+    \@tempa{%
+      \vbox to\z@{%
+        \vss
+        \@mn@margintest
+        \if@reversemargin\if@tempswa
+            \@tempswafalse
+          \else
+            \@tempswatrue
+        \fi\fi
+
+          \llap{%
+            \vbox to\z@{\kern\marginnotevadjust\kern #3
+              \vbox to\z@{%
+                \hsize\marginparwidth
+                \linewidth\hsize
+                \kern-\parskip
+                %\mn@parboxrestore
+                \marginfont\raggedleftmarginnote\strut\hspace{\z@}%
+                \ignorespaces#1\endgraf
+                \vss
+              }%
+              \vss
+            }%
+            \if@mn@verbose
+              \PackageInfo{marginnote}{xpos seems to be \@mn@currxpos}%
+            \fi
+            \begingroup
+              \ifx\@mn@currxpos\relax\else\ifx\@mn@currpos\@empty\else
+                  \kern\@mn@currxpos
+              \fi\fi
+              \ifx\@mn@currpage\relax
+                \let\@mn@currpage\@ne
+              \fi
+              \if@twoside\ifodd\@mn@currpage\relax
+                  \kern-\oddsidemargin
+                \else
+                  \kern-\evensidemargin
+                \fi
+              \else
+                \kern-\oddsidemargin
+              \fi
+              \kern-1in
+            \endgroup
+            \kern\marginparsep
+          }%
+      }%
+    }%
+  \endgroup
+}
+\makeatother
+%
+
+% Encabezado
+
+% Encabezado encima de las notas al margen
+% Source: https://tex.stackexchange.com/a/200921
+\newlength{\headerovermarginoffset}
+\setlength{\headerovermarginoffset}{\pageMarginWidth}
+  
+ % Chapter's name on header
+ % https://alvinalexander.com/blog/post/latex/get-chapter-name-section-name-inheader-of-page-in-latex-document/
+
+% Estilo para el contenido del documento
+\fancypagestyle{contentStyle}{%
+    \fancyhf{}%
+    \fancyheadoffset[lh]{\headerovermarginoffset}%
+    \fancyhead[L]{\nouppercase{\leftmark}}%
+    \fancyhead[C]{\materia}%
+    \fancyhead[R]{Hoja \thepage}%
+}
+
+% Estilo para el anexo
+\fancypagestyle{appendixStyle}[contentStyle]{%
+    \fancyheadoffset[lh]{0mm}%
+}
+
+% Estilo para el índice y la introducción
+\fancypagestyle{indexStyle}[contentStyle]{%
+    \fancyheadoffset[lh]{0mm}%
+}
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+
+
+% Evita que se agregue el número de página en el comienzo de cada capítulo.
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+}
+
+
+% Línea separadora entre el margen y el texto
+% https://tex.stackexchange.com/a/89336
+
+% Para omitir la línea en una página, basta insertar \nomarginbar
+
+\def\bottommargin{%
+    \paperheight - \topmargin - \textheight - \headheight
+    - \headsep - 1in - \voffset
+}
+\def\toptotalheight{%
+    \paperheight - \topmargin - \headheight
+    - \headsep - 1in - \voffset
+}
+\def\leftlength{
+  \evensidemargin - 0.5*\marginparsep
+   + 1in
+   + \hoffset
+}
+\def\rightlength{\paperwidth
+  - \evensidemargin + 0.5*\marginparsep
+    - 1in - \hoffset
+}
+
+\makeatletter
+\newcommand{\nomarginbar}{\let\ESO@HookIIBG\@empty}
+\makeatother
+
+\newcommand{\thisisfullsize}{\path (0,0) --  (\paperwidth,\paperheight);}
+
+\newcommand\LeftBar{%
+  \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+      \vfill
+      \centering
+      \begin{tikzpicture}
+        \thisisfullsize
+        \draw[line width=0.5pt] %
+            (\leftlength,\bottommargin) -- (\leftlength,\toptotalheight);
+      \end{tikzpicture}
+      \vfill
+  }}}
+
+% No usamos la barra a la derecha en este documento.
+%
+% \newcommand\RightBar{%
+%   \put(0,0){%
+%     \parbox[b][\paperheight]{\paperwidth}{%
+%       \vfill
+%       \centering
+%       \begin{tikzpicture}
+%         \thisisfullsize
+%         \draw[line width=1pt] %
+%             (\rightlength,\bottommargin) -- (\rightlength,\toptotalheight);
+%       \end{tikzpicture}
+%       \vfill
+%   }}}
+
+
+% Personalización de capítulos y secciones
+
+\titleformat
+{\chapter} % command
+[block] % shape
+{\bfseries\Large\itshape} % format
+{} % label
+{0.25ex} % sep
+{
+    %\rule{\textwidth}{0.25pt}
+    \vspace{1ex}
+    \centering
+} % before-code
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{0.23pt}
+] % after-code
+
+ % this alters "before" spacing (the second length argument) to 0
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+
+% Math
+\everymath{\displaystyle} 
+
+% Me gusta que la raíz "se cierre" :)
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics#Roots
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\usepackage{letltxmacro}
+\makeatletter
+\let\oldr@@t\r@@t
+\def\r@@t#1#2{%
+\setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+\LetLtxMacro{\oldsqrt}{\sqrt}
+\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
+\makeatother
+
+
+% Circle numbers
+% https://tex.stackexchange.com/a/7045
+%
+% Usage: \circled{1}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1.25pt] (char) {#1};}}
+
+
+% Teoremas, corolarios, lemas
+\newcounter{cteoremas}      % Contador externo para los teoremas
+\newcounter{cproposicion}   % Contador externo para las proposiciones
+
+% Noni:
+% Teoremas, lemas, proposiciones, etc, son casi lo mismo.
+% Los teoremas son más difíciles de probar o el resultado es muy importante.
+%
+% Si no es tan importante, lo llamamos proposición u observación.
+%
+% Los lemas son un "pedacito" del teorema que se puede tomar aparte.
+%
+% Los corolarios vienen luego de un teorema y suelen tener una demostración
+% corta utilizando el teorema en cuestión.
+%
+% Cuando hay muchas afirmaciones acerca de un mismo objeto, solemos llamarlas
+% propiedades.
+
+\tcbset{
+%   % Definiciones
+    defstyle/.style={%
+        colback=black!15!white,%
+        colframe=black!80!white,%
+        fonttitle=\bfseries,%
+    },%
+%   % Teoremas, corolarios, lemas
+    theostyle/.style={%
+        colback=black!15!white,%
+        colframe=black!80!white,%
+        fonttitle=\bfseries,%
+    },%
+}
+
+\tcbuselibrary{theorems}
+
+% Definiciones
+\newtcbtheorem%
+  []% init options
+  {definicion}% name
+  {Definición}% title
+  {%
+    defstyle% style
+  }% options
+  {def}% prefix
+
+% Teoremas
+\newtcbtheorem%
+  []% init options
+  {teorema}% name
+  {Teorema}% title
+  {%
+    before title={\stepcounter{cteoremas}},
+    theostyle% style
+  }% options
+  {teo}% prefix
+
+% Corolarios
+\newtcbtheorem%
+  [number within=cteoremas]% init options
+  {corolario}% name
+  {Corolario}% title
+  {%
+    theostyle% style
+  }% options
+  {corol}% prefix
+
+% Lemas
+\newtcbtheorem%
+  [number within=cteoremas]% init options
+  {lema}% name
+  {Lema}% title
+  {%
+    theostyle% style
+  }% options
+  {lema}% prefix
+
+% Proposiciones 
+\newtcbtheorem%
+  []% init options
+  {proposicion}% name
+  {Proposición}% title
+  {%
+    before title={\stepcounter{cproposicion}},% Counter
+    theostyle% style
+  }% options
+  {propo}% prefix
+
+% Corolarios de proposicion
+\newtcbtheorem%
+  [number within=cproposicion]% init options
+  {corolario-proposicion}% name
+  {Corolario}% title
+  {%
+    theostyle% style
+  }% options
+  {corol}% prefix
+
+% Hipótesis
+\newtcbtheorem%
+  []% init options
+  {hipotesis}% name
+  {Hipótesis}% title
+  {%
+    theostyle% style
+  }% options
+  {hipo}% prefix
+
+
+% Tesis
+\newtcbtheorem%
+  []% init options
+  {tesis}% name
+  {Tesis}% title
+  {%
+    theostyle% style
+  }% options
+  {tesis}% prefix
+
+
+% Espacio entre el texto y las ecuaciones
+
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{2pt}%
+  \setlength{\belowdisplayskip}{2pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+% Párrafos y texto en general
+
+\setlength{\parskip}{0.25em} % Espaciado entre párrafos
+\renewcommand{\baselinestretch}{1.0} % Interlineado
+
+
+% Falso tag para agregar un número a la ecuación y referenciarla dentro de 
+% align*
+% https://tex.stackexchange.com/a/42728
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Comandos propios
+
+% \includePDFAnexo
+\newcommand{\includePDFAnexo}[2]{%
+    \includepdf[%
+        pages=1,%
+        scale=0.95,%
+        pagecommand=\section{#1},%
+        ]{#2}
+    \includepdf[%
+        pages=2-,%
+        scale=0.95,%
+        pagecommand=\pagestyle{appendixStyle},%
+        ]{#2}
+}
+
+% \divides
+\DeclareRobustCommand{\divides}[2]{{\begingroup#1\endgroup|#2}}
+% \notdivides
+\DeclareRobustCommand{\notdivides}[2]{{\begingroup#1\endgroup\nmid#2}}
+
+% \mcd
+\DeclareRobustCommand{\mcd}[2]{\left(\begingroup#1\endgroup:#2\right)}
+
+% \coprime
+\DeclareRobustCommand{\coprime}[2]{\begingroup#1\endgroup\perp#2}
+
+% \polmult
+\DeclareRobustCommand{\polmult}[2]{mult\left(\begingroup#1\endgroup, #2\right)}
+
+% \Chi
+% https://tex.stackexchange.com/a/103898
+\DeclareRobustCommand{\Chi}{{\mathpalette\irchi\relax}}
+% inner command, used by \Chi
+\newcommand{\irchi}[2]{\raisebox{\depth}{$\begingroup#1\endgroup\chi$}} 
+
+% \frest : Funcion restricción
+% stackoverflow, pero no recuerdo dónde exactamente
+\newcommand{\frest}[2]{%
+    \left.\kern-\nulldelimiterspace % Resize bar automatically (with \right)
+    \begingroup#1\endgroup          %
+    \vphantom{\big|}                % Pretend the bar is a little bit taller
+    \right|_{\begingroup#2\endgroup}% at normal size.
+}
+
+% \nota
+\newcommand{\nota}[1]{\marginnote{\RaggedRight\begingroup#1\endgroup}}
+% \notamath
+\newcommand{\notamath}[1]{%
+    \tag*{\marginnote{\RaggedRight\begingroup#1\endgroup}}%
+}
+
+% \inlinematrix
+\newcommand{\inlinematrix}[1]{%
+    \left(\begin{smallmatrix}#1\end{smallmatrix}\right)%
+}
+
+
+% \cmark , \xmark: Checkmark and Crossmark
+% See pifont package documentation for ding numbers reference.
+% https://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% \restatruncada
+\newcommand{\restatruncada}{%
+    \;\accentset{\mbox{\large\bfseries .}}{\text{--}}\;%
+}
+
+% \ceil
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% \floor
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% Links y titulo del PDF
+
+\hypersetup{%
+    colorlinks=true,%
+    linkcolor=blue!80!black,%
+    filecolor=magenta,%
+    urlcolor=cyan,%
+    breaklinks=true,%
+    pdftitle={Apuntes de \materia \space - \codigomateria},%
+    pdfauthor={\theauthor}
+}
+
+\urlstyle{same}
+
+
+\begin{document}
+
+% ------ Carátula -----
+\input{caratula} % Title page
+
+\newpage\null\thispagestyle{empty}\newpage  % Blank page
+
+% ------ Índice -----
+\frontmatter
+\loadgeometry{Indice-Introduccion-Anexo}
+\pagestyle{indexStyle}
+
+\tableofcontents
+
+\newpage
+
+% ------ Introducción -----
+\include{introduccion}
+
+% ----- Contenido del Documento ------
+\mainmatter
+\loadgeometry{Contenido}
+\pagestyle{contentStyle}
+
+% Mostramos la línea separadora notas - texto a partir de aquí
+\AddToShipoutPictureBG{\LeftBar}
+
+\include{teoria/repaso}
+\include{teoria/cardinalidad}
+\include{teoria/logica-proposicional}
+\include{teoria/logica-primer-orden}
+\include{teoria/lenguaje-s}
+\include{teoria/funciones-rp}
+\include{teoria/funciones-computables}
+
+
+% ----- Anexo ------
+% Sacamos la línea separadora notas - texto a partir de aquí
+\ClearShipoutPictureBG
+
+\appendix
+\loadgeometry{Indice-Introduccion-Anexo}
+\pagestyle{appendixStyle}
+
+\include{anexo}
+
+\end{document}
+

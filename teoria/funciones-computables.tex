@@ -1,0 +1,904 @@
+%% Copyright (c) 2022 Martín E. Zahnd
+%%
+%% This code is licensed under MIT license (see LICENSE.txt for details)
+%%
+\chapter{Funciones Computables}
+% \graphicspath{ {./teoria/resources/funciones-computables/} }
+
+\section{Función par}
+
+\begin{teorema}{}{}
+    Sea $\langle , \rangle : \mathbb{N}^2 \to \mathbb{N} / 
+    \langle x, y \rangle = 2^x (2y+1) - 1$
+
+    \medskip
+
+    Entonces $\langle , \rangle$ es biyectiva
+
+    \bigskip
+    \textbf{Notación:}
+    $\langle,\rangle$ se llama \textit{función par}.
+\end{teorema}
+
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item Iny.)
+            \begin{align*}
+                \langle x, y \rangle = \langle a, b \rangle 
+                \implies& 2^x(2y + 1) - 1 = 2^a(2b+1-1)\\
+                \implies& \underbrace{2^x \vphantom{y} % Para que 'Par' quede a
+                                                % la misma altura que los 
+                                                % 'Impar'
+                }_{\text{Par}} 
+                \underbrace{2y+1}_{\text{Impar}} = 2^a
+                \underbrace{2b+1}_{\text{Impar}} \\
+                \implies& \notamath{TFA} x = a \text{ y } 2y+1=2b+1 \\
+                \implies& x=a \text{ y } y=b \\
+                \implies& (x,y) = (a,b)
+            \end{align*}
+        \item Sobrey.)
+            Sea $z \in \mathbb{N}$. Quiero ver que existe 
+            $(x,y) \in \mathbb{N}^2 / \langle x, y \rangle = z$
+            \begin{align*}
+                \iff& 2^x (2y+1) -1 = z \\
+                \iff& 2^x(2y+1) = z+1 \\
+            \end{align*}
+            \nota{La función $V_p$ está definida en la 
+            página \pageref{def:funcion-vp} del Anexo}%
+            \begin{gather*}
+                x = \max_{t} {~\divides{2^t}{(z+1)}}  = V_2(z+1) 
+                \; \in \mathbb{N}
+                \quad \text{ y } \quad 
+                y = \left(\frac{z+1}{2^x} - 1 \right) \frac{1}{2} 
+                \; \in \mathbb{N}
+            \end{gather*}
+
+            Pues $\left(\frac{z+1}{2^x} \right)$ es impar ya que le sacamos 
+            todos los $2$ que había en su factorización 
+            (cuando definimos $x$).
+
+            Por lo tanto, $\langle , \rangle$ es una función biyectiva.
+    \end{itemize}
+\end{proof}
+
+\subsubsection{Ejemplo}
+
+Hallar $(x,y) / \langle x, y \rangle = 11$
+\begin{align*}
+    \langle x, y \rangle = 11 \iff& 2^x (2y + 1) - 1 = 11\\
+    \iff& 2^x(2y+1) = 12 = 2^2 \, . \, 3 \\
+    \implies& \notamath{Por TFA} x= 2 \quad \text{ y } \quad 2y+1=3 \\
+    \therefore & ~ \boxed{x=2 \quad \text{ y } \quad y = 1}
+\end{align*}
+
+\section{Teorema}
+
+\begin{teorema}{}{}
+    Sean $l: \mathbb{N} \to \mathbb{N} / l(z) = x$ siendo
+    $z=\langle x, y \rangle$
+
+    \phantom{Sean }$r: \mathbb{N}\to \mathbb{N} / r(z) = y$ siendo
+    $z=\langle x, y \rangle$
+    
+    \medskip
+
+    $l, r$ y $\langle , \rangle$ son funciones RP.
+\end{teorema}
+
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item 
+            \begin{align*}
+                \langle x,y \rangle =& \underbrace{2^x (2y+1)}_{\geq 1} - 1 \\
+                =& 2^x (2y+1) \restatruncada 1 \\
+                =& \mathrm{PROD}( \mathrm{POT} (1,x), \mathrm{SUC}(y+y))
+                \restatruncada 1
+            \end{align*}
+
+            $\langle , \rangle$ es RP por ser composición de 
+            $\mathrm{PROD}$, $\mathrm{POT}$,
+            $\mathrm{SUC}$, $+, \restatruncada, h_1$, todas funciones RP.
+
+        \item $l(z) = \min_{x\leq z}{~ \exists \, y \leq z \quad
+                \overbrace{\langle x, y \rangle=z}^{%
+            \mathrm{EQ}(\langle x, y \rangle,z)}}$
+
+                Las cotas están bien elegidas pues:
+                \begin{itemize}
+                    \item Veamos que $x \leq z$:
+
+                    Supongo que $x > z \implies x \geq z + 1 
+                    \implies 2^x \geq 2^{z+1} 
+                    \underbrace{>}_{\substack{\text{Por}\\%
+                    \text{inducción}}} z+1$
+
+                    Como $2y+1 \geq 1$
+                    \begin{align*}
+                        \implies& 2^x (2y+1) \geq 2^x > z+1 \\
+                        \implies& 2^x(2y+1) - 1 > z \\
+                        \implies& z > z
+                    \end{align*}
+                    ¡Absurdo! Por lo tanto es cierto que $x \leq z$.
+
+                    \item Veamos que $y \leq z$:
+
+                    Supongo que $y\geq z + 1$
+                    \begin{align*}
+                        \implies& 2y+1 \geq 2z+2+1 \\
+                        \implies& 2y+1 \geq 2z+3 > z+1
+                    \end{align*}
+
+                    Como $2^x \geq 1$
+                    \begin{align*}
+                        \implies& 2^x (2y+1)  \geq 2y+1 > z+1 \\
+                        \implies& 2^x(2y+1)-1 > z \\
+                        \implies& z > z
+                    \end{align*}
+                    ¡Absurdo! Por lo tanto es cierto que $y \leq z$.
+                \end{itemize}
+
+                Entonces $l$ es una función RP por composición de mínimo 
+                acotado con existencial acotado con $\langle , \rangle$,
+                $\mathrm{EQ}$, que son RP.
+
+            \item $r(z) = \min_{y\geq z}{ ~\exists \, x \leq z
+                \quad \langle x, y \rangle = z}$
+
+                Tarea.
+    \end{itemize}
+\end{proof}
+
+
+\section{Numeración de Gödel}
+
+\begin{definicion}{Numeración de Gödel}{}
+    Sea $k \in \mathbb{N}$.
+
+    \medskip
+
+    Para cada $k$ se define una función
+    \begin{gather*}
+        [\;,\;,\;]_k: \mathbb{N}^{k+1} \to \mathbb{N} / 
+        [(a_0, \dotsc, a_k)] = p_0^{a_0} \cdots p_k^{a_k}
+    \end{gather*}
+
+    \nota{$p_0 = 2$, $p_1 = 3$, $p_2 = 5$}%
+    Donde $p_i$ representa el $(i+1)$-primo
+
+    \bigskip
+    \textbf{Notación:}
+    $[(a_0, \dotsc, a_k)]$ se llama \textit{Número de Gödel} de 
+    $(a_0, \dotsc, a_k)$.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+\begin{itemize}
+    \item $[(3,4)] = 2^3 3^4$
+    \item $[(3,0,8)] = 2^3 3^0 5^8$
+    \item $[(3,1,0,4)] = 2^3 \, . \, 3^1 \, . \, 5^0 \, . \, 7^4$
+    \item $[(3,1,0,4,0)] = 
+        2^3 \, . \, 3^1 \, . \, 5^0 \, . \, 7^4 \, . \, 11^0$
+\end{itemize}
+
+Observemos que el mismo número de Gödel corresponde a la 4-tupla 
+y a la 5-tupla.
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    Las funciones que calculan los números de Gödel son inyectivas, RP, pero
+    no sobreyectivas.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item Sobrey.) Notemos dos cosas: 
+            \begin{enumerate}
+                \item $0 \notin Im [\;,\;,\;]_k$
+                \item $p_{k+1} \notin Im [\;,\;,\;]_k$ 
+            \end{enumerate}
+
+            Entonces la función no es sobreyectiva.
+        \item Iny.) $[(a_0, \dotsc, a_k)] = [(b_0, \dotsc, b_k)]$
+            \begin{align*}
+                \implies& p_0^{a_0}, p_1^{a_1}, \dotsc, p_k^{a_k} =
+                p_0^{b_0}, p_1^{b_1}, \dotsc, p_k^{b_k}\\
+                \implies& \notamath{por TFA. $0 \leq j \leq k$} 
+                a_j = b_j
+            \end{align*}
+        \item RP) En la práctica vimos que la siguiente función es RP:
+            $f: \mathbb{N} \to \mathbb{N} / f(n) = P_n$, siendo $P_n$ el
+            $(n+1)$-ésimo primo.
+
+            \begin{gather*}
+                [(a_0, \dotsc, a_k)] = \prod_{j=0}^{k} \mathrm{POT}(
+                \underbrace{f(j)}_{\geq 1} \restatruncada 1, a_j)
+            \end{gather*}
+
+            Entonces la función de Gödel es RP por ser composición de 
+            funciones RP:
+            la potencia; la resta truncada; la función $f$; la función 
+            constante 1; el producto; y las proyecciones, que por ser 
+            iniciales son RP.
+    \end{itemize}
+\end{proof}
+
+\subsection{Indicadores de números de Gödel}
+
+\begin{definicion}{Indicadores de números de Gödel}{indicadores-num-godel}
+    \begin{enumerate}
+        \item \nota{La función $V_p$ está definida en la página 
+            \pageref{def:funcion-vp} del Anexo}%
+            $\cdot \, [ \, \cdot \, ]: \mathbb{N}^2 \to \mathbb{N} /
+            x[i] = V_{p_i}(x)$
+        \item $|\, \cdot \,|: \mathbb{N} \to \mathbb{N} /
+            |n| = \begin{cases}
+                long(n) & n \neq 0\\
+                0 & n = 0
+            \end{cases}$
+
+            \nota{$\alpha_k \neq 0$}%
+            Donde si $n \neq 0 \implies n = p_0^{\alpha_0} p_1^{\alpha_1}
+            p_2^{\alpha_2} \cdots p_k^{\alpha_k}$ 
+
+            \begin{gather*}
+                long(n) = long[(\alpha_0, \dotsc, \alpha_k)]  = k + 1
+            \end{gather*}
+    \end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+\begin{itemize}
+    \item $long(44)$ 
+        \begin{align*}
+            =& long(2^2 \, . \, 11) \\
+            =& long([2,0,0,0,1]) = 5 \\
+            =& long([2,0,0,0,1,0]) = 5
+        \end{align*}
+\end{itemize}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    Las funciones denominadas ``\nameref{def:indicadores-num-godel}''
+    son RP.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item $x[i] = 
+            \overbrace{\min_{t \leq x}{~ \notdivides{p_{i}^{t+1}}{x}}}^{%
+            \circled{1}} 
+            = \max_{t \leq x}{~ \divides{p_i^t}{x}}$
+            
+            $t \leq x \text{ porque } p^x > x \; \forall p \text{ primo } 
+                \implies \notdivides{p^x}{x}$
+
+            A $\notdivides{p_{i}^{t+1}}{x}$ lo puedo pensar como
+
+            \begin{gather*}
+                \underbrace{\alpha( \mathrm{DIV}(p_i^{t+1}, x))}_{%
+                C_P(i,t,x)}
+                = \alpha(\mathrm{DIV}(\mathrm{POT}(p_i \restatruncada 1, t+1),
+                x))
+            \end{gather*}
+
+            Que es un predicado RP (por composición de funciones RP).
+
+            Por lo tanto el mínimo en \circled{1} es el mínimo acotado de
+            un predicado RP y, en consecuencia, $x[i]$ es RP.
+
+        \item $|n| = \max_{t \leq n}{~ (\divides{p_t}{n})}$
+            $= \left(\max_{t \leq n}{~ \mathrm{DIV}(h(k+1), n)}\right) \,
+            \alpha(\alpha(n)) + \mathrm{EQ}(n,1)$
+
+            Tarea: formalizar.
+    \end{enumerate}
+\end{proof}
+
+\section{Codificación de programas}
+
+\begin{definicion}{Codificación de programas}{}
+    Cada instrucción en un programa queda determinada por tres números:
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item \textbf{Variables}: $Y, X_1, Z_1, X_2, Z_2, \dotsc$
+    
+        \item \textbf{Etiquetas}: 
+            $A_1, B_1, C_1, D_1, E_1, A_2, B_2, C_2, D_2, \dotsc$
+    
+        \item \textbf{Instrucciones}:
+        \begin{align*}
+            &V \gets V + 1 \\
+            &V \gets V - 1 \\
+            &IF ~ V \neq 0 \quad GOTO ~ L \\
+            &V \gets V
+        \end{align*}
+    \end{enumerate}
+
+    \bigskip
+
+    Definimos $\#I : \{ \text{Instrucciones} \} \to \mathbb{N}$ como:
+
+    \begin{gather*}
+        \# I_{a,b,c} = \langle a, \langle b, c \rangle \rangle
+    \end{gather*}
+
+    Donde
+    \begin{gather*}
+        a = \begin{cases}
+            0 & \text{si } I \text{ no tiene etiqueta} \\
+            \# L  \notamath{$\# L$: Pos. de la etiqueta en la lista 
+                            \circled{2}}
+              & \text{si tiene etiqueta}
+        \end{cases}
+    \end{gather*}
+    
+    \begin{gather*}
+        b = \begin{cases}
+            0 & V \gets V = I\\
+            1 & V \gets V + 1 = I\\
+            2 & V \gets V - 1 = I\\
+            \# L + 2
+              & \text{si } I = IF ~ V \neq 0 \quad GOTO ~ L
+        \end{cases}
+    \end{gather*}
+
+    \begin{gather*}
+        \notamath{$\#V$: Pos. de la variable en la lista \circled{1}}
+        c = \# V - 1
+    \end{gather*}
+    
+    \medskip
+
+    Además, tomamos por válido que 
+    \begin{gather*}
+        I \leftrightarrow (a,b,c)
+        \notamath{Dada una instrucción $I$, tenemos la terna $(a,b,c)$}
+    \end{gather*}
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+La función $\# I$ es biyectiva.
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item Iny.)
+            \begin{align*}
+                \langle a, \langle b, c \rangle \rangle 
+                = \langle x, \langle y, z \rangle \rangle& \\
+                &\implies a = x ~ \text{ y } ~ \langle b, c \rangle 
+                = \langle y, z \rangle 
+                \notamath{$\langle , \rangle$ es inyectiva}\\
+                &\implies a = x, \; b = y, \; c = z 
+                \notamath{$\langle , \rangle$ es inyectiva} \\
+                &\implies (a,b,c) = (x,y,z) \\
+                &\implies I_{(a,b,c)} = I_{(x,y,z)}
+            \end{align*}
+        \item Sobrey.)
+            Sea $z \in \mathbb{N}$.
+
+            Como $\langle , \rangle$ es sobreyectiva, existen 
+            $x, \; b \in \mathbb{N}/ \langle x, b \rangle = z$.
+
+            Como $\langle , \rangle$ es sobreyectiva, existen 
+            $u, \; w \in \mathbb{N}/ \langle u, w \rangle = b$
+            \begin{gather*}
+                \implies \langle x , \langle u, w \rangle \rangle = z
+            \end{gather*}
+    \end{itemize}
+\end{proof}
+
+\subsubsection{Ejemplos}
+
+\begin{itemize}
+    \item Halla la instrucción de código 6
+
+    \begin{gather*}
+        \langle a, \langle b, c \rangle \rangle = 6 
+        = 2^a (2 \langle b, c \rangle + 1) - 1\\
+    \end{gather*}
+    
+    \begin{align*}
+        7 = 2^a (2 \langle b, c \rangle + 1) 
+        \implies& \boxed{a = 0} \text{ y } 7 
+        = 2 \langle b, c \rangle + 1 \notamath{Por TFA} \\
+        \implies& 3 = \langle b, c \rangle\\
+    \end{align*}
+    
+    Luego
+    \begin{align*}
+        3 = 2^b (2c + 1) - 1 \implies& 4 = 2^b (2c +1) \\
+        \implies& \boxed{b = 2} \text{ y } 1 = 2c + 1 \notamath{Por TFA} \\
+        \implies& \boxed{c = 0}
+    \end{align*}
+    
+    Entonces $a = 0$, $b = 2$, $c= 0$.
+    
+    Por otra parte:
+    \begin{itemize}
+        \item $a=0$: Me está diciendo que no tiene etiqueta
+        \item $b=2$: $V \gets V-1$
+        \item $c=0$ : $V = Y$
+    \end{itemize}
+    
+    Por lo tanto
+    \begin{align*}
+        I: \quad Y \gets Y -1
+    \end{align*}
+    
+    \item Hallar el código de
+    \begin{gather*}
+        [B_1] \quad IF ~ Z_3 \neq 0 \quad GOTO ~ A_1
+    \end{gather*}
+    
+    \begin{gather*}
+        \# I = \langle a, \langle b, c \rangle \rangle \\
+        a = 2, \quad c = 7 - 1 = 6 \quad b = 2+1=3 \\
+        \# I = \langle 2, \langle 3, 6 \rangle \rangle \\
+        \langle 3, 6 \rangle = 2^3 (2 \, . \, 6 + 1) - 1 = 8 \, . \, 13 - 1 = 103\\
+        \# I = \langle 2, 103 \rangle = 2^2 (2 \, . \, 103 + 1 ) - 1 
+        = 4(207) - 1 = 828-1=827
+    \end{gather*}
+\end{itemize}
+
+\subsection{Codificación de programas}
+
+\begin{definicion}{Codificación de programas}{codif-programas}
+    Sea $\mathcal{P}$ un programa con $I_1, I_2, \dotsc, I_k$ instrucciones.
+
+    \medskip
+
+    Definimos
+    \begin{gather*}
+        \# \mathcal{P}: \{ \text{Programas} \} \to \mathbb{N} / 
+        \# \mathcal{P} = [(\#I_1, \dotsc, \#I_k)] - 1
+    \end{gather*}
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Hallar $\# \mathcal{P}$ con $\mathcal{P}$:
+\begin{align*}
+    [B_1] \quad &X_1 \gets X_1 - 1 \\
+    &IF ~ X_1 \neq 0 \quad GOTO ~ B_1
+\end{align*}
+
+\begin{align*}
+    \#I_1 =& \langle 2, \langle 2, 1 \rangle \rangle 
+    = \langle 2, 11 \rangle = 2^2 (2 \, . \, 11 + 1) - 1 = 91
+    \notamath{$\langle 2, 1 \rangle = 2^2 (1 \, . \, 1 + 1)-1 = 11$ \\
+    $\langle 4, 1 \rangle = 2^4 (2 \, . \, 1 + 1) -1 = 47$}\\
+    \#I_2 =& \langle 0, \langle 2+2,1 \rangle \rangle 
+    = \langle 0, 47 \rangle = 2^0 (2 \, . \, 41 + 1) - 1 = 94
+\end{align*}
+
+Entonces
+\begin{gather*}
+    \# \mathcal{P} = 2^{91} \, . \, 3^{94} - 1
+\end{gather*}
+
+Notemos que hay un problema:
+
+Sea $\mathcal{P}_2$
+\begin{align*}
+    [B_1] \quad &X_1 \gets X_1 - 1 \\
+    &IF ~ X_1 \neq 0 \quad GOTO ~ B_1\\
+    &Y \gets Y
+\end{align*}
+
+Como
+\begin{align*}
+    \notamath{$\langle 0,0 \rangle = 2^0 (2 \, . \, 0 + 1) - 1 = 0$}
+    \#(Y \gets Y) = \langle 0, \langle 0, 0 \rangle \rangle = 0
+\end{align*}
+
+Entonces
+\begin{align*}
+    \# \mathcal{P}_2 &= 2^{91} \, . \, 3^{94} \, . \, 5^0 - 1 \\
+           &= 2^{91} \, . \, 3^{94} - 1 \\
+           &= \# \mathcal{P}
+\end{align*}
+
+Y notamos que la función no es inyectiva, pues tenemos dos programas distintos 
+con el mismo número.
+
+Para eliminar esta ambigüedad, la última instrucción no puede ser $Y \gets Y$
+excepto que sea la única.
+
+\begin{proof} \textit{La función propuesta en \nameref{def:codif-programas} 
+    es biyectiva.}
+
+    Queremos probar que $\#: \{ \text{Programas} \} \to \mathbb{N} / 
+        \# \mathcal{P} = [(\#I_1, \dotsc, \#I_k)] - 1$ es biyectiva.
+
+    \begin{itemize}
+        \item Sobrey.) 
+            \begin{itemize}
+                \item $0 \in Im \#$
+
+                    El programa $Y \gets Y$ tiene código 0.
+
+                \item $n \in \mathbb{N}$
+
+                    \begin{gather*}
+                        \underbrace{n + 1}_{\geq \, 1} =
+                        p_0^{\alpha_0} \cdots p_k^{\alpha_k} =
+                        [(\alpha_0, \dotsc, \alpha_k)]
+                    \end{gather*}
+
+                    Como $\# \{ \text{Instrucciones} \} \to \mathbb{N}$ es
+                    \nota{$0 \leq j \leq k$}%
+                    sobreyectiva, existe $I_j / \# I_j = \alpha_j$
+
+                    \begin{align*}
+                        \implies& n+1 = [(\# I_0, \dotsc, \#I_k)] \\
+                        \implies& n = [(\# I_0, \dotsc, \# I_k)] - 1
+                    \end{align*}
+
+                    \begin{gather*}
+                        \therefore ~ \# \mathcal{P}_{I_0, \dotsc, I_k} = n
+                    \end{gather*}
+            \end{itemize}
+
+            De esta manera queda probada la sobreyectividad.
+
+        \item Iny.)
+            $\# \underbrace{\mathcal{P}_{I_0, \dotsc, I_k}}_{\mathcal{P}_1} = 
+            \# \underbrace{\mathcal{P}_{\widetilde{I}_0, \dotsc, 
+            \widetilde{I}_t}}_{\mathcal{P}_2}$
+            \begin{gather*}
+                    \implies [(\# I_0, \dotsc, \# I_k)] - 1 =
+                    [(\# \widetilde{I}_0 \dotsc, \# \widetilde{I}_t)] - 1 \\
+            \end{gather*}
+
+            \begin{itemize}
+                \item $k \neq 0 \implies \mathcal{P}_1$ tiene al menos 2
+                    instrucciones.
+                \begin{align*}
+                    \implies& \# I_k \neq 0 \\
+                    \implies& \divides{p_k}{%
+                        [(\# \widetilde{I}_0, \dotsc, 
+                    \# \widetilde{I}_t)]} \\
+                    \text{Análogamente } &
+                    \divides{p_t}{[(\# I_0, \dotsc, \# I_k)]} \\
+                    \implies& k = t
+                \end{align*}
+
+                Como las funciones de Gödel son inyectivas
+                \begin{gather*}
+                    \# I_j = \# \widetilde{I}_j \implies I_j = \widetilde{I}_j
+                    \notamath{$0 \leq j \leq k$}
+                \end{gather*}
+                \item $k = 0$
+
+                    Si $\mathcal{P}_2$ tiene más de una instrucción va a haber 
+                    un primo que divide a 
+                    $[(\# \widetilde{I}_0 \dotsc, \# \widetilde{I}_t)] - 1$ 
+                    pero no a  $[(\# I_0, \dotsc, \# I_k)] - 1$, entonces 
+                    $\mathcal{P}_2$ también tiene que tener una única
+                    instrucción.
+
+                    Luego, al tener ambos una única instrucción, como la 
+                    función de Gödel es inyectiva, tienen la misma instrucción.
+            \end{itemize}
+    \end{itemize}
+\end{proof}
+
+
+\subsubsection{Ejemplo}
+
+Hallar el programa de código $71$
+
+\bigskip
+
+Tenemos que $71 = [(\#I_1, \dotsc, \#I_k)] - 1$ $\implies$ 
+$72 = [(\#I_1, \dotsc, \#I_k)]$
+
+Además, $72 = 36 \, . \, 2 = 3^2 \, . \, 2^3$ por lo que 
+$[(\#I_1, \dotsc, \#I_k)] = [(3,2)]$
+
+\begin{gather*}
+    \implies \# I_1 = 3 \text{ y } \# I_2 = 2
+\end{gather*}
+
+Luego $\langle a, \langle b, c \rangle \rangle = 3 
+= 2^a (2 \, . \, \langle b, c \rangle + 1) - 1$
+
+\begin{align*}
+    \implies& 4 = 2^a (2 \, . \, \langle b, c \rangle + 1)  \\
+    \implies& \notamath{TFA} \boxed{a = 2} 
+    \text{ y } 1 = 2 \, . \, \langle b, c \rangle + 1 \\
+    \implies& \langle b, c \rangle = 0 \\
+    \implies& \boxed{b = 0} \quad \boxed{c = 0}
+    \notamath{Pues $\langle , \rangle$ es inyectiva}
+\end{align*}
+
+Resultando
+\begin{gather*}
+    I_1 : ~ [B_1] \quad Y \gets Y
+\end{gather*}
+
+
+Para la segunda instrucción:
+
+\begin{gather*}
+    \# I_2 = 2 = \langle a, \langle b, c \rangle \rangle
+\end{gather*}
+
+\begin{align*}
+    2^a (2 \, . \, \langle b, c \rangle + 1) - 1 = 2 & \\
+    \implies& 2^a (2 \, . \, \langle b, c \rangle + 1) = 3 \\
+    \implies& \boxed{a=0} \notamath{TFA} \\
+    \text{ y }& 2 \, . \, \langle b, c \rangle + 1 = 3 \\
+    \implies& \langle b, c \rangle = 1 \\
+    \implies& 2^b (2c + 1) - 1 = 1 \\
+    \implies& 2^b (2c + 1 ) = 2 \\
+    \implies& \notamath{TFA} \boxed{b = 1} \text{ y } 2c + 1 = 1 \\
+    \implies& \boxed{c=0}
+\end{align*}
+
+Resultando
+\begin{gather*}
+    I_2 : ~ Y \gets Y + 1
+\end{gather*}
+
+
+Por lo tanto, el programa $P$ es:
+
+\begin{align*}
+    [B_1] \quad &Y \gets Y \\
+    &Y \gets Y + 1
+\end{align*}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    Existen funciones no computables
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Sabemos que $\# \{ \text{Programas} \} = \aleph_0$
+    porque encontramos una función biyectiva entre el conjunto de los 
+    programas y los números naturales.
+
+    Pero
+    \begin{gather*}
+        \# \{ f: \mathbb{N} \to \mathbb{N} / f \text{ es función} \} 
+        = {\aleph_0}^{\aleph_0} = \mathcal{C}
+    \end{gather*}
+
+    \begin{gather*}
+        \mathcal{C} > \aleph_0
+    \end{gather*}
+
+    Entonces ``no me alcanzan'' los programas para implementar todas las 
+    funciones: existen funciones que no son computables.
+
+\end{proof}
+
+\section{Problema de la parada}
+
+Dados un programa $\mathcal{P}$, $u_1, u_2, \dotsc, u_m$ números naturales y
+$\phi_1$ un estado inicial, recordemos que si hay un cómputo 
+$d_1=(1,\sigma), d_2, \dotsc, d_k$, $\Psi_p^m$ devuelve el valor de $Y$ en
+$d_k$; en caso contrario, $\Psi_p^m = \uparrow$.
+
+\medskip
+
+\begin{definicion}{Problema de la parada}{}
+    \begin{gather*}
+        \mathrm{Halt}: \mathbb{N}^2 \to \mathbb{N} /
+        \mathrm{Halt}(x,y) = 
+        \begin{cases}
+            1 & \text{si el programa de código } y \\
+              & \text{termina ante la entrada } x \\
+            0 & \text{sino} 
+            \notamath{Es decir, devuelve $0$ si\\ 
+            $\Psi_P(x) = \uparrow / \#P=y$}
+        \end{cases}
+    \end{gather*}
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item Sea $f: \mathbb{N} \to \mathbb{N} / f(x) = \mathrm{Halt}(x,0) = 1$, 
+    $f = \mathrm{SUC} \circ \mathrm{cero}$
+    
+    \begin{gather*}
+        \# P = 0 \qquad P: ~ Y \gets Y
+    \end{gather*}
+
+    \item $\mathrm{Halt}(x,71) = 1$
+    \begin{align*}
+        \#P = 71 \quad [B_1] \quad &Y \gets Y\\
+                                   &Y \gets Y+1
+    \end{align*}
+
+     \item $P: \quad [A_1] \quad IF ~ X_1 \neq 0 \quad GOTO ~ A_1$
+         \begin{gather*}
+             \mathrm{Halt}(x,\#P) = 
+             \begin{cases}
+                 0 & x \neq 0\\
+                 1 & x = 0
+             \end{cases}
+         \end{gather*}
+\end{enumerate}
+
+\begin{teorema}{}{}
+
+ $\mathrm{Halt}: \mathbb{N}^2 \to \mathbb{N}$ es no computable.
+    
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Supongo que $\mathrm{Halt}$ es computable
+    $\implies f: \mathbb{N} \to \mathbb{N} / f(x) = \mathrm{Halt}(x,x)$ es
+    computable pues $f = \mathrm{Halt} \circ (\Pi_1 \times \Pi_1)$
+
+    Armo el siguiente programa:
+    \begin{gather*}
+        \notamath{$\# \mathcal{P} = n_0$}
+        \mathcal{P}: \quad [A_1] \quad IF ~ f(x) \neq 0 \quad GOTO ~ A_1
+    \end{gather*}
+
+    \begin{align*}
+        f(n_0) = 1 \iff& \mathrm{Halt}(n_0, n_0) = 1 \\
+        \iff& \mathcal{P} \text{ termina si } x = n_0 
+        \notamath{Definición de $\mathrm{Halt}$} \\
+        \iff& f(n_0)=0 \notamath{Mirando el programa}
+    \end{align*}
+
+    ¡Absurdo! Vino de suponer que $\mathrm{Halt}$ es computable.
+
+    \begin{center}
+        $\therefore ~ \mathrm{Halt}$ no es computable
+    \end{center}
+
+\end{proof}
+
+\subsubsection{Ejemplos}
+
+Decidir si $f$ es computable.
+
+\begin{enumerate}
+    \item $f: \mathbb{N}^2 \to \mathbb{N}/f(x,y) = \mathrm{Halt}(x,y)^2 + xy$
+        
+        Supongo $f$ computable $\implies$ defino
+        \begin{align*}
+            g: \mathbb{N} \to \mathbb{N} / g(x) =& f(x,x) \restatruncada x^2\\
+            =& \underbrace{%
+            \underbrace{\mathrm{Halt}(x,x)^2}_{\geq \, 0} + x^2}_{\geq \, x^2}
+            \restatruncada x^2 \\
+            =& \mathrm{Halt}(x,x)^2 \\
+            =& \mathrm{Halt}(x,x) \notamath{\circled{1}}
+        \end{align*}
+
+        Siendo válido \circled{1} porque:
+        \nota{\textit{Noni:} Pueden probar por inducción que 
+        $\mathrm{Halt}(x,y)^n = \mathrm{Halt}(x,y)$}%
+        \begin{align*}
+            \mathrm{Halt}(x,x) = 1 \implies& \mathrm{Halt}(x,x)^2 = 1 \\
+            \mathrm{Halt}(x,x) = 0 \implies& \mathrm{Halt}(x,x)^2 = 0
+        \end{align*}
+
+        Entonces $g$ es computable por ser composición de $f$, que
+        estamos suponiendo computable, $\restatruncada$, $\mathrm{PROD}$, y 
+        $\Pi_1$, que son RP y entonces, por teorema, computables.
+
+        Por lo tanto, como $g$ es computable, $\mathrm{Halt}$ es computable.
+        
+        ¡Absurdo! Vino de suponer que $f$ es computable.
+
+        \begin{center}
+        Conclusión: $f$ no es computable.
+        \end{center}
+
+    \item $f: \mathbb{N}^2 \to \mathbb{N} / 
+        f(x,y) = \langle \mathrm{Halt}(x,y), xy \rangle$
+
+        Supongo que $f$ es computable, entonces defino
+        \begin{align*}
+            g: \mathbb{N}^2 \to \mathbb{N} / g(x,y) =& l(f(x,y)) \\
+            =& \mathrm{Halt}(x,y)
+        \end{align*}
+
+        \nota{$l$ es RP $\implies$ computable\\$f$ computable 
+        (lo estamos suponiendo)}%
+        Como $g = l \circ f$ es computable por composición de computables,
+        $\mathrm{Halt}$ es computable. ¡Absurdo!
+        \begin{center}
+            Conclusión: $f$ no es computable.
+        \end{center}
+
+    \item $f: \mathbb{N}^2 \to \mathbb{N} / 
+        f(x,y) = \mathrm{Halt}(x,y)^2 - \mathrm{Halt}(x,y)$
+
+        Ya vimos que $\mathrm{Halt}(x,y)^2 = \mathrm{Halt}(x,y)$
+
+        Por lo tanto $f(x,y) = \mathrm{Halt}(x,y) - \mathrm{Halt}(x,y)=0$
+
+        Entonces $f = \underbrace{\mathrm{cero} \circ \Pi_1}_{%
+        \text{RP} \implies \text{computable}}$
+
+        Por lo tanto $f$ es computable por composición de funciones 
+        computables.
+
+        Notemos que esta función es computable a pesar de estar originalmente 
+        escrita como composición de no computables. 
+        
+        \textit{Noni}: Es un error grave afirmar que una función no es 
+        computable por ser composición de funciones no computables. 
+\end{enumerate}
+
+\bigskip
+
+\textit{Noni}: La estrategia para resolver este tipo de ejercicios es siempre
+la misma.
+
+Si la función es computable, intentar escribirla de una manera diferente con
+funciones computables (sin usar $\mathrm{Halt}$); si no lo es, suponemos que
+sí, la componemos con funciones que sabemos son computables y tratamos de que
+nos quede $\mathrm{Halt}$.
+
+
+\section{Tesis de Church y Turing}
+
+\begin{tesis}{Tesis de Church}{church}
+    Todos los algoritmos para computar funciones 
+    $f: A \subseteq \mathbb{N}^k \to \mathbb{N}$ se pueden programar en
+    lenguaje S.
+\end{tesis}
+
+Es decir, si el algoritmo no se puede programar en lenguaje S, entonces en 
+ningún otro lenguaje se puede.
+
+\medskip
+
+\begin{tesis}{Tesis de Turing}{}
+    Lo que no se puede resolver con una Máquina de Turing, no se puede resolver
+    con otra máquina.
+\end{tesis}
+
+Las tesis no tienen demostración, se consideran como verdaderas por la 
+comunidad matemática.
+
+\section{Programas universales}
+
+\begin{definicion}{Programas universales}{}
+    Para cada $n > 0$ se define
+    \begin{gather*}
+        \phi^n : \mathbb{N}^{n+1} \to \mathbb{N} /
+        \phi^n (x_1, \dotsc, x_n, e) = \Psi_P^n (x_1, \dotsc, x_n) 
+    \end{gather*}
+
+    Con $\# \mathcal{P}= e$.
+\end{definicion}
+
+Notemos que esta función solamente está definida si el programa $\mathcal{P}$ 
+termina ante la entrada $(x_1, \dotsc, x_n)$, en cuyo caso devuelve
+la salida del programa.
+
+\medskip
+
+\begin{teorema}{}{}
+    $\phi^n$ es parcialmente computable $\forall n > 0$.
+\end{teorema}
+
+\begin{proof} 
+    En el apunte de Programas Universales del Anexo.
+\end{proof}
+
+

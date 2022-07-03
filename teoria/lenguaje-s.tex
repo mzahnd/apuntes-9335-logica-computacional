@@ -1,0 +1,667 @@
+%% Copyright (c) 2022 Martín E. Zahnd
+%%
+%% This code is licensed under MIT license (see LICENSE.txt for details)
+%%
+\chapter{Lenguaje S}
+%\graphicspath{ {./teoria/resources/lenguaje-s/} }
+
+\section{Variables, etiquetas e instrucciones}
+\begin{definicion}{Variables}{}
+    Existen tres tipos de variables, las cuales no se declaran:
+   \begin{enumerate}
+       \item \textbf{Variables de entrada:} $X_1, X_2, X_3, \dotsc$
+
+       \item \textbf{Variables temporales:} $Z_1, Z_2, Z_3, \dotsc$
+
+       \item \textbf{Variable de salida:} $Y$
+   \end{enumerate} 
+
+   El tipo de datos es $\mathbb{N}$ y las variables auxiliares y la de salida
+   comienzan inicializadas en 0.
+\end{definicion}
+
+\begin{definicion}{Etiquetas}{}
+    Las etiquetas se representan como:
+    \begin{gather*}
+        A_1, B_1, C_1, D_1, E_1, A_2, \dotsc
+    \end{gather*}
+\end{definicion}
+
+\begin{definicion}{Instrucciones}{}
+    Existen tres tipos de instrucciones:
+    \begin{enumerate}
+        \item Sea $V$ una variable.
+            \begin{gather*}
+                V \gets V + 1
+            \end{gather*}
+
+            Si la variable $V$ tiene el valor $n \in \mathbb{N}$, luego de
+            ejecutarse la instrucción va a tener el valor $n+1$.
+        \item Sea $V$ una variable.
+            \begin{gather*}
+                V \gets V - 1
+            \end{gather*}
+            Si la variable $V$ tiene el valor $n \in \mathbb{N}_{\geq 1}$, 
+            luego de ejecutarse la instrucción va a tener el valor $n-1$.
+            Si $V$ tiene el valor 0, luego de ejecutarse queda con el mismo
+            valor.
+        \item Sea $V$ una variable y $L$ una etiqueta.
+            \begin{gather*}
+                IF ~ V \neq 0 \quad GOTO ~ L
+            \end{gather*}
+
+            Si la variable $V$ tiene el valor 0, se pasa a la próxima 
+            instrucción; si tiene un valor distinto de cero, se pasa a la 
+            primer instrucción del programa a la cual la antecede la etiqueta
+            $L$.
+    \end{enumerate}
+
+    A cada instrucción la puede anteceder una etiqueta, la cual se escribe
+    entre corchetes:
+    \begin{gather*}
+        [L] \quad \text{Instrucción}
+    \end{gather*}
+\end{definicion}
+
+\subsection{Programa}
+
+\begin{definicion}{Programa}{}
+   Un programa es una lista finita de instrucciones $I_1, I_2, \dotsc, I_n$
+   que se escriben una debajo de la otra.
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{itemize}
+    \item Dado el siguiente programa:
+        \begin{align*}
+            [A_1] \quad &X_1 \gets X_1 - 1 \\
+                        &Y \gets Y + 1 \\
+                        &IF ~ X \neq 0 \quad GOTO ~ A_1
+        \end{align*}
+
+        Veamos qué ocurre si entramos con diferentes valores:
+        
+        \begin{center}
+        \begin{tabular}{c c c}
+            \begin{tabular}{c | c}
+                $X$ & $Y$ \\
+                \hline
+                2 & 0 \\
+                1 & 1 \\
+                0 & 2 \\
+            \end{tabular}
+
+            &
+
+            \begin{tabular}{c | c}
+                $X$ & $Y$ \\
+                \hline
+                1 & 0 \\
+                0 & 1 \\
+                \phantom{0} & \phantom{0} \\
+            \end{tabular}
+
+            &
+
+            \begin{tabular}{c | c}
+                $X$ & $Y$ \\
+                \hline
+                0 & 0 \\
+                0 & 1 \\
+                \phantom{0} & \phantom{0} \\
+            \end{tabular}
+        \end{tabular}
+        \end{center}
+
+        Este programa implementa $f: \mathbb{N} \to \mathbb{N} / f(n) =
+        \begin{cases}
+            n & n \neq 0 \\
+            1 & n = 0
+        \end{cases}$
+
+    \item Supongamos que el programa tiene una única instrucción:
+        \begin{gather*}
+            Y \gets Y - 1
+        \end{gather*}
+        
+        Este programa computa la función $f: \mathbb{N} \to \mathbb{N}/f(n)=0$.
+
+        Es decir, el programa presentado es una forma de implementar la 
+        función constante cero.
+
+
+        \bigskip
+        \textit{Observación:}
+        Notemos que
+        \begin{align*}
+            &X_1 \gets X_1 - 1 \\
+            &Y \gets Y - 1
+        \end{align*}
+        es un programa que computa la misma función.
+
+        Entonces dos programas distintos pueden computar la misma función.
+
+    \item Dado el siguiente programa:
+        \begin{gather*}
+           \left.\begin{aligned}
+                   Y &\gets Y + 1 \\
+                Y &\gets Y + 1 \\
+                  &\vdots \\
+                Y &\gets Y + 1
+               \end{aligned}\right\} k \text{ instrucciones}
+        \end{gather*}
+
+        Este programa computa la función $f: \mathbb{N} \to \mathbb{N}/f(n)=k$
+
+    \item Dado el siguiente programa:
+        \begin{gather*}
+            [A_1] \quad IF ~ X_1 \neq 0 \quad GOTO ~ A_1
+        \end{gather*}
+
+        \begin{center}
+        \begin{tabular}{c c}
+            \begin{tabular}{c | c}
+                $X_1$ & $Y$ \\
+                \hline
+                2 & 0 \\
+                2 & 0 \\
+                2 & 0 \\
+                \vdots & 0 \\
+            \end{tabular}
+
+            &
+
+            \begin{tabular}{c | c}
+                $X_1$ & $Y$ \\
+                \hline
+                0 & 0 \\
+            \end{tabular}
+        \end{tabular}
+        \end{center}
+
+        Notemos que el programa nunca termina si entramos con una constante
+        distinta de cero.
+
+        Entonces este programa computa la función 
+        \nota{$Dom(f) = \{ 0 \}$}%
+        $f: \mathbb{N} \to \mathbb{N} /
+        f(x) = \begin{cases}
+            \uparrow & x \neq 0 \\
+            0 & x = 0
+        \end{cases}$
+
+        Donde $\uparrow$ significa que no está definida la función, es decir,
+        el programa nunca termina.
+
+    \item \textbf{Función identidad}
+
+        Dado el siguiente programa
+        \begin{align*}
+            [A_1] \quad &IF ~ X_1 \neq 0 \quad GOTO ~ B_1 \\
+                        &Z_1 \gets Z_1 + 1 \\
+                        &IF ~ Z_1 \neq 0 \quad GOTO ~ E_1 \\
+            [B_1] \quad &X_1 \gets X_1 - 1 \\
+                        &Y \gets Y + 1 \\
+                        &Z_1 \gets Z_1 + 1 \\
+                        &IF ~ Z_1 \neq 0 \quad GOTO ~ A_1
+        \end{align*}
+
+        Como la etiqueta $E_1$ no antecede a ninguna instrucción, cuando el
+        programa busca dicha etiqueta termina.
+
+        Este programa computa la función identidad:
+        $f: \mathbb{N} \to \mathbb{N} / f(x) = x$
+\end{itemize}
+
+
+\section{Macros}
+
+\begin{definicion}{Macro}{}
+    Una macro es una pseudoinstrucción que representa un segmento de 
+    un programa.
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Expansión de una macro}{}
+    Cada vez que en un programa $\mathcal{P}$ aparece una macro, la misma se 
+    debe reemplazar por el segmento del programa que representa.
+    Este proceso de denomina \textit{expansión de la macro}.
+\end{definicion}
+
+Debemos ser cuidadosos de que las variables auxiliares y las etiquetas que
+se utilicen para expandir una macro no aparezcan en otras instrucciones del
+programa.
+
+\subsubsection{Ejemplos de macros}
+
+\begin{itemize}
+    \item La macro \textit{salto incondicional} se representa como:
+        \begin{gather*}
+            GOTO ~ L
+        \end{gather*}
+        siendo $L$ una etiqueta.
+
+        Esta macro se expande de la siguiente manera:
+        \begin{align*}
+            &V \gets V + 1 \\
+            &IF ~ V \neq 0 \quad GOTO ~ L
+        \end{align*}
+
+    \item La macro \textit{asignación de cero} se representa como:
+        \begin{gather*}
+            V \gets 0
+        \end{gather*}
+
+        Y se expande como
+        \begin{align*}
+            [L] \quad &V \gets V - 1 \\
+                      &IF ~ V \neq 0 \quad GOTO ~ L
+        \end{align*}
+
+    \item La macro \textit{asignación de variable} se representa como
+        \begin{gather*}
+            V_1 \gets V_2
+        \end{gather*}
+
+        Y se expande:
+        \nota{Recordar que las etiquetas que aparecen en esta macro
+        \underline{no} deben ser utilizadas en el programa donde se utiliza la
+        macro. Lo mismo para la variable auxiliar.}%
+        \begin{align*}
+                        &V_1 \gets 0 \\
+            [A_1] \quad &IF ~ V_2 \neq 0 \quad GOTO ~ B_1 \\
+                        &GOTO ~ C_1 \\
+            [B_1] \quad &V_2 \gets V_2 -1 \\
+                        &V_1 \gets V_1 + 1 \\
+                        &Z_1 \gets Z_1 + 1 \\
+                        &GOTO ~ A_1 \\
+            [C_1] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ D_1 \\
+                        &GOTO ~ E_1 \\
+            [D_1] \quad &Z_1 \gets Z_1 - 1 \\
+                        &V_2 \gets V_2 + 1 \\
+                        &GOTO ~ C_1
+        \end{align*}
+
+        \bigskip
+        \textit{Observación:}
+        Notemos que si cambiamos $V_1$ por $Y$ y $V_2$ por $X_1$ y vemos la
+        macro como un programa completo este computaría la función identidad.
+        A diferencia del ejemplo en la sección anterior, este programa 
+        resguardaría el valor de entrada.
+\end{itemize}
+
+\subsubsection{Ejemplos de programas con macros}
+
+\begin{itemize}
+    \item \textbf{Función suma} \label{ej:funcion-suma}
+
+        El siguiente programa computa la función 
+        $f: \mathbb{N} \times \mathbb{N} \to \mathbb{N}/f(x_1, x_2) = x_1+x_2$
+
+        \begin{align*}
+                        &Y \gets X_1 \\
+                        &Z_1 \gets X_2 \\
+            [C_1] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ B_1 \\
+                        &GOTO ~ E_1 \\
+            [B_1] \quad &Z_1 \gets Z_1 - 1 \\
+                        &Y \gets Y + 1 \\
+                        &GOTO ~ C_1
+        \end{align*}
+
+    \item \textbf{Función producto} \label{ej:funcion-producto}
+
+        El siguiente programa computa la función 
+        $f: \mathbb{N} \times \mathbb{N} \to \mathbb{N}/f(x_1, x_2) = x_1 x_2$
+
+        \begin{align*}
+                        &Z_2 \gets X_2 \\
+            [B_1] \quad &IF ~ Z_2 \neq 0 \quad GOTO ~ A_1 \\
+                        &GOTO ~ E_1 \\
+            [A_1] \quad &Z_2 \gets Z_2 - 1 \\
+                        &Z_1 \gets X_1 + Y \\
+                        &Y \gets Z_1 \\
+                        &GOTO ~ B_1
+        \end{align*}
+
+    \item \textbf{Función sucesor} \label{ej:funcion-sucesor}
+
+        El siguiente programa computa la función
+        $f: \mathbb{N} \to \mathbb{N} / f(x) = x + 1$
+
+        \begin{align*}
+            &Y \gets X_1 \\
+            &Y \gets Y + 1
+        \end{align*}
+
+    \item \textbf{Función proyección} \label{ej:funcion-proyeccion}
+
+        Basta con cambiarle al programa que computa la función identidad su 
+        variable $X_1$ por la variable $X_i$, 
+        donde $X_i$ es la i-ésima variable que se quiere proyectar.
+
+
+        \nota{$1 \leq i \leq n$}%
+        $\Pi_i: {\mathbb{N}}^k \to \mathbb{N} / 
+        \Pi_i (x_1, \dotsc, x_i, \dotsc, x_n) = x_i$
+
+        \begin{align*}
+            &Y \gets X_i \\
+        \end{align*}
+\end{itemize}
+
+\section{Descripciones de programas}
+
+\subsection{Estado de un programa}
+
+\begin{definicion}{Estado de un programa}{}
+    El estado de un programa $\mathcal{P}$ es una lista finita de ecuaciones 
+    de la forma
+    \begin{gather*}
+        V = m
+    \end{gather*}
+
+    Donde $V$ es una variable y $m \in \mathbb{N}$.
+
+    \medskip
+
+    Hay una única ecuación para cada variable que aparece en $\mathcal{P}$.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Dado el siguiente programa $\mathcal{P}$:
+\begin{align*}
+    [A_1] \quad &X_1 \gets X_1 - 1 \\
+                &Y \gets Y + 1 \\
+                &IF ~ X_1 \neq 0 \quad GOTO ~ A_1
+\end{align*}
+
+Entonces los estados de $\mathcal{P}$ son:
+\begin{align*}
+    X_1 &= 2, Y = 1 \\
+    X_1 &= 3, Y = 1, Z_1 = 0 \\
+    X_1 &= 5, Y = 1, Z_1 = 6
+\end{align*}
+
+Notemos que no es necesario que los estados sean alcanzados.
+
+\medskip
+
+Por otra parte, las siguientes secuencias \underline{no} son estados:
+\begin{align*}
+    X_1 = 2 \quad \text{Falta una ecuación asociada a la variable } Y \\
+    X_1 = 2, Z_1 = 3 \quad \text{Falta una ecuación asociada a la 
+    variable } Y \\
+    Y = 1, X_1 = 6, Y = 2 \quad \text{Hay dos secuencias asociadas a la 
+    variable} Y
+\end{align*}
+
+\subsection{Descripción instantánea de un programa o Snapshot}
+
+\begin{definicion}{Descripción instantánea de un programa}{}
+    Supongamos que un programa $\mathcal{P}$   tiene longitud $n$, es decir,
+    consta de $n$ instrucciones $I_1, I_2, \dotsc, I_n$.
+
+    \begin{itemize}
+        \item Para un estado $\sigma$ de $\mathcal{P}$ y un 
+            $i \in \{ 1,2,\dotsc,n+1\}$ tenemos que el par $(i, \sigma)$ es 
+            una descripción instantánea de $\mathcal{P}$, la cual se llama 
+            terminal si $i = n+1$.
+
+            $i$ nos dice a qué instrucción apunta antes de ser ejecutada, y
+            en $\sigma$ están los valores de las variables antes de ejecutar
+            la instrucción $i$.
+
+        \item Para una $(i, \sigma)$ no terminal se puede definir su sucesor 
+        $(j, \tau)$:
+        \begin{enumerate}
+            \item La i-ésima instrucción de $\mathcal{P}$ es $V \gets V+1$.
+
+            Entonces $j = i + 1$, y $\tau = \sigma$ salvo que la ecuación 
+            $V=m$ en $\sigma$ va a ser $V=m+1$ en $\tau$
+
+            \item La i-ésima instrucción de $\mathcal{P}$ es $V\gets V-1$.
+
+                Entonces $j= i + 1$, y $\tau = \sigma$ salvo que
+                $V=m$ en $\sigma$ será 
+
+                $V = \begin{cases}
+                    m - 1 & \text{si } m > 0 \\
+                    0 & \text{si } m = 0
+                \end{cases} ~$ en $\tau$.
+                
+            \item La i-ésima instrucción de $\mathcal{P}$ es 
+                $IF ~ V \neq 0 \quad GOTO ~ L$
+
+                Entonces 
+                $\tau = \sigma$ y 
+                \begin{itemize}
+                    \item Si $V=0$ en $\sigma$
+                        $\implies$
+                        $j=i+1$
+                    \item Si $V \neq 0$ en $\sigma$
+                        $\implies$
+
+                        $j = \begin{cases} 
+                    \min{\{ k: I_k \text{ tiene etiqueta } L \}} & \text{si 
+                    existe } [L] ~ I_k \\
+                    n+1 & \text{si no existe } [L] ~ I_k
+                \end{cases}$
+                \end{itemize}
+        \end{enumerate}
+    \end{itemize}
+\end{definicion}
+
+\subsection{Cómputo}
+\begin{definicion}{Cómputo}{}
+    Un cómputo de un programa $\mathcal{P}$ a partir de una descripción 
+    instantánea $d_1 = (i, \sigma)$ es una lista 
+    $d_1, d_2, \dotsc, d_k$ de descripciones
+    instantáneas de $\mathcal{P}$ tales que $d_{j+1}$ es el sucesor de $d_j$.
+
+    Siendo $ 1 \leq j \leq k-1$, y $d_k$ la descripción 
+    instantánea terminal.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Para el siguiente programa $\mathcal{P}$:
+\begin{align*}
+    [A_1] \quad &X_1 \gets X_1 - 1 \\
+                &Y \gets Y + 1 \\
+                &IF ~ X_1 \neq 0 \quad GOTO ~ A_1
+\end{align*}
+
+El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
+\begin{align*}
+    d_2 &= \{ 2, X_1 = 1, Y = 0 \} \\
+    d_3 &= \{ 3, X_1 = 1, Y = 1 \} \\
+    d_4 &= \{ 1, X_1 = 1, Y = 1 \} \\
+    d_5 &= \{ 2, X_1 = 0, Y = 1 \} \\
+    d_6 &= \{ 3, X_1 = 0, Y = 2 \} \\
+    d_7 &= \{ 4, X_1 = 0, Y = 2 \}
+\end{align*}
+
+\subsection{Estado inicial}
+\begin{definicion}{Estado inicial}{}
+    Sea $\mathcal{P}$  un programa y sean $u_1, \dotsc, u_m$ números naturales.
+    
+    \medskip
+
+    El estado inical de $\mathcal{P}$ para $u_1, \dotsc, u_m$ es el estado
+    $\sigma_1$  definido como
+    \begin{gather*}
+        \notamath{$j>m$}
+        \sigma_1 = (X_1 = u_1, X_2 = u_2, \dotsc, X_m = u_m, X_j = 0, Z_j = 0,
+        Y = 0)
+    \end{gather*}
+    \nota{En cuyo caso no se escriben}%
+    Donde $X_j$ y $Z_j$ pueden no aparecer en el programa.
+
+    Por lo tanto la descripción inicial de $\mathcal{P}$ para $u_1,\dotsc,u_m$
+    es $d_1 = (1, \sigma_1)$.
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Cómputo a partir del estado inicial}{}
+    Sea $\mathcal{P}$ un programa, sean $u_1, \dotsc, u_m$ números naturales
+    y $\sigma_1$ el estado inicial para ellos.
+
+    \medskip
+
+    Entonces existen dos posibilidades:
+    \begin{enumerate}
+        \item Hay un cómputo de $\mathcal{P}$: $d_1, \dotsc, d_k$, siendo
+            $d_1 = (1, \sigma_1)$.
+
+            \bigskip
+            \textbf{Notación:}
+            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m)$ es el valor de $Y$
+            en la descripción instantánea $d_k$.
+
+        \item Existe una secuencia infinita $d_1, d_2, \dotsc$ siendo
+            \nota{No hay tal cómputo}%
+            $d_1 = (1, \sigma_1)$ y $d_{i+1}$ el sucesor de $d_i$.
+
+            \bigskip
+            \textbf{Notación:}
+            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m) = \uparrow$ significa
+            que $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m)$ está indefinido.
+    \end{enumerate}
+\end{definicion}
+
+\subsection{Función computable}
+
+\begin{definicion}{Función parcialmente computable}{}
+    Una función $f$ es parcialmente computable si existe un programa 
+    $\mathcal{P}$ tal que $f = \Psi_{\mathcal{P}}^k$
+
+    \medskip
+
+    Donde si $x = (x_1, \dotsc, x_k) \in \mathbb{N}^k$ entonces
+    \begin{itemize}
+        \item Si $x \in Dom(f) \implies$
+            \nota{Para todo \\$(u_1, \dotsc, u_m) \in \mathbb{N}^m$}%
+            $f(u_1, \dotsc, u_m) = \Psi_{\mathcal{P}}^m (u_1, \dotsc, u_m)$
+    \item Si $x \notin Dom(f) \implies$
+            $\Psi_{\mathcal{P}}^k (x_1, \dotsc, x_k) = \uparrow$
+    \end{itemize}
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Función total}{}
+    Sea $f$ una función.
+
+    \medskip
+
+    Decimos que $f$ es total si su dominio es $\mathbb{N}^m$.
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Función computable}{}
+    Una función $f: \mathbb{N}^k \to \mathbb{N}$ es computable si es 
+    parcialmente computable y total.
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+Notemos que el mismo programa puede servir para computar funciones de
+$1, 2, 3, \dotsc$ variables.
+
+Por lo tanto si en $\mathcal{P}$ aparece $X_n$ y no aparece $X_i$, con $i>n$,
+hay dos opciones:
+\begin{enumerate}
+    \item Si sólo se especifican $m < n$ valores de entrada, entonces 
+        $X_{m+1}, \dotsc, X_n$ toman el valor 0.
+    \item Si se especifican $m>n$ valores de entrada, $\mathcal{P}$ ignorará
+        $u_{n+1}, \dotsc, u_m$.
+\end{enumerate}
+
+\subsubsection{Ejemplo}
+
+Sea el programa $\mathcal{P}$
+\begin{gather*}
+    [A_1] \quad IF ~ X_1 \neq 0 \quad GOTO ~ A_1
+\end{gather*}
+
+Notemos que $\Psi_{\mathcal{P}}^{1} (x) = \begin{cases}
+    0 & x = 0\\
+    \uparrow & x \neq 0
+\end{cases} ~$ pues:
+
+\begin{align*}
+    d_1 &= (1, X_1 = 0, Y = 0) \\
+    d_2 &= (2, X_1 = 0, Y = 0) \notamath{Terminal}\\
+    \\
+    d_1 &= (1, X_1 = n, Y = 0) \notamath{$n>0$} \\
+    d_2 &= (1, X_1 = n, Y = 0)\\
+        & \implies d_j = d_1 ~ \forall j \in \mathbb{N}
+\end{align*}
+\begin{gather*}
+    \therefore ~ \nexists \text{ un cómputo de } d_1 \text{ de } \mathcal{P}
+\end{gather*}
+
+La función $f$ que computa es parcialmente computable pues su dominio es 
+$\{0\}$, siendo $f: \{ 0 \} \to \mathbb{N} / f(0) = 0$.
+
+\bigskip
+
+
+\section{Teorema}
+
+\begin{teorema}{Composición de funciones computables}{composicion-computables}
+    Sean $f: \mathbb{N}^k \to \mathbb{N}$,
+
+    \phantom{Sean }$g_1, g_2, \dotsc, g_k: \mathbb{N}^m \to \mathbb{N}$, y
+
+    \phantom{Sean }$h: \mathbb{N}^m \to \mathbb{N}$ tales que
+
+    \smallskip
+
+    $h(x_1, \dotsc, x_m) = f(g_1 (x_1, \dotsc, x_m), g_2 (x_1, \dotsc, x_m),
+    \dotsc, g_k (x_1, \dotsc, x_m))$
+
+    \smallskip
+
+    Es decir, $h = f \circ (g_1 \times g_2 \times \dotsc \times g_k)$
+
+    \medskip
+
+    Si $f, g_1, g_2, \dotsc, g_k$ son (parcialmente) computables, entonces $h$ es
+    (parcialmente) computable.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Como $f$ es (parcialmente) computable 
+    $\implies \exists \; \mathcal{P}_f$ que
+    la computa $\implies$ podemos armar una macro.
+
+    Como $g_j$ es (parcialmente) computable 
+    $\implies \exists \; \mathcal{P}_{g_j}$ 
+    que la computa $\implies$ podemos armar una macro.
+
+    Armo el siguiente programa para probar que $h$ es (parcialmente) 
+    computable.
+
+    \begin{align*}
+        Z_1 \gets& g_1 (x_1, \dotsc, x_m) \\
+        Z_2 \gets& g_w (x_1, \dotsc, x_m) \\
+        \vdots & \\
+        Z_k \gets& g_k (x_1, \dotsc, x_m) \\
+        Y \gets& f(z_1, \dotsc, z_k)
+    \end{align*}
+\end{proof}
+
+
+
+\textbf{Bonus:} libro recomendado por Noni.
+
+\textit{Introduction to Automata Theory, Languages, and Computation by 
+Hopcroft, J. and Ullman, J}.
+

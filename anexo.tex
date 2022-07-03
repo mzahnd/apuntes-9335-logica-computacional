@@ -1,0 +1,118 @@
+\chapter{Anexo}
+% \graphicspath{ {./anexo/graf/} }
+
+\section{Ecuaciones y funciones útiles}
+
+\subsection{Función Vp}
+
+\begin{definicion}{Función $V_p$}{funcion-vp}
+    Sea $p \in \mathcal{P}$, con 
+    $\mathcal{P} = \{ p \in \mathbb{N} / p \text{ es primo} \}$
+
+    \medskip
+
+    \begin{gather*}
+        V_p : \mathbb{Z} - \{ 0 \} \to \mathbb{N} /
+        V_p (a) =
+        \begin{cases}
+            0 & \text{si } \notdivides{p}{a} \\
+            k & \text{si } \divides{p^k}{a} \wedge \notdivides{p^{k+1}}{a}\\
+        \end{cases}
+    \end{gather*}
+\end{definicion}
+
+Esta función devuelve la cantidad de veces que aparece el primo $p$ en la 
+factorización de $a$.
+
+\subsubsection{Propiedades}
+\begin{itemize}
+    \item $V_p (a \, . \, b) = V_p(a) + V_p(b)$
+    \item $V_p (a^n) = n \, . \, V_p(a)$
+    \item $\divides{d}{a} \implies V_p (d) \leq V_p (a)$
+\end{itemize}
+
+\subsection{Funciones RP}
+
+Las siguientes funciones son RP.
+
+\begin{equation} \label{eq:anexo-restatruncada}
+    \text{Resta truncada } \restatruncada: \mathbb{N}^2 \to \mathbb{N} / 
+    x \restatruncada y =
+    \begin{cases}
+        x-y & x \geq y \\
+        0 & x < y
+    \end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-alpha}
+    \alpha: \mathbb{N} \to \mathbb{N} / 
+    \alpha (x) =
+    \begin{cases}
+        1 & x = 0 \\
+        0 & x \neq 0
+    \end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-eq}
+    \mathrm{EQ}: \mathbb{N}^2 \to \mathbb{N} / 
+    \mathrm{EQ} (x,y) =
+    \begin{cases}
+        1 & x = y \\
+        0 & x \neq y
+    \end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-fact}
+    \mathrm{fact}: \mathbb{N} \to \mathbb{N} / 
+    \mathrm{fact} (x) = x!
+\end{equation}
+
+\begin{equation} \label{eq:anexo-pot}
+    \mathrm{POT}: \mathbb{N}^2 \to \mathbb{N} / 
+    \mathrm{POT} (x,y) = {(x+1)}^{y}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-pred}
+    \mathrm{PRED}: \mathbb{N} \to \mathbb{N} / 
+    \mathrm{PRED} (x) =
+    \begin{cases}
+        0 & x = 0 \\
+        x-1 & x \neq 0
+    \end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-max}
+    \mathrm{max}: \mathbb{N}^2 \to \mathbb{N} / 
+    \mathrm{max} (x,y) =
+    \begin{cases}
+        x & x \geq y \\
+        y & \text{sino}
+    \end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:anexo-par}
+    \mathrm{IMPAR}: \mathbb{N} \to \mathbb{N} / 
+    \mathrm{IMPAR} (x) =
+    \begin{cases}
+        1 & x \text{ es impar} \\
+        0 & x \text{ es par}
+    \end{cases}
+\end{equation}
+
+\section{Apuntes de la cátedra}
+
+Se incluyen a continuación copias de los apuntes provistos por la cátedra
+que complementan los temas teóricos vistos en clase.
+
+Todos ellos están incluídos utilizando el documento publicado en formato PDF 
+a falta de una version en {\LaTeX} de los mismos.
+
+\includePDFAnexo{Álgebra de Boole}{anexo/Algebra-de-Boole.pdf}
+
+\includePDFAnexo{Ejemplos de Pruebas}{anexo/Ejemplos-Pruebas.pdf}
+
+\includePDFAnexo{Lenguaje S}{anexo/Lenguaje-S.pdf}
+
+\includePDFAnexo{Programas Universales}{anexo/Programas-Universales.pdf}
+
+\includePDFAnexo{Errores Comunes}{anexo/Errores-Comunes-Logica.pdf}

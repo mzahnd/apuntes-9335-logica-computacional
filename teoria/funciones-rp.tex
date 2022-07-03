@@ -1,0 +1,1313 @@
+%% Copyright (c) 2022 Martín E. Zahnd
+%%
+%% This code is licensed under MIT license (see LICENSE.txt for details)
+%%
+\chapter{Funciones RP}
+% \graphicspath{ {./teoria/resources/funciones-rp/} }
+
+\section{Esquemas recursivos}
+
+\nota{ERI}%
+\begin{definicion}{Esquema recursivo Tipo I}{}
+    Sea $h: \mathbb{N} \to \mathbb{N}$
+    
+    Sea $g: \mathbb{N}^2 \to \mathbb{N}$
+
+    \medskip
+
+    Decimos que $h$ se obtiene a partir de $g$ por un ERI si se puede escribir
+    de la siguiente forma:
+    \begin{align*}
+        h(0) &= k \in \mathbb{N} \\
+        h(n+1) &= g(n, h(n))
+    \end{align*}
+\end{definicion}
+
+\medskip
+
+\begin{teorema}{}{}
+    Si $h$ se obtiene a partir de $g$ por un ERI y $g$ es computable, 
+    entonces $h$ es computable.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    \begin{align*}
+        &Y \gets K \\
+        [A_1] \quad &IF ~ X_1 = 0 \quad GOTO ~ E_1 
+        \notamath{Def. en ej. de la práctica}\\
+        &Y \gets g(Z_1, Y) \\
+        &Z_1 \gets Z_1 + 1 \\
+        &X_1 \gets X_1 - 1 \\
+        &GOTO ~ A_1
+    \end{align*}
+
+    Notemos que
+    \begin{center}
+        \begin{tabular}{c | c | l}
+            $X_1$ & $Z_1$ & $Y$ \\
+            \hline
+            $2$ & $0$ & $0$ \\
+            $2$ & $0$ & $k = h(0)$ \\
+            $1$ & $1$ & $g(0,k) = h(1)$ \\
+            $0$ & $2$ & $g(1, g(0,k))=h(2)$
+        \end{tabular}
+    \end{center}
+\end{proof}
+
+\subsubsection{Ejemplo}
+Demostrar mediante un ER que $f: \mathbb{N} \to \mathbb{N}/f(n) = n!$ es
+computable.
+\nota{$\mathrm{PROD(x,y)}$: Producto de $x$ e $y$ \\
+$\mathrm{SUC}(x)$: Sucesor de $x$\\
+$\Pi_j$: Proyección de la variable j-ésima}%
+\begin{align*}
+    f(0) &= 1 \\
+    f(n+1) &= (n+1)! = (n+1) n! = (n+1) f(n) \underbrace{=}_{\text{Quiero}} 
+    g(n, f(n))
+\end{align*}
+
+Defino $g: \mathbb{N}^2 \to \mathbb{N} / g(x,y) = 
+\mathrm{PROD}(\mathrm{SUC}(x),y)$
+
+\begin{align*}
+    g(x,y) = \mathrm{PROD}(\mathrm{SUC}(\Pi_1 (x,y)), \Pi_2 (x,y)) \\
+    g = \mathrm{PROD} \circ (\mathrm{SUC} \circ \Pi_1 \times \Pi_2)
+\end{align*}
+
+\smallskip
+
+$g$ es computable por ser composición de funciones computables 
+\nota{Ver los ejemplos en la página~\pageref{ej:funcion-suma}}%
+(ya vimos que $\mathrm{PROD}$, $\mathrm{SUC}$ y $\Pi_j$ es computable).
+
+\begin{center}
+    $\therefore ~ f$ es computable por ser ERI a partir de $g$ computable.
+\end{center} 
+
+\bigskip
+
+\nota{ERII}%
+\begin{definicion}{Esquema recursivo Tipo II}{}
+    Sea $h: \mathbb{N}^{n+1} \to \mathbb{N}$
+    
+    Sea $g: \mathbb{N}^{n+2} \to \mathbb{N}$
+
+    Sea $q: \mathbb{N}^{n} \to \mathbb{N}$
+
+    \medskip
+
+    Decimos que $h$ se obtiene por ERII a partir de $g$ y $q$ si puede 
+    escribirse:
+    \begin{align*}
+        h(x_1, x_2, \dotsc, x_n, 0) &= q(x_1, \dotsc, x_n) \\
+        h(x_1, x_2, \dotsc, x_n, y+1) &= g(x_1, \dotsc, x_n, y, 
+        h(x_1,\dotsc, x_n, y))
+    \end{align*}
+\end{definicion}
+
+\medskip
+
+\begin{teorema}{}{}
+    Sea $g: \mathbb{N}^{n+2} \to \mathbb{N}$
+
+    Sea $q: \mathbb{N}^{n} \to \mathbb{N}$
+
+    Sea $h: \mathbb{N}^{n+1} \to \mathbb{N}$ tal que se obtiene por ERII a 
+    partir de $q$ y $g$.
+
+    \medskip
+
+    Si $q$ y $g$ son computables $\implies$ $h$ es computable.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    \begin{align*}
+        &Y \gets q(X_1, \dotsc, X_n) \\
+        [A_1] \quad &IF ~ X_{n+1} = 0 \quad GOTO ~ E_1 \\
+        &Y \gets g(x_1, \dotsc, x_n, Z_1, Y) \\
+        &Z_1 \gets Z_1 + 1 \\
+        &X_{n+1} \gets X_{n+1} - 1 \\
+        &GOTO ~ A_1
+    \end{align*}
+\end{proof}
+
+\section{Funciones iniciales} \label{sec:funciones-iniciales}
+
+Las siguientes funciones se denominan \underline{funciones iniciales}.
+
+\begin{definicion}{Función cero}{}
+    \begin{gather*}
+        \mathrm{CERO}: \mathbb{N} \to \mathbb{N} / \mathrm{CERO}(x) = 0
+    \end{gather*}
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Función sucesor}{}
+    \begin{gather*}
+        \mathrm{SUC}: \mathbb{N} \to \mathbb{N} / \mathrm{SUC}(x) = x+1
+    \end{gather*}
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Función proyección}{}
+    \begin{gather*}
+        \Pi_{j}^{n}: \mathbb{N}^{n} \to \mathbb{N} / 
+        \Pi_{j}^{n}(x_1, \dotsc, x_n) = x_j
+        \notamath{$1 \leq j \leq n$}
+    \end{gather*}
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+Las funciones iniciales son computables.
+
+\begin{proof}
+    \nota{En los ejemplos de programas en la sección del lenguaje S.
+    Página~\pageref{ej:funcion-suma}}%
+    Ya la hicimos.
+\end{proof}
+
+\section{Recursividad primitiva}
+
+\nota{RP}%
+\begin{definicion}{Recursividad primitiva}{rp}
+    Una función es RP si es inicial o se obtiene aplicando finitas 
+    ``operaciones válidas'' a las \nameref{sec:funciones-iniciales},
+    siendo las operaciones válidas: composición, ERI y ERII.
+\end{definicion}
+
+
+\subsubsection{Ejemplo}
+
+Probar que $\mathrm{SUMA}$ es RP, siendo
+\begin{gather*}
+    \mathrm{SUMA}: \mathbb{N}^2 \to \mathbb{N} / \mathrm{SUMA}(x,y) = x+y
+\end{gather*}
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        \mathrm{SUMA}(x,0) &= x \underbrace{=}_{\text{Quiero}} g(x) \\
+        \mathrm{SUMA} (x,y+1) &= x + (y+1) = (x+y) + 1 \\ 
+        &= \mathrm{SUMA}(x,y)+1
+        \underbrace{=}_{\text{Quiero}} f(x,y,\mathrm{SUMA}(x,y))
+    \end{align*}
+
+    Defino $g: \mathbb{N} \to \mathbb{N} / g(x) = \Pi_1 (x)$
+    \nota{$g=\Pi_1$ es inicial}%
+
+    Defino $f: \mathbb{N}^3 \to \mathbb{N} / f(x,y,z) = z+1 
+    = \mathrm{SUC}(\Pi_3 (x,y,z))$
+
+
+    Es decir, $f = \mathrm{SUC} \circ \Pi_3$ es composición de iniciales.
+
+    Con lo cual me queda que $\mathrm{SUMA}$ es RP pues es un ERII de $g$
+    inicial y de $f$ composición de iniciales.
+
+\end{proof}
+
+\textbf{Cuidado:} lo siguiente está mal.
+\begin{align*}
+    \mathrm{SUMA}(x,2) &= \mathrm{SUC}( \mathrm{SUC} (x)) \\
+    \mathrm{SUMA}(x,3) &= \mathrm{SUC}( \mathrm{SUC}( \mathrm{SUC} (x))) \\
+    \implies \mathrm{SUMA}(x,y) &= \underbrace{\mathrm{SUC} \circ \dotsc 
+    \circ \mathrm{SUC}}_{y \text{ veces}}(x) \\
+    \implies \mathrm{SUMA} &=  \mathrm{SUC} \circ \dotsc \circ \mathrm{SUC} 
+    \circ \Pi_1
+\end{align*}
+
+El error es que no podemos decir cuántas veces estamos haciendo la composición
+porque depende de dónde evaluamos $\mathrm{SUM}$, y no puede depender de dónde
+la estamos evaluando.
+
+\bigskip
+
+\begin{teorema}{}{}
+    Si $f: \mathbb{N}^k \to \mathbb{N}$ es RP $\implies$ $f$ es computable.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item Las funciones iniciales son computables (ya lo vimos).
+        \item Composición de computables es computable (ya lo vimos).
+        \item ERI y ERII de computables es computable (ya lo vimos).
+    \end{enumerate}
+
+    Como una función $f$ RP se obtiene aplicando finitas composiciones, ERI
+    y ERII a iniciales que son funciones computables, entonces $f$ es 
+    computable.
+
+\end{proof}
+
+\bigskip
+\textit{Observación:}
+Si $f$ no es total $\implies$ no es RP.
+
+\bigskip
+\textit{Observación:}
+Existen funciones computables que no son RP.
+
+\begin{proof}
+    No la vemos.
+\end{proof}
+
+\subsubsection{Ejemplo}
+
+\nota{\textit{Noni}: En alguna materia de programación la implementaron, así
+que ya saben que es computable.}%
+\textbf{Función de Ackermann}: Sea $A: \mathbb{N}^2 \to \mathbb{N}$ tal que
+\begin{align*}
+     &A(0,y) = y+1 \\
+     &A(x+1,0) = A(x,1) \\
+     &A(x+1,y+1) = A(x, A(x+1,y))
+\end{align*}
+
+Faltaría ver que la función no es RP.
+
+\bigskip
+
+\begin{teorema}{}{}
+   \begin{enumerate}
+       \item $f$ es composición de funciones RP $\implies$ $f$ es RP.
+       \item $f$ se obtiene a partir de un ERI o un ERII de funciones RP
+           $\implies$ $f$ es RP.
+   \end{enumerate} 
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item Defino $f: \mathbb{N}^k \to \mathbb{N} / 
+        f = h \circ (g_1 \times \dotsc \times g_k)$
+
+        Donde 
+        $g_1, \dotsc, g_n: \mathbb{N}^k \to \mathbb{N}$ RP y 
+        $h: \mathbb{N}^n \to \mathbb{N}$ RP.
+
+        \begin{itemize}
+        \item Como $g_j$ es RP, se obtuvo aplicando $m_j$ operaciones 
+            \nota{``\hyperref[def:rp]{Operaciones permitidas}'': 
+                Composiciones, ERI y ERII.\\
+        $1 \leq j \leq n$}%
+        permitidas a funciones iniciales.
+
+        \item Como $h$ es RP, se obtuvo aplicando $m$ operaciones permitidas a
+            funciones iniciales.
+            
+        \end{itemize}
+
+        $\implies f$ se obtiene aplicando $1+m+m_1+\dots + m_n \in \mathbb{N}$
+        operaciones a funciones iniciales.
+        \begin{center}
+            $\implies f$ es RP
+        \end{center}
+
+    \item 
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item Tenemos
+                $f: \mathbb{N} \to \mathbb{N}/ f(0) = k, f(n+1)=h(n,f(n))$,
+                siendo $h: \mathbb{N}^2 \to \mathbb{N}$ RP.
+
+                Como $h$ es RP, se obtuvo aplicando $k$ operaciones permitidas
+                a funciones iniciales.
+
+                $\implies f$ se obtiene aplicando $1+k$ operaciones permitidas
+                a funciones iniciales.
+                \begin{center}
+                    $\implies f$ es RP
+                \end{center}
+            \item Tenemos $f: \mathbb{N}^{k+1} \to \mathbb{N} / \substack{%
+                    f(x_1, \dotsc, x_k, 0) = g(x_1, \dotsc, x_k)\\
+                    f(x_1, \dotsc, x_k, y+1) = h(x_1, \dotsc, x_k,y, 
+                    f(x_1, \dotsc, x_k, y))}$
+
+                Siendo $g: \mathbb{N}^k \to \mathbb{N}$ RP y 
+                $h: \mathbb{N}^{k+2} \to \mathbb{N}$ RP.
+
+                \begin{itemize}
+                \item Como $g$ es RP, se obtuvo aplicando $m_g$ operaciones 
+                permitidas a funciones iniciales.
+
+                \item Como $h$ es RP, se obtuvo aplicando $m_h$ operaciones 
+                permitidas a funciones iniciales.
+                    
+                \end{itemize}
+
+                $\implies f$ se obtiene aplicando $m_g+m_h+1 \in \mathbb{N}$
+                operaciones a funciones iniciales.
+                \begin{center}
+                    $\implies f$ es RP
+                \end{center}
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\section{Predicados RP}
+
+\begin{definicion}{Predicado}{}
+    Un \textit{predicado} $\mathcal{P}^k$ de $k$ variables es una relación $k$-aria de
+    números naturales, es decir, $\mathcal{P}^k \subseteq \mathbb{N}^k$.
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Función característica}{}
+    Se asocia a $P^k$ una función $C_{P^k}$, denominada
+    \textit{función característica}, y definida como:
+    \begin{gather*}
+        C_{P^k} : \mathbb{N}^k \to \{ 0,1 \} /
+        \notamath{$\overrightarrow{x} = (x_1, \dotsc, x_n)$, con 
+                    $n \in \mathbb{N}$}
+        C_{P^k} (\overrightarrow{x}) = \begin{cases}
+            1 & \text{si } \overrightarrow{x} \in \mathcal{P}^k\\
+            0 & \text{si } \overrightarrow{x} \notin \mathcal{P}^k
+        \end{cases}
+    \end{gather*}
+
+    \bigskip
+    \textbf{Notación:}
+    $C_{P^k} = \Chi_{P^k}$
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Predicado computable y RP}{}
+    \begin{itemize}
+        \item Decimos que ``$P^k$ es computable'' si 
+            $C_{P^k}$ es computable.
+        \item Decimos que ``$P^k$ es RP'' si 
+            $C_{P^k}$ es RP.
+    \end{itemize}
+
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Dada $\mathcal{P} = \{ (x,y) \in \mathbb{N}^2 / x \leq y \} \subsetneq \mathbb{N}^2$.
+Probar que $\mathcal{P}$ es RP.
+
+Definimos
+
+\begin{gather*}
+    C_{\mathcal{P}}: \mathbb{N}^2 \to \mathbb{N} / C_{\mathcal{P}} (x,y) =
+    \begin{cases}
+        1 & \text{si } x \leq y \\
+        0 & \text{si } x > y
+    \end{cases} =
+    \begin{cases}
+        1 & \text{si } x \restatruncada y  = 0\\
+        0 & \text{si } x \restatruncada y \neq 0
+    \end{cases} = \alpha(x \restatruncada y)
+\end{gather*}
+
+\nota{$\restatruncada$ significa ``resta truncada''\\
+$\alpha$ es una función de la práctica\\
+Ver ecuaciones \ref{eq:anexo-restatruncada} y \ref{eq:anexo-alpha}}%
+Entonces $C_{\mathcal{P}} 
+= \alpha \circ \restatruncada \circ (\Pi_1 \times \Pi_2)$.
+
+Por lo tanto, $C_{\mathcal{P}}$ es composición de $\alpha$, $\restatruncada$,
+$\Pi_j$, que son RP $\implies C_{\mathcal{P}}$ es RP $\implies \mathcal{P}$ es
+RP.
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    \begin{enumerate}
+        \item Sean $P^k$ y ${Q}^k$ predicados RP $\implies$
+            $(P \wedge Q)$ y $\neg P$ son predicados RP.
+        \item Sean ${P}^k$ y ${Q}^k$ predicados computables
+            $\implies$ $(P \wedge Q)$ y $\neg P$ son predicados computables.
+    \end{enumerate}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    \begin{enumerate}
+        \item $\mathcal{P}^k$ es RP $\implies$ 
+            $C_{{P}}: \mathbb{N}^k \to \mathbb{N}$ es RP.
+
+            $\mathcal{Q}^k$ es RP $\implies$ 
+            $C_{Q}: \mathbb{N}^k \to \mathbb{N}$ es RP.
+
+            $C_{\neg P}: \mathbb{N}^k \to \mathbb{N} /
+            C_{\neg P} (\overrightarrow{x}) = 
+            \begin{cases}
+                1 & \text{si } \overrightarrow{x} \notin {P} \\
+                0 & \text{si } \overrightarrow{x} \in {P}
+            \end{cases}$
+
+            \begin{align*}
+                C_{\neg P} (\overrightarrow{x}) =& \, 
+                1 \restatruncada C_{P}(\overrightarrow{x})\\
+                \text{ó}& \\
+                C_{\neg P} (\overrightarrow{x}) =& \,
+                \alpha(C_{P}(\overrightarrow{x})) \implies C_{\neg P} 
+                = \underbrace{\alpha}_{\text{RP}} \circ 
+            \underbrace{C_P}_{\substack{\text{RP}\\ \text{(dato)}}}
+            \end{align*}
+
+            $\implies C_{\neg P}$ es RP por composición de RP.
+
+            $\implies \neg P$ es un predicado RP.
+
+
+            $C_{P \wedge Q}: \mathbb{N}^k \to \mathbb{N} /
+            C_{P \wedge Q} (\overrightarrow{x}) = 
+            \begin{cases}
+                1 & \text{si } \overrightarrow{x} \in 
+                P \cap Q \\
+                0 & \text{si } \overrightarrow{x} \notin
+                P \cap Q \\
+            \end{cases}$
+
+            \begin{align*}
+                C_{P \wedge Q}(\overrightarrow{x}) &= 
+                C_{{P}}(\overrightarrow{x}) \, . \,
+                C_{{Q}}(\overrightarrow{x}) \\
+                &= \mathrm{PROD}(C_{{P}}(\overrightarrow{x}), 
+                    C_{{Q}}(\overrightarrow{x})) \\
+                &= \mathrm{PROD}( (C_{{P}}  \times
+                    C_{{Q}}) (\overrightarrow{x})) \\
+                &= \underbrace{\mathrm{PROD}}_{\text{RP}} 
+                \, \circ \,
+                (\underbrace{C_{{P}}}_{\substack{\text{RP}\\
+                \text{(dato)}}} \times 
+                    \underbrace{C_{{Q}}}_{\substack{\text{RP}\\
+                    \text{(dato)}}})
+            \end{align*}
+
+            $\implies C_{P \wedge Q}$ es RP por composición de funciones RP.
+
+            $\implies P \wedge Q$ es un predicado RP.
+
+        \item ${P}^k$ es computable $\implies$ 
+            $C_{{P}}: \mathbb{N}^k \to \mathbb{N}$ es computable.
+
+            ${Q}^k$ es computable $\implies$ 
+            $C_{{Q}}: \mathbb{N}^k \to \mathbb{N}$ es computable.
+
+            $C_{\neg P}: \mathbb{N}^k \to \mathbb{N} /
+            C_{\neg P} (\overrightarrow{x}) = 
+            \begin{cases}
+                1 & \text{si } \overrightarrow{x} \notin {P} \\
+                0 & \text{si } \overrightarrow{x} \in {P}
+            \end{cases}$
+
+            \begin{align*}
+                C_{\neg P} (\overrightarrow{x}) &= 
+                1 \restatruncada C_{P}(\overrightarrow{x})\\
+                &\text{ó} \\
+                C_{\neg P} (\overrightarrow{x}) &= 
+                \alpha(C_{P}(\overrightarrow{x})) \implies C_{\neg P} 
+                = \underbrace{\alpha}_{\text{Computable}} \circ 
+                \underbrace{C_{{P}}}_{\substack{\text{Computable}\\
+                    \text{(dato)}}}
+            \end{align*}
+
+
+            $\implies C_{\neg P}$ es computable por composición de funciones
+            computables.
+
+            $\implies \neg {P}$ es un predicado computable.
+
+            \smallskip
+
+            $C_{P \wedge Q}$ computable: Tarea.
+    \end{enumerate}
+\end{proof}
+
+\begin{corolario}{}{}
+    \begin{enumerate}
+        \item ${P}^k$, ${Q}^k$ son predicados RP $\implies$
+            $({P}^k \cup {Q}^k)$ y 
+            $({P}^k \to {Q}^k)$ son RP.
+        \item ${P}^k$, ${Q}^k$ son computables $\implies$
+            $({P}^k \cup {Q}^k)$ y 
+            $({P}^k \to {Q}^k)$ son computables.
+    \end{enumerate}
+\end{corolario}
+
+\begin{proof}
+    Tarea.
+\end{proof}
+
+\subsection{Teorema}
+\nota{Son dos teoremas en uno. Aplica a funciones RP o a computables.}%
+\begin{teorema}{}{rp-computable-funcionpartida}
+    Sean $h,g: \mathbb{N}^n \to \mathbb{N}$ funciones RP (computables).
+
+    Sea ${P}^n$ un predicado RP (computable).
+
+    Sea $f: \mathbb{N}^n \to \mathbb{N} / f(\overrightarrow{x}) = \begin{cases}
+        h(\overrightarrow{x}) & \text{si } \overrightarrow{x} \in {P}\\
+        g(\overrightarrow{x}) & \text{si } \overrightarrow{x}\notin{P}
+    \end{cases}$
+
+    \medskip
+
+    Entonces $f$ es RP (computable).
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item $f(\overrightarrow{x}) = 
+            h(\overrightarrow{x}) \, . \, C_{{P}}(\overrightarrow{x}) 
+            + g(\overrightarrow{x}) \, . \, C_{\neg P} (\overrightarrow{x})$
+
+            $f = \mathrm{SUMA} \circ (\mathrm{PROD}( h \times C_{{P}} ) \times  \mathrm{PROD} (g \times C_{\neg P}))$
+
+            $f$ es composición de 
+            $\underbrace{\text{suma, producto}}_{\text{RP}}$,
+            $\underbrace{h, g, C_{{P}}}_{\text{RP (dato)}}$
+            $\underbrace{C_{\neg {P}}}_{%
+                \substack{\text{RP pues}\\ C_{{P}} \text{ es RP}}}$
+            \begin{center}
+                $\implies f$ es RP
+            \end{center}
+
+        \item Tarea.
+    \end{enumerate}
+\end{proof}
+
+
+\subsubsection{Ejemplo}
+
+Sea $F: \mathbb{N}^2 \to \mathbb{N}$ tal que $F(x,y) = \begin{cases}
+    x+y & \text{si } x \leq y \\
+    x\, . \, y & \text{si } x > y 
+\end{cases}$
+
+Probar que $F$ es RP.
+
+\begin{proof} \phantom{.}
+
+    Escribimos $F$ como:
+    \begin{gather*}
+        F(x,y) = 
+        \begin{cases}
+            g(x,y) & \text{si } (x,y) \in {P}\\
+            h(x,y) & \text{si } (x,y) \notin {P}
+        \end{cases}
+    \end{gather*}
+
+    $g(x,y) = x+y$, ya vimos que $g$ es RP.
+
+    $h(x,y) = x \, . \, y$, ya vimos que $h$ es RP.
+
+    Luego $P = \{ (x,y) \in \mathbb{N}^2 / x \leq y \}$, ya vimos que es RP.
+
+    $\implies$ Por el Teorema \ref{teo:rp-computable-funcionpartida} $F$ es RP.
+\end{proof}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    Sean $g_1, \dotsc, g_n,h : \mathbb{N}^n \to \mathbb{N}$ funciones RP
+    (computables).
+
+    Sean $P_1, \dotsc, P_m$ predicados n-arios RP (computables) tales que
+    $P_i \cap P_j = \varnothing$ si $i \neq j$.
+
+    Sea $f: \mathbb{N}^n \to \mathbb{N} / f(\overrightarrow{x}) =
+    \begin{cases}
+        g_1(\overrightarrow{x}) & \text{si } \overrightarrow{x} \in P_1 \\
+        g_2(\overrightarrow{x}) & \text{si } \overrightarrow{x} \in P_2 \\
+        \quad \vdots & \\
+        g_m(\overrightarrow{x}) & \text{si } \overrightarrow{x} \in P_m \\
+        h(\overrightarrow{x}) & \text{sino}
+    \end{cases}$
+
+    \medskip
+
+    Entonces $f$ es RP (computable).
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        f(\overrightarrow{x}) =& \phantom{+}
+        g_1(\overrightarrow{x}) \, . \, C_{P_1} (\overrightarrow{x}) +
+        g_2(\overrightarrow{x}) \, . \, C_{P_2} (\overrightarrow{x}) +
+        \cdots
+        +
+        g_m(\overrightarrow{x}) \, . \, C_{P_m} (\overrightarrow{x}) +\\
+        &+ h(\overrightarrow{x}) 
+        \underbrace{\alpha(C_{P_1}(\overrightarrow{x})) \, . \, 
+        \alpha(C_{P_2}(\overrightarrow{x}))
+        \, . \; 
+        \dotsc
+        \; . \, 
+        \alpha (C_{P_m}(\overrightarrow{x}))}_{1 \iff C_{P_j}=0 \; \forall j} 
+        = \\
+        &= \sum_{k=1}^{m} g_{k}(\overrightarrow{x}) C_{P_k}(\overrightarrow{x})
+        + h(\overrightarrow{x}) \, . \, \prod_{k=1}^{m} 
+        \alpha(C_{P_k}(\overrightarrow{x}))
+    \end{align*}
+
+    Entonces como $f$ es composición de 
+    $\underbrace{\text{suma, producto, } \alpha}_{\text{RP}}$,
+    $\underbrace{h, g_j, P_j}_{\text{RP (dato)}}$
+
+    \begin{center}
+        $\implies f$ es RP
+    \end{center}
+\end{proof}
+
+\section{Predicados acotados}
+
+\subsection{Sumatoria y productoria acotada}
+
+\begin{teorema}{}{}
+    Sea $f: \mathbb{N}^{n+1} \to \mathbb{N}$ RP (computable).
+
+    \nota{$\mathcal{SA}_f$: Suma acotada\\
+    $\mathcal{PA}_f$: Productoria acotada}%
+    Sean $\mathcal{SA}_f, \mathcal{PA}_f: \mathbb{N}^{n+1} \to \mathbb{N}$ 
+    tal que
+    \begin{gather*}
+        \mathcal{SA}_f (\overrightarrow{x}, y) = 
+        \sum_{k=0}^{y} f (\overrightarrow{x}, k) 
+        \quad \text{y} \quad
+        \mathcal{PA}_f (\overrightarrow{x},y) 
+        = \prod_{k=0}^{y} f(\overrightarrow{x},k)
+    \end{gather*}
+
+    \nota{$\overrightarrow{x} = (x_1, \dotsc, x_n)$, con 
+    $n \in \mathbb{N}$}%
+    
+    \medskip
+
+    Entonces $\mathcal{SA}_f$ y $\mathcal{PA}_f$ son RP (computables).
+
+    \bigskip
+    \textit{Observación:}
+    Si $n=0$
+
+    \begin{gather*}
+        \mathcal{SA}_f(y) = \sum_{k=0}^y f(k)
+        \quad \text{y} \quad
+        \mathcal{PA}_f (y) = \prod_{k=0}^y f(k)
+    \end{gather*}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    \begin{enumerate}
+        \item Sumatoria acotada: $n \neq 0$
+            \begin{align*}
+                \mathcal{SA}_f (\overrightarrow{x},0) &= \sum_{k=0}^0 f(
+                \overrightarrow{x},k) = f(\overrightarrow{x}, 0)
+                \overbrace{=}^{\text{Quiero}} g(\overrightarrow{x}) \\
+                \mathcal{SA}_f (\overrightarrow{x},y+1) &= \sum_{k=0}^{y+1} f(
+                \overrightarrow{x},k) = \sum_{k=0}^{y} f(
+                \overrightarrow{x},k) + f(\overrightarrow{x}, y+1) \\
+                &= \mathcal{SA}_f (\overrightarrow{x},y) + 
+                f(\overrightarrow{x}, y+1) \overbrace{=}^{\text{Quiero}}
+                h(\overrightarrow{x}, y, \mathcal{SA}_f(\overrightarrow{x},y))
+            \end{align*}
+
+            Siendo $g$:
+            \begin{align*}
+                g: \mathbb{N}^n \to \mathbb{N} / g(\overrightarrow{x}) &=
+                f(\overrightarrow{x}, 0) \\
+                g &= \underbrace{f}_{\substack{\text{RP}\\ \text{(Dato)}}}
+                \circ \;
+                \big(\underbrace{\Pi_1 \times \dots \times \Pi_n \times \circ 
+                \mathrm{CERO} \circ \Pi_1}_{\text{Iniciales}} \big)
+            \end{align*}
+
+            Entonces $g$ es RP por composición de RP.
+
+            Luego, $h$:
+            \begin{align*}
+                h: \mathbb{N}^{n+1} \to \mathbb{N} / h(\overrightarrow{x},y,z)
+                &= z + f(\overrightarrow{x},y+1) \\
+                &= \mathrm{SUMA}(f(\overrightarrow{x}, \mathrm{SUC}(y),z))\\
+            \end{align*}
+            \begin{gather*}
+                h = \underbrace{\mathrm{SUMA}}_{\text{RP}} \circ \,
+                \Big( \underbrace{f}_{\substack{\text{RP}\\ \text{(Dato)}}} 
+                \circ \;
+                \big( \underbrace{\Pi_1 \times \Pi_2 \times \dots \times 
+                \Pi_n \times 
+                (\mathrm{SUC} \circ \Pi_{n+1})}_{\text{Iniciales}} \big)
+                \times \underbrace{\Pi_{n+2}}_{\text{Inicial}} \Big) 
+            \end{gather*}
+
+            $h$ es RP por composición de funciones RP.
+            \begin{center}
+                $\therefore ~ \mathcal{SA}_f$ es RP por escribirse mediante un
+                ERII a partir de $g$ y $h$ que son RP.
+            \end{center}
+
+        \item Sumatoria acotada: $n=0$
+            
+            Quiero ver que $\mathcal{SA}_f (y) = \sum_{k=0}^y f(k)$
+
+            \begin{align*}
+                \mathcal{SA}_f(0) &= \sum_{k=0}^0 f(k) = f(0) 
+                \overbrace{\in \mathbb{N}}^{\text{Quiero}} \\
+                \mathcal{SA}_f(y+1) &= \sum_{k=0}^{y+1} f(k) =
+                \sum_{k=0}^{y} f(k) + f(y+1) \\
+                &= \mathcal{SA}_f(y) + f(y+1) \overbrace{=}^{\text{Quiero}}
+                H(y, \mathcal{SA}_f (y))
+            \end{align*}
+
+            Defino $H: \mathbb{N}^2 \to \mathbb{N} / H(u,w) 
+            = \overbrace{w + f(w+1)}^{\substack{\mathrm{SUMA}(\Pi_2(u,w),
+            f(\mathrm{SUC}(\Pi_2 (w))))}}$
+            \begin{gather*}
+                H = \mathrm{SUMA} \circ \, \Big(
+                \Pi_2 \times (f \circ ( \mathrm{SUC} \circ \Pi_2 ) )
+                \Big)
+            \end{gather*}
+
+            Entonces $H$ es RP por ser composición de 
+            $\underbrace{\mathrm{SUMA}}_{\text{RP}}$,
+            $\underbrace{\Pi_j, \mathrm{SUC}}_{Iniciales}$, 
+            $\underbrace{f}_{\substack{\text{RP}\\ \text{(Dato)}}}$
+            \begin{center}
+                $\implies H$ es RP
+            \end{center}
+            \begin{center}
+                $\therefore ~ \mathcal{SA}_f$ es RP por escribirse como un ERI
+                a partir de $H$ RP.
+            \end{center}
+    \end{enumerate}
+
+    Tarea: Demostrar los casos $n=0$ y $n \neq 0$ para productoria y para
+    computable.
+
+\end{proof}
+
+\subsubsection{Ejemplo}
+Sea $q: \mathbb{N} \to \mathbb{N} / q(n) =$ suma de los primeros $n$ números 
+pares.
+
+Probar que $q$ es RP.
+
+\medskip
+
+\begin{center}
+    \begin{tabular}{c c c}
+        $q(1)=0$ & $q(2)=0 + 2$ & $q(3)=0 + 2 + 4$ \\
+    \end{tabular}
+
+    $q(0) = ? \rightarrow$ No tiene sentido.
+\end{center}
+Como el enunciado no nos dice nada, definimos $q(0)=0$
+\begin{gather*}
+    q(n) = \underbrace{2 \, . \, 0 + 2 \, . \, 1 + \dots + 2 \, . \, (n-1)}_{%
+    \text{Los } n \text{ primeros pares}} \\
+    q(n) = \sum_{k=0}^{n-1} 2 k 
+    = \sum_{k=0}^{n-1} \overbrace{\mathrm{PROD}(2,k)}^{f(k)} 
+    \stackrel{?}{=} \sum_{k=0}^{n \restatruncada 1} f(k) \\
+    q(n) = \mathcal{SA}_f (n \restatruncada 1)
+\end{gather*}
+
+Para responder a la pregunta de la ecuación anterior, notemos que si 
+$n \geq 1$, entonces la igualdad se cumple; cuando $n = 0$, del lado
+izquierdo de la igualdad, la suma desde 0 hasta $-1$ es cero, entonces
+resulta que estamos evaluando si $0 \stackrel{?}{=} f(0)$.
+Como  $f(0) = \mathrm{PROD}(2,0) = 0$, entonces $0 = f(0)$ y la igualdad
+se cumple.
+
+Entonces $f: \mathbb{N} \to \mathbb{N} / f(k) = \mathrm{PROD}(h_2(k), k)$
+
+$f$ es RP por ser composición de 
+$\underbrace{\mathrm{PROD}, \overbrace{h_2}^{\text{cte.}}}_{\text{RP}}$
+\begin{gather*}
+    q(n) = \mathcal{SA}_f (\restatruncada (n, \underbrace{h_1(n)}_{1})
+\end{gather*}
+
+$q$ es composición de $\underbrace{\mathcal{SA}_f}_{\substack{%
+\text{RP pues }\\ f \text{ es RP}}}$,
+$\underbrace{\restatruncada, h_1}_{\substack{\text{Ya vimos}\\%
+\text{que son RP}}}$
+\begin{center}
+    $\implies q$ es RP
+\end{center}
+
+\textit{Noni}: En general el ejercicio de la práctica 5 y 6 lo hacen mal.
+Sería bueno que lo muestren para ver si está bien hecho.
+
+Muchas veces escriben como que es composición pero se olvidan de fijarse de
+si la composición depende de dónde están evaluando. Cuando depende de dónde
+se está evaluando \underline{no es} composición de funciones.
+
+Notemos que acá armamos la ``suma acotada'' y no utilizamos composición
+de sumas porque hasta dónde llega la suma depende de dónde evaluaba la 
+función. Lo mismo con la productoria acotada.
+
+\subsection{Cuantificadores acotados}
+
+\begin{teorema}{Cuantificadores acotados}{}
+    Sea ${P}^{k+1}$ un predicado RP (computable).
+
+    Dadas
+    \begin{enumerate}
+        \item \nota{$\mathrm{EA}$: ``Existencial acotado''\\
+            $\overrightarrow{x} = (x_1, \dotsc, x_k)$}%
+            $\mathrm{EA}_P : \mathbb{N}^{k+1} \to \{0,1\} / 
+            \mathrm{EA}_P (\overrightarrow{x},y) = \exists \, t \leq y
+            \quad C_P (\overrightarrow{x},t)$
+
+            Este predicado es verdadero $\iff$
+            $C_P(\overrightarrow{x},0) = 1$ ó 
+            $C_P(\overrightarrow{x},1) = 1$ ó 
+            \dots ó
+            $C_P(\overrightarrow{x},y) = 1$
+        \item \nota{$\mathrm{UA}$: ``Universal acotado''}%
+            $\mathrm{UA}_P : \mathbb{N}^{k+1} \to \{ 0,1 \} /
+            \mathrm{UA}_P (\overrightarrow{x},y) = \forall t \leq y \quad
+            C_P(\overrightarrow{x},t)$
+
+            Este predicado es verdadero $\iff$
+            $C_P(\overrightarrow{x},0) = 1$ y 
+            $C_P(\overrightarrow{x},1) = 1$ y 
+            \dots y
+            $C_P(\overrightarrow{x},y) = 1$
+    \end{enumerate}
+
+    \medskip
+
+    Entonces $\mathrm{EA}_P$ es RP (computable) y $\mathrm{UA}_P$ es RP
+    (computable).
+
+    \bigskip
+    \textit{Observación:}
+    En el caso $k=0$
+    \begin{itemize}
+        \item $\mathrm{EA}_P (y) = \exists \, t \leq y \quad C_P(t)$
+        \item $\mathrm{UA}_P (y) = \forall t \leq y \quad C_P(t)$
+    \end{itemize}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    \begin{itemize}
+        \item $\mathrm{EA}_P$
+        \begin{itemize}
+        \item $k \neq 0$
+            \begin{gather*}
+                \mathrm{EA}_P (\overrightarrow{x}, y) = 
+                \alpha \Bigg( \alpha \bigg(
+                \sum_{t=0}^y C_P (\overrightarrow{x},t)
+                \notamath{Si la sumatoria es
+                    $= 0 \overbrace{\rightarrow}^{\substack{\text{Quiero que}\\ 
+                    \text{devuelva}}} 0$\\
+                    Si es 
+                $> 0 \rightarrow 1$\\
+                Entonces
+                $\phantom{=} 3 \rightarrow 1$\\
+                $\phantom{=} 1 \rightarrow 1$, etc.
+            Por ello aplicamos el doble $\alpha$}
+                \bigg) \Bigg)
+            \end{gather*}
+
+            $\mathrm{EA}_P$ es composición de $\underbrace{\alpha}_{\text{RP}}$
+            y $\underbrace{\text{suma acotada de un predicado RP}}_{\text{RP}}$
+
+        \item $k=0$
+            \begin{gather*}
+                \mathrm{EA}_P (y) =
+                \alpha \Bigg( \alpha \bigg(
+                        \sum_{t=0}^y C_P (t)
+                \bigg) \Bigg)
+            \end{gather*}
+
+            Misma justificación que el caso $k \neq 0$.
+        \end{itemize}
+        \begin{center}
+            $\therefore ~ \mathrm{EA}_P$ es RP
+        \end{center}
+
+        \item $\mathrm{UA}_P$
+        \begin{itemize}
+        \item $k \neq 0$
+            \begin{align*}
+                \mathrm{UA}_P(\overrightarrow{x},y) &= \forall t \leq y \quad
+                C_P(\overrightarrow{x},t) \\
+                \mathrm{UA}_P(\overrightarrow{x},y) &= 1 \iff
+                C_P(\overrightarrow{x}, 0) = 1 \text{ y }
+                C_P(\overrightarrow{x}, 1) = 1 \text{ y }
+                \dots \text{ y } \\
+                &\phantom{= 1 \iff} ~
+                C_P(\overrightarrow{x}, y) = 1 \\
+                \mathrm{UA}_P(\overrightarrow{x},y) &=
+                \prod_{t=0}^y C_P(\overrightarrow{x}, y)
+            \end{align*}
+
+            $\mathrm{UA}_P$ es una productoria acotada de predicados RP
+            $\implies \mathrm{UA}_P$ es RP para $k \neq 0$.
+
+        \item $k=0$
+
+            \begin{gather*}
+                \mathrm{UA}_P (y) = \prod_{t=0}^y C_P (t)
+            \end{gather*}
+
+            Idem caso $k \neq 0$.
+        \end{itemize}
+
+        \begin{center}
+            $\therefore ~ \mathrm{UA}_P$ es RP
+        \end{center}
+    \end{itemize}
+\end{proof}
+
+
+\subsubsection{Ejemplo}
+
+Probar que $\mathrm{DIV}: \mathbb{N}^2 \to \{ 0,1 \} / 
+\mathrm{DIV}(x,y) = \begin{cases}
+    1 & \text{si } \divides{x}{y}\\
+    0 & \text{sino}
+\end{cases} ~$
+es RP.
+
+Notemos que $\mathrm{DIV} (0,y) = 0$ pues la división por cero no está 
+definida.
+
+\begin{align*}
+    \mathrm{DIV}(x,y) = 1 
+    &\iff \exists \, t \text{ tal que } y = x \, . \, t \text{ y } x \neq 0 \\
+    &\iff \exists \, t \leq y \quad \mathrm{EQ}(\mathrm{PROD}(x,t),y)
+    \wedge \alpha(\alpha(x))
+\end{align*}
+
+Hasta acá tenemos un $\mathrm{AND}$ de funciones RP, pero con un pequeño
+\nota{Recordemos: \\
+    $\mathrm{EA}(x,y)$ $=$ \\
+$=$ $\exists \; t \leq y \quad C_P (x,t)$}%
+problema: lo que tenemos definido \textit{no} es el existencial acotado pues,
+por la definición que dimos, el predicado $C_P$ no puede tener la $y$, que
+sí tenemos en $\mathrm{EQ}$.
+
+Entonces, a partir del predicado 
+$\exists \, t \leq y \quad \mathrm{EQ}(\mathrm{PROD}(x,t),y)$ 
+
+Definamos
+\begin{align*}
+    \mathrm{DIV}(x,y) &= \mathrm{EA}_P (x,y,y) \wedge \alpha(\alpha(x))\\
+    C_P(x_1, x_2, y) &= \mathrm{EQ}(\mathrm{PROD}(y, x_1), x_2) \\
+    \mathrm{EA}_P (x_1, x_2, y) &= \exists \, z \leq y \quad C_P(x_1, x_2, z) \\
+    \mathrm{EA}_P (\underbrace{x,y}_{\circled{1}},
+    \underbrace{y}_{\circled{2}}) 
+    &= \exists \, z \leq y \quad C_P(\underbrace{x,y}_{\circled{1}}, z) 
+    = \exists \, z \leq y \quad \mathrm{EQ}(\mathrm{PROD}(z,x),y)
+\end{align*}
+
+Notemos que para usar el existencial acotado tuvimos que emplear un truco: 
+hicimos que $\mathrm{DIV}$ de dos variables (\circled{1})
+sea igual a un existencial acotado con 3 variables, repitiendo la última de 
+ellas (\circled{2}).
+Así las variables $\circled{1}$ son las que aparecen en $C_P$.
+
+\medskip
+
+Entonces
+\begin{gather*}
+    \mathrm{DIV} = \mathrm{AND} \big(
+    \mathrm{EA}_P(\Pi_1 \times \Pi_2 \times \Pi_2)
+    \times \alpha \circ \alpha \circ \Pi_1 \big)
+\end{gather*}
+
+$\mathrm{DIV}$ es composición de funciones RP y, por lo tanto, $\mathrm{DIV}$ 
+es RP.
+
+\subsection{Cuantificador acotado con menor estricto}
+
+\begin{teorema}{Cuantificador acotado con $<$}{cuantificador-acotado-menor}
+    Sea $P^{n+1}$ un predicado RP (computable).
+
+    Sean 
+    \begin{enumerate}
+        \item $\mathrm{EAE}_P (\overrightarrow{x},y) = \exists \, t < y \quad
+            C_P (\overrightarrow{x},t)$
+        \item $\mathrm{UAE}_P (\overrightarrow{x},y) = \forall t < y \quad
+            C_P (\overrightarrow{x},t)$
+    \end{enumerate}
+
+    Con $\mathrm{EAE}_P, \mathrm{UAE}_P: \mathbb{N}^{n+1} \to \{ 0,1 \}$
+
+    \medskip
+
+    \nota{En el Teorema \ref{teo:cuantificador-acotado-menor}, 
+    $\mathrm{EAE}_P$ y $\mathrm{UAE}_P$ también se pueden definir 
+    de una variable.}%
+
+    Entonces $\mathrm{EAE}_P$ y $\mathrm{UAE}_P$ son RP (computables).
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Sea $\overrightarrow{x} = (x_1, \dotsc, x_n)$.
+
+    \begin{enumerate}
+    \item Defino
+        \begin{align*}
+            \mathrm{EAE}_P(\overrightarrow{x},y) &= \exists \, t \leq y \quad
+            (\underbrace{C_P (\overrightarrow{x},t) \wedge t \neq y}_{%
+            C_Q(\overrightarrow{x},y,t)}) \\
+            &= \exists \, t \leq y \quad C_Q (\overrightarrow{x},y,t)
+        \end{align*}
+
+        Entonces, para deshacernos de $y$ escribimos
+        \begin{align*}
+            \mathrm{EAE}_P(\overrightarrow{x},y) &= 
+            \mathrm{EA}_Q(\overbrace{\overrightarrow{x}}^{\circled{1}},
+            \overbrace{y}^{\circled{2}}, \overbrace{y}^{\circled{3}}) = \\
+            &= \exists \, t \leq \underbrace{y}_{\circled{3}} \quad 
+                (C_P(\underbrace{\overrightarrow{x}}_{\circled{1}}, t) \wedge
+            \alpha(\mathrm{EQ}(t, \underbrace{y}_{\circled{2}})))
+        \end{align*}
+
+        Entonces $\mathrm{EAE}_Q$ es $\mathrm{EA}_Q$ de $Q$ que es RP.
+        \begin{center}
+            $\implies \mathrm{EAE}_P$ es RP
+        \end{center}
+
+        \medskip
+
+        \underline{Otra manera:}
+
+        \begin{align*}
+            \mathrm{EAE}_P (\vec{x}, y) &\underbrace{=}_{\text{Si } y\geq 1} 
+            \mathrm{EA}_P (\vec{x}, y \restatruncada 1) 
+            \, . \, \alpha(\alpha(y)) \\
+            \mathrm{EAE}_P (\vec{x}, 0) &= 
+            \exists \; t < 0 \quad C_P (\vec{x}, t) = 0 \\
+            \mathrm{EA}_P (\vec{x}, 0) &= 
+            \exists \; t \leq 0 \quad C_P (\vec{x}, t) = C_P (x,0) \\
+        \end{align*}
+
+        Entonces $\mathrm{EAE}_P$ es RP por ser composición de $\mathrm{EA}_P$,
+        que es RP,
+        $\Pi_1$, $\Pi_2$, $\alpha$ y $\mathrm{PROD}$, que son RP.
+
+        \item Defino
+        \begin{gather*}
+            \mathrm{UAE}_P(\overrightarrow{x},y) = \forall t \leq y \quad
+            (\underbrace{C_P (\overrightarrow{x},t) \vee t = y}_{%
+                C_Q(\overrightarrow{x},y,t)}) \\
+        \end{gather*}
+
+        Entonces, para deshacernos de $y$ escribimos
+
+        \begin{align*}
+            \mathrm{UAE}_P(\overrightarrow{x},y) &= 
+            \mathrm{UA}_Q(\overbrace{\overrightarrow{x}, y}^{\circled{4}},
+              \overbrace{y}^{\circled{5}}) = \\
+            &= \forall t \leq \underbrace{y}_{\circled{5}} \quad 
+                (C_Q(\underbrace{\overrightarrow{x}, y}_{\circled{4}}, t)
+        \end{align*}
+
+        Donde $C_Q(\overrightarrow{x}, y, t) = C_P(\overrightarrow{x},t)
+        \vee \mathrm{EQ}(t,y)$
+
+        Entonces $\mathrm{UAE}_Q$ es RP por ser $\mathrm{UA}_Q$, siendo $Q$
+        RP
+    \end{enumerate}
+\end{proof}
+
+\subsection{Minimización acotada}
+
+\begin{teorema}{Minimización acotada}{}
+    Sea $P^{n+1}$ un predicado RP (computable).
+
+    Sea $\mathrm{MA}_P: \mathbb{N}^{n+1} \to \mathbb{N}$ tal que
+    \begin{gather*}
+        \mathrm{MA}_P (\overrightarrow{x}, y) = \begin{cases}
+            \min_{t \leq y}{\{ C_P (\overrightarrow{x},t) \}} & \text{si 
+            existe } t \leq y / C_P (\overrightarrow{x},t) = 1 \\
+            0 & \text{sino}
+        \end{cases}
+    \end{gather*}
+
+    \medskip
+
+    Entonces $\mathrm{MA}_P$ es RP (computable).
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        g(\overrightarrow{x},y) =& \alpha(C_P(\overrightarrow{x},0)) 
+        + \alpha(C_P(\overrightarrow{x}, 0)) \alpha(C_P(\overrightarrow{x},1))
+        \\
+        &+ \alpha(C_P(\overrightarrow{x},0)) \alpha(C_P(\overrightarrow{x},1))
+          \alpha(C_P(\overrightarrow{x},2)) \\
+        &+ \dots
+        + \alpha(C_P(\overrightarrow{x},0)) \, \cdots \, 
+          \alpha(C_P(\overrightarrow{x},y)) \\
+        =& \sum_{j=0}^{y} \prod_{k=0}^{j} \alpha(C_P(\overrightarrow{x},k))
+        = \begin{cases}
+            \min_{t \leq y}{\{ C_P (\overrightarrow{x},t) \}} & \text{si 
+            existe} \\
+            y+1 & \text{sino}
+        \end{cases}
+    \end{align*}
+
+    Entonces
+    \begin{align*}
+        \mathrm{MA}_P (\overrightarrow{x},y) 
+        &= g(\overrightarrow{x},y) \, . \, (g(\overrightarrow{x},y) \leq y) \\
+        \mathrm{MA}_P (\overrightarrow{x},y) 
+        &= g(\overrightarrow{x},y) \, . \, \mathrm{MENOR}(g(\overrightarrow{x},y) , y+1) \\
+    \end{align*}
+
+    Donde $\mathrm{MENOR}: \mathbb{N}^2 \to \mathbb{N}$ se define como
+    \begin{gather*}
+        \mathrm{MENOR} (x,y) =
+        \begin{cases}
+            1 & x < y \\
+            0 & \text{sino}
+        \end{cases}
+    \end{gather*}
+
+    Por lo tanto $\mathrm{MA}_P$ es RP por ser composición de $g$ (que es $\mathcal{SA}_P$, $\mathcal{PA}_P$,
+    $\alpha$), $\mathrm{MENOR}$, $\mathrm{SUMA}$, $\Pi_1$, $\Pi_2$.
+\end{proof}
+
+\bigskip
+
+Tarea: Probar que el máximo acotado es RP.
+
+\textit{Noni}: Háganlo de dos maneras, usando mínimo acotado y sin usar
+mínimo acotado. Si ambas les salen significa que etendieron bien mínimo 
+acotado.
+
+\subsubsection{Ejemplo}
+
+Probar que $h: \mathbb{N} \to \mathbb{N} / 
+h(x) = \left[\sqrt{\frac{3}{2} x}\right]$ es RP.
+
+Recordemos la función \textit{parte entera}:
+
+Sea $x \in \mathbb{R}$, entonces
+\begin{gather*}
+    [x] = \begin{cases}
+        \ceil{x} & x < 0 \\
+        \floor{x} & x \geq 0
+    \end{cases}
+\end{gather*}
+
+Otra manera de escribirlo es:
+\begin{gather*}
+    [x] = t \in \mathbb{Z} / t \leq x < t + 1
+\end{gather*}
+
+
+Es decir,
+\begin{gather*}
+    [x] = \min_{t \leq x}{~ x < t + 1} = \max_{t \leq x}{~ x < t+1}
+\end{gather*}
+
+¿Por qué podemos decir que es igual al mínimo y al máximo a la vez?
+Esto se debe a que $\exists ! \; t \in \mathbb{Z} / t \leq x < t + 1$,
+entonces, como el elemento es único, el mínimo y el máximo es el mismo.
+
+\begin{align*}
+    h(x) =& \min_{t \leq \sqrt{\nicefrac{3}{2} x}}{~ \sqrt{\frac{3}{2} x}} 
+    < t + 1 \\
+    \notamath{Necesito una cota. $\nicefrac{3}{2} = 1,5 < 2 < 10$\\
+    Notemos que al tomar una cota mayor el conjunto podría resultar más grande,
+    entonces nos vemos obligados a trabajar con el mínimo.\\
+    Recordemos que \\$\mathrm{POT}(x,y) = {(x+1)}^y$, por eso ponemos $t$}
+    =& \min_{t \leq 10x}{~ \sqrt{\frac{3}{2} x}} < t + 1 \\
+    =& \min_{t \leq 10x}{~ \underbrace{\mathrm{MENOR}(\mathrm{PROD}(h_3(x),x),
+            \mathrm{PROD}(h_2(x), \mathrm{POT}(t,h_2(x))
+    ))}_{C_P(x,t)}}
+\end{align*}
+\nota{}%
+
+\begin{tcolorbox}[%
+    colback=white,%
+    colbacktitle=black!75!white,%
+    colframe=black!25!white,%
+    title=Cuenta auxiliar%
+    ]
+
+Para la última igualdad:
+\begin{align*}
+    0 \leq \sqrt{\frac{3}{2} x} < t + 1 &\iff \\
+    &\iff \frac{3}{2} x < (t+1)^2 \qquad 
+    (\sqrt{y} \geq 0 ~ \forall y \in \mathbb{R}) \\
+    &\iff 3x < 2 (t+1)^2 \qquad \qquad
+\end{align*}
+
+El último paso se debe a que necesitamos que la función constante sea RP,
+por lo cual tiene que devolver un natural.
+\end{tcolorbox}
+
+\medskip
+
+Tenemos entonces que $h(x) = \mathrm{MA}_P (10 x)
+= \mathrm{MA}_P (\mathrm{PROD}(h_{10}(x), x))$
+
+
+Entonces $h$ es RP por ser composición de funciones RP.
+
+\textit{Noni}: Notemos que podríamos haber elegido $h_2$ ó $h_{100}$ como cota (en lugar
+de $h_{10}$) y habría estado bien igual.
+
+Por otra parte, si bien en el resultado nos quedó que $h$ depende de $x$ y $t$,
+como la función se complica demasiado en el parcial ``les vamos a permitir''
+que dejen la $x$. Deberían saber, de todos modos, que se puede salvar como
+vimos en los ejemplos anteriores, resultando:
+
+\begin{gather*}
+    h(x) = f(x,10 \, . \, x), f(x,y) = \mathrm{MA}_P(x,y)
+\end{gather*}
+
+Ahora sí está ``perfectamente escrito''.
+
+Para que máximo acotado, universal acotado, existencial acotado, etc, sean RP
+tiene que ser RP lo que está adentro de la función \textbf{y} la cota.
+
+
+\subsection{Minimización no acotada}
+
+\begin{teorema}{Minimización no acotada}{}
+    Sea $P^{n+1}$ un predicado computable.
+
+    Sea $A = \{ t \in \mathbb{N}/ C_P(\overrightarrow{x},t)=1 \}$
+
+    \medskip
+
+    Entonces $H(\vec{x}) = \min_{t}{~ C_P(\overrightarrow{x},t)} = 
+    \begin{cases}
+        \min{~ A} & \text{si } A \neq \varnothing \\
+        \uparrow & \text{si } A = \varnothing
+    \end{cases}$
+
+    es parcialmente computable
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        [A_1] \quad &IF ~ C_P(\overrightarrow{x},y) \neq 0 \quad GOTO ~ E_1\\
+                    &Y \gets Y + 1 \\
+                    &GOTO ~ A_1
+    \end{align*} 
+
+    si $C_P(x_0, y)$ es falso, ejecuta la segunda instrucción; 
+    si $C_P(x_1, y)$ es falso, ejecuta la segunda instrucción;
+    y así sucesivamente.
+
+   Si para ningún $Y$ es verdadero, este programa entra en un ciclo infinito; 
+   sino el programa devuelve el $Y$ por más grande que sea.
+
+   Por esto, es una función parcialmente computable.
+\end{proof}

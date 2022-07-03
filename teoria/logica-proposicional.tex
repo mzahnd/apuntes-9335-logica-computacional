@@ -1,0 +1,4781 @@
+%% Copyright (c) 2022 Martín E. Zahnd
+%%
+%% This code is licensed under MIT license (see LICENSE.txt for details)
+%%
+\chapter{Lógica Proposicional}\label{chap:logica-proposicional}
+% \graphicspath{ {./teoria/resources/logica-proposicional/} }
+
+\section{Lenguajes}
+
+\subsection{Alfabeto}
+
+\begin{definicion}{Alfabeto}{}
+    Sea $A$ un conjunto, con $A \neq \varnothing$.
+
+    \medskip
+
+    El conjunto $A$ se llama alfabeto.
+\end{definicion}
+
+
+\subsection{Expresión}
+
+\begin{definicion}{Expresión}{}
+    Una expresión es una sucesión finita de elementos de $A$ o la cadena 
+    vacía, a la cual llamamos $\lambda$.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+\begin{gather*}
+    A = \{ 1,2,3,5,4,6 \}
+\end{gather*}
+
+Las expresiones son: $121$, $4$, $\lambda$, $66666$
+
+
+\subsection{Longitud}
+
+\begin{definicion}{Longitud}{}
+    Sea $E = e_0 e_1 \dots e_{n-1}$ una expresioń de elementos de $A$, 
+    definimos:
+    \begin{enumerate}
+        \item $long(E) = n$
+        \item $long(\lambda)=0$
+    \end{enumerate}
+\end{definicion}
+
+\subsection{Conjunto A estrella}
+
+\begin{definicion}{$A^{*}$}{}
+    \begin{gather*}
+        A^{*} = \bigcup_{n\in \mathbb{N}} A^n
+    \end{gather*}
+\end{definicion}
+
+Entonces, en $A^{*}$ están:
+\begin{gather*}
+    A^0 = \{ \lambda \}, \; A^1 = A, \; 
+    A^j = \{ e \text{ expresión en } A / long(e) = j \}
+\end{gather*}
+
+\bigskip
+\textit{Observación:}
+$A^{*}$ es infinito.
+
+\begin{proof} \phantom{.}
+
+    Sea $A \neq \varnothing$.
+
+    \begin{align*}
+         \implies& \exists x \in A \\
+         \implies& x, xx, xxx, xxxx, \dotsc \in A^{*}
+    \end{align*}
+
+    Por lo tanto
+    \begin{gather*}
+        f: \mathbb{N} \to A^{*} / f(n) =
+        \begin{cases}
+            \lambda & n = 0 \\
+            \underbrace{x \, . \, x \, . \, \dotsc \, . \, x}_{n 
+        \text{ veces}} & n \geq 1
+        \end{cases}
+    \end{gather*}
+
+    Y como $f$ es inyectiva $\implies \# A^{*} \geq \aleph_0$
+\end{proof}
+
+\subsection{Lenguaje}
+
+\begin{definicion}{}{}
+    Dado $A$ un alfabeto.
+
+    \medskip
+
+    \nota{$\Sigma \subseteq A^{*}$}% 
+    Un lenguaje $\Sigma$ sobre $A$, con $\Sigma \neq \varnothing$,
+    es un subconjunto de $A^{*}$.
+
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item $A = \{ a, \dotsc, z \} \implies \# A = 27$
+
+        Entonces definimos el lenguaje como:
+        
+        \begin{gather*}
+            \Sigma \subseteq A^{*} / \Sigma = \{ e \in A^{*} / e 
+                \text{ es una palabra que está en la última edición del } \\ 
+            \text{diccionario de la Real Academia Española.} \}
+        \end{gather*}
+
+    \item Sea $A = \{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \}$.
+
+        \begin{align*}
+            \mathcal{L} &= \{ x \in A^{*} / x 
+            \text{ representa un número natural} \} \\
+              &= \{ x \in A^{*} / x = a_1, \dotsc, a_n, \text{ con }
+              a_j \in A \text{ y } a_1 \neq 0\} \cup \{ 0 \}
+        \end{align*}
+\end{enumerate}
+
+\subsection{Igualdad de expresiones}
+
+
+\begin{definicion}{Igualdad de expresiones}{}
+    Sean las expresiones $E$ y $F$ sobre $A$.
+
+    \medskip
+
+    Entonces $E = F \text{ si } long(E) = long(F)$ y
+    \begin{center}
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $long(E)= 0 \implies E = F = \lambda$
+        \item $long(E) = n \implies E = e_0 e_1 \dots e_{n}$ y
+            \nota{$0 \leq i \leq n$}%
+            $F = f_0 f_1 \dots f_j$, con $n = j$ y $e_i = f_i$.
+    \end{enumerate}
+    \end{center}
+\end{definicion}
+
+\subsection{Concatenación}
+
+\begin{definicion}{Concatenación}{}
+    \begin{center}
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item Sean las expresiones $E = e_0 e_1 \dots e_{n-1}$ 
+                y 
+        $F = f_0 f_1 \dots f_{k-1}$, con $E, F \in A^{*}$
+
+        \medskip
+
+        Definimos $E$ concatenado con $F$ como:
+        \begin{gather*}
+            EF = e_0 e_1 \dots e_{n-1} f_0 f_1 \dots f_{k-1}
+        \end{gather*}
+
+            \item Sean $E = e_0 e_1 \dots e_{n-1}$, $F = \lambda$
+
+                \medskip
+                Definimos $E$ concatenado con $F$ como:
+                \begin{gather*}
+                    EF = E
+                \end{gather*}
+            \item Sean $E = e_0 e_1 \dots e_{n-1}$, $F = \lambda$
+                
+                \medskip
+                Definimos $F$ concatenado con $E$ como:
+                \begin{gather*}
+                    FE = E
+                \end{gather*}
+            \item Sean $E = F = \lambda$
+
+                \medskip
+                Definimos $E$ concatenado con $F$ como:
+                \begin{gather*}
+                    EF = \lambda
+                \end{gather*}
+        \end{enumerate}
+    \end{center}
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+Notemos que $long(EF) = long(E) + long(F) = n+k$
+
+\bigskip
+\textit{Observación:}
+Notemos que 
+$E F = e_0 e_1 \dots e_{n-1} f_0 f_1 \dots f_{k-1}$ mientras que
+
+$F E = f_0 f_1 \dots f_{k-1} e_0 e_1 \dots e_{n-1}$. 
+
+Por lo tanto
+\begin{gather*}
+    EF \neq FE \notamath{Excepto que $E = F$}
+\end{gather*}
+
+\medskip
+
+\begin{teorema}{}{efgh-longe-geq-longg}
+    Sean $A$ alfabeto, $E, F, G, H \in A^{*}$ 
+
+    \medskip
+
+    Si $EF = GH$ y $long(E) \geq long(G)$
+    \begin{gather*}
+        \implies \exists \text{ una expresión } H' \in A^{*}/E=GH'
+    \end{gather*}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+   Por inducción en $long(E) = n$.
+
+   Sea $\mathcal{P}(n) = A$, con $A$ alfabeto tal que $E, F, G, H \in A^{*}$
+   y $long(E) = n \geq long(G)$ $\implies$ $\exists \; H' \in A^{*} / E = GH'$
+
+   \begin{itemize}
+       \item Caso base) $P(0)$ 
+           \begin{align*}
+                long(E) = 0 &\implies E = \lambda \\
+                long(E) \geq long(G) \geq 0 &\implies G = \lambda
+           \end{align*}
+
+           Tomo $H' = \lambda \implies E = GH'$
+
+    \item HI) $\mathcal{P}(n)$
+
+    \item T) $\mathcal{P}(n+1)$
+
+   \end{itemize}
+
+   \bigskip 
+
+   Sea $E, F, G, H \in A^{*} / EF = GH$
+   \begin{gather*}
+       long(E) = \overbrace{n+1}^{\geq 1} \geq long(G) = k+1 \\
+       \therefore ~  E = e_1, \dotsc, e_{n+1}
+   \end{gather*}
+
+    \begin{enumerate}[%
+        labelindent=*,
+        style=multiline,
+        leftmargin=*,
+        align=left,
+        leftmargin=2\parindent,
+        label=Caso \arabic*)]
+        \item $G \neq \lambda$ y $G = g_1, g_2 \dots g_k$
+           
+            \begin{gather*}
+                E = e_1 \underbrace{e_2 \dots e_{n+1}}_{\widetilde{E}} \; \; 
+                G = g_1 \underbrace{g_2 \dots g_k}_{\widetilde{G}} 
+            \end{gather*}
+
+            Como $EF = GH \implies \widetilde{E} F = \widetilde{G}H$
+
+            \begin{gather*}
+                n = long(\widetilde{E}) = long(E) - 1 
+                \geq long(G)-1 = long(\widetilde{G})
+            \end{gather*}
+
+            \begin{align*}
+                \notamath{Por HI} 
+                &\implies \exists \; H' \big/ \widetilde{E} = \widetilde{G} H' \\
+                &\implies e_1 \widetilde{E} = e_1 \widetilde{G} H' \\
+                &\implies E = GH'
+            \end{align*}
+
+        \item $G = \lambda$
+
+            Quiero probar que $\exists \; H' \in A^{*} / E = GH'$
+
+            Tomo, entonces, $H' = E$ y obtengo lo que buscaba.
+    \end{enumerate}
+
+\end{proof}
+
+\begin{corolario}{}{alfabeto-igual-long}
+    Sean $A$ alfabeto, $E, F, G, H \in A^{*} / EF = GH$
+
+    \medskip
+
+    \begin{gather*}
+        long(E) = long(G) \implies E=G \text{ y } F=H
+    \end{gather*}
+\end{corolario}
+
+\begin{proof} \phantom{.}
+
+    Sean $A$ alfabeto, $E, F, G, H \in A^{*} / EF = GH$
+
+    Si $long(E) = long(G) \implies long(E) \geq long(G)$.
+
+    Por lo tanto, por el Teorema \ref{teo:efgh-longe-geq-longg}, 
+    $\exists \; H' \in A^{*}/E=GH'$
+
+    Luego
+    \begin{align*}
+        long(E) &= long(G) + long(H') \\
+        0 &= long(H') \notamath{$long(E) = long(G)$}\\
+          &\implies H' = \lambda \\
+          &\therefore ~ E= G \underbrace{\implies}_{EF=GH} F = H 
+    \end{align*}
+
+\end{proof}
+
+\section{Sintaxis}
+
+\begin{definicion}{Alfabeto de la lógica proposicional}{}
+    
+    \begin{gather*}
+        A = \mathrm{VAR} \cup \{ (, ) \} \cup C
+    \end{gather*}
+
+    \nota{$Card(\mathrm{VAR}) = \aleph_0$}%
+
+    Siendo
+    \begin{gather*}
+        \mathrm{VAR} = \{ p_n / n \in \mathbb{N} \} = \{ p_0, p_1, p_2, \dots \}
+    \end{gather*}
+
+    \medskip
+
+    Y los elementos del conjunto de conectivos 
+    $C = \{ \wedge, \vee, \to, \neg \} $: 
+    \begin{itemize}
+        \item $\wedge$: Conjunción
+        \item $\vee$: Disyunción
+        \item $\to$: Implicación
+        \item $\neg$: Negación
+    \end{itemize}
+    
+\end{definicion}
+
+\bigskip 
+
+\begin{definicion}{Fórmula}{}
+    Definimos fórmula como:
+
+    \begin{enumerate}
+        \item $\mathrm{VAR} \subseteq \mathrm{FORM}$
+        \item $\alpha \in F \implies \neg \alpha \in F$
+        \item $\alpha, \beta \in F \implies (\alpha \wedge \beta), 
+            (\alpha \vee \beta), (\alpha \to \beta) \in F$
+        \item $\alpha \in A^{*}$ es fórmula si se obtiene aplicando 
+            finitas veces $1.$, $2.$ y $3.$
+    \end{enumerate}
+
+    \bigskip
+    \textbf{Notación:}
+    Al conjunto de fórmulas del lenguaje proposicional lo llamamos 
+    $\mathrm{FORM}$ o $F \subset A^{*}$.
+\end{definicion}
+
+\bigskip 
+
+\begin{definicion}{Lenguaje de lógica proposicional}{}
+   El lenguaje de lógica proposicional son las fórmulas.
+\end{definicion}
+
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item $p_1 \in F$
+    \item $\neg p_1 \in F$
+    \item $(\neg p_1) \notin F$ \nota{Sobran los $($ $)$}%
+    \item $((p_1 \wedge p_2) \to \neg p_3) \in F$
+    \item $p_1 \wedge p_2 \notin F$ \nota{Faltan los $($ $)$}%
+    \item $((p_1 \wedge p_2) \to (p_2 \vee p_3)) \in F$
+    \item $\neg \neg \neg \neg \neg p_6 \in F$
+    \item $p_1 \to p_8 \notin F$ \nota{Faltan los $($ $)$}%
+\end{enumerate}
+
+
+\subsection{Eslabones y cadenas de formación}
+
+\begin{definicion}{Cadena de formación}{cf}
+    Una sucesión finita $X_1, X_2, \dotsc, X_n$ de expresiones de 
+    $A^{*}$ es una cadena de formación (CF) si:
+
+    \begin{center}
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item $X_i \in \mathrm{VAR}$ \nota{$1 \leq i \leq n$}%
+            \item $\exists \; j < i / X_i = \neg X_j$ \nota{$1 \leq i, j \leq n$}%
+            \item $\exists \; s,t<i / X_i = (X_s * X_t)$
+                \nota{$1 \leq s, t, j \leq n$ \\
+                    $* \in \underbrace{\{
+                    \wedge, \vee, \to \}}_{\substack{
+                    \text{Conectivos}\\ \text{binarios}}}$}%
+        \end{enumerate}
+    \end{center}
+
+    Cada $X_i$ se llama eslabón.
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item $X_1 = p_1$, $X_2 = \neg X_1$, $X_3 = p_2$, $X_4 = p_3$, 
+    $X_5 = (X_3 \to X_4)$, $X_6 = \neg X_5$, $X_7 = \neg X_6$, es una cadena
+    de formación pues cada $X_i$ cumple con la definición.
+    \nota{$1\leq i \leq 7$}%
+
+    \item $X_1 = p_1$, $X_2 = \neg X_1$, $X_3 = p_2$, $X_4 = p_3$,
+        $X_5 = (X_2 \to X_3)$, $X_6 = \neg X_5$
+\end{enumerate}
+
+\bigskip
+\textit{Observación:}
+\nota{$n \geq 2$}%
+Si $X_1, \dotsc, X_{n+1}$ es una cadena de formación $\implies$ 
+$X_1, \dotsc, X_n$ es una cadena de formación.
+
+\begin{proof} \phantom{.}
+    Tarea.
+\end{proof}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    \begin{gather*}
+        \alpha \in \mathrm{FORM} \iff \exists \; X_1, \dotsc, X_n = \alpha 
+        \text{ CF}
+    \end{gather*}
+\end{teorema}
+
+Este es un teorema importante porque nos dice que $\alpha$ es una fórmula 
+sí y sólo sí existe una cadena de formación de la misma.
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item $\implies$) Lo vamos a probar por inducción en $long(\alpha)$.
+            En principio, utilizando inducción simple.
+
+        \begin{itemize}
+            \item CB) $n=1$
+
+                Sea $X_1$ CF
+                $\implies X_i \in \mathrm{VAR} \subseteq \mathrm{FORM}$
+            \item HI) Sea $\alpha \in \mathrm{FORM}/ long(\alpha) = n \implies$ 
+                existe una CF de $\alpha$
+                \nota{$\exists\; X_1,\dotsc,X_k=\alpha$}%
+            \item T) Sea $\alpha \in \mathrm{FORM}/ long(\alpha) = n + 1 \implies$
+                existe una CF de $\alpha$ 
+                \nota{$\exists\; X_1,\dotsc,X_{k+1}=\alpha$}%
+        \end{itemize}
+        
+        \medskip
+
+        Sea $\alpha \in F / long(\alpha) = n + 1 > 0$
+
+        \begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+            \item $\alpha = p_j$
+
+                Propongo $X_1 = p_j$
+
+            \item $\alpha = \neg \beta$ \nota{$\beta \in \mathrm{FORM}$}%
+
+                Recordando que $long(\alpha) = n+1$,
+                \begin{gather*}
+                    long(\alpha) = long(\beta) + 1 = n + 1 \implies 
+                    long(\beta) = n
+                \end{gather*}
+
+                \begin{gather*}
+                    \therefore ~ \text{ Por HI, } \exists \; X_1, 
+                    \dotsc, X_k = \beta \text{ CF de } \beta
+                \end{gather*}
+
+                \medskip
+
+                Defino $Y_1 = X_1, Y_2 = X_2, \dotsc, Y_k = X_k, 
+                Y_{k+1}=\neg Y_k$.
+
+                \medskip
+
+                Notemos que acá tenemos una cadena de formación para $\alpha$,
+                pues hasta $Y_k = X_k$ es una cadena de formación de $\beta$,
+                bien definida por la HI, y el eslabón $Y_{k+1} = \neg Y_k$ es
+                la negación del eslabón anterior. Por lo tanto, cumple con
+                la definición de CF.
+
+            \item $\alpha = (\beta_1 * \beta_2)$, con 
+                $* \in \{ \wedge, \vee, \to \}$, 
+                $\beta_1, \beta_2 \in \mathrm{FORM}$
+
+                \medskip
+
+                Acá nos damos cuenta que necesitamos inducción completa
+                pues $n+1 = \underbrace{long(\beta_1)}_{\geq 0} +
+                \underbrace{long(\beta_2)}_{\geq 0} + 3$ 
+                $\implies$ $\underbrace{long(\beta_1)}_{\geq 1} \leq n$, 
+                $\underbrace{long(\beta_2)}_{\geq 1} \leq n$
+
+                Y la suma de ambas longitudes es $n-2$, entonces $n+1$ puede
+                tener una longitud menor estricta que $n$.
+                
+
+                Para arreglar esto, cambiamos la hipótesis inductiva del 
+                siguiente modo:
+
+                \begin{center}
+                    \dashbox{
+                    HI) $\alpha \in \mathrm{FORM}, long(\alpha) \; 
+                    \boxed{\, \leq \,} \; n \implies$ existe una CF de 
+                    $\alpha$ 
+                    }
+                \end{center}
+
+                Y continuamos utilizando inducción completa.
+
+
+                Como $\beta_1 \in \mathrm{FORM}$ y $long(\beta_1) \leq n$, por HI:
+                \begin{gather*}
+                    \exists \; X_1, \dotsc, X_r = \beta_1 \text{ CF} \\
+                    \exists \; Y_1, \dotsc, Y_s = \beta_2 \text{ CF} \\
+                \end{gather*}
+
+                Defino: 
+                \begin{gather*}
+                    Z_1 = X_1, \dotsc, Z_r = X_r\\
+                    Z_{r+1} = Y_1, \dotsc, Z_{r+s} = Y_s\\
+                    Z_{r+s+1} = (Z_r * Z_{r+s}) = \alpha
+                \end{gather*}
+                
+                Esto cumple con la definición de CF pues 
+                (1) $Z_1 = X_1, \dotsc, Z_r = X_r$ es CF; 
+                (2) $Z_{r+1} = Y_1, \dotsc, Z_{r+s} = Y_s$ es otra CF;
+                y (3)
+                $Z_{r+s+1} = (Z_r * Z_{r+s})$ 
+                \nota{$\alpha = (\beta_1 * \beta_2)$}%
+                es un conectivo binario ($*$) de
+                conectivos que están antes.
+                
+        \end{enumerate}
+
+        \item $\impliedby$) Sea $X_1, \dotsc, X_n$ una CF.
+            Queremos probar que $X_n \in F$.
+
+            \nota{$1 \leq i \leq n$}%
+            Vamos a probar que $X_i \in F$ por inducción en $n$ 
+            (es decir, en la longitud de la cadena de formación).
+
+            \begin{itemize}
+                \item CB) $n=1$ 
+
+                    $X_1$ es una cadena de formación $\implies$
+                    $X_1 \in \mathrm{VAR}S \subseteq \mathrm{FORM}$
+
+                \item HI) Sea $X_1, \dotsc, X_k$ CF
+                    $\implies$ $X_k \in F$
+                    
+                \item T) Sea $X_1, \dotsc, X_{n+1}$ CF
+                    $\implies$ $X_{n+1}\in F$
+            \end{itemize}
+
+            Sea $X_1, \dotsc, X_{n+1}$ una CF. Queremos probar que $X_{n+1}$
+            es una fórmula.
+
+            \begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+                \item Si $X_{n+1} \in \mathrm{VAR} \subseteq \mathrm{FORM}$
+
+                \item Si $X_{n+1} = \neg X_j$, con $j \leq n$, tenemos
+                    que $X_1, \dotsc, X_j$ es una CF.
+
+                    \medskip
+                    Acá nos damos cuenta que necesitamos inducción completa.
+
+                    \nota{Así permitimos cualquier longitud de cadena de 
+                    formación menor o igual que $n$.}%
+                    Nuevamente, cambiamos la hipótesis inductiva:
+
+                    \begin{center}
+                        \dashbox{
+                            HI) Sea $X_1, \dotsc, X_k$ CF, con $k \leq n$ 
+                            $\implies$ $X_k \in F$
+                        }
+                    \end{center}
+
+                    \medskip
+                    \nota{Por definición de CF.}%
+                    Retomando, como tenemos que si $X_{n+1} = \neg X_j$,
+                    con $j \leq n$ (es decir, con un eslabón anterior), 
+                    $X_1, \dotsc, X_j$ es una 
+                    CF.
+                    \nota{Recordar la observación dada tras la definición de
+                    \nameref{def:cf}}%
+
+                    Entonces, por HI, $X_j \in \mathrm{FORM}$
+
+                    \begin{center}
+                        Por lo tanto, por definición de fórmula,
+                        $\neg X_j \in \mathrm{FORM}$
+                    \end{center}
+
+                \item Si $X_{n+1} = (X_j * X_t)$, con 
+                    $* \in \{ \wedge, \vee, \to \}$ y $j, t \leq n$
+
+                    Tenemos que:
+                    \begin{align*}
+                        X_1, \dotsc, X_{n+1} &
+                        \text{ es una cadena de formación } \\
+                        &\implies X_1, \dotsc, X_j
+                        \text{ es una cadena de formación }
+                        \notamath{$j \leq n < n+1$} \\
+                        &\implies X_j \in \mathrm{FORM} \notamath{Por HI} \\
+                        X_1, \dotsc, X_{n+1} &
+                        \text{ es una cadena de formación } \\
+                        &\implies X_1, \dotsc, X_t
+                        \text{ es una cadena de formación para } 
+                        \notamath{$t \leq n < n+1$} \\
+                        &\implies X_t \in \mathrm{FORM} \notamath{Por HI} \\
+                    \end{align*}
+
+                    Luego, por definición de $\mathrm{FORM}$:
+                    \begin{gather*}
+                        \underbrace{( X_j * X_k )}_{X_{n+1}} \in \mathrm{FORM}
+                    \end{gather*}
+            \end{enumerate}
+    \end{itemize}
+\end{proof}
+
+\subsubsection{Ejemplo}
+
+Sea $\alpha = ( \neg \neg p_1)$, ¿pertenece $E$ a la fórmula ($F$)?
+
+Supongamos que $\alpha \in F \implies \exists \; X_1, \dotsc, X_n = \alpha$ 
+CF.
+
+Como $X_n$ empieza con `(', por la definición de cadena de formación,
+\begin{gather*}
+    \exists \; j, k \leq n-1 / E = (X_j * X_k)
+    \notamath{$* \in \{ \wedge, \vee, \to \}$}
+\end{gather*}
+
+¡Lo cual es un absurdo!
+
+\begin{gather*}
+    \therefore ~ E \notin F
+\end{gather*}
+
+\subsection{Subcadena}
+
+\begin{definicion}{Subcadena}{}
+    Sea la cadena de formación $X_1, \dots X_n$.
+
+    \medskip
+
+    Decimos que
+    $X_{i_1}, X_{i_2}, \dotsc, X_{i_k}$ es una subcadena si:
+    \begin{enumerate}
+        \item Es cadena de formación.
+        \item $X_{i_k} = X_n$ \nota{``El último eslabón tiene que ser el 
+            mismo''}%
+        \item $1 \leq i_1 < i_2 < \dots < i_k = n$
+    \end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Sea la cadena de formación $X_1 = p_1$, $X_2 = p_3$, $X_3 = \neg X_2$ y
+$X_4 = (X_2 \to X_3)$.
+
+Notemos que toda cadena de formación es subcadena de sí misma.
+
+Si ahora tomo $Y_1 = p_3$, $Y_2 = \neg Y_1$, $Y_3 = (Y_1 \to Y_2)$, esta es
+una CF y una subcadena de la CF anterior que se obtiene quitando $X_1 = p_1$.
+
+Como la segunda CF solamente tiene como subcadena a si misma, entonces decimos
+que es una cadena de formación minimal.
+
+
+\subsection{Cadena de formación minimal}
+
+\begin{definicion}{Cadena de formación minimal}{}
+    Una cadena de formación es minimal si la única subcadena que tiene es
+    ella misma.
+\end{definicion}
+
+\medskip
+\textit{Observación:}
+
+Notemos que ``minimal'' implica la existencia de una relación de orden. En las
+cadenas de formación, esta relación de orden está definida como sigue:
+
+\medskip
+
+\begin{definicion}{Relación de orden en cadenas de formación}{}
+Sean $A$, $B$ cadenas de formación.
+
+\medskip
+
+Se define $\mathcal{R}$ en el conjunto de cadenas de formación tal que
+$A \mathcal{R} B$ si $A$ es subcadena de $B$.
+
+Además, $\mathcal{R}$ es de orden.
+\end{definicion}
+
+\begin{proof}[Demostración de que $\mathcal{R}$ es de orden:] Tarea.
+\end{proof}
+
+\textit{Observación:}
+Notemos que la relación no es de orden total.
+
+Tomemos las cadenas de formación $A$ y $B$ que están definidas como:
+\begin{align*}
+    A:& \; X_1 = p_1, \; X_2 = p_2, \; X_3 = (X_1 \wedge X_2) \\
+    B:& \; Y_1 = p_8, \; Y_2 = \neg Y_1
+\end{align*}
+
+Por la manera en que definimos a las CF, $A$ no es subcadena de $B$, y $B$ no 
+es subcadena de $A$.
+
+Entonces, si la relación es ser subcadena y $A$ y $B$ no se relacionan, la 
+relación no es de orden total.
+
+
+\subsubsection{Diferencia entre mínimo y minimal}
+
+Sea $X$ un conjunto y $m \in X$.
+
+$m$ es minimal si $\nexists \; a \in X / a < m$
+
+Por otra parte, $m$ es mínimo si $m \leq b$, $\forall \, b \in X$
+
+Análogamente podemos definir máximo y maximal.
+
+
+\subsection{Complejidad}
+
+\begin{definicion}{Complejidad}{}
+    Sea $E \in A^{*}$.
+
+    \medskip
+
+    \begin{enumerate}
+        \item La complejidad de $E$ es la cantidad de conectivos que 
+            aparecen en $E$.
+
+            \bigskip
+            \textbf{Notación:} \phantom{b}$c(E) =$ complejidad de $E$.
+        \item La complejidad binaria de $E$ es la cantidad de conectivos
+            binarios que aparecen en $E$.
+
+            \bigskip
+            \textbf{Notación:} $cb(E) =$ complejidad binaria de $E$.
+    \end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{itemize}
+    \item Sea $E = ( \; ) \wedge \to p_1 \wedge p_2$
+        \begin{align*}
+            c(E) &= 3 \\
+            cb(E) &= 3
+        \end{align*}
+
+    \item Sea $\alpha = \neg (p_1 \to p_2)$
+        \begin{align*}
+            c(E) &= 2 \\
+            cb(E) &= 1
+        \end{align*}
+
+    \item Sea $\alpha = (((p_1 \vee p_2) \to \neg p_3) \vee p_2)$
+        \begin{align*}
+            c(E) &= 4 \\
+            cb(E) &= 3
+        \end{align*}
+\end{itemize}
+
+\subsection{Peso}
+
+\begin{definicion}{Peso}{}
+    Dada una expresión $E \in A^{*}$.
+
+    \medskip
+
+    Definimos el peso de $E$ como la cantidad de paréntesis que abren menos
+    la cantidad de paréntesis que cierran.
+
+    \bigskip
+    \textbf{Notación:}
+    $peso(E) = p(E) =$ peso de $E$
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+\begin{itemize}
+    \item Si $E = ( p_1 \wedge p_2))) \to p_8$, entonces $p(E)=1-3=-2$
+
+    \item Si tenemos $\alpha = ((p_1 \to p_2) \vee p_3)$, entonces
+        $p(\alpha) = 2-2=0$
+\end{itemize}
+
+\begin{lema}{}{}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    \begin{enumerate}
+        \item $c(\alpha) = 0 \implies \alpha \in \mathrm{VAR}$
+        \item $c(\alpha) > 0 \implies \alpha = \neg \beta$ ó
+            $\alpha = (\beta_1 * \beta_2)$
+            \nota{Con $\beta \in F$\\
+                Con $\beta_1, \beta_2 \in F$ \\
+                $*\in \{ \wedge,\vee,\to \}$}%
+    \end{enumerate}
+\end{lema}
+
+\begin{proof}
+    Tarea.
+
+    \nota{Más que darnos una ``pista'', Noni demostró el lema oralmente.}%
+    \textit{Pista:} Si la complejidad de $\alpha$ es cero, quiere decir que no
+    tiene conectivos. La única fórmula que no tiene conectivos es una
+    variable.
+    
+    Si $\alpha$ es una fórmula, entonces existe una CF de $\alpha$ y, 
+    si además no tiene conectivos, entonces no la pude haber armado a partir
+    de eslabones anteriores. Entonces tiene que ser una variable.
+
+
+    Si $\alpha$ tiene un conectivo o la negación, como es una fórmula, 
+    entonces existe una CF de $\alpha$, el último eslabón es una variable, una
+    negación de alguno anterior, o el $\wedge$, $\vee$ o $\to$ de un eslabón
+    previo.
+
+    Como $c(\alpha)>0$, entonces el caso de la variable no tiene sentido y
+    caemos en los otros dos casos.
+\end{proof}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{peso-formula}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    Entonces:
+    \begin{enumerate}
+        \item $p(\alpha)= 0$
+        \item Si $\bullet$ es un conectivo binario que aparece en $\alpha$,
+            entonces la expresión $E$ a la izquierda de $\bullet$ en $\alpha$
+            verifica que tiene $p(E)>0$
+    \end{enumerate}
+\end{teorema}
+
+\subsubsection{Ejemplo}
+
+Si tengo $\alpha = \underbrace{((p_1 \to p_2) \vee (p_3}_{E} \bullet p_4))$, 
+entonces $p(E) = 3-1 = 2>0$
+
+
+\begin{proof}[Demostración del Teorema \ref{teo:peso-formula}:] \phantom{.}
+
+    Lo vamos a demostrar por inducción en $c(\alpha)$.
+
+    Sea $\alpha \in F$.
+
+    \begin{itemize}
+        \item CB) 
+        \begin{enumerate}
+            \item $c(\alpha) = 0 \implies \alpha \in \mathrm{VAR}$, entonces 
+            $p(\alpha)=0$
+            \item Es verdadero por antecedente falso.
+        \end{enumerate}
+
+        Para escribir menos, vamos a llamar a ambos casos del teorema 
+        $\mathcal{P}(n)$ y vamos a decir que $c(\alpha)=n$.
+
+        \item HI) $\mathcal{P}(k)$, $k \leq n$
+        \item T) $\mathcal{P}(n+1)$
+    \end{itemize}       
+
+    Sea $\alpha \in F / c(\alpha) =  n+1 > 0$
+
+    \begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+        \item $\alpha = \neg \beta$, con $\beta \in F$
+
+            Además, $c(\beta) = c(\alpha) -1 = n$
+
+            \begin{enumerate}
+                \item Por HI, $p(\beta)=0 \implies p(\alpha) 
+                    = p(\neg \beta) = 0$
+
+                    \item Sea $\bullet$ un conectivo binario que aparece
+                        en $\alpha$ $\implies$ $\bullet$ está en $\beta$
+
+                Entonces, por HI, la expresión a la izquierda de $\bullet$
+                en $\beta$, $E$, tiene peso positivo.
+
+                Si $\widetilde{E}$ es la expresión a la izquierda de $\bullet$ en
+                $\alpha$ $\implies \widetilde{E} = \neg E$
+
+                Luego
+                \begin{gather*}
+                    p(\widetilde{E}) = \underbrace{p(\neg)}_{=0} + 
+                    \underbrace{p(E)}_{>0} > 0
+                \end{gather*}
+            \end{enumerate}
+            
+
+        \item $\alpha = ( \beta_1 * \beta_2)$, con 
+            $* \in \{ \wedge, \vee, \to \}$, $\beta_1, \beta_2 \in F$
+
+            \begin{gather*}
+                \underbrace{c(\beta_1)}_{\geq 0} +
+                \underbrace{c(\beta_2)}_{\geq 0} = c(\alpha) - 1 = n \\
+                \implies c(\beta_1) \leq n ~ \wedge ~ c(\beta_2) \leq n
+            \end{gather*}
+
+
+            \begin{enumerate}
+            \item Por HI, $p(\beta_1) = 0$ y $p(\beta_2) = 0$
+
+            Luego, $p(\alpha) = p(\; (\beta_1 * \beta_2) \;)
+            = \underbrace{1}_{(} 
+            + \underbrace{p(\beta_1)}_{=0} 
+            + \underbrace{p(\beta_2)}_{=0} 
+            - \underbrace{1}_{)} = 0$
+
+            \item Sea $\bullet$ un conectivo binario que aparece en $\alpha$.
+            \begin{enumerate}
+            \item $\bullet$ aparece en $\beta_1$ $\implies$ Por HI la 
+                expresión $E$ a la izquierda de $\bullet$ en $\beta$ tiene
+                peso mayor a cero.
+
+                $\widetilde{E} = ( \, E$ $\quad$
+                es la expresión a la izquierda de $\bullet$ en $\alpha$
+                \begin{gather*}
+                    \implies p(\widetilde{E}) = 1 + \underbrace{p(E)}_{>0}>0 
+                \end{gather*}
+
+            \item $\bullet = *$
+
+                La expresión a la izquierda de $\bullet$ en $\alpha$ es
+                $\widetilde{E} = ( \beta_1$
+                \begin{gather*}
+                    \implies p(\widetilde{E}) = 1 + 
+                        \underbrace{p(\beta_1)}_{=0} > 0 
+                        \notamath{Pues $\beta_1 \in F$}
+                \end{gather*}
+
+            \item $\bullet$ aparece en $\beta_2$
+
+                Por HI, la expresión a la izquierda de $\bullet$ en $\beta_2$
+                es $E$ y $p(E)>0$
+
+                $\widetilde{E} = ( \; \beta_1 * E$ es la expresión a la izquierda
+                de $\bullet$ en $\alpha$
+
+                \begin{gather*}
+                    \implies p(\widetilde{E}) = 1 
+                    + \underbrace{p(\beta_1)}_{=0} + \underbrace{p(*)}_{=0}
+                    + \underbrace{p(E)}_{>0} > 0
+                \end{gather*}
+            \end{enumerate}
+            \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+
+\begin{corolario}{Unicidad de escritura}{}
+       Sea $\alpha \in F$.
+
+       \medskip
+
+       \begin{align*}
+           c(\alpha)>0 \implies& \exists ! \; \beta \in F / \alpha 
+           = \neg \beta \\
+           \text{o }& \exists! \; \beta_1,\beta_2 \in F, 
+           *\in\{\wedge,\vee,\to\} /
+           \alpha = (\beta_1 * \beta_2) \notamath{Únicos $\beta_1$,
+           $\beta_2$ y un único conectivo $*$ }
+       \end{align*}
+\end{corolario}
+
+Dicho de otra manera:
+\begin{align*}
+    (\beta_1 * \beta_2 ) = (\gamma_1 \circ \gamma_2) 
+    &\implies& \beta_1 = \gamma_1 \notamath{$* = \circ$} \\
+    &\phantom{\implies}& 
+    \beta_2=\gamma_2 \\
+    \neg \beta_1 = \neg \beta_2 &\implies& \beta_1 = \beta_2
+\end{align*}
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item Supongo $\alpha = \neg \beta_1$ y $\alpha = \neg \beta_2$, con
+            $\beta_1, \beta_2 \in F$
+
+            \begin{gather*}
+                \neg \beta_1 = \neg \beta_2 \implies \beta_1 = \beta_2
+            \end{gather*}
+
+        \item Supongo $\alpha = ( \beta_1 * \beta_2)$, 
+            $\alpha = (\gamma_1 \circ \gamma_2)$, con 
+            $*, \circ \in \{ \wedge,\vee,\to \}$, $\beta_1, \beta_2, 
+            \gamma_1, \gamma_2 \in F$
+
+            \begin{gather*}
+                (\beta_1*\beta_2) = (\gamma_1 \circ \gamma_2)
+                \implies \beta_1 * \beta_2 = \gamma_1 \circ \gamma_2
+            \end{gather*}
+
+            \begin{enumerate}
+                \item Supongamos que $long(\beta_1) = long(\gamma_1)$.
+
+                    Entonces, por el Corolario \ref{corol:alfabeto-igual-long},
+                    \begin{gather*}
+                        \beta_1 = \gamma_1 \text{ y } 
+                        *\beta_2 = \circ \gamma_2
+                        \implies \beta_1 = \gamma_1, \; * = \circ \text{ y }
+                        \beta_2 = \gamma_2
+                    \end{gather*}
+                    
+                \item Supongamos $long(\beta_1) > long(\gamma_1)$.
+
+                    Entonces $\exists \; H'\in A^{*} / \beta_1 = \gamma_1 H'$.
+
+                    Como las longitudes son mayores estrictas, entonces $H'$
+                    tiene al menos un caracter y, en consecuencia, 
+                    $H'=\circ H''$, con $H'' \in A^{*}$
+
+                    Como $\beta_1 \in F$, la expresión a la izquierda de 
+                    $\circ$ en $\beta_1$ tiene peso positivo.
+                    \begin{gather*}
+                        p(\gamma_1) > 0
+                    \end{gather*}
+
+                    ¡Absurdo!
+                    Pues $\gamma_1 \in F$
+
+                \item $long(\beta_1) < long(\gamma_1)$
+
+                    Tarea. Análogo al caso anterior.
+            \end{enumerate}
+
+        \item $\alpha = \neg \beta$, $\alpha = (\beta_1 * \beta_2)$, con
+            $\beta, \beta_1, \beta_2 \in F$, $*\in \{ \wedge,\vee,\to \}$
+
+            \begin{gather*}
+                \neg \beta = (\beta_1 * \beta_2)
+            \end{gather*}
+
+            Lo cual es absurdo pues las expresiones no coinciden en el primer
+            caracter.
+    \end{enumerate}
+\end{proof}
+
+
+\subsection{Subfórmula}
+
+\begin{definicion}{Subfórmula}{}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    \begin{itemize}
+        \item \nota{$j \in \mathbb{N}$}%
+            Si $c(\alpha) = 0 \implies \alpha = p_j $
+
+            En este caso, el conjunto de subfórmulas de $\alpha$ es:
+            \begin{gather*}
+                S(\alpha)=\{ p_j \}
+            \end{gather*}
+
+        \item Si $c(\alpha) > 0$
+            \begin{enumerate}
+                \item $\alpha = \neg \beta$
+                    \begin{gather*}
+                        S(\alpha) = \{ \alpha \} \cup S(\beta)
+                    \end{gather*}
+                \item \nota{$* \in \{ \wedge, \vee, \to \}$}%
+                    $\alpha = (\beta_1 * \beta_2)$
+                    \begin{gather*}
+                        S(\alpha)=\{ \alpha \}\cup S(\beta_1) \cup S(\beta_2)
+                    \end{gather*}
+            \end{enumerate}
+    \end{itemize}
+
+    \bigskip
+    \textbf{Notación:}
+    $S(\alpha)$ es el conjunto de subfórmulas de $\alpha$.
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{itemize}
+    \item Sea $\alpha = ((p_1 \wedge p_2) \vee p_3)$
+
+    \begin{align*}
+        S(\alpha) &= \{\alpha\} \cup S((p_1 \wedge p_2)) \cup S(p_3) \\
+                  &= \{\alpha\} \cup \{p_1 \wedge p_2\} \cup S(p_1) 
+                  \cup S(p_2) \cup \{p_3\} \\
+                  &= \{\alpha\} \cup \{p_1 \wedge p_2\} \cup \{p_1\} 
+                  \cup \{p_2\} \cup \{p_3\} \\
+                  &= \{ \alpha, (p_1 \wedge p_2), p_1, p_2, p_3 \}
+    \end{align*}
+
+    \item Sea $\alpha = (\overbrace{(p_1 \wedge p_2)}^{\beta_1} 
+        \to \overbrace{p_3}^{\beta_2})$
+
+        \begin{align*}
+            S(\alpha) &= \{ \alpha \} \cup S(\beta_1) \cup S(\beta_2) \\
+            &= \{ \alpha \} \cup \{ \beta_1 \} 
+            \cup \underbrace{S(p_1)}_{\{ p_1 \}} 
+            \cup \underbrace{S(p_2)}_{\{ p_2 \}} 
+            \cup \{ \beta_2 \} \cup \underbrace{S(p_3)}_{\{ p_3 \}}
+        \end{align*}
+
+        Entonces
+        \begin{gather*}
+            S(\alpha) = \{\alpha, (p_1\wedge p_2), p_1, p_2,\neg p_3, p_3 \}
+        \end{gather*}
+\end{itemize}
+
+\pagebreak
+\section{Semántica}
+
+\subsection{Valuaciones}
+
+
+\begin{definicion}{Valuación}{}
+    Una \textit{valuación} (o \textit{asignación}) es una función 
+    $v: \mathrm{FORM} \to \{ 0,1 \}$ que verifica:
+
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item \nota{$\forall \alpha \in F$}%
+            $v (\neg \alpha) = 1 - v (\alpha)$
+        \item \nota{$\forall \alpha, \beta \in F$}%
+            $v(\alpha \wedge \beta) = \min \{ v(\alpha), v(\beta) \}$
+        \item \nota{$\forall \alpha, \beta \in F$}%
+            $v(\alpha \vee \beta) 
+            = \max \{ v(\alpha), v(\beta) \}$
+        \item \nota{$\forall \alpha, \beta \in F$}%
+            $v (\alpha \to \beta) 
+            = \max\{ 1-v(\alpha), v(\beta) \}$
+    \end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplo}
+$v: \mathrm{FORM} \to \{ 0,1 \} / v(\alpha) = 1$ 
+
+No es una valuación, pues $v(p_1)=1$ y $v(\neg p_1) = 1$
+\begin{gather*}
+    \implies \text{ no verifica } v(\neg \alpha)=1-v(\alpha)
+\end{gather*}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{valuacion-unica}
+    Dada $f: \mathrm{VAR}\to \{ 0,1 \}$ función.
+
+    \medskip
+
+    Existe una única valuación
+    $v_f: \mathrm{FORM} \to \{ 0,1 \}$ que extiende a $f$.
+\end{teorema}
+
+Esto significa que $v$ restringido a las variables es igual a $f$:
+\begin{gather*}
+    \frest{v}{\mathrm{VAR}} = f
+\end{gather*}
+
+Es decir, que $v(p_j) = f(p_j)$, con $p_j \in \mathrm{VAR}$.
+
+
+\begin{proof} \phantom{.}
+
+    Sea $F_m = \{\alpha \in \mathrm{FORM} / c(\alpha) \leq m\}$, con $m \in \mathbb{N}$
+
+    Luego $F_0 = \mathrm{VAR}$, $F_1 = \mathrm{VAR} \cup \{ \alpha \in F / c(\alpha) = 1 \}$, y
+    así sucesivamente.
+    Es decir, estamos definiendo $(F_m)_{m \in \mathbb{N}}$ una sucesión creciente 
+    de conjuntos de fórmulas:
+    $F_0 \subseteq F_1 \subseteq F_2 \subseteq \dots$.
+
+    \bigskip
+
+    Veamos por inducción que en $m$ que se cumple 
+    $\mathcal{P}(m)$ para todo $m \in \mathbb{N}$.
+
+    Para ello, definamos $\mathcal{P}(m)$: 
+    Existe una única función 
+    $v_m: F_m \to \{ 0,1 \}$ tal que $\frest{v_m}{\mathrm{VAR}} = f$ y 
+    verifica los cuatro items de la definición de valuación.
+
+    \begin{itemize}
+        \item CB) Defino 
+            $v_0: \underbrace{F_0}_{\substack{%
+            \text{Conjunto} \\ \text{ de } \mathrm{VARS}}} 
+            \to \{ 0,1 \} / v_0 (p_j) = f(p_j)$
+        \item HI) $\mathcal{P}(k)$, $k \leq m$
+        \item T) $\mathcal{P}(m+1)$
+     \end{itemize}
+
+
+    Defino $v_{m+1}: F_{m+1} \to \{ 0,1 \}$.
+
+    Supongamos que tenemos $\alpha \in F_{m+1}/c(\alpha) \leq m: 
+    v_{m+1} (\alpha) = v_m (\alpha)$
+
+    Si $\alpha \in F_{m+1}/c(\alpha) = m+1$, tenemos cuatro posibilidades:
+    \begin{enumerate}
+        \item $\alpha = \neg \beta \implies c(\beta) = m$
+            \begin{align*}
+                v_{m+1} (\neg \beta) &= 1 - v_{m+1}(\beta) 
+                \notamath{Cumple con \circled{1}} \\
+                &= 1 - v_m (\beta) \notamath{$c(\beta)=m$}
+            \end{align*}
+
+            Notemos que esto extiende a $F$, pues $v_m$ lo hace.
+
+            Cumple las 4 propiedades de valuación porque en la primer igualdad
+            lo está haciendo y $v_m$ lo hace por HI.
+
+            También es única la manera de definirla, ya que la primer igualdad
+            es única, sino no cumpliría la definición de valuación; en el
+            segundo igual, si no cumpliera habría otra forma de definir
+            $v_m$ y no estaríamos cumpliendo con la HI.
+
+            \item $\alpha = (\beta_1 \wedge \beta_2)$
+                \begin{align*}
+                    v_{m+1} (\beta_1 \wedge \beta_2) &= 
+                    \min \{ v_{m+1} (\beta_1), v_{m+1}(\beta_2)\}
+                    \notamath{Cumple con \circled{2}} \\
+                    &= \min \{ v_m(\beta_1), v_m(\beta_2) \}
+                    \notamath{Por HI y porque \\ $c(\beta_1 \wedge \beta_2)=$\\
+                    $=\overbrace{c(\beta_1)}^{\geq 0} + 
+                    \overbrace{c(\beta_2)}^{\geq 0}+1=$ $=m+1$ \\ 
+                $c(\beta_i)\leq m$, $i\in \{ 1,2 \}$}
+                \end{align*}
+
+                El argumento de validez y unicidad de este caso es análogo el
+                anterior.
+
+            \item $\alpha = (\beta_1 \vee \beta_2)$ 
+
+                Tarea.
+            \item $\alpha = (\beta_1 \to \beta_2)$
+
+                Tarea.
+    \end{enumerate}
+        
+    Para completar la demostración del teorema, definamos 
+    
+    \[ v: \mathrm{FORM} \to \{0,1\}: 
+        v(\alpha) \underbrace{=}_{c(\alpha)=m} v_m(\alpha) \]
+        
+    $v(\alpha)$ es una valuación pues extiende a $F$ ya que $v_m$ lo hace 
+    $\forall m \in \mathbb{N}$.
+
+    Además cumple las 4 propiedades de valuación pues $v_m$ las cumple 
+    $\forall m \in \mathbb{N}$ y, por último, es la única función que cumple 
+    las cuatro propiedades y extiende a $F$ pues, en caso contrario, habría 
+    otra manera de definir $v_m(\alpha)$ y acabamos de probar que
+    es única.
+
+\end{proof}
+
+
+\subsection{Clasificación semántica de las fórmulas}
+
+\begin{definicion}{Clasificación semántica de las fórmulas}{}
+    Sea $\alpha \in F.$
+
+    \begin{enumerate}
+        \item $\alpha$ es \textit{tautología} si $v(\alpha)=1$
+            $\forall v$ valuación.
+        \item $\alpha$ es \textit{contradicción} si $v(\alpha)=0$
+            $\forall v$ valuación.
+        \item $\alpha$ es \textit{contingencia} si:
+            \begin{itemize}
+                \item $\exists \; v \text{ valuación}/ v(\alpha) = 1$
+                \item $\exists \; w \text{ valuacíon}/ w(\alpha)=0$
+            \end{itemize}
+    \end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+Clasificar las siguientes fórmulas:
+
+\begin{enumerate}
+    \item $\alpha = (p_1 \wedge \neg p_1)$ es una contradicción.
+
+        Tenemos que probar que es una contradicción 
+        \textbf{para toda valuación}. No podemos definir una única valuación.
+
+        \begin{proof} \phantom{.}
+        
+            Sea $v$ una valuación.
+
+            \begin{align*}
+                v(\alpha) &= v(p_1 \wedge \neg p_1) \\
+                &= \min \{ v(p_1), v(\neg p_1) \} \\
+                &= \min \{ v(p_1), 1-v(p_1) \}
+            \end{align*}
+
+            \begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+                \item $v(p_1) = 1 \implies v(\alpha) = \min \{ 1,0 \} = 0$
+                \item $v(p_1) = 0 \implies v(\alpha)=\min \{ 0,1 \} = 0$
+            \end{enumerate}
+            \begin{gather*}
+                \therefore ~ v(\alpha) = 0 ~ \forall v \text{ valuación}
+            \end{gather*}
+            
+        \end{proof}
+        
+    \item $\alpha = (p_1 \wedge p_2)$ es una contingencia.
+
+        Como en este caso tenemos que probar que existen dos valuaciones,
+        una tal que $v(\alpha)=1$ y otra $w(\alpha)=0$, tenemos que 
+        definirlas. Para ello nos ayuda el Teorema \ref{teo:valuacion-unica}
+
+
+        \begin{proof} \phantom{.}
+        
+            \begin{enumerate}
+                \item Defino $f: \mathrm{VAR} \to \{ 0,1 \}/ f(p_j) = 1$, $\forall j$.
+            Sea $v_f$ la única valuación que extiende a $f$.
+
+            \begin{align*}
+                v_f(\alpha) &= \min \{ v_f(p_1), v_f(p_2) \}
+                \notamath{Esto nos asegura que $\alpha$ \textit{no} es una 
+                contradicción.} \\
+                &= \min \{ \underbrace{f(p_1)}_{=1}, 
+                \underbrace{f(p_2)}_{=1} \} \\
+                &= 1 \\
+            \end{align*}
+            \begin{gather*}
+                \therefore ~ v_f(\alpha)=1
+            \end{gather*}
+
+            \item Defino $g: \mathrm{VAR} \to \{ 0,1 \}/ g(p_j) = 0$, $\forall j$.
+
+            Sea $v_g$ la única valuación que extiende a $g$.
+
+            \begin{align*}
+                v_g(\alpha) &= \min \{ v_g(p_1), v_g(p_2) \} 
+                \notamath{Análogamente, esto nos asegura que $\alpha$ 
+                    \textit{no} es una tautología.}\\
+                &= \min \{ \underbrace{g(p_1)}_{=0},
+                \underbrace{g(p_2)}_{=0} \} \\
+                &= 0 \\
+            \end{align*}
+            \begin{gather*}
+                \therefore ~ v_g(\alpha)=0
+            \end{gather*}
+            \end{enumerate}
+
+            Por lo tanto, por 1 y 2, $\alpha$ es una contingencia.
+        \end{proof}
+    \item $\alpha = (p_1 \vee \neg p_1)$ es una tautología.
+
+        \begin{proof} \phantom{.}
+        
+            Sea $v$ valuación.
+
+            \begin{align*}
+                v(\alpha) &= \max{\{ v(p_1), v(\neg p_1) \}} \\
+                          &= \max{\{ v(p_i), 1-v(p_i) \}}
+            \end{align*}
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item Si $v(p_1) = 1 \implies v(\alpha) = \max{\{ 1,0 \}}=1$
+                \item Si $v(p_1) = 0 \implies v(\alpha) = \max{\{ 1,0 \}}=1$
+            \end{enumerate}
+            \begin{gather*}
+                \therefore ~  v(\alpha) = 1 ~ \forall v \text{ valuación}
+            \end{gather*}
+        \end{proof}
+\end{enumerate} 
+
+
+\subsection{Teorema}
+
+\begin{teorema}{Otra forma del Teorema \ref{teo:valuacion-unica}}{igualdad-valuaciones-frest}
+    \nota{$var(\alpha)$ es el conjunto de variables de $\alpha$}%
+    Sea $\alpha \in F$. 
+
+    Sea $var(\alpha) = 
+    \{ p_j \in \mathrm{VAR} / p_j \text{ aparece en } \alpha \}$
+
+    \medskip
+
+    Si $v, w$ son valuaciones tales que 
+    $\frest{v}{var(\alpha)} = \frest{w}{var(\alpha)}$
+    \begin{gather*}
+        \implies v(\alpha) = w(\alpha)
+    \end{gather*}
+
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Por inducción en $c(\alpha)$.
+
+    \begin{itemize}
+        \item CB) Sea $\alpha \in F/c(\alpha) = 0$.
+            \begin{gather*}
+                \implies \alpha = p_j
+            \end{gather*}
+
+            Si tenemos $v, w$ valuaciones tales que 
+            $\frest{v}{var(\alpha)} = \frest{w}{var(\alpha)}$
+
+            \begin{align*}
+                \implies v(p_j) &= w(p_j) \\
+                \implies v(\alpha) &= w(\alpha)
+            \end{align*}
+
+        \item HI) Supongamos que $\alpha \in F/ c(\alpha) = k$.
+
+            Sean $v, w$ valuaciones tales que 
+            $\frest{v}{var(\alpha)} = \frest{w}{var(\alpha)}$ 
+            $\implies v(\alpha) = w(\alpha)$
+
+            \medskip
+
+            Por simplicidad, vamos a llamar a lo que acabamos de escribir 
+            $\mathcal{P}(k)$.
+
+            Así, la hipótesis inductiva es $\mathcal{P}(k)$, con $k \leq n$.
+
+        \item T) $\mathcal{P}(n+1)$
+    \end{itemize}
+
+    Sea $\alpha \in F/ c(\alpha) = n+1 > 0$
+
+    \begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+        \item $\alpha = \neg \beta$
+
+            \begin{gather*}
+                n+1 = c(\alpha) = 1+c(\beta) \implies \dashbox{$c(\beta)=n$}
+            \end{gather*}
+
+            Sean $v$ y $w$ valuaciones tales que 
+            $\frest{v}{var(\alpha)}=\frest{w}{var(\alpha)}$
+
+            Como $var(\alpha) = var(\beta)$, entonces 
+            \dashbox{$\frest{v}{var(\beta)}=\frest{w}{var(\beta)}$}
+
+            Por esto, y por la HI: 
+            \begin{align*}
+                v(\beta) = w(\beta)& \\
+                \implies& 1 - v(\beta) 
+                    = 1 - w(\beta) \\
+                \implies& \boxed{ v(\alpha) = w(\alpha) }
+            \end{align*}
+
+    \item $\alpha = (\beta_1 \wedge \beta_2)$
+
+    \begin{align*}
+        c(\alpha) =& \, n + 1 \\
+        =& \, 1 + \underbrace{c(\beta_1)}_{\geq 0} 
+        + \underbrace{c(\beta_2)}_{\geq 0} \\
+        \implies& c(\beta_1) + c(\beta) = n \\
+        \implies& \dashbox{$c(\beta_1) \leq n \text{ y } c(\beta_2) \leq n$}
+    \end{align*}
+
+    Notemos que $var(\alpha) = var(\beta_1) \cup var(\beta_2)$
+
+    \medskip
+
+    Luego, sean $v$ y $w$ valuaciones tales que 
+    $\frest{v}{var(\alpha)}=\frest{w}{var(\alpha)}$
+
+    Como $var(\beta_1) \subseteq var(\alpha)$ $\implies$ 
+        \dashbox{$\frest{v}{var(\beta_1)}=\frest{w}{var(\beta_1)}$}
+
+    Como $var(\beta_2) \subseteq var(\alpha)$ $\implies$ 
+        \dashbox{$\frest{v}{var(\beta_2)}=\frest{w}{var(\beta_2)}$}
+
+
+    Entonces, por HI, $v(\beta_1) = w(\beta_1)$ y $v(\beta_2) = w(\beta_2)$
+
+    Resultando:
+    \begin{align*}
+        v(\alpha) 
+            &= \min \{ v(\beta_1), v(\beta_2) \} \\
+            &= \min \{ w(\beta_2), w(\beta_2)\} \\
+        \implies &\boxed{v(\alpha) = w(\alpha)}
+    \end{align*}
+
+    \item $\alpha = (\beta_1 \wedge \beta_2)$
+
+        Tarea. Análogo a los casos anteriores.
+
+    \item $\alpha=(\beta_1 \to \beta_2)$
+
+        Tarea. Análogo a los casos anteriores.
+    \end{enumerate}
+
+\end{proof}
+
+\subsubsection{Ejemplos}
+
+\begin{itemize}
+    \item Sea $f: \mathrm{VAR} \to \{ 0,1 \} / f(p_i) =
+        \begin{cases}
+            1 & i \text{ es par} \\
+            0 & i \text{ es impar}
+        \end{cases}$
+
+    y sea $v_f$ la valuación que extiende a $f$.
+
+
+    Por ejemplo,
+    \begin{align*}
+        v_f(p_1 \wedge p_3) &= \min{\{ v_f(p_1), v_f(p_3)\}} \\
+                            &= \min{\{ \underbrace{f(p_1)}_{=0},
+                            \underbrace{f(p_\beta)}_{=0} \}} = 0
+    \end{align*}
+
+
+    \item Sea $f:\mathrm{VAR} \to \{ 0,1 \} / f(p_i) = 1$, $\forall i \in \mathbb{N}$. 
+ 
+    Sea $g: \mathrm{VAR} \to \{ 0,1 \} / g(p_i) =
+        \begin{cases}
+            1 & i \text{ es par} \\
+            0 & i \text{ es impar}
+        \end{cases}$
+ 
+    Y sean $v_f$ y $v_g$ son las valuaciones que extienden a $f$ 
+    y $g$ respectivamente.
+ 
+    Sea $\alpha = (p_0 \to (\neg p_2 \wedge p_4))$, 
+    $\mathrm{VAR}(\alpha) = \{ p_0,p_2,p_4 \}$
+
+    \begin{gather*}
+        \frest{v_f}{\mathrm{VAR}(\alpha)} = \frest{v_g}{\mathrm{VAR}(\alpha)} 
+        \implies v_f(\alpha) = v_g(\alpha)
+    \end{gather*}
+\end{itemize}
+
+
+\subsection{Proposición sobre las tautologías}
+
+
+\nota{\textit{Noni:} ``La demostración de esta proposición es súper importante.
+Hay varios ejercicios parecidos en la práctica y es un tema que evaluamos
+mucho en exámenes.''}%
+\begin{proposicion}{}{p-no-varsalpha-alpha-tautologia}
+    Sea $\alpha \in F$, $(p_1 \to \alpha)$ tautología.
+
+    \medskip
+
+   \begin{gather*}
+       \text{Si } p_1 \notin var(\alpha) 
+        \implies \alpha \text{ es tautología}
+   \end{gather*} 
+\end{proposicion}
+
+\begin{proof}[\textit{Noni}: ``Esta es una MALA demostración que vi en 
+    exámenes.'']
+
+    \bigskip
+
+    \begin{align*}
+        & v(p_1 \to \alpha) = 1 \notamath{$\forall v$ valuación} \\
+        \iff & \max \{ 1-v(p_1), v(\alpha) \} = 1 
+        \notamath{$\forall v$ valuación} \\
+        \iff & 1-v(p_1) = 1 \text{ ó } v(\alpha)=1 
+        \notamath{$\forall v$ valuación} \\
+        \iff & v(p_1) = 0 \text{ ó } v(\alpha) = 1
+        \notamath{Ambos, $\forall v$ valuación}
+    \end{align*}
+
+    Como $v(p_1) = 0$ $\forall v$ valuación es falso, pues para algunas
+    valuaciones $v(p_1)=1$, entonces el caso verdadero es el segundo:
+    $v(\alpha)=1$, $\forall v$ valuación.
+
+    \begin{gather*}
+        \therefore ~ \alpha \text{ tautología.}
+    \end{gather*}
+\end{proof}
+
+En la demostración anterior, lo primero que notamos es que falta el dato de
+la proposición: $p_1 \notin var(\alpha)$.
+Particularmente, en esta proposición el dato mencionado es imprescindible.
+
+\medskip
+
+Tomemos por ejemplo $\alpha=(p_1 \to p_1)$. 
+
+Esta es una tautología pues 
+$v(\alpha)=\max \{ 1 - v(p_1), v(p_1) \}$
+y esto siempre vale $1$.
+
+Sin embargo, la fórmula recuadrada es una contingencia: 
+$(p_1 \to \boxed{p_1})$
+
+Con esto vemos que si el dato de la Proposición 
+\ref{propo:p-no-varsalpha-alpha-tautologia}, $p_1 \notin var(\alpha)$, no
+se cumple entonces no es necesariamente verdad que $\alpha$ es tautología.
+
+En conclusión, si no lo escribimos en nuestra demostración, esta es una pista
+de que \textit{algo} está mal en la misma.
+
+\medskip
+
+El error fundamental de la demostración está en el último $\iff$ pues
+el ``\verb+para todo+'' \textbf{no} se distribuye con el ``\verb+ó+''.
+
+Es decir, es falso que
+\begin{gather*}
+    1-v(p_1) = 1 \text{ ó } v(\alpha)=1 ~ \dashbox{$\forall v$ valuación} \\
+    ~\boxed{\iff}~ \\
+    v(p_1) = 0 ~ \dashbox{$\forall v$ valuación} 
+    \text{ ó } v(\alpha) = 1 ~ \dashbox{$\forall v$ valuación} 
+\end{gather*}
+
+
+Realicemos la prueba correcta.
+
+\begin{proof} \phantom{.}
+
+    \nota{El ``cualquiera'' es redundante, pero Noni lo enfatizó para que 
+    quede claro.\\
+    Notemos que $f$ está bien definida pues $p_1 \notin var(\alpha)$.}%
+    Sea $v$ una valuación cualquiera.
+
+    Defino 
+    \begin{gather*}
+        f:\mathrm{VAR}\to \{ 0,1 \} / f(p_j) =
+            \begin{cases}
+                v(p_j) & \text{si } p_j \in var(\alpha) \\
+                1 & \text{sino}
+            \end{cases}
+    \end{gather*}
+
+    Y sea $v_f$ la valuación que extiende a $f$.
+
+    Entonces
+
+    \begin{align*}
+        1 =& \, v_f(p_1 \to \alpha) \notamath{Por ser tautología.} \\
+        =& \, \max \{ 1-v_f (p_1), v_f(\alpha) \} \\
+        \implies& 1 - \underbrace{v_f(p_1)}_{f(p_1)} = 1 
+        \text{ ó } v_f(\alpha) = 1 \\
+        \implies& \underbrace{0 = 1}_{\text{Falso}} \text{ ó } v_f(\alpha)=1
+    \end{align*}
+
+    \begin{gather*}
+        \dashbox{$\therefore ~ v_f(\alpha)=1$}
+        \notamath{$\forall v$ valuación}
+    \end{gather*}
+
+    \medskip
+
+    Por otra parte tenemos que:
+    \begin{gather*}
+        \frest{v}{var(\alpha)} = \frest{v_f}{var(\alpha)}
+    \end{gather*}
+
+    Entonces, por el Teorema \ref{teo:igualdad-valuaciones-frest}:
+
+    \nota{\textit{Noni:} ``Si entienden realmente esta demostración, están 
+    comenzando a entender el tema.''}%
+    \begin{gather*}
+        \boxed{ v(\alpha) = v_f(\alpha)=1}
+    \end{gather*}
+
+\end{proof}
+
+
+
+\subsection{Equivalencia}
+
+\begin{definicion}{}{}
+    Sean $\alpha, \beta \in F$.
+
+    \medskip
+
+    Decimos que $\alpha$ es equivalente a $\beta$ si $v(\alpha)=v(\beta)$, 
+    $\forall v$ valuación.
+
+    \bigskip
+    \textbf{Notación:}
+    \( \alpha \equiv \beta \)
+\end{definicion}
+
+
+\bigskip
+\textit{Observación:}
+
+Definimos $\mathcal{R}$ en $F$ tal que $\alpha \mathcal{R} \beta$
+si $\alpha \equiv \beta$.
+Entonces $\mathcal{R}$ es de equivalencia.
+
+\begin{proof} \phantom{.}
+    Tarea.
+
+    \textit{Demostrada ``en el aire'' por Noni:}
+    Para ser una relación de equivalencia tiene que ser reflexiva, entonces
+    tiene que ocurrir que $\alpha \equiv \alpha$. Esto es fácil de probar
+    porque $v(\alpha) = v(\alpha)$ para toda $v$ valuación.
+
+    En cuanto a la simetría, supongamos que $\alpha \mathcal{R} \beta$, 
+    entonces $\alpha \equiv \beta$, entonces $v(\alpha)=v(\beta)$ para toda
+    $v$ valuación. Pero, entonces, $v(\beta)=v(\alpha)$ para toda $v$
+    valuación, con lo cual $\beta \mathcal{R} \alpha$.
+
+    Por último, para la transitividad, $\alpha \mathcal{R} \beta$ y
+    $\beta \mathcal{R} \gamma$, entonces $v(\alpha) = v(\beta)$ para toda
+    $v$ valuación y $v(\beta)=v(\gamma)$ para toda $v$ valuación. Pero por
+    transitividad de la igualdad, $v(\alpha) = v(\gamma)$ para toda $v$
+    valuación. Por lo tanto $\alpha \mathcal{R} \gamma$.
+
+    Como es reflexiva, simétrica y transtiva, entonces es una relación de
+    equivalencia.
+\end{proof}
+
+
+Como es una relación de equivalencia, entonces tiene clases de equivalencia.
+¿Cuáles son?
+
+$\left[ ( p_1 \wedge \neg p_1 )  \right] \{ \alpha\in F / 
+\alpha \text{ es contradicción} \}$ 
+
+
+$\left[ ( p_1 \vee \neg p_1 )  \right] \{ \alpha\in F / 
+\alpha \text{ es tautología} \}$ 
+
+Por otra parte, vamos a tener infinitas clases de contingencias.
+
+Tarea: ¿Cómo caracterizaríamos todas las clases de equivalencia que hay?
+
+
+\subsubsection{Ejemplo}
+
+\nota{Notemos que \textbf{no} es la misma fórmula. Es decir, 
+$\alpha \neq \neg \neg \alpha$ porque \\
+$c(\neg \neg \alpha) = 2 + c(\alpha)$}%
+\begin{gather*}
+    \alpha \equiv \neg\neg \alpha
+\end{gather*}
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        v(\neg \neg \alpha) =& 1 \\
+        =& 1-(1-v(\alpha)) \\
+        =& 1 - 1 + v(\alpha) \\
+        =& v(\alpha)
+    \end{align*}
+\end{proof}
+
+\subsection{Función booleana}
+
+\begin{definicion}{Función booleana}{}    
+    Sea la función $f: {\{ 0,1 \}}^{n} \to \{ 0,1 \}$ con 
+    $n \in \mathbb{N}_{\geq 1}$.
+
+    Entonces $f$ se denomina función booleana.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+\begin{gather*}
+    f: {\{ 0,1 \}}^{3} \to \{ 0,1 \} / f(x,y,z) = \begin{cases}
+        1 & \text{si } x = y\\
+        0 & \text{sino} 
+    \end{cases}
+\end{gather*}
+
+\begin{center}
+    \begin{tabular}{c c c c} 
+        $f(1,1,0)=1$ & $f(1,0,1)=0$ & $f(1,1,1)=1$ & etc...
+    \end{tabular}
+\end{center}
+
+\begin{teorema}{}{}
+    \begin{gather*}
+        \notamath{$\frest{\mathrm{FORM}}{\equiv}$ es el conjunto de clases 
+        de equivalencia inducidas por la relación de equivalencia sobre 
+        las fórmulas.}
+        \{ f / f \text{ es función booleana} \} 
+    \xrightarrow[\text{biyección}]{} \frest{\mathrm{FORM}}{\equiv}
+    \end{gather*}%
+\end{teorema}
+
+El teorema nos está diciendo que existe una función biyectiva entre ambos
+conjuntos.
+
+\begin{proof} \phantom{.}
+    No la vemos.
+\end{proof}
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item $\alpha = (p_1 \to p_2)$ ¿Con qué función booleana la vinculo?
+        \nota{Notar que $n$ es la potencia del conjunto en el dominio de $f$}%
+
+        Como $n = \# var(\alpha) = 2$, defino $f: {\{ 0,1 \}}^{2} \to 
+        \{ 0,1 \}$ tal que:
+            $f(0,0) = 1$,
+            $f(0,1) = 1$,
+            $f(1,0) = 0$,
+            $f(1,1) = 1$
+
+    \item $\alpha = ((p_1 \wedge \neg p_2) \to p_3)$ 
+        ¿Con qué función booleana la vinculo?
+
+        Defino $f: {\{ 0,1 \}}^3 \to \{ 0,1 \}$ tal que:
+       \begin{gather*}
+            f(x,y,z) = \begin{cases}
+                0 & x = 1, \; y=0, \; z=1 \\
+                1 & \text{ otro caso}
+            \end{cases} 
+        \end{gather*} 
+
+    \item $f: {\{ 0,1 \}}^2 \to \{ 0,1 \} / f(x,y) = \begin{cases} 
+            1 & \text{si } x=y \\
+            0 & \text{sino}
+            \end{cases}$
+        ¿Con qué $\alpha \in F$ la vinculo?
+
+        Obervemos que
+        \begin{gather*}
+            \begin{array}{c | c | c}
+                x & y & f(x,y) \\
+                \hline 
+                0 & 0 & 1 \\
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                1 & 1 & 1
+            \end{array}
+        \end{gather*}
+
+        \nota{La fórmula es la disyunción de tantas fórmulas como renglones
+        vayan a parar al $1$. En este caso hay dos.}%
+        Entonces defino:
+        $\alpha = (\neg p_1 \wedge \neg p_2) \vee (p_1 \wedge p_2)$.
+
+    \item $f: {\{ 0,1 \}}^3 \to \{ 0,1 \} / f(x,y,z) = \begin{cases}
+            1 & x = 1 \\ 0 & \text{sino} \end{cases}$
+        ¿Con qué $\alpha \in F$ la vinculo?
+
+        En este caso:
+        \begin{gather*}
+            \begin{array}{c | c | c | c}
+                x & y & z & f \\
+                \hline 
+                0 & 0 & 0 & 0 \\
+                0 & 0 & 1 & 0 \\
+                0 & 1 & 0 & 0 \\
+                0 & 1 & 1 & 0 \\
+                1 & 0 & 0 & 1 \\
+                1 & 0 & 1 & 1  \\
+                1 & 1 & 0 & 1  \\
+                1 & 1 & 1 & 1 
+            \end{array}
+        \end{gather*}
+
+        Nos concentramos en los renglones que van a parar al uno y
+        obtenemos la siguiente fórmula:
+
+        \begin{gather*}
+            \alpha = (p_1 \wedge \neg p_2 \wedge \neg p_3) \vee
+            (p_1 \wedge \neg p_2 \wedge p_3) \vee 
+            (p_1 \wedge p_2 \wedge \neg p_3) \vee (p_1 \wedge p_2 \wedge p_3)
+        \end{gather*}
+
+        \medskip
+        Uno podría probar (\textit{tarea}) que $\alpha \equiv p_1$.
+
+        Además es mejor trabajar con $p_1$, pues $c(\alpha) = 15$ mientras 
+        que $c(p_1) = 0$ y es siempre más fácil trabajar con fórmulas de 
+        complejidad mínima.
+\end{enumerate}
+
+\subsection{Conectivos adecuados}
+
+\begin{definicion}{Conectivos adecuados}{}
+    Sea $C$ un conjunto de conectivos. 
+
+    $F_C = \{$ fórmulas que tienen conectivos de $ C \} \cup \mathrm{VAR}$
+
+    \medskip
+
+    $C$ es adecuado si 
+    \begin{gather*}
+        \forall \alpha \in \mathrm{FORM}, \exists \; \beta \in F_C / 
+        \beta \equiv \alpha
+    \end{gather*}
+
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item Sea $C = \{ \neg, \wedge \}$. ¿Puedo escribir cualquier fórmula
+        de la lógica proposicional usando solamente \textit{no} e \textit{y}?
+        Es decir, ¿siempre voy a poder encontrar un fórmula equivalente
+        que tenga solamente estos dos conectivos?
+
+        La respuesta es sí, el conjunto $\{ \neg, \wedge \}$ es adecuado.
+        \begin{proof} \phantom{.}
+        \begin{align*}
+            (\alpha \vee \beta) \equiv& \\
+            \equiv& \neg \neg (\alpha \vee \beta) \notamath{Teórica} \\
+            \equiv& \neg(\neg \alpha \wedge \neg \beta) \notamath{De Morgan}\\
+            (\alpha \to \beta) \equiv& \\
+            \equiv& \neg \alpha \vee \beta \notamath{Tarea: demo. del 
+            $\equiv$} \\
+            \equiv& \neg(\neg \neg \alpha \wedge \neg \beta) \\
+            \equiv& \neg(\alpha \wedge \neg \beta)
+        \end{align*}
+        \end{proof}
+
+    \item $C = \{ \wedge, \vee, \neg, \to, \leftrightarrow \}$ es adecuado.
+        \begin{proof} \phantom{.}
+        
+        Es trivial porque tiene más conectivos. Puedo escribir las fórmulas
+        con $\{ \wedge, \vee, \neg, \to \}$ y, además, le estoy agregando
+        un conectivo.
+        \begin{gather*}
+            \alpha \leftrightarrow \beta 
+            \equiv (\alpha \to \beta) \wedge (\beta \to \alpha)
+        \end{gather*}
+        \end{proof}
+
+    \item $C = \{ \wedge, \to \}$ no es adecuado. 
+        \nota{\textit{Noni:} ``Esta técnica sirve para 
+        muchos ejemplos de no adecuados (pero no para todos).''}%
+        \begin{proof} \phantom{.}
+        
+            Defino $f: \mathrm{VAR} \to \{ 0,1 \} / f(p_j) = 1$. Sea $v_f$ la 
+            valuación que extiende a $f$.
+
+            Veamos que $v_f(\alpha) = 1$ $\forall \alpha \in F_C$.
+            \nota{\textit{Noni:} ``Si digo ``\underline{La} novia de Juan'' 
+                está clarísimo que tiene una única novia; ``\underline{Una} 
+                novia de Juan'' implica que puede haber más.
+                Lo mismo ocurre acá: al decir ``\underline{la}'' 
+                es única.''}%
+
+            Sea $C(\alpha) = $ cantidad de veces que aparece $\wedge, \to$ en
+            $\alpha$. Por inducción en $C$.
+
+            \begin{itemize}
+                \item CB) $c(\alpha) = 0 \implies \alpha = p_j \in \mathrm{VAR}$
+                   \begin{gather*}
+                       \implies v_f(\alpha) = f(p_j) = 1
+                   \end{gather*} 
+
+                \item HI) $\alpha \in F_C / c(\alpha) \leq n 
+                    \implies v_f(\alpha)=1$
+
+                \item T) $\alpha \in F_C / c(\alpha) = n+1 
+                    \implies v_f(\alpha) = 1$
+            \end{itemize}
+
+            Sea $\alpha \in F_C/ c(\alpha) = n + 1$
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item $\alpha = (\beta_1 \wedge \beta_2)$
+                    \nota{$\beta_1,\beta_2 \in F_C$}%
+                    \begin{gather*}
+                        c(\alpha) = \underbrace{c(\beta_1)}_{\geq 0} 
+                        + \underbrace{c(\beta_2)}_{\geq 0} + 1 = n+1 \\
+                        \implies c(\beta_i) \leq n \notamath{$i\in\{1,2\}$}\\
+                        % \therefore ~ v_f(\beta_1) \notamath{Por HI} 
+                        % - v_f(\beta_2) = 1 \\
+                        \implies \dashbox{$v_f(\alpha) = 
+                        \min \{ \underbrace{v_f(\beta_1)}_{=1},
+                        \underbrace{v_f(\beta_2)}_{=1} \} = 1$}
+                    \end{gather*}
+
+                \item $\alpha = (\beta_1 \to \beta_2)$
+                    \begin{gather*}
+                        c(\alpha) = \underbrace{c(\beta_1)}_{\geq 0} 
+                        + \underbrace{c(\beta_2)}_{\geq 0} + 1 = n+1 \\
+                        c(\beta_i) \leq n \notamath{$i \in \{ 1,2 \}$}\\
+                        \implies  v_f(\beta_i) = 1 \notamath{Por HI}\\
+                        \implies \dashbox{$v_f(\alpha) 
+                            = \max \{ 1-v_f(\beta_1), v_f(\beta_2) \}
+                        = 1$}
+                    \end{gather*}
+            \end{enumerate}
+
+            Sea $\alpha = (p_1 \wedge \neg p_1) \in F$. Supongo $C$ adecuado.
+            \begin{gather*}
+                \implies \exists \; \beta \in F_C/ \beta \equiv \alpha \\
+                \implies \underbrace{v_f(\alpha)}_{=1} 
+                = \underbrace{v_f(\beta)}_{=0} = 1
+            \end{gather*}
+
+            ¡Absurdo!
+            Pues $\alpha$ es una contradicción.
+
+            El absurdo vino de suponer que el conjunto de conectivos es
+            adecuado.
+            \begin{center}
+                \fbox{$\therefore ~ C$ no es adecuado.}
+            \end{center}
+
+        \end{proof}
+\end{enumerate}
+
+\subsection{Definiciones}
+
+\begin{definicion}{}{}
+    Sean $\alpha \in F$ y $v$ valuación.
+
+    \medskip 
+
+    Decimos que $v$ satisface $\alpha$ si $v(\alpha)=1$
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{}{}
+    Sea $\alpha \in F$.
+    
+    \medskip
+
+    Decimos que $\alpha$ es satisfacible si $\exists \; v$ valuación tal que
+    $v(\alpha) = 1$.
+\end{definicion}
+
+Otra manera (equivalente) de escribir esta definición es:
+\begin{gather*}
+    \exists \; v \text{ valuación } (\alpha \in \Gamma \implies v(\alpha) = 1)
+\end{gather*}
+
+\medskip
+
+\begin{definicion}{}{}
+    Sea $\Gamma \subseteq F$.
+
+    \medskip
+
+    Decimos que $\Gamma$ es \textit{satisfacible} si $\exists \; v$ valuación tal que
+    $v(\alpha) = 1$ $\forall \alpha \in \Gamma$.
+
+    \bigskip
+    \textbf{Notación:}
+    $v(\Gamma) = 1$ 
+
+    \medskip
+
+    \nota{$v(\Gamma) = 0$ \underline{NO} existe}%
+    Decimos que $\Gamma$ es \textit{insatisfacible} si $\nexists \; v$ 
+    valuación tal que $v(\Gamma)=1$.
+
+    Es decir, $\forall v$ val. $\exists \; \alpha \in \Gamma$ $/$ $v(\alpha)=0$
+\end{definicion}
+
+\subsubsection{Ejemplos}
+
+Decidir si $\Gamma$ es satisfacible.
+
+\begin{enumerate}
+    \item $\Gamma = \{ p_1, (p_1 \wedge p_2) \}$
+
+        Sí, es satisfacible.
+
+        \begin{proof} \phantom{.}
+
+        Defino $f:\mathrm{VAR}\to \{ 0,1 \} / f(p_j)=1$. 
+
+        Sea $v_f$ la valuación que extiende a $f$.
+        \begin{gather*}
+            v_f(p_1) = f(p_1) = 1 \\
+            v_f(p_1 \wedge p_2) = \min \{ v_f (p_1), v_f(p_2) \} =
+            \min \{\underbrace{f(p_1)}_{=1}, \underbrace{f(p_2)}_{=1}\} = 1 \\
+        \end{gather*}
+        \begin{gather*}
+            \boxed{\therefore ~ v_f \text{ satisface } \Gamma}
+        \end{gather*}
+
+        \end{proof}
+
+    \item $\Gamma = \{ p_1, \neg p_2, (\neg p_1 \wedge \neg p_2) \}$
+
+        No es satisfacible.
+
+        \begin{proof} \phantom{.}
+
+        Supongo $\Gamma$ satisfacible $\implies \exists \; v$ valuación tal
+        que $v(\Gamma)=1$
+
+        \begin{gather*}
+            v(p_1) = 1 \wedge v(\neg p_2) = 1
+            \implies v(p_2)=0
+        \end{gather*}
+
+        Luego,
+        \begin{gather*}
+            v(\neg p_1 \wedge \neg p_2) = 1 = \min \{ 1-v(p_1),1-v(p_2) \}
+            \implies v(p_1)=0 \text{ y } v(p_2)=0
+        \end{gather*}
+
+        Lo cual es absurdo pues $1 \neq 0$. El mismo vino de suponer que 
+        $\Gamma$ es satisfacible.
+
+        \begin{gather*}
+            \boxed{\therefore ~ \Gamma \text{ es insatisfacible.}}
+        \end{gather*}
+
+        \end{proof}
+
+    \item $\Gamma = \varnothing$ es satisfacible
+
+
+        \begin{proof} \phantom{.}
+            
+            Supongo $\Gamma$ insatisfacible.
+
+            Dada $v$ valuación, 
+            \begin{gather*}
+                \underbrace{\exists \; \alpha \in \Gamma}_{\text{Falso}} / 
+                v(\alpha)=0
+            \end{gather*}
+
+            Otra manera:
+            \begin{gather*}
+                \underbrace{(\underbrace{\alpha \in \Gamma}_{\text{Falso}} 
+                \Rightarrow v(\alpha)=1)}_{\text{Verdadero}}
+            \end{gather*}
+
+            \begin{gather*}
+                \boxed{\therefore ~ \Gamma = \varnothing \text{ es 
+                satisfacible y, además, la satisfacen todas las 
+                valuaciones.}}
+            \end{gather*}
+                
+        \end{proof}
+
+    \item $\Gamma = \mathrm{FORM}$ es insatisfacible.
+
+        \begin{proof} \phantom{.}
+            
+            Supongo $\Gamma$ satisfacible $\implies \exists \; v$ valuación
+            tal que $v(\Gamma)=1$
+
+            Entonces, como $\{ p_1, \neg p_1 \} \subseteq \Gamma$:
+            \begin{gather*}
+                v(p_1)=1 \text{ y } v(\neg p_1)= 1
+            \end{gather*}
+
+            ¡Absurdo! Vino de suponer que $\Gamma$ es satisfacible.
+
+            Por lo tanto, $\Gamma$ es insatisfacible.
+
+        \end{proof}
+\end{enumerate}
+
+\subsection{Consecuencia}
+
+\begin{definicion}{Consecuencias}{}
+    \nota{\textit{Noni}: ``\textbf{LA} definición.''}%
+    Sean $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
+
+    \medskip
+
+    Decimos que $\alpha$ es consecuencia de $\Gamma$ si
+    \begin{gather*}
+        \left( ~ v(\Gamma)=1 \implies v(\alpha) = 1 ~ \right) 
+        \notamath{$\forall v$ valuación.}
+    \end{gather*}
+
+    \bigskip
+    \textbf{Notación:}
+    $\underbrace{C(\Gamma)}_{\substack{
+        \text{Consecuencias}\\\text{de } \Gamma}}
+    = ~ \{\alpha \in F / \alpha \text{ es consecuencia de } \Gamma\}$
+\end{definicion}
+
+Decimos que $\alpha \notin C(\Gamma)$ si
+$\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
+
+\subsubsection{Ejemplos}
+
+\begin{enumerate}
+    \item Decidir si $\alpha \in C(\Gamma)$.
+
+\begin{enumerate}
+    \item $\Gamma = \{ p_1, (p_1 \to p_2) \}$, $\alpha = p_2$
+
+        \nota{\textit{Noni}: ``Esto es siempre igual. No innoven por favor.''}%
+        Vamos que $\alpha \in C(\Gamma)$
+
+        \begin{proof} \phantom{.}
+        
+            Sea $v \text{ valuación} / v(\Gamma)=1$
+
+            Entonces se cumple que
+            \begin{gather*}
+                v(p_1) = 1 \text{ y } v(p_1 \to p_2) = 1
+            \end{gather*}
+
+            \begin{gather*}
+                1 = v(p_1 \to p_2)
+                = \max \{1-\underbrace{v(p_1)}_{=1}, v(p_2)\} = v(p_2) \\
+                \implies v(p_2)=1
+            \end{gather*}
+
+            \begin{gather*}
+                \therefore ~ v(\Gamma) = 1 \implies v(p_2) = 1 \\
+                \boxed{\text{Conclusión: } \alpha \in C(\Gamma)}
+            \end{gather*}
+        \end{proof}
+
+    \item $\Gamma = \{ p_1, (p_1 \to p_2) \}$, $\alpha = p_3$
+
+        Veamos que $\alpha \notin C(\Gamma)$
+
+        \begin{proof} \phantom{.}
+        
+            Defino $f:\mathrm{VAR} \to \{ 0,1 \}/f(p_j) = \begin{cases}
+                0 & j =3 \\
+                1 & \text{sino}
+            \end{cases}$
+
+            Sea $v_f$ la valuación que extiende a $f$
+
+            \begin{gather*}
+                \left.\begin{aligned}
+                    v_f(p_1) = f(p_1)=1 \\
+                    \\
+                    v_f (p_1 \to p_2) = \max \{ 1-\underbrace{v_f(p_1)}_{=1},
+                    \underbrace{v_f(p_2)}_{=1} \}=1
+                \end{aligned} \right\}
+                \quad \dashbox{$v_f(\Gamma) = 1$}\\
+            \end{gather*}
+
+            Por otra parte,
+            \begin{gather*}
+                \dashbox{$v_f(p_3) = f(p_3) = 0$}
+            \end{gather*}
+
+            Entonces 
+            \begin{gather*}
+                \boxed{\alpha \notin C(\Gamma)}
+            \end{gather*}
+
+        \end{proof}
+
+
+    \item $\Gamma = \{ p_1, p_2 \}$, $\alpha = \neg p_1$
+
+        Veamos que $\alpha \notin C(\Gamma)$
+
+        \begin{proof} \phantom{.}
+        
+            Defino $f: \mathrm{VAR}\to \{ 0,1 \}/ f(p_j) = 1$.
+
+            Sea $v_f$ la valuación que extiende a $f$.
+
+            \begin{gather*}
+                v_f(p_1)=1 \wedge v_f(p_2) = 1 \implies v_f(\Gamma)=1
+            \end{gather*}
+
+            Pero $v_f(\alpha) = 1 - v_f(p_1) = 0$
+
+            \begin{gather*}
+                \boxed{\therefore ~ \alpha \notin C(\Gamma)}
+            \end{gather*}
+        \end{proof}
+        
+\end{enumerate}
+
+\item Hallar $C(\Gamma)$.
+
+\begin{enumerate}
+    \item $C(\varnothing) = ?$
+
+        Veamos que $C(\varnothing) = $ tautologías 
+        $= \{ \alpha\in F /\alpha \text{ es tautología} \}$
+
+        \begin{proof} \phantom{.}
+        
+            \begin{itemize}
+                \item[$\subseteq$)] $\alpha \in C(\varnothing)$.
+
+                    Quiero ver que $\alpha$ es tautología.
+
+                    \medskip
+
+                    Supongo que no 
+                    $\implies \exists \; v \text{ valuación}/v(\alpha)=0$
+
+                    \nota{$\varnothing$ es satisfacible.}%
+                    Pero $v(\varnothing)=1 \implies \alpha \notin
+                    C(\varnothing)$
+
+                    ¡Absurdo!
+                    Vino de suponer que $\alpha$ no era una tautología.
+
+                \item[$\supseteq$)] $\alpha$ tautología.
+
+                    Quiero ver que $\alpha \in C(\varnothing)$
+
+                    \medskip
+
+                    Sea $v \text{ valuación} / v(\varnothing)=1$
+                    $\implies \underbrace{v(\alpha)=1}_{\alpha \text{ taut.}}$
+            \end{itemize}
+        \end{proof}
+
+        \bigskip
+
+        Otra forma:
+
+        \begin{proof} \phantom{.}
+        
+            Como toda valuación satisface el $\varnothing$, si 
+            \begin{gather*}
+                \alpha \in C(\varnothing) \implies v(\alpha) = 1
+                \notamath{$\forall v$ valuación} \\
+            \end{gather*}
+            \begin{gather*}
+                \therefore ~ \alpha \in C(\varnothing) \iff \alpha 
+                \text{ es tautología}
+            \end{gather*}
+        \end{proof}
+
+    \item Supongamos que tengo un conjunto $\Gamma$ insatisfacible.
+        $C(\Gamma) = ?$
+
+        Veamos que $C(\Gamma) = \mathrm{FORM}$.
+
+        \begin{proof} \phantom{.}
+        
+        \begin{itemize}
+            \item $\subseteq$) Es trivial por definición.
+            \item $\supseteq$) Supongo
+                $\exists \; \alpha \in \mathrm{FORM} / \alpha \notin C(\Gamma)$
+                \begin{gather*}
+                    \exists \; v \text{ valuación}/v(\alpha)=0 
+                    \text{ y } \overbrace{v(\Gamma) = 1}^{\text{¡Absurdo!}}
+                \end{gather*}
+
+                \medskip
+
+                $V(\Gamma)=1$ es absurdo pues $\Gamma$ es insatisfacible.
+
+                El mismo vino de suponer que había una fórmula que no está
+                en las consecuencias de $\Gamma$.
+        \end{itemize}
+
+        De esta manera probamos que $C(\Gamma)$ son todas las fórmulas.
+
+        \end{proof}
+
+        \bigskip
+
+        Otra manera:
+        \begin{proof} \phantom{.}
+        
+            Sea $v$ valuación.
+
+            \begin{gather*}
+                \underbrace{(\underbrace{v(\Gamma) = 1}_{\text{Falso}}
+                \implies v(\alpha) = 1)}_{\text{Verdadero}}
+            \end{gather*}
+        \end{proof}
+
+    \item Tautologías $\subseteq C(\Gamma)$, $\Gamma \subseteq \mathrm{FORM}$
+
+    \begin{proof} \phantom{.}
+    
+        Sea $\alpha \in$ Tautologías, quiero ver que $\alpha \in C(\Gamma)$.
+
+        Sea $v$ val.$/v(\Gamma) = 1$
+
+        \begin{center}
+            $v(\alpha)=1$ pues $\alpha$ es tautología.
+        \end{center}
+    \end{proof}
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{Teorema}
+
+\nota{\textit{Noni}: ``Entra en la categoría de \textit{``fácil''} ''}%
+\begin{teorema}{}{}
+    Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
+
+    \medskip
+
+    \begin{gather*}
+        \alpha \in C(\Gamma) \iff 
+        \Gamma \cup \{ \neg \alpha \} \text{ es insatisfacible.}
+    \end{gather*}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item $\implies$) Por dato, $\alpha \in C(\Gamma)$. Quiero ver que
+            $\Gamma \cup \{ \neg \alpha \}$ es insatisfacible.
+
+            Supongo que $\Gamma \cup \{ \neg \alpha \}$ es satisfacible.
+            \begin{align*}
+                \implies& \exists  \; v \text{ valuación}/
+                v\left(\Gamma \cup \{ \neg\alpha \}\right) = 1 \\
+                \implies& v(\Gamma) = 1 ~ \wedge ~ v(\neg \alpha) = 1 \\
+                \implies& v(\Gamma) = 1 ~ \wedge ~ v(\alpha) = 0
+            \end{align*}
+
+            Entonces $\alpha \notin C(\Gamma)$, lo cual es absurdo.
+
+        \item $\impliedby$) Por dato, $\Gamma \cup \{ \neg\alpha \}$ es
+            insatisfacible. Quiero ver que $\alpha \in C(\Gamma)$
+
+            Supongo que $\alpha \notin C(\Gamma)$
+            \begin{align*}
+                \implies& \exists \; v \text{ valuación}/ v(\Gamma)=1 
+                ~ \wedge ~ v(\alpha)= 0 \\
+                \implies& v(\Gamma) = 1 ~ \wedge ~ v(\neg \alpha)=1 \\
+                \implies& v(\Gamma \cup \{ \neg \alpha \}) = 1 \\
+                \implies& v \text{ satisface } \Gamma \cup \{ \neg\alpha \}
+            \end{align*}
+
+            Lo cual es un absurdo porque ese conjunto es insatisfacible.
+    \end{itemize}
+\end{proof}
+
+\subsection{Teorema}
+
+\nota{\textit{Noni}: ``Entra en la categoría de \textit{``fácil''} ''}%
+\begin{teorema}{}{}
+    Sean $\Gamma = \{ \gamma_1, \dotsc, \gamma_n \} \subseteq \mathrm{FORM}$, 
+    $\alpha \in \mathrm{FORM}$
+
+    \medskip
+
+    \begin{gather*}
+        \alpha \in C(\Gamma) \iff 
+        \left( (\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha  \right) 
+        \text{ es tautología}
+    \end{gather*}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item $\implies$) Por dato: $\alpha \in C(\Gamma)$, con 
+            $\Gamma = \{ \gamma_1, \dotsc, \gamma_n \}$
+
+            Quiero ver que 
+            $\beta = (\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha$
+            es tautología.
+
+            \medskip
+
+            Supongo que $\beta$ no es tautología.
+            \begin{align*}
+                \implies& \exists \; v \text{ valuación}/ v(\beta) = 0 \\
+                \implies& \underbrace{
+                    v(\gamma_1 \wedge \dots \wedge\gamma_n) = 1}_{
+                    v(\gamma_i)=1 \implies v(\Gamma)=1
+                \notamath{$1 \leq i \leq n$}}
+                ~\wedge~ v(\alpha)=0
+            \end{align*}
+
+            Entonces $\alpha \notin C(\Gamma)$ pero $v(\Gamma)= 1$
+
+            ¡Absurdo! Vino de suponer que $\beta$ no es tautología.
+
+            Por lo tanto, si $\alpha \in C(\Gamma)$, entonces 
+            $(\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha$
+            es tautología.
+
+        \item $\impliedby$) El dato que tenemos es que 
+            $(\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha$ es
+            tautología.
+
+             Quiero ver que $\alpha \in C(\Gamma)$.
+
+             \medskip
+
+             Sea $v \text{ valuación}/v(\Gamma)=1$, quiero ver que 
+             $v(\alpha)=1$
+             \begin{align*}
+                 \notamath{Como $v(\Gamma)=1$, entonces $v$ de cada fórmula 
+                 de $\Gamma$ vale uno, es decir, $v(\gamma_1) = 1, 
+                 v(\gamma_2)=1$, etc.}
+                 1 &= v((\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha)\\
+                   &= \max \{ 1-
+                    \underbrace{v(\gamma_1 \wedge \dots \wedge \gamma_n)}_{=1},
+                   v(\alpha) \} \\
+                   &= v(\alpha)
+             \end{align*}
+
+             \begin{gather*}
+                 \therefore ~ v(\alpha) = 1
+             \end{gather*}
+
+             Por lo tanto, $\alpha \in C(\Gamma)$.
+    \end{itemize}
+\end{proof}
+
+
+\subsection{Teorema de la deducción}
+
+\begin{teorema}{Teorema de la deducción %
+(versión semántica)}{deduccion-semantica}
+    Sean $\Gamma \subseteq \mathrm{FORM}$, $\alpha, \beta \in \mathrm{FORM}$.
+
+    \medskip
+
+    \begin{gather*}
+        (\alpha \to \beta) \in C(\Gamma) \iff \beta \in 
+        C(\Gamma \cup \{ \alpha \})
+    \end{gather*}
+\end{teorema}
+
+\nota{\textit{Noni}: ``Es similar a las anteriores, inténten demostrarlo
+ ustedes. Estos teoremas los tomamos mucho en los finales.''}%
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item $\implies$) Sea $v \text{ valuación}/ 
+            v(\Gamma \cup \{ \alpha \}) = 1$.
+
+            Quiero ver que $v(\beta)=1$.
+
+            \medskip
+            \begin{align*}
+                v(\Gamma) = 1 ~ &\wedge ~ v(\alpha) = 1 \\
+                1 &= v(\alpha\to\beta) = \max \{ 1 - 
+                    \overbrace{v(\alpha)}^{=1}, v(\beta) \} 
+                \notamath{Dato: $(\alpha\to\beta)\in C(\Gamma)$} \\
+                  &= v(\beta)
+            \end{align*}
+
+            \begin{gather*}
+                \therefore ~ v(\beta) = 1
+            \end{gather*}
+
+        \item $\impliedby$) Sea $v \text{ valuación}/ v(\Gamma)=1$
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item $v(\alpha)=1 \implies v(\Gamma \cup \{ \alpha \})=1$
+
+                    Como $\beta \in C(\Gamma \cup \{ \alpha \})$, $v(\beta)=1$
+
+                    \begin{gather*}
+                        v(\alpha\to\beta)
+                        = \max \{ 1-v(\alpha), \underbrace{v(\beta)}_{=1}\}
+                        = 1
+                    \end{gather*}
+
+                \item $v(\alpha)=0$
+
+                    \begin{gather*}
+                        v(\alpha\to\beta) 
+                        =\max \{ 1-\underbrace{v(\alpha)}_{=0}, v(\beta)\}
+                        = 1
+                    \end{gather*}
+            \end{enumerate}
+    \end{itemize}
+\end{proof}
+
+
+\subsubsection{Ejemplo}
+
+Probar que $\beta \in C( \{ \alpha, (\alpha\to\beta) \})$
+
+Por el Teorema \ref{teo:deduccion-semantica}:
+
+\begin{gather*}
+    \beta \in C( \{ \alpha, (\alpha\to\beta) \}) \iff
+    (\alpha\to\beta) \in C(\{ \alpha\to\beta \})
+\end{gather*}
+
+Lo cual es cierto porque es cierto que $\Gamma \subseteq C(\Gamma)$
+
+
+\subsection{Independencia de fórmulas}
+
+\begin{definicion}{Conjunto de fórmulas independientes}{}
+    Sea $\Gamma$ un conjunto de fórmulas.
+
+    \medskip
+
+    Decimos que $\Gamma$ es un conjunto de fórmulas independientes si para
+    todo $\alpha \in \Gamma$ se tiene que $\alpha \notin C(\Gamma-\{\alpha\})$.
+
+    En caso contrario, $\Gamma$ es dependiente.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Decidir si los siguientes conjuntos son independientes.
+
+\begin{enumerate}
+    \item $\Gamma = \{ p_1, (p_1 \to p_2)\}$
+
+        Veamos que son independientes.
+
+        \begin{proof} \phantom{.}
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item $\alpha = p_1$ %$p_1 \notin C(\Gamma - \{ p_1 \})
+                %= C\left(\{(p_1\to p_2)\}\right)$
+                
+                    \nota{$i=\{ 1,2 \}$}%
+                    Sea $f:\mathrm{VAR}\to \{ 0,1 \} / f(p_i)=0$ 
+                    para todo $p_i$.
+
+                    Sea $v_f$ la única valuación que extiende a $f$.
+
+                    \begin{align*}
+                        \implies& v_f(p_1) = f(p_1) = 0 \\
+                        & v_f(p_1\to p_2) = \max \{ 
+                        \underbrace{1-\underbrace{v(p_1)}_{=0}}_{=1},v(p_2)\}
+                        = 1
+                    \end{align*}
+
+                    Entonces,
+                    \begin{gather*}
+                        \alpha \notin C(\Gamma \backslash \{ \alpha \})
+                        \notamath{$\Gamma \backslash \{ \alpha \}$ equivale
+                        a $\Gamma \mathrm{-} \{ \alpha \}$}
+                    \end{gather*}
+
+            \item $\alpha = (p_1 \to p_2)$ 
+                %$(p_1 \to p_2) \notin C(\Gamma - \{ (p_1\to p_2) \}
+                %= C(\{ p_1 \})$
+
+                    Sea $g: \mathrm{VAR}\to \{ 0,1 \} / f(p_i) = \begin{cases}
+                        1 & \text{si } i=2 \\
+                        0 & \text{si } i\neq 2
+                    \end{cases}$
+
+                    Sea $v_g$ la única valuación que extiende a $g$.
+
+                    \begin{align*}
+                        \implies& v_g(p_1)=g(p_1)=1 \\
+                        & v_g(p_1 \to p_2)= \max 
+                        \{\underbrace{1-\underbrace{v_g(p_1)}_{=1}}_{=0}, 
+                        \underbrace{v_g(p_2)}_{=0}\} = 0
+                    \end{align*}
+
+                    Es decir,
+                    $v_g(\Gamma \backslash \{ \alpha \}) = 1$ y
+                    $v_g(\alpha) = 0$
+
+                    \begin{gather*}
+                        \implies \alpha \notin 
+                        C(\Gamma \backslash \{ \alpha \})
+                    \end{gather*}
+        \end{enumerate}
+
+        \begin{gather*}
+            \therefore ~ \Gamma \text{ es independiente.}
+        \end{gather*}
+
+        \end{proof}
+
+    \item $\Gamma = \{ p_1, p_2, (p_1 \to p_2)\}$
+
+        Veamos que $\Gamma$ no es independiente.
+
+        \begin{proof} \phantom{.}
+                
+            Notemos que 
+            $(p_1 \to p_2) \in C(\Gamma \backslash \{ (p_1\to p_2 \}) 
+            = C(\{ p_1, p_2 \})$.
+
+            \medskip
+
+            Sea $v \text{ valuación}/v(\{ p_1,p_2 \})=1$
+
+            En particular,
+            \begin{align*}
+                v(p_1) = v(p_2) = 1 \\
+                & v(p_1\to p_2) = \max \{1-v(p_1), 
+                \underbrace{v(p_2)}_{=1}\} = 1
+            \end{align*}
+
+            Lo cual está contradiciendo a la definición de 
+            independencia.
+
+            \begin{gather*}
+                \therefore ~ \Gamma \text{ es dependiente}
+            \end{gather*}
+        \end{proof}
+
+    \item $\Gamma=\{ (p_n \wedge p_{n+1} / n \in \mathbb{N} \}$
+
+        Notemos que $\Gamma = \{(p_0 \wedge p_1), (p_1\wedge p_2),
+        (p_2 \wedge p_3), \dotsc\}$
+
+        \nota{$(p_1 \wedge p_2)$ $\in$ \\
+        $C\left(\Gamma \backslash \{(p_1 \wedge p_2)\}\right)$}%
+        Como en el primer elemento del conjunto vemos que vale $p_1$ y en el
+        tercero que vale $p_2$, podemos deducir que vale $(p_1 \wedge p_2)$.
+        Es decir, la fórmula se puede deducir a partir de las demás.
+
+        Por lo tanto, el conjunto es dependiente.
+        
+        \begin{proof} \phantom{.}
+        
+            Sea $v \text{ valuación}/
+            v(\Gamma \backslash \{(p_1\wedge p_2)\})=1$
+
+            \begin{align*}
+                \implies& v(p_0 \wedge p_1) = 1 \\
+                & v(p_2 \wedge p_3)=1 \\
+                \implies& v(p_0\wedge p_1) = \min \{ \underbrace{v(p_0)}_{=1},
+                \underbrace{v(p_1)}_{=1}\} = 1 \notamath{Como estamos 
+            buscando el mínimo, ambos tienen que valer 1.}
+            \end{align*}
+
+            Entonces, como $v(p_0 \wedge p_1) = 1 \implies v(p_1)=1$ y como
+            $v(p_2 \wedge p_3)=1 \implies v(p_2)=1$
+            
+
+            Por lo tanto, $v(p_1 \wedge p_2) = \min\{\underbrace{v(p_1)}_{=1},
+            \underbrace{v(p_2)}_{=1}\} = 1$
+            
+            Con lo cual llegamos a probar que dada una valuación que 
+            satisface el conjunto de fórmulas 
+            $\{ \Gamma - \{(p_1\wedge p_2)\} \}$, entonces satisface 
+            $(p_1\wedge p_2)$. Y eso contradice la definición de 
+            independencia.
+
+            \begin{gather*}
+                \therefore ~ \Gamma \text{ es dependiente.}
+            \end{gather*}
+
+        \end{proof}
+\end{enumerate}
+
+
+\subsection{Base}
+
+\begin{definicion}{Base}{}
+    Sea $\Gamma$ un conjunto de fórmulas.
+
+    \medskip
+
+    Decimos que $\Gamma$ es una base si:
+    \begin{enumerate}
+        \item Es independiente.
+        \item Es maximal con respecto a la independencia.
+    \end{enumerate}
+\end{definicion}
+
+
+Recordemos que decimos que un conjunto va a ser ``maximal'' respecto al orden
+dado si no hay ningún otro objeto estrictamente más grande. Esto es distinto
+a ``máximo''.
+
+El orden que nos interesa en el caso de una base, donde $\Gamma$ es un
+conjunto de fórmulas, es la contención de conjuntos. Entonces, cuando decimos
+un conjunto maximal estamos diciendo que no hay ningún otro conjunto que lo
+contenga que sea independiente.
+
+
+Formalmente, si $\Sigma$ es un conjunto independiente y 
+$\Gamma \subseteq \Sigma$ $\implies \Gamma = \Sigma$
+
+\nota{$\Gamma \varsubsetneq \Sigma$ se lee \textit{``$\Gamma$ es un 
+subconjunto propio de $\Sigma$''}. Esto significa que $\Gamma$ tiene menos 
+elementos que $\Sigma$.}%
+Además, si tomamos un conjunto $\Sigma$ que agrega un elemento a una base 
+$\Gamma$, es decir, $\Gamma \varsubsetneq \Sigma = \Gamma \cup \{\alpha\}$, 
+con $\alpha \notin \Gamma$, entonces $\Sigma$ resulta ser dependiente.
+
+\subsubsection{Ejemplos}
+
+Decidir si los siguiente conjuntos son bases.
+
+\begin{itemize}
+    \item $\Gamma = \{ p_1, \neg p_1 \}$
+
+        \begin{enumerate}
+            \item Comencemos con la independencia.
+
+                El conjunto es independiente pues sabiendo que vale $p_1$ no
+                puedo deducir que vale $\neg p_1$. A lo sumo puedo deducir 
+                que no vale $\neg \neg p_1$.
+
+                Tarea: demostrarlo formalmente.
+
+            \item Veamos si es maximal.
+
+                El conjunto $\Gamma$ es insatisfacible pues las dos fórmulas
+                que lo definen son contradictorias entre sí. Recordando
+                que cuando un conjunto es insatisfacible la consecuencia del 
+                mismo son todas las fórmulas.
+
+
+                \begin{proof} \phantom{.}
+                
+                    Supongamos que $\Gamma$ no es maximal respecto a la 
+                    independencia.
+
+                    En consecuencia, $\exists \; \alpha \notin \Gamma /
+                    \Sigma=\Gamma \cup \{ \alpha \}$ es independiente.
+
+                    Por otra parte, como $\Gamma$ es insatisfacible, entonces 
+                    $C(\Gamma)=\mathrm{FORM}$.
+
+                    Por lo tanto, $\alpha \in C(\Gamma) = \mathrm{FORM} \implies
+                    \alpha \in C(\Sigma - \{ \alpha \}) = \mathrm{FORM}$. Lo cual es
+                    absurdo pues $\Sigma$ es independiente.
+
+                    Como el absurdo viene de suponer que $\Gamma$ no es
+                    maximal, probamos que sí lo es respecto de la 
+                    independencia.
+
+                \end{proof}
+
+        \end{enumerate}
+
+        Como se cumplen ambas condiciones de la definición, $\Gamma$ es base.
+
+    \item $\Gamma = \mathrm{VAR}$
+
+        Supongamos que $\alpha = p_i$ \nota{$i \in \mathbb{N}$}%
+
+        \begin{enumerate}
+            \item Empecemos con la independencia.
+
+            Defino $f_i : \mathrm{VAR} \to \{ 0,1 \} / f_i(p_j) =
+            \begin{cases}
+                0 & \text{si } j = i \\
+                1 & \text{si } j \neq i 
+            \end{cases}$
+
+            Sea $v_{f_i}$ la valuación que extiende a $f_i$.
+            \begin{gather*}
+                v_{f_i} (\alpha) = f_i(p_i) = 0 \\
+                v_{f_i}(p_j) = f_i(p_j) = 1 \notamath{$j \neq i$}
+            \end{gather*}
+            Luego, 
+            \begin{gather*}
+                v_{f_i}(\Gamma \backslash \{ p_i \}) = 1 
+                \text{ y } v_{f_i}(p_i)=0 \\
+                \implies p_i \notin C(\Gamma \backslash \{ p_i \})
+            \end{gather*}
+            \begin{gather*}
+                \dashbox{$\therefore ~ \Gamma$ es independiente.}
+            \end{gather*}
+        
+            \item Notemos que $\exists ! v \text{ valuación}/v(\Gamma) = 1$
+        
+                \begin{enumerate}[%
+                                labelindent=*,
+                                style=multiline,
+                                leftmargin=*,
+                                align=left,
+                                leftmargin=2\parindent,
+                                label=Caso \arabic*)]
+                    \item Si $v(\alpha) = 1$
+
+                        Como $\exists !$ valuación que satisface a $\Gamma$ y
+                        es $v \implies \alpha \in C(\Gamma)$
+                        $\implies \alpha \in 
+                        \underbrace{C(\Sigma \backslash \{\alpha\})}_{\Gamma}$
+
+                        \begin{gather*}
+                            \implies \Sigma \text{ es dependiente.}
+                        \end{gather*}
+
+                    \item Si $v(\alpha) = 0 \implies \Sigma$ es 
+                        insatisfacible.
+
+                        Sea $\beta = p_i$, con $p_i \notin \mathrm{VAR}(\alpha)$.
+                        Veamos que $\Sigma \backslash \{ \beta \}$ es
+                        insatisfacible.
+
+                        Supongamos que $\Sigma \backslash \{ \beta \}$ es
+                        satisfacible.
+                        \begin{gather*}
+                            \implies \exists \; w \text{ valuación} /
+                            w(\Sigma \backslash \{\beta\} = 1
+                        \end{gather*}
+
+                        Entonces, $w(\alpha) = 1$ pues
+                        $\alpha \in \Sigma \backslash \{ \beta \}$
+
+                        Además, $\frest{w}{\mathrm{VAR}(\alpha)} = 1$ y
+                        $\frest{v}{\mathrm{VAR}(\alpha)} = 1$
+
+                        Por lo tanto $\underbrace{w(\alpha)}_{=1} 
+                            = \underbrace{v(\alpha)}_{= 0}$.
+                        Lo cual es un absurdo.
+
+                        \bigskip
+                        Otra forma, usando el \nameref{teo:compacidad}
+
+                        Recordemos: Si $v(\alpha) = 0 \implies \Sigma$ es 
+                        insatisfacible.
+
+                        $\implies \exists \; \Sigma' \subseteq \Sigma$, 
+                        $\Sigma'$ es finito e insatisfacible.
+
+                        Tomamos $\beta \in \underbrace{\Sigma}_{\text{inf.}} 
+                        \backslash \underbrace{\Sigma'}_{\text{finito}}$
+
+                        Como $\Sigma' \subseteq \Sigma \backslash \{\beta\}$
+
+                        Entonces
+                        \begin{align*}
+                            & \underbrace{c(\Sigma')}_{\mathrm{FORM}} 
+                            \subseteq c(\Sigma \backslash \{\beta\} \\
+                            \implies & c(\Sigma \backslash \{ \beta \}) = F \\
+                            \implies & \beta \in 
+                            c(\Sigma\backslash \{ \beta \})
+                        \end{align*}
+                \end{enumerate}
+
+                \begin{gather*}
+                    \therefore ~ \Gamma \text{ es independiente.}
+                \end{gather*}
+        \end{enumerate}
+\end{itemize}
+
+\subsection{Conjunto finitamente satisfacible}
+
+\begin{definicion}{Conjunto finitamente satisfacible}{}
+    $\Gamma$ es finitamente satisfacible (\Verb+f.s.+) si todo subconjunto
+    finito de $\Gamma$ es satisfacible.
+\end{definicion}
+
+\medskip
+
+\begin{lema}{}{gamma-pi-no-pi-esfs}
+    Sea $\Gamma$ f.s., $p_i \in \mathrm{VAR}$
+
+    \medskip
+
+
+    \nota{\textit{Noni:} ``Es un ``o'' común. Pueden ocurrir ambas cosas a la 
+    vez o solamente una.''}%
+    Entonces $\Gamma \cup \{ p_i \}$ es f.s. o $\Gamma \cup \{ \neg p_i \}$
+    es f.s.
+\end{lema}
+
+\subsubsection{Ejemplos}
+
+Si tengo $\Gamma = \{ p_1 \}$, resulta ser f.s. pues cualquier subconjunto
+finito es satisfacible y los subconjuntos de $\Gamma$ son el mismo y el
+vacío.
+
+Si tomamos $\Gamma \cup \{ p_2 \}$, también es f.s. (por el mismo motivo) y 
+$\Gamma \cup \{ \neg p_2 \}$ también es f.s..
+
+
+\begin{proof} \phantom{.} \nota{Del Lema \ref{lema:gamma-pi-no-pi-esfs}}%
+
+    Supongo que existe $p_i \in \mathrm{VAR} / 
+    \underbrace{\Gamma \cup \{ p_i \} \text{ no es f.s.}}_{\circled{1}} 
+    \text{ y } 
+    \underbrace{\Gamma \cup \{ \neg p_i \} \text{ no es f.s.}}_{\circled{2}}$
+
+\begin{enumerate}[label=\protect\circled{\arabic*}]
+    \item $\implies \exists \; X \subseteq \Gamma \cup \{ p_i \} / X$ 
+        es finito e insatisfacible.
+
+        \nota{$\Gamma$ es f.s.}%
+        Notemos que $X \nsubseteq \Gamma$ 
+
+        \begin{gather*}
+         \therefore ~ X=X' \cup \{ p_i \} \notamath{$X' \subseteq \Gamma$}
+        \end{gather*}
+
+    \item $\implies \exists \; Y \subseteq \Gamma \cup \{ \neg p_i \} / Y$ 
+        es finito e insatisfacible.
+
+        \nota{$\Gamma$ es f.s.}%
+        Notemos que $X \nsubseteq \Gamma$ 
+
+        \begin{gather*}
+         \therefore ~ Y=Y' \cup \{ \neg p_i \} \notamath{$Y' \subseteq \Gamma$}
+        \end{gather*}
+
+\end{enumerate}
+
+\nota{$X'\subseteq \Gamma$, $Y' \subseteq \Gamma$, 
+$\implies X'\cup Y' \subseteq \Gamma$}%
+Entonces, $X' \cup Y' \subseteq \Gamma$; $X' \cup Y'$ es finito, pues $X'$ e
+$Y'$ lo son, y como $\Gamma$ es f.s. $\implies \exists \; v \text{ valuación}/
+v(X' \cup Y') = 1$ 
+
+\begin{enumerate}[%
+                labelindent=*,
+                style=multiline,
+                leftmargin=*,
+                align=left,
+                leftmargin=2\parindent,
+                label=Caso \arabic*)]
+    \item $v(p_i) = 1 \implies v(X' \cup \{ p_i \})=1 \implies v(X)=1$
+
+        ¡Absurdo! $X$ es insatisfacible.
+
+    \item $v(p_i) = 0 \implies v(Y' \cup \{ \neg p_i \})=1 \implies v(Y)=1$
+
+        ¡Absurdo! $Y$ es insatisfacible.
+\end{enumerate}
+
+El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} / 
+\Gamma \cup \{ p_i \} \text{ no es f.s.} 
+\text{ y } 
+\Gamma \cup \{ \neg p_i \} \text{ no es f.s.}$
+
+\end{proof}
+
+
+\subsection{Literal}
+
+\begin{definicion}{Literal}{}
+    Se denomina literal a las fórmulas que son variables o variables negadas.
+\end{definicion}
+
+
+\subsection{Teorema de Compacidad}
+
+\begin{teorema}{Teorema de Compacidad}{compacidad}
+    Sea $\Gamma$ un conjunto.
+
+    \medskip
+
+    \begin{center}
+        $\Gamma$ es satisfacible $\iff \Gamma$ es finitamente satisfacible
+    \end{center}
+\end{teorema}
+
+\begin{itemize}[align=right]
+    \item $\implies$)
+        \begin{align*}
+            \Gamma \text{ es satisfacible} \implies& \exists \; v 
+            \text{ valuación} / v(\alpha) = 1 \\
+            \implies& v(\alpha)=1 \notamath{$\forall \alpha \in \Gamma$}
+        \end{align*}
+
+        Sea $\Sigma = \{ \alpha_1, \dotsc, \alpha_n \} \subseteq \Gamma$
+
+        $v(\alpha_i) = 1$, $1 \leq i \leq n$, pues $\alpha_i \in \Gamma$
+        $\implies v(\Sigma)=1$
+
+        \begin{gather*}
+            \therefore ~ \Gamma \text{ es f.s.}
+        \end{gather*}
+
+    \item $\impliedby$) Tenemos por dato que $\Gamma$ es finitamente 
+        satisfacible.
+
+        Defino una sucesión creciente de conjuntos literales.
+
+        \begin{align*}
+            \Delta_0 =& \varnothing \\
+            \Delta_{n+1} =& 
+            \begin{cases}
+                \Delta_n \cup \{ p_n \} & \text{si } \Gamma \cup \Delta_n
+                                        \cup \{ p_n \} \text{ es f.s.}\\
+                \Delta_n \cup \{ \neg p_n \} & \text{sino}
+            \end{cases} \\
+        \end{align*}    
+        \begin{gather*}
+            \Delta_0 \subseteq \Delta_1 \subseteq \Delta_2 \subseteq \Delta_3
+            \subseteq \dots
+        \end{gather*}
+
+
+        Defino $\Delta = \bigcup_{n \in \mathbb{N}} \Delta_n$
+
+       \begin{enumerate}
+           \item $\Gamma \cup \Delta_n$ es f.s. $\forall n$
+
+            \begin{proof}
+            Por inducción en $n$.
+
+            \begin{itemize}
+                \item CB) $n = 0$
+
+                    \begin{gather*}
+                         \Gamma \cup \Delta_0 = \Gamma \text{ es f.s.}
+                         \notamath{Dato}
+                    \end{gather*}
+                \item HI) $\Gamma \cup \Delta_n$ es f.s.
+                \item T) $\Gamma \cup \Delta_{n+1}$ es f.s.
+            \end{itemize}
+
+            \begin{align*}
+                 \Gamma \cup \Delta_{n+1} =
+                 \begin{cases}
+                     \Gamma \cup \Delta_n \cup \{ p_n \} & \text{si } 
+                     \underbrace{\Gamma \cup \Delta_n}_{\substack{
+                     \text{Por HI}\\\text{es f.s.}}} 
+                     \cup \{ p_n \} \text{ es f.s.}\\
+                     \Gamma \cup \Delta_n \cup \{ \neg p_n \} & \text{sino}
+                 \end{cases} \\
+            \end{align*}
+
+            Utilizando el Lema \ref{lema:gamma-pi-no-pi-esfs}:
+
+            Si $\Gamma \cup \Delta_n \cup \{ p_j \}$ es f.s. 
+            $\implies \Gamma \cup \Delta_{n+1} 
+            = \Gamma \cup \Delta_n \cup \{ p_n \}$ es f.s.
+
+            Si $\Gamma \cup \Delta_n \cup \{ \neg p_j \}$ es f.s. 
+            $\implies \Gamma \cup \Delta_{n+1} 
+            = \Gamma \cup \Delta_n \cup \{ \neg p_n \}$ es f.s.
+
+            \end{proof}
+
+            \item Sea $p_j \in \mathrm{VAR} \implies p_j \in \Delta$ o 
+                $\neg p_j \in \Delta$
+
+            \begin{proof} \phantom{.}
+            
+            \begin{itemize}
+                \item \begin{align*}
+                \text{Si } \Gamma \cup \Delta_j \cup \{ p_j \}
+                \text{ es f.s.} \implies& \Delta_{j+1} 
+                = \Delta_j \cup \{ p_j \} \\
+                \implies& p_j \in \Delta_{j+1} \subseteq \Delta
+            \end{align*}
+
+                \item \begin{align*}
+                \text{Si } \Gamma \cup \Delta_j \cup \{ p_j \}
+                \text{ no es f.s.} \implies& \Delta_{j+1} 
+                = \Delta_j \cup \{ \neg p_j \} \\
+                \implies& \neg p_j \in \Delta_{j+1} \subseteq \Delta
+            \end{align*}            
+            
+            \end{itemize}
+            \end{proof}
+
+            \item Defino $f:\mathrm{VAR} \to \{ 0,1 \} / f(p_j) = \begin{cases}
+                    1 & \text{si } p_j \in \Delta \\
+                    0 & \text{sino}
+                    \end{cases}$
+
+                \begin{gather*}
+                    v_f(\Delta)=1
+                \end{gather*}
+
+                Porque:
+                
+                \begin{itemize}
+                    \item Si  $p_j \in \Delta \implies v_f(p_j) = f(p_0)=1$
+                
+                    \item Si 
+                    $\neg p_j \in \Delta \implies v_f(\neg p_j) = 1 - f(p_j)=1$
+                \end{itemize}
+
+            \item Veamos que $v_f(\Gamma)=1$
+
+                \begin{proof} \phantom{.}
+                
+                    \nota{\textit{Noni:} ``¡No pueden utilizar la notación
+                    $v_f(\Gamma)=0$ ! No es estándar y se presta a confusión:
+                    no queda claro si estoy diciendo que no satisface a
+                    $\Gamma$ o que no satisface a ninguna fórmula de 
+                    $\Gamma$.''}%
+                    Supongo que $v_f$ no satisface $\Gamma$
+                    $\implies \exists \; \alpha \in \Gamma / v_f(\alpha)=0$
+
+                    Llamemos $M = \max \{i / p_i \text{ aparece en } \alpha\}$
+
+
+                \begin{enumerate}[%
+                                labelindent=*,
+                                style=multiline,
+                                leftmargin=*,
+                                align=left,
+                                leftmargin=2\parindent,
+                                label=Caso \arabic*)]
+                    \item $v_f(p_M)=1$
+
+                        \begin{gather*}
+                            v_f(p_M)=1 
+                            \underbrace{\implies}_{*}
+                            \{ \alpha \} \cup \Delta_M \cup \{ p_M \} 
+                            \text{ es insatisfacible}
+                        \end{gather*}
+
+                    \bigskip
+
+                    \begin{proof}[Demostración de la implicación $*$.]
+                        \phantom{.}
+
+                    Supongo que existe $w \text{ valuación} /
+                    w ( \{ \alpha \} \cup 
+                    \underbrace{\Delta_M \cup \{ p_M \}}_{\Delta_{M+1}}
+                    ) = 1$
+
+                    Como $v_f(p_M)=1 \implies p_M \in \Delta 
+                    \implies p_M \in \Delta_{M+1}$
+                    \begin{align*}
+                        \therefore ~ 
+                    \frest{w}{var(\alpha)} =& \frest{v_f}{var(\alpha)} \\
+                    \notamath{$w(\alpha)=1$ por la suposición.\\
+                    $v_f(\alpha)=0$ por el dato en este item.}
+                    \implies \underbrace{w(\alpha)}_{=1} =& 
+                    \underbrace{v_f(\alpha)}_{=0} \\
+                    \end{align*}
+
+                    Lo cual es un absurdo que vino de suponer que existe una
+                    variable que satisface  el conjunto
+                    $\{ \alpha \} \cup \Delta_M \cup \{ p_M \}$. 
+
+                    Por lo tanto, el mencionado conjunto es insatisfacible.
+
+                    \end{proof}
+
+                    \bigskip
+
+                    Por otra parte, en este caso tenemos que
+                    \begin{gather*}
+                        \underbrace{\{ \alpha \} \cup \Delta_M 
+                        \cup \{ p_M \}}_{\substack{\text{Finito e} \\
+                        \text{insatisfacible}}}
+                        \subseteq \underbrace{\Gamma \cup 
+                        \Delta_{M+1}}_{\text{Es f.s.}}
+                    \end{gather*}
+
+                    Lo cual es un absurdo que vino de suponer que $v_f(p_M)=1$
+
+                    \item $v_f(p_M)=0$
+
+                    \begin{gather*}
+                        v_f(p_M)=0 
+                            \underbrace{\implies}_{*}
+                            \{ \alpha \} \cup \Delta_M \cup \{ \neg p_M \} 
+                            \text{ es insatisfacible}
+                    \end{gather*}
+
+                    \bigskip
+
+                    \begin{proof}[Demostración de la implicación $*$.]
+                        \phantom{.}
+
+                    Supongo que existe $w \text{ valuación} /
+                    w ( \{ \alpha \} \cup \Delta_M \cup \{ \neg p_M \}) = 1$
+
+                    Como $v_f(p_M)=0 
+                    \implies v_f(\neg p_M)=1 \text{ y } v_f(\Delta)=1
+                    \implies \neg p_M \in \Delta 
+                    \implies \Delta_M \cup \{ \neg p_M \} = \Delta_{M+1}$
+                    \begin{align*}
+                        \therefore ~ 
+                        \frest{w}{var(\alpha)} =& \frest{v_f}{var(\alpha)} \\
+                        \notamath{$w(\alpha)=1$ por la suposición.\\
+                        $v_f(\alpha)=0$ por el dato en este item.}
+                        \implies \underbrace{w(\alpha)}_{=1} =& 
+                        \underbrace{v_f(\alpha)}_{=0} \\
+                    \end{align*}
+
+                    Lo cual es un absurdo que vino de suponer que existe una
+                    variable que satisface  el conjunto
+                    $\{ \alpha \} \cup \Delta_M \cup \{ \neg p_M \}$. 
+
+                    Por lo tanto, el mencionado conjunto es insatisfacible.
+
+                    \end{proof}
+
+                    \bigskip
+
+                    Por otra parte, en este caso tenemos que
+                    \begin{gather*}
+                        \underbrace{\{ \alpha \} \cup \Delta_M 
+                        \cup \{ \neg p_M \}}_{\substack{\text{Finito e} \\
+                        \text{insatisfacible}}}
+                        \subseteq \underbrace{\Gamma \cup 
+                        \Delta_{M+1}}_{\text{Es f.s.}}
+                    \end{gather*}
+
+                    Lo cual es un absurdo que vino de suponer que $v_f(p_M)=0$
+
+                \end{enumerate}
+
+                Por lo tanto, probamos que $v_f(\Gamma)= 1 \implies \Gamma$ es
+                satisfacible.
+
+                \end{proof}
+       \end{enumerate} 
+\end{itemize}
+
+\begin{proposicion}{}{}
+    Son equivalentes:
+    \begin{enumerate}[label=\protect\circled{\arabic*}]
+        \item \nameref{teo:compacidad}
+        \item $\alpha \in C(\Gamma) \implies 
+            \exists \; \Gamma'$ finito tal que $\Gamma' \subseteq \Gamma$ y
+            $\alpha \in C(\Gamma')$
+    \end{enumerate}
+\end{proposicion}
+
+\begin{proof} \phantom{.}
+
+    Recordemos que el \nameref{teo:compacidad} nos dice que
+    \begin{center}
+        $\Gamma$ es satisfacible $\iff \Gamma$ es finitamente satisfacible
+    \end{center}
+
+    \begin{itemize}
+        \item $\circled{1} \implies \circled{2}$) Sea $\alpha \in C(\Gamma)$
+            $\underbrace{\implies}_{\text{Ya probado}}
+            \Gamma \cup \{ \neg \alpha \}$ es insatisfacible.
+
+            \begin{gather*}
+                \therefore ~ \text{ Por \nameref{teo:compacidad} } \exists \;
+                \Gamma' \text{ finito insatisfacible} / 
+                \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
+            \end{gather*}
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item $\Gamma' \subseteq \Gamma$
+
+                    Entonces $C(\Gamma ') = \mathrm{FORM}$, $\Gamma '$ finito.
+
+                    Como $\Gamma'$ es insatisfacible 
+                    $\implies \alpha \in C(\Gamma')$
+
+                \item $\Gamma' \nsubseteq \Gamma$
+
+                    \begin{gather*}
+                        \implies \Gamma ' = \Gamma '' \cup \{ \neg\alpha \} 
+                        \notamath{$\Gamma '' \subset \Gamma$}
+                    \end{gather*}
+                    
+                    \medskip
+
+                    \nota{Si pruebo esto ya está, pues $\Gamma''$ es finito y
+                    Queremos ver que $\alpha \in C(\Gamma'')$. 
+                    $\Gamma'' \subset \Gamma$}%
+
+                    Supongo que $\alpha \notin C(\Gamma '')$
+
+                    \begin{align*}
+                        \implies& \exists \; v \text{ valuación}/ 
+                        v(\Gamma'')=1 \text{ y } v(\alpha)=0 \\
+                        \implies& v(\Gamma '' \cup \{ \neg \alpha \} ) = 1 \\
+                        \implies& v(\Gamma ') = 1
+                    \end{align*}
+
+                    Lo cual es un absurdo pues $\Gamma '$ es insatisfacible.
+
+                    El mismo vino de suponer que $\alpha \notin C(\Gamma'')$.
+                    Por lo tanto, $\alpha \in C(\Gamma'')$ y, entonces,
+                    $\Gamma ''$ es finito y $\Gamma'' \subset \Gamma$.
+            \end{enumerate}
+
+
+        \item $\circled{2} \implies \circled{1}$) Como $\Gamma$ es 
+            satisfacible $\implies \Gamma$ es finitamente satisfacible.
+            \nota{Sale igual que cuando probamos el T. de Compacidad.}%
+
+            Sea $\Gamma$ satisfacible
+            \begin{align*}
+                \implies& \exists v \text{ valuación} / v(\Gamma)= 1 \\
+                \implies& v(\alpha)=1 \notamath{$\forall \alpha \in \Gamma$}
+            \end{align*}
+
+            Sea $\Sigma = \{ \alpha_1, \dotsc, \alpha_n \} \subseteq \Gamma$
+            $\implies v(\alpha_i) = 1$, $1 \leq i \leq n$, porque 
+            $\alpha_i \in \Gamma$
+            \nota{Observemos que en este caso no usamos \circled{2}.}%
+            \begin{gather*}
+                \therefore ~ v(\Sigma) = 1
+            \end{gather*}
+
+            Por lo tanto, $\Gamma$ es f.s.
+
+        \bigskip
+
+        \item $\circled{2} \implies \circled{1}$) $\Gamma$ f.s. 
+            $\implies \Gamma$ satisfacible
+            \nota{Otra forma, usando \circled{2}}%
+
+            Supongamos $\Gamma$ insatisfacible.
+            \begin{align*}
+                \implies& C(\Gamma) = \mathrm{FORM} \\
+                \implies& \alpha = (p_1 \wedge \neg p_1) \in C(\Gamma)
+            \end{align*}
+
+            \begin{center}
+                $\therefore$ Por \circled{2} existe $\Gamma' \subseteq\Gamma$,
+                $\Gamma'$ finito, $/ (p_1 \wedge \neg p_1) \in C(\Gamma')$
+            \end{center}
+
+            Veamos que $\Gamma'$ es insatisfacible.
+
+            Supongo $\Gamma'$ satisfacible.
+            \begin{align*}
+                \implies& \exists \; w \text{ valuación}/ w(\Gamma') = 1\\
+                \implies& w(p_1 \wedge \neg p_1)=1
+                \notamath{$p_1 \wedge \neg p_1 \in C(\Gamma')$}
+            \end{align*}
+
+            Lo cual es un absurdo, pues $p_1 \wedge \neg p_1$ es una 
+            contradicción.
+
+            Entonces, probamos que $\Gamma'$ es insatisfacible.
+
+            Por lo tanto, $\Gamma'$ es insatisfacible y finito. Además,
+            $\Gamma ' \subset \Gamma$
+
+            \begin{center}
+                $\therefore ~ \Gamma$ no es f.s.                
+            \end{center}
+    \end{itemize}
+\end{proof}
+
+\pagebreak
+\section{Teoría axiomática}
+
+\begin{definicion}{Axiomas}{axiomas}
+    Sean $\alpha, \beta, \gamma \in F$, se definen los siguiente axiomas:
+
+    \medskip
+
+    \begin{itemize}
+        \item Axioma 1) $(\alpha \to (\beta \to \alpha))$
+        \item Axioma 2) $((\alpha \to (\beta\to\gamma )) \to 
+            ((\alpha\to\beta) \to (\alpha \to \gamma)))$
+        \item Axioma 3) $((\neg \alpha \to \neg\beta) \to 
+            ((\neg \alpha \to \beta) \to \alpha))$
+    \end{itemize}
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+
+Los axiomas de la Definición \ref{def:axiomas} son tautologías.
+
+\begin{proof} \phantom{.}
+    Tarea.
+\end{proof}
+
+
+\begin{definicion}{Regla MODUS PONENS}{regla-mp}
+    \begin{equation*}
+    \frac{
+        \begin{array}[b]{l}
+            \circled{1} ~ \alpha \to \beta \\
+            \circled{2} ~ \alpha
+        \end{array}
+    }{
+            \circled{3} ~ \beta \phantom{\to \beta}
+    }
+    \end{equation*}
+
+    \medskip
+
+    Decimos que \circled{3} se obtiene por MODUS PONENS (MP) a partir
+    de \circled{1} y \circled{2}.
+\end{definicion}
+
+La regla quiere decir que si tenemos como dato $\alpha\to\beta$ y 
+$\alpha$ obtenemos $\beta$.
+
+\medskip
+
+\begin{definicion}{Sistema axiomático}{}
+    Está formado por los tres \nameref{def:axiomas} y por la
+    \nameref{def:regla-mp}.
+\end{definicion}
+
+
+\medskip
+
+\begin{definicion}{Prueba}{}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    Una prueba para $\alpha$ es una suseción finita de fórmulas 
+    $\alpha_1, \alpha_2, \dotsc, \alpha_n$ tal que:
+    \begin{enumerate}
+        \item $\alpha_n = \alpha$
+        \item Cada $\alpha_k$ es un axioma, o se obtiene aplicando MP a 
+            $\alpha_i$ y $\alpha_j$.
+            \nota{$1 \leq k \leq n$\\
+            $i, j < k$}%
+
+            Es decir, $\alpha_k$ es axioma o $\alpha_j = (\alpha_i \to \alpha_k)$.
+
+    \end{enumerate}
+\end{definicion}
+
+\medskip
+
+\begin{definicion}{Teorema}{}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    $\alpha$ es demostrable si existe una prueba de $\alpha$.
+
+    \bigskip
+    En este caso, $\alpha$ se llama \textit{teorema}.
+\end{definicion}
+
+\subsubsection{Ejemplo}
+
+Probar que $(\gamma \to \gamma)$ es demostrable mediante una prueba.
+
+\begin{enumerate}
+    \item $\alpha_1=$ $(\gamma \to ((\gamma \to \gamma) \to \gamma )) 
+        \to 
+        ((\gamma \to (\gamma \to \gamma))\to (\gamma \to \gamma))$
+        \nota{Axioma 2}%
+
+    \item $\alpha_2=$ $\gamma \to ( (\gamma \to \gamma) \to \gamma)$
+        \nota{Axioma 1}%
+
+    \item Aplicando MP entre 1 y 2, obtenemos:
+        $\alpha_3=$ $(\gamma \to (\gamma \to \gamma)) \to (\gamma \to \gamma)$
+
+    \item $\alpha_4=$ $(\gamma \to (\gamma \to \gamma))$
+        \nota{Axioma 1}%
+
+    \item Por último, aplicando MP entre 3 y 4, 
+        $\alpha_5=$ $(\gamma \to \gamma)$
+\end{enumerate}
+
+Entonces, $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \alpha_5=\gamma \to \gamma$
+
+\subsection{Teorema}
+
+
+\begin{teorema}{}{}
+    Sea $\alpha \in F$.
+
+    \medskip
+
+    Si $\alpha$ es demostrable $\implies \alpha$ es tautología.
+\end{teorema}
+
+\begin{proof} \phantom{.}
+    
+    Sea $\alpha \in F$.
+
+    Si $\alpha$ es demostrable, entonces $\exists \; \alpha_1,
+    \alpha_2, \dotsc, \alpha_n=\alpha$ prueba de $\alpha$.
+
+    Veamos que $\alpha$ es tautología por inducción en $n$, donde $n$ es la 
+    longitud de la prueba.
+
+    \begin{itemize}
+        \item CB) $n=1$
+
+            $\alpha_1$ es prueba de $\alpha$, es decir, $\alpha_1=\alpha$.
+
+            Como es una única fórmula (no hay anteriores), la única 
+            posibilidad es que $\alpha$ sea un axioma. Luego, $\alpha$ es
+            tautología.
+            \nota{Por la observación presentada junto a la Definición de
+                \nameref{def:axiomas}.}%
+
+        \item HI) $\exists \; \alpha_1, \dotsc, \alpha_k = \alpha$ es prueba 
+            de $\alpha$ $\implies \alpha$ es tautología.
+
+            Para escribir menos, a la HI la vamos a llamar $\mathcal{P}(k)$.
+
+            Es decir, la hipótesis inductiva resulta que $\mathcal{P}(k)$ es
+            verdadero, con $k \leq n$.
+
+        \item T) $\mathcal{P}(n+1)$
+    \end{itemize}
+    
+
+    Sea $\alpha_1, \alpha_2, \dotsc, \alpha_{n+1} = \alpha$.
+
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $\alpha_{n+1}$ es un axioma $\implies \alpha_{n+1}$  es 
+            tautología.
+            \nota{Por la observación mencionada en el CB.}%
+
+        \item $\alpha_{n+1}$ se obtiene aplicando MP a $\alpha_i$ y $\alpha_j$
+            siendo $i, j \leq n$
+
+            Notemos que vamos a tener lo siguiente:
+            \begin{gather*}
+                \alpha_1, \alpha_2, \dotsc, \alpha_i \text{ es una prueba}\\
+                \alpha_1, \alpha_2, \dotsc, \alpha_j \text{ es una prueba}
+            \end{gather*}
+
+            Esto es cierto pues, como 
+            $\alpha_1, \alpha_2, \dotsc, \alpha_{n+1}=\alpha$ es una
+            prueba, entonces, si tuviera una prueba de longitud 20 y me
+            quedo con los primeros 10, esos primeros 10 forman una prueba de
+            la última fórmula pues cada uno de ellos es un axioma o se obtiene
+            aplicando MP a partir de fórmulas anteriores.
+
+            Entonces, por HI, como $i \leq n$, $\alpha_i$ es una tautología.
+            Análogamente, como $j \leq n$, $\alpha_j$ es una tautología.
+
+            Como obtuvimos $\alpha_i$ por MP, entonces 
+            $\alpha_i = (\alpha_j \to \alpha_{n+1})$.
+            Análogo con $\alpha_j$.
+
+            Quiero ver que $\alpha_{n+1}$ es tautología.
+
+            Sea $v$ valuación.
+
+            \begin{align*}
+                1 &= v(\alpha_i) \\
+                  &= v(\alpha_j \to \alpha_{n+1}) \\
+                  &= \max \{ 1- \underbrace{v(\alpha_j)}_{=1}, 
+                  v(\alpha_{n+1}) \} \\
+                  &= v(\alpha_{n+1})
+            \end{align*}
+
+            Como lo probamos para una valuación cualquiera, probamos que
+            $\alpha_{n+1}$ es una tautología.
+
+            De esta manera queda demostrado el teorema que nos interesaba.
+    \end{enumerate}
+\end{proof}
+
+
+\subsection{Prueba de una fórmula a partir de un conjunto de fórmulas}
+ 
+\begin{definicion}{Prueba de $\alpha$ a partir de $\Gamma$}{}
+    Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in F$.
+
+    \medskip
+
+    Decimos que $\alpha$ se deduce de $\Gamma$ si existe una sucesión finita
+    de fórmulas $\alpha_1, \alpha_2, \dotsc, \alpha_n = \alpha$ que verifica
+    alguno de los siguientes casos 
+    \nota{Es un ``o'' entre cada casa.}%
+
+    \begin{center}
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item $\alpha_i \in \Gamma$ \nota{$1 \leq i \leq n$}%
+            \item $\alpha_i$ es un axioma \nota{$1 \leq i \leq n$}%
+            \item $\alpha_i$ se obtiene por MP a partir de anteriores:
+                \nota{$1 \leq i \leq n$}%
+                $\alpha_j = (\alpha_k \to \alpha_i)$ y $\alpha_k$, siendo 
+                $j, k \leq i$.
+        \end{enumerate}
+    \end{center}
+
+    A $\alpha_1, \alpha_2, \dotsc, \alpha_n = \alpha$ la denominamos
+    prueba de $\alpha$ a partir de $\Gamma$.
+
+    Cuando decimos que $\alpha_i \in \Gamma$ decimos que $\alpha_i$ es un 
+    dato.
+
+    \bigskip
+    \textbf{Notación:}
+    $\Gamma \vdash \alpha$
+    
+\end{definicion}
+
+
+\bigskip
+\textit{Observación:}
+Notemos el caso particular $\Gamma = \varnothing$.
+
+$\Gamma = \varnothing \vdash \alpha$ es equivalente a decir que $\alpha$ es
+demostrable, lo cual a su vez es equivalente a decir que $\alpha$ es un
+teorema. 
+
+Este caso también se puede notar como: $\vdash \alpha$
+
+
+\subsubsection{Ejemplo}
+
+Demostrar que $\Gamma \vdash \beta$, siendo 
+$\Gamma = \{\alpha, (\alpha \to \beta)\}$
+
+\begin{enumerate}
+    \item $\alpha$  \nota{Dato: $\alpha \in \Gamma$}%
+    \item $(\alpha \to \beta)$ \nota{Dato: $(\alpha\to\beta)\in\Gamma$}%
+    \item $\beta$ \nota{MP 1 y 2}%
+\end{enumerate}
+
+
+\subsection{Teorema de la deducción}
+
+\begin{teorema}{Teorema de la deducción %
+(versión axiomática)}{deduccion-axiomatica}
+    Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha, \beta \in \mathrm{FORM}$
+
+    \medskip
+
+    \begin{gather*}
+        \Gamma \vdash (\alpha \to \beta) \iff \Gamma \cup \{\alpha\} \vdash
+        \beta
+    \end{gather*}
+\end{teorema}
+
+\bigskip
+\nota{La vamos a usar para demostrar el Teorema 
+    \ref{teo:deduccion-axiomatica}.}%
+\textit{Observación:}
+
+\begin{gather*}
+    \Gamma \vdash \rho 
+    \underbrace{\implies}_{\cancel{\impliedby}} 
+    \Gamma \cup \Sigma \vdash \rho
+\end{gather*}
+
+Si de un conjunto de fórmulas puedo deducir una fórmula, entonces también
+puedo deducirla cuando agrando el conjunto de datos.
+Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
+
+
+\begin{proof} \phantom{.}
+    \nota{Del Teorema \ref{teo:deduccion-axiomatica}.}%
+
+    \begin{itemize}
+        \item $\implies$) Como $\Gamma \vdash (\alpha\to\beta)$, entonces
+            existe una prueba a partir de $\Gamma$
+            de $(\alpha\to\beta)$:
+            $\gamma_1, \gamma_2, \dotsc, \gamma_n = (\alpha\to\beta)$
+
+            Por la observación anterior, 
+            $\gamma_1, \dotsc, \gamma_n=(\alpha\to\beta)$ es una prueba
+            a partir de $\Gamma \cup \{ \alpha \}$
+
+            Ahora queremos ver que podemos obtener $\beta$ a partir de 
+            $\Gamma \cup \{ \alpha \}$.
+            \begin{enumerate}
+                \item $\gamma_1$
+                \item $\gamma_2$
+                \item[$\vdots$]
+                \item[$n$.] $\gamma_n = (\alpha \to \beta)$
+                \item[$n+1$.] $\alpha$ 
+                    \nota{Dato: $\alpha \in \Gamma \cup \{ \alpha \}$}%
+
+                \item[$n+2$.] $\beta$ \nota{MP entre $n$ y $n+1$}%
+            \end{enumerate}
+
+        \item $\impliedby$) Tenemos por dato que
+            $\Gamma \cup \{ \alpha \}\vdash \beta$ y queremos probar:
+            $\Gamma \vdash (\alpha \to \beta)$.
+
+            Como $\Gamma \cup \{ \alpha \} \vdash \beta \implies
+            \exists \; \gamma_1, \dotsc, \gamma_n = \beta$ prueba a partir
+            de $\Gamma \cup \{ \alpha \}$
+
+            Vamos a probar por inducción en $n$, con $n$ la longitud de la
+            prueba, que $\Gamma \vdash (\alpha \to \beta)$.
+
+
+            \begin{itemize}
+                \item CB) $n=1$
+
+                    $\alpha_1 = \beta$ es prueba a partir de 
+                    $\Gamma \cup \{ \alpha \}$
+
+
+                    \begin{enumerate}[%
+                                    labelindent=*,
+                                    style=multiline,
+                                    leftmargin=*,
+                                    align=left,
+                                    leftmargin=2\parindent,
+                                    label=Opción \arabic*)]
+                        \item $\beta \in \Gamma\cup \{ \alpha \}$
+                            
+                        \begin{enumerate}[%
+                                        labelindent=*,
+                                        style=multiline,
+                                        leftmargin=*,
+                                        align=left,
+                                        leftmargin=2\parindent,
+                                        label=Caso \arabic*)]
+                        \item \begin{align*}
+                            \beta=\alpha & \\
+                            \implies& \text{Ya vimos que } (\alpha\to\alpha)
+                            \text{ es demostrable.} \\
+                            \implies& \varnothing\vdash(\alpha\to\alpha)\\
+                            \implies& \Gamma\vdash(\alpha\to\alpha)
+                        \end{align*}
+
+                        \item $\beta \in \Gamma$
+
+                        \begin{enumerate}
+                            \item $\beta$ \nota{Dato: $\beta \in \Gamma$}%
+                            \item $\beta\to(\alpha\to\beta)$\nota{Axioma 1}%
+                            \item $\alpha\to\beta$
+                                \nota{MP entre 1 y 2}%
+                        \end{enumerate}
+
+                        De esto se deduce que $\Gamma\vdash(\alpha\to\beta)$
+                        \end{enumerate}
+
+                        \item $\beta$ es un axioma.
+                        \begin{enumerate}
+                            \item $\beta$ axioma.
+                            \item $\beta \to (\alpha\to\beta)$
+                                \nota{Axioma 1}%
+                            \item $\alpha \to \beta$
+                                \nota{MP entre 1 y 2}%
+                        \end{enumerate}
+
+                        Así probamos que 
+                        $\varnothing\vdash(\alpha\to\beta)
+                        \implies \Gamma \vdash (\alpha\to\beta)$
+
+                    \end{enumerate}
+
+                \item HI) $\exists \; \gamma_1, \dotsc, \gamma_k = \beta$ 
+                    prueba a partir de $\Gamma \cup \{ \alpha \}$
+                    $\implies \Gamma \vdash (\alpha\to\beta)$
+
+                    Llamando a todo esto $\mathcal{P}(k)$, la HI resulta
+                    $\mathcal{P}(k)$ con $k \leq n$.
+
+                \item T) $\mathcal{P}(n+1)$
+            \end{itemize}
+
+
+            Sea $\gamma_1, \dotsc, \gamma_{n+1} = \beta$ una prueba a partir
+            de $\Gamma \cup \{ \alpha \}$, queremos ver que
+            $\Gamma \vdash (\alpha \to \beta)$
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item Si $\beta$ es axioma, caemos en el caso base.
+
+                    \begin{enumerate}
+                        \item $\beta$ \nota{Dato: $\beta$ axioma}%
+                        \item $\beta\to(\alpha\to\beta)$ \nota{Axioma 1}%
+                        \item $\alpha \to \beta$
+                            \nota{MP entre 1 y 2}%
+                    \end{enumerate}
+
+                \item $\beta \in \Gamma \cup \{\alpha\}$
+                    \begin{itemize}
+                        \item $\beta=\alpha 
+                            \implies \varnothing\vdash(\alpha\to\alpha)
+                            \implies \Gamma\vdash(\alpha\to\alpha)$
+                        \item $\beta \in \Gamma \implies$ 
+
+                            \begin{enumerate}
+                                \item $\beta$ \nota{Dato}%
+                                \item $(\beta\to(\alpha\to\beta))$
+                                    \nota{Axioma 1}%
+                                \item $\alpha\to\beta$
+                                    \nota{MP entre 1 y 2}%
+                            \end{enumerate}
+                    \end{itemize}
+
+                \item $\exists \; \gamma_i, \gamma_j \text{ con } i,j\leq n /
+                    \gamma_i = (\gamma_j \to \beta)$
+
+                    Como $\gamma_1, \dotsc, \gamma_i = (\gamma_j\to\beta)$
+                    es una prueba a partir de $\Gamma \cup \{ \alpha \}$
+                    e $i \leq n$, entonces, por HI, 
+                    $\Gamma\vdash(\alpha\to(\gamma_j\to\beta))$
+
+                    Análogamente, como $\gamma_1, \dotsc, \gamma_j$ es una
+                    prueba a partir de $\Gamma\cup \{ \alpha \}$, $j \leq n$,
+                    entonces, por HI, $\Gamma \vdash(\alpha\to\gamma_j)$
+            \end{enumerate}
+
+            En resumen, ya probamos que $\Gamma \vdash (\alpha\to\gamma_j)$ y
+            que $\Gamma\vdash(\alpha\to(\gamma_j\to\beta))$.
+            Recordemos que queremos ver que $\Gamma\vdash(\gamma\to\beta)$.
+
+            Armemos la siguiente prueba:
+
+            \begin{enumerate}
+                \item $(\alpha\to(\alpha_j\to\beta)) \to 
+                    ((\alpha\to\alpha_j) \to (\alpha\to\beta))$
+                    \nota{Axioma 2}%
+                \item $(\alpha \to (\gamma_j\to\beta))$
+                    \nota{$\Gamma\vdash(\alpha\to(\gamma_j\to\beta))$}%
+                \item $(\alpha \to \gamma_j)\to(\alpha\to\beta)$
+                    \nota{MP entre 1 y 2}%
+                \item $(\alpha\to\gamma_j)$
+                    \nota{Pues $\Gamma \vdash (\alpha\to\gamma_j)$}%
+                \item $(\alpha\to\beta)$ \nota{MP entre 3 y 4}%
+            \end{enumerate}
+
+            \begin{gather*}
+                \therefore ~ \Gamma \vdash (\alpha \to \beta)
+            \end{gather*}
+    \end{itemize}
+\end{proof}
+
+\subsubsection{Ejemplo}
+
+Probar que $(\gamma \to \gamma)$ es demostrable.
+
+\begin{proof} \phantom{.}
+
+    Queremos ver que $\varnothing\vdash(\gamma\to\gamma)$
+
+    \begin{align*}
+        \varnothing \vdash (\gamma \to \gamma)
+        &\iff \varnothing \cup \{ \gamma \} \vdash \gamma 
+        \notamath{Teorema \ref{teo:deduccion-axiomatica}}\\
+        &\iff \underbrace{\{ \gamma \} \vdash \gamma}_{\text{Verdadero}}
+    \end{align*}
+
+    Podemos afirmar que esto último es verdadero pues:
+    \begin{enumerate}
+        \item $\gamma$ (dato)
+        \nota{$\gamma \subseteq \{ \gamma \}$}%
+    \end{enumerate}
+
+\end{proof}
+
+\bigskip
+\textit{Observación:}
+
+Podemos probar que $\alpha$ es demostrable a través de una prueba
+$\implies$ tienen que hacer una prueba.
+
+\begin{itemize}
+    \item Decidir si $\Gamma \vdash \alpha$:
+        \begin{itemize}
+            \item[Sí:] Entonces hay que exhibir una prueba de $\alpha$ a 
+                partir de $\Gamma$.
+            \item[No:] Tendría que probar que no existe ninguna prueba. Pero
+                esto es ``difícil''. En el parcial probamos que 
+                $\alpha \notin C(\Gamma)$.
+            
+        \end{itemize}
+\end{itemize}
+
+\subsection{Teorema de correctitud}
+
+\begin{teorema}{Teorema de correctitud}{correctitud}
+    Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in F$.
+
+    \medskip
+
+    \begin{itemize}
+        \item Versión débil:
+            \begin{gather*}
+                \underbrace{\alpha \text{ demostrable}}_{\vdash \gamma} 
+                \implies 
+                \underbrace{\alpha \text{ tautología}}_{%
+                \alpha \in C(\varnothing)}
+            \end{gather*}
+        \item Versión fuerte:
+            \begin{gather*}
+                \Gamma \vdash \alpha \implies \alpha \in C(\Gamma)
+            \end{gather*}
+    \end{itemize}
+\end{teorema}
+
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $\Gamma = \varnothing$
+
+            Ya lo demostramos.
+
+            \begin{gather*}
+                \underbrace{\varnothing \vdash \alpha}_{%
+                \substack{\alpha \text{ es} \\ \text{demostrable}}} 
+                \implies \underbrace{\alpha \in C(\varnothing)}_{%
+                \substack{\alpha \text{ es una}\\\text{tautología}}}
+            \end{gather*}
+        
+        \item Caso general. Tarea.
+            \nota{Es similar a la demostración del Caso 1.}%
+    \end{enumerate}
+\end{proof}
+
+
+\subsection{Consistencia}
+\begin{definicion}{Consistente}{}
+    Sea $\Gamma \subseteq \mathrm{FORM}$
+
+    \medskip
+
+    $\Gamma$ es consistente si 
+    \begin{gather*}
+        \nexists \; \varphi \in \mathrm{FORM}/
+        \Gamma\vdash\varphi \text{ y } \Gamma \vdash \neg \varphi
+    \end{gather*}
+    
+    \medskip
+
+    \nota{La diferencia está en la existencia de $\varphi$.}%
+    Por otra parte, decimos que $\Gamma$ es inconsistente si
+    \begin{gather*}
+        \exists \; \varphi \in \mathrm{FORM} /
+        \Gamma \vdash \varphi \text{ y } \Gamma \vdash \neg \varphi
+    \end{gather*}
+\end{definicion}
+
+\bigskip
+\textit{Observación:}
+Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
+
+\begin{proof} \phantom{.}
+
+    Supongo $\Gamma$ inconsistente.
+
+    Entonces
+    \begin{align*}
+        & \exists \; \varphi \in \mathrm{FORM} / 
+        \Gamma \vdash \varphi \text{ y } \Gamma \vdash \neg \varphi \\
+        \notamath{Por \nameref{teo:correctitud}}
+        \implies& \underbrace{\varphi \in C(\Gamma)}_{\circled{1}} 
+        \text{ y } \underbrace{\neg\varphi \in C(\Gamma)}_{\circled{2}}\\
+        \notamath{$\Gamma$ es satisfacible}
+        \implies& \exists \; v \text{ valuación}/ v(\Gamma)=1 \\
+        \implies& \underbrace{v(\varphi)=1}_{\text{Por }\circled{1}}
+        \text{ y } \underbrace{v(\neg\varphi)=1}_{\text{Por }\circled{2}} 
+    \end{align*}
+
+    Lo cual es un absurdo. Y el absurdo vino de suponer que $\Gamma$ es
+    inconsistente.
+
+    Por lo tanto, $\Gamma$ es consistente.
+
+\end{proof}
+
+
+\subsection{Maximal consistente}
+
+\begin{definicion}{Maximal consistente}{}
+    Sea $\Gamma \subseteq \mathrm{FORM}$.
+
+    \medskip
+
+    Decimos que $\Gamma$ es maximal consistente (m.c.) si $\Gamma$ es 
+    consistente y 
+
+    $\forall \alpha \in \mathrm{FORM}$:
+
+    \begin{center}
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $\alpha \in \Gamma$
+        \item $\exists\; \varphi \in F / \Gamma \cup \{\alpha\} \vdash \varphi$
+        y $\Gamma \cup \{ \alpha \} \vdash \neg \varphi$
+        \nota{$\Gamma \cup \{ \alpha \}$ es inconsistente}%
+    \end{enumerate}
+    \end{center}
+
+\end{definicion}
+
+\subsection{Lema de Lindenbaum}
+
+\begin{lema}{Lema de Lindenbaum}{lindenbaum}
+    Sea $\Gamma$ un conjunto.
+
+    \medskip
+
+    Si $\Gamma$ es consistente $\implies \exists \; \Gamma' \text{ m.c.}/
+    \Gamma \subseteq \Gamma'$ 
+\end{lema}
+
+
+Este lema nos está diciendo que, dado cualquier cojunto, siempre existe un
+maximal consistente que lo contiene.
+
+
+\begin{proof} \phantom{.}
+
+    \begin{enumerate}
+        \item $\# \mathrm{FORM} = \aleph_0$ \nota{Ejercicio: probarlo.}%
+
+            \begin{gather*}
+                \implies \exists F: \mathbb{N}\to \mathrm{FORM} / F(n) = \varphi_n
+                \notamath{$\mathrm{FORM}=\{\varphi_n / n \in \mathbb{N}\}$
+                $=$ $\{ \varphi_0, \varphi_1, \dots\}$}
+            \end{gather*}
+
+        \item Defino \dashbox{$ \Gamma_0 = \Gamma $}
+
+            Defino 
+            
+            \begin{gather*}
+                \dashbox{
+                $\Gamma_{n+1} =
+                \begin{cases}
+                    \Gamma_r \cup \{ \varphi_n \} & \text{si } \Gamma_n
+                                        \cup \{ \varphi_n \}
+                                        \text{ es consistente} \\
+                    \Gamma_n        & \text{sino}
+                \end{cases}$
+                }
+            \end{gather*}
+
+            Entonces
+            \begin{gather*}
+                \Gamma_0 \subseteq \Gamma_1 \subseteq \Gamma_2 \subseteq\dots
+            \end{gather*}
+
+            Es decir, $\Gamma_n \subseteq \Gamma_{n+1}$
+
+            Defino
+            \begin{gather*}
+                \dashbox{$
+                    \Gamma' = \bigcup_{n \in \mathbb{N}} \Gamma_n
+                $}
+            \end{gather*}
+
+            Teniendo estas tres cosas definidas, quiero ver que $\Gamma'$ es
+            m.c. y $\Gamma \subseteq \Gamma'$.
+
+            \begin{enumerate}
+                \item $\Gamma \subseteq \Gamma'$
+
+                    Esto es cierto porque
+                    \begin{gather*}
+                        \Gamma = \Gamma_0 \subseteq \bigcup_{n\in\mathbb{N}}
+                        \Gamma_n = \Gamma'
+                    \end{gather*}
+
+                \item $\Gamma_n$ es consistente $\forall n \in \mathbb{N}$.
+
+                    Veámoslo por inducción en $n$.
+
+                    \begin{itemize}
+                        \item CB) $n=0$
+
+                            $\Gamma_0 = \Gamma$ es consistente por hipótesis.
+
+                        \item HI) $\Gamma_n$ es consistente.
+                        \item T) $\Gamma_{n+1}$ es consistente.
+                    \end{itemize}
+
+
+                    Sea
+                    \begin{gather*}
+                        \Gamma_{n+1} = \begin{cases}
+                        \Gamma_r \cup \{ \varphi_n \} & \text{si } \Gamma_n
+                                            \cup \{ \varphi_n \}
+                                            \text{ es consistente} \\
+                        \underbrace{\Gamma_n}_{\circled{1}}  & \text{sino}
+                        \end{cases}
+                    \end{gather*}
+
+                    \circled{1} es consistente por HI.
+
+                    Entonces, así queda probado que $\Gamma_{n+1}$ es 
+                    consistente.
+            \end{enumerate}
+
+        \item $\Gamma'$ es consistente.
+
+
+            Supongo que no.
+
+            \begin{align*}
+                \implies& \exists \; \varphi \in \mathrm{FORM} /
+                \Gamma' \vdash\varphi \text{ y } \Gamma' \vdash \neg\varphi \\
+                \implies& \exists\; \alpha_1,\alpha_2,\dotsc,\alpha_n=\varphi
+                \text{ prueba a partir de $\Gamma'$} \\
+                & \exists\; \beta_1,\beta_2,\dotsc,\beta_n=\neg\varphi
+                \text{ prueba a partir de $\Gamma'$}
+            \end{align*}
+
+            Entonces creamos el conjunto $X$ y lo definimos
+
+            \begin{gather*}
+                \notamath{$X \subseteq \Gamma'$}
+                X=\{\alpha_j / 
+                1 \leq j \leq n \text{ y } \alpha_j \in \Gamma'\} \cup
+                \{ \beta_j /
+                1 \leq j \leq k \text{ y } \beta_j \in \Gamma' \}
+            \end{gather*}
+
+            Sea $M = \max \{ n / \varphi_n \in X \}$.
+
+            \begin{gather*}
+                \implies X \subseteq \Gamma_{M+1}
+            \end{gather*}
+
+            \begin{gather*}
+                \therefore ~ \underbrace{\Gamma_{M+1} \vdash \varphi}_{%
+                \substack{\alpha_1, \dotsc, \alpha_n = \varphi \\
+                \text{prueba a } \\
+                \text{partir de } \Gamma_{M+1}}}
+                \text{ y }
+                \underbrace{\Gamma_{M+1} \vdash \neg \varphi}_{%
+                \substack{\beta_1, \dotsc, \beta_n = \neg \varphi \\
+                \text{prueba a } \\
+                \text{partir de } \Gamma_{M+1}}}
+            \end{gather*}
+            
+            \smallskip
+
+            Por lo tanto, $\Gamma_{M+1}$ es incosistente.
+
+            ¡Absurdo! Pues en el item anterior (2) probamos que todos los 
+            $\Gamma_M$ son consistentes.
+
+        \item $\Gamma'$ es maximal.
+
+            Supongo que $\exists \varphi \in \mathrm{FORM} / \varphi \notin \Gamma'$.
+
+            Como $\varphi \in \mathrm{FORM} \implies \exists\; N \in \mathbb{N}/
+            \varphi=\varphi_N$
+
+            Luego,
+            \begin{align*}
+                \varphi_N \notin \Gamma' & \\
+                \implies& \varphi_N \notin \Gamma_{N+1} \\
+                \implies& \Gamma_N \cup \{ \varphi_N \} 
+                \text{ es consistente} \\
+                \implies& \exists \; \psi \in \mathrm{FORM} / 
+                \Gamma_N \cup \{ \varphi_N \} \vdash \psi \text{ y }
+                \Gamma_N \cup \{ \varphi_N \} \vdash \neg \psi
+            \end{align*}
+
+            Como $\Gamma_N \subseteq \Gamma'$:
+            \begin{gather*}
+                \Gamma' \cup \{ \varphi_N \} \vdash \psi \text{ y }
+                \Gamma' \cup \{ \varphi_N \} \vdash \neg \psi
+            \end{gather*}
+
+            \smallskip
+
+            Por lo tanto, $\Gamma'$ es maximal. \nota{Está cumpliendo la
+            definición de maximal consistente.}%
+    \end{enumerate}
+\end{proof}
+
+
+\bigskip
+\textit{Observación:}
+\begin{enumerate}
+    \item $\Gamma \cup \{ \neg \varphi \} \text{  es inconsistente} \iff
+        \Gamma \vdash \varphi$
+    \item $\Gamma \cup \{\varphi\} \text{  es inconsistente} \iff
+        \Gamma \vdash \neg \varphi$
+\end{enumerate}
+
+\begin{proof} \phantom{.}
+    
+    \begin{enumerate}
+        \item Tarea.
+
+        \item \phantom{.}
+            \begin{itemize}
+                \item[$\impliedby$)] $\Gamma \vdash \neg \varphi $ 
+
+                    \begin{align*}
+                        \implies& \Gamma\cup\{\varphi\}\vdash \neg \varphi \\
+                        & \text{ y }\Gamma\cup\{\varphi\}\vdash \varphi 
+                        \notamath{Por dato.} \\
+                        \implies& \Gamma \cup \{ \varphi \} 
+                        \text{ es inconsistente}
+                    \end{align*}
+
+                \item[$\implies$)] $\Gamma \cup \{ \varphi \}$ es 
+                    inconsistente.
+
+                    \begin{align*}
+                        \implies& \exists\; \psi \in \mathrm{FORM} / 
+                        \Gamma \cup \{ \varphi \} \vdash \psi \text{ y }
+                        \Gamma \cup \{ \varphi \} \vdash \neg \psi \\
+                        \implies& \underbrace{\Gamma \vdash 
+                        (\varphi\to\psi)}_{\circled{1}} 
+                        \text{ y }
+                        \underbrace{\Gamma \vdash (\varphi\to\neg \psi)}_{%
+                        \circled{2}}
+                        \notamath{Por \nameref{teo:deduccion-axiomatica}}
+                    \end{align*}
+
+                    \smallskip
+
+                    Recordemos que estamos intentando probar que 
+                    $\Gamma\vdash\neg\varphi$. Hagamos una prueba.
+
+                    \begin{enumerate}
+                        \item $(\neg\neg\varphi\to\neg\neg\psi)\to
+                            ((\neg\neg\varphi\to\neg\psi)\to\neg\varphi)$
+                            \nota{Axioma 3}%
+                        \item $(\varphi\to\psi)\to
+                            (\neg\neg\varphi\to\neg\neg\psi)$
+                            \nota{Tarea.}%
+                        \item $\varphi\to\psi$
+                            \nota{Por \circled{1}}%
+                        \item $\neg\neg\varphi \to \neg\neg \varphi$
+                            \nota{MP entre 2 y 3}%
+                        \item $(\neg\neg\varphi\to\neg\psi)\to\neg\varphi$
+                            \nota{MP entre 1 y 4}%
+                        \item $\varphi\to\neg\psi$
+                            \nota{Por \circled{2}}%
+                        \item $(\varphi\to\neg\psi)\to
+                            (\neg\neg\varphi\to\neg\psi)$
+                            \nota{Tarea.}%
+                        \item $\neg\neg\varphi\to\neg\psi$
+                            \nota{MP entre 6 y 7}%
+                        \item $\neg\varphi$
+                            \nota{MP entre 5 y 8}%
+                    \end{enumerate}
+
+                    \medskip
+                    \textit{Aclaración: en los pasos que quedan como tarea
+                        hay que comprobar que la prueba sea demostrable.}
+            \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\subsection{Proposición}
+
+
+\begin{proposicion}{}{}
+    Sea $\Gamma'$ maximal consistente.
+
+    \medskip
+
+    \begin{gather*}
+        \varphi \in \Gamma' \text{ o } \neg \varphi \in \Gamma'
+        \notamath{$\forall \varphi \in \mathrm{FORM}$}
+    \end{gather*}    
+\end{proposicion}
+
+\nota{Notemos que el ``\Verb+o+'' de esta proposición es excluyente.
+    Si estuvieran las dos el conjunto no sería consistente.}
+
+
+\begin{proof} \phantom{.}
+
+    Supongo que el consecuente es falso.
+
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $\varphi \notin \Gamma'$ y $\neg\varphi \notin \Gamma'$
+
+            Como $\varphi \notin \Gamma'$
+            \begin{align*}
+                \implies& \Gamma \cup \{\varphi\} \text{ es consistente}\\
+                \implies& \Gamma' \vdash \neg\varphi
+                \notamath{Por la observación anterior.} \\
+            \end{align*}
+
+            Por otra parte, como $\neg\varphi \notin \Gamma'$
+            \begin{align*}
+                \implies& \Gamma \cup \{\neg\varphi\} 
+                \text{ es inconsistente}
+                \notamath{$\Gamma'$ m.c.} \\
+                \implies& \Gamma' \vdash \varphi
+                \notamath{Por la observación anterior.} \\
+            \end{align*}
+
+            Por ambas cosas, $\Gamma'$ es inconsistente. Lo cual es un
+            absurdo que vino de suponer que ninguna de las dos condiciones
+            de pertenencia se cumplían.
+
+        \item $\Gamma \in \Gamma'$ y $\neg \varphi \in \Gamma'$
+
+            Como $\Gamma \in \Gamma'$ $\implies$ $\Gamma \vdash \varphi$
+
+            Y como $\neg \varphi \in \Gamma'$ $\implies$ $\Gamma' \vdash \neg \varphi$
+
+            Por ambas condiciones se obtiene $\Gamma'$ inconsistente.
+            Lo cual es un absurdo.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Propiedad}
+
+\begin{itemize}
+    \item Sea $\Gamma$ m.c., entonces 
+        $\Gamma \vdash \varphi \iff \varphi \in \Gamma$
+\end{itemize}
+
+
+\begin{proof} \phantom{.}
+
+   \begin{itemize}
+       \item $\impliedby$) 
+           \begin{gather*}
+               \varphi \in \Gamma \implies 
+               \underbrace{\Gamma \vdash \varphi}_{\varphi \text{ es dato}}
+           \end{gather*}
+
+       \item $\implies$) Supongamos $\varphi \notin \Gamma$.
+
+           \begin{align*}
+               \implies& \Gamma \cup \{ \varphi \} \text{ es inconsistente} 
+               \notamath{$\Gamma$ m.c.} \\
+               \implies& \Gamma \vdash \neg \varphi
+               \notamath{Observación anterior}
+           \end{align*}
+
+           Lo cual es un absurdo porque $\Gamma \vdash \varphi$ y $\Gamma$ es
+           consistente por ser maximal consistente.
+   \end{itemize} 
+
+\end{proof}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    \begin{gather*}
+        \Gamma \text{ consistente} \implies \Gamma \text{ satisfacible}
+    \end{gather*}
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Dado $\Gamma$ consistente, entonces por el \nameref{lema:lindenbaum},
+    $\exists\; \Gamma'$ m.c. tal que $\Gamma \subseteq \Gamma'$
+
+
+    Defino $f:\mathrm{VAR} \to \{0,1\}/f(p_j) = \begin{cases}
+        1 & \text{si } p_j \in \Gamma' \\
+        0 & \text{si } \neg p_j \in \Gamma'
+    \end{cases}$
+
+    Esta función está bien definida porque $\Gamma'$ es m.c. 
+    $\implies \alpha \in \Gamma'$ 
+    $\underbrace{\text{o}}_{\text{excluyente}}$ 
+    $\neg \alpha \in \Gamma'$.
+    En particular, $\forall \alpha$ $p_j \in \Gamma'$ 
+    $\underbrace{\text{o}}_{\text{exc.}}$ 
+    $\neg p_j \in \Gamma'$
+
+    Sea $v_f$ la valuación que extiende a $f$. Quiero ver que $v_f(\Gamma')=1$
+
+    Vamos a probar que $v_f(\alpha)=1 \iff \alpha \in \Gamma'$ por inducción
+    en $c(\alpha)$.
+
+
+    \begin{itemize}
+        \item CB)
+            \begin{gather*}
+                c(\alpha)= 0 \implies \alpha \in \mathrm{VAR} \implies \alpha = p_j \\
+                v_f(p_j)=1 \iff f(p_j)=1 \iff p_j \in \Gamma'
+            \end{gather*}
+        \item HI) Sea $\alpha \in F/ c(\alpha) \leq n$
+            \begin{gather*}
+                \notamath{El contrarrecíproco es:\\ 
+                $v_f(\alpha)=0 \Leftrightarrow \alpha\notin\Gamma'$}
+                v_f(\alpha)= 1 \iff \alpha \in \Gamma'
+            \end{gather*}
+
+        \item T) Sea $\alpha \in F/ c(\alpha) \leq n+1$
+            \begin{gather*}
+                v_f(\alpha)= 1 \iff \alpha \in \Gamma'
+            \end{gather*}
+    \end{itemize}
+
+    Sea $\alpha \in F/ c(\alpha) = n+1$. Quiero ver que $v_f(\alpha) = 1
+    \iff \alpha \in \Gamma'$.
+    
+    \begin{enumerate}[%
+                    labelindent=*,
+                    style=multiline,
+                    leftmargin=*,
+                    align=left,
+                    leftmargin=2\parindent,
+                    label=Caso \arabic*)]
+        \item $\alpha = \neg \beta \implies c(\beta) = c(\alpha) - 1 =  n$
+
+            \begin{align*}
+                \implies v_f(\alpha)=1 & \\
+                &\iff 1-v_f(\beta)=1 \\
+                &\iff v_f(\beta)=0 \\
+                &\iff \beta \notin \Gamma'
+                \notamath{HI} \\
+                &\iff \neg\beta \in \Gamma'
+                \notamath{$\Gamma'$ m.c.} \\
+                &\iff \alpha \in \Gamma'
+            \end{align*}
+
+        \item Sea $\alpha=(\beta_1\to\beta_2)
+                \underbrace{c(\beta_1)}_{\geq 0} + 
+                \underbrace{c(\beta_2)}_{\geq 0} = 0
+                c(\beta_i) \leq n$
+            \nota{$i \in \{ 1,2 \}$}%
+
+
+            \begin{itemize}
+                \item $v_f(\alpha)=1$
+                    \begin{align*}
+                        \iff& \max \{ 1-v_f(\beta_1),v_f(\beta_2) \}=1 \\
+                        \iff& v_f(\beta_1)=0 \text{ o } v_f(\beta_2)=1
+                    \end{align*}
+
+                    \begin{itemize}
+                        \item $v_f(\beta_1)=0$
+                            \begin{align*}
+                                \implies& \beta_1 \notin \Gamma'
+                                \notamath{Por HI} \\
+                                \implies& \neg\beta_1 \in \Gamma'
+                                \notamath{$\Gamma'$ m.c.} \\
+                                \implies& \underbrace{\Gamma' \vdash 
+                                    \neg \beta_1}_{\circled{1}}
+                            \end{align*}
+
+                        \smallskip
+
+                        Tarea: 
+                        $\underbrace{\varphi \vdash 
+                        (\neg\beta_1\to(\beta_1\to\beta_2))}_{\circled{2}}$
+
+                        Por \circled{1} y \circled{2} y MP:
+                        \begin{align*}
+                            \Gamma'\vdash(\beta_1\to\beta_2) & \\
+                            \implies&\underbrace{(\beta_1\to\beta_2)}_{\alpha}
+                            \in \Gamma'
+                            \notamath{$\Gamma'$ m.c.}
+                        \end{align*}
+                    \item $v_f(\beta_2)=1$
+                        \begin{align*}
+                            \implies& \beta_2 \in \Gamma'
+                            \notamath{Por HI} \\
+                            \implies& \underbrace{\Gamma' \vdash \beta_2}_{%
+                            \circled{3}}
+                        \end{align*}
+
+                        \smallskip
+
+                        Sabemos que $\varnothing \vdash 
+                        \underbrace{(\beta_2\to(\beta_1\to\beta_2))}_{%
+                        \text{Axioma 1 } \circled{4}}$
+
+                    Por \circled{3} y \circled{4} y MP:
+                    \begin{align*}
+                        \Gamma' \vdash(\beta_1 \to \beta_2) & \\
+                        \implies&\underbrace{(\beta_1\to\beta_2)}_{\alpha}
+                        \in \Gamma'
+                        \notamath{$\Gamma'$ m.c.}
+                    \end{align*}
+                    \end{itemize}
+
+                    Hasta acá probamos que 
+                    $v_f(\alpha)=1 \implies \alpha \in \Gamma'$
+
+                \item $v_f(\alpha)=0$
+                    \begin{align*}
+                        \iff& \max \{ 1-v_f(\beta_1),v_f(\beta_2) \}=0 \\
+                        \iff& v_f(\beta_1)=1 \text{ y } v_f(\beta_2)=0
+                    \end{align*}
+
+                    Luego,
+
+                    \begin{align*}
+                        & v_f(\beta_1)=1 \implies \beta_1\in\Gamma' \\
+                        & v_f(\beta_2)=0 \implies \beta_2\notin\Gamma'
+                        \notamath{Por HI} \\
+                        \implies& \beta_1 \in \Gamma'
+                        \text{ y } \neg \beta_2 \in \Gamma' \\
+                        \implies& \underbrace{\Gamma' \vdash \beta_1}_{%
+                        \circled{5}}
+                        \text{ y } \underbrace{\Gamma' \vdash \neg\beta_2}_{%
+                        \circled{6}}
+                    \end{align*}
+
+                    Tarea: $\underbrace{\varnothing \vdash 
+                    (\beta_1\to(\neg\beta_2\to(\neg(\beta_1\to\beta_2))))}_{%
+                    \circled{7}}$
+
+
+                    Por  \circled{5} y \circled{6} y MP:
+                    \begin{gather*}
+                        \underbrace{\Gamma' \vdash
+                        (\neg\beta_2\to\neg(\beta_1\to\beta_2))}_{%
+                        \circled{8}}
+                    \end{gather*}
+
+                    Por  \circled{6} y \circled{8} y MP:
+                    \begin{gather*}
+                        \Gamma' \vdash \neg(\beta_1 \to \beta_2)
+                    \end{gather*}
+
+                    Entonces, como $\Gamma'$ es m.c.:
+                    \begin{align*}
+                        \neg \overbrace{(\beta_1 \to \beta_2)}^{\alpha}
+                        \in \Gamma' & \\
+                        &\implies \neg \alpha \in \Gamma' \\
+                        &\implies \alpha \notin \Gamma'
+                    \end{align*}
+            \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\subsection{Teorema de completitud}
+
+\begin{teorema}{Teorema de completitud}{completitud}
+   \begin{gather*}
+       \alpha \in C(\Gamma) \implies \Gamma \vdash \alpha
+   \end{gather*} 
+\end{teorema}
+
+
+\begin{proof} \phantom{.}
+
+    \begin{align*}
+        \alpha \in C(\Gamma) & \\
+        &\implies \Gamma \cup \{ \neg\alpha \} \text{ es insatisfacible} \\
+        &\implies \Gamma \cup \{\neg\alpha\} \text{ es inconsistente} \\
+        &\implies \Gamma \vdash \alpha
+    \end{align*}
+\end{proof}
+
+\section{Resumen}
+
+\begin{center}
+   \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{c c c}
+        & Lógica proposicional & \\
+        && \\
+        Semántica & & Axiomática \\
+        $\alpha$ tautología & 
+        $\xleftrightarrow[\text{\phantom{Lógica proposicional}}]{}$ & 
+        $\alpha$ es demostrable \\
+        $\alpha \in C(\Gamma)$ & 
+        $\xleftrightarrow[\text{\phantom{Lógica proposicional}}]{}$ & 
+        $\Gamma \vdash \alpha$ \\
+        $\Gamma$ satisfacible & 
+        $\xleftrightarrow[\text{\phantom{Lógica proposicional}}]{}$ & 
+        $\Gamma$ es consistente
+    \end{tabular}
+\end{center}
+
+\section{Consistencia de un sistema axiomático}
+
+\begin{definicion}{Consistencia de un sistema}{}
+    Un sistema axiomático $S$ es consistente si
+    \begin{gather*}
+        \nexists \; \varphi \in \mathrm{FORM} / {\vdash}_{s}\; \varphi 
+        \text{ y } {\vdash}_{s}\; \neg\varphi
+    \end{gather*}
+
+\end{definicion}
+
+\subsection{Teorema}
+
+\begin{teorema}{}{}
+    El sistema axiomático que vimos en \nameref{chap:logica-proposicional}
+    es consistente.
+\end{teorema}
+
+
+\begin{proof} \phantom{.}
+
+    Supongo que es inconsistente. Entonces
+
+    \begin{align*}
+        \exists \; \varphi / \vdash \varphi \text{ y } \varphi \neg \varphi&\\
+        &\implies \varphi \in c(\varnothing) \text{ y } 
+        \neg\varphi \in c(\varnothing) \\
+        &\implies \varphi \text{ es tautología y } 
+        \neg \varphi \text{ es tautología}
+    \end{align*}
+
+    Lo cual es un absurdo que vino de suponer que el sistema axiomático
+    es inconsistente.
+    
+    Por lo tanto el sistema axiomático presentado en 
+    \nameref{chap:logica-proposicional} es consistente.
+
+\end{proof}
+
+% \textbf{Nota to self:} en el último video teórico de Noni, en 1:30:00 
+% empieza a hacer ejercicios de la \textbf{práctica}.
+
+\bigskip
+
+\bigskip
+
+\textbf{Importante:} En este capítulo finaliza la teoría para el primer 
+parcial. Queda por estudiar Álgebra de Boole (del apunte de la cátedra) que 
+se evalúa en el final.
