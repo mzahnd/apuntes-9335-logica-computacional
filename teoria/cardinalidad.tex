@@ -523,8 +523,8 @@ $\#(\mathbb{N}\times\mathbb{N}) = \aleph_0$
     \begin{align*}
         g(a,b) = g(c,d) & \\
         \implies& 2^a 3^b = 2^c 3^b \\
-        \implies&  a = c \wedge b=d \notamath{Por Teorema Fundamental de la 
-        Aritmética (TFA)}
+        \implies&  a = c \wedge b = d 
+        \notamath{Por Teorema Fundamental de la Aritmética (TFA)}
     \end{align*}
     
     Entonces, $g$ inyectiva 
@@ -684,7 +684,8 @@ $A \subseteq B \implies \# A \leq \# B$
 
 \section{Numerable}
 \begin{definicion}{Numerable}{}
-    $A$ es numerable si $A$ es finito o $A \sim \mathbb{N}$
+    \nota{$\# A \leq \mathbb{N}$}%
+    $A$ es numerable si $A$ es finito o $A \sim \mathbb{N}$.
 \end{definicion}
 
 \subsection{Propiedades}
@@ -693,8 +694,11 @@ $A \subseteq B \implies \# A \leq \# B$
     \item $A$ numerable y $A \neq \varnothing 
         \implies \exists \; f:\mathbb{N} \to A$ sobreyectiva.
 
-    \item $\exists \; f: \mathbb{N} \to A$ sobreyectiva $\implies A$ es
+    \item Si $\exists \; f: \mathbb{N} \to A$ sobreyectiva $\implies A$ es
         numerable.
+
+    \item Si $A$ y $B$ son conjuntos numerables
+        $\implies A \times B$ es numerable.
 \end{enumerate}
 
 \medskip 
@@ -702,6 +706,45 @@ $A \subseteq B \implies \# A \leq \# B$
 \begin{enumerate}
     \item \begin{proof} Tarea. \end{proof}
     \item \begin{proof} Tarea. \end{proof}
+    \item \begin{proof} \phantom{.}
+
+            Como $A$ y $B$ son numerables $\implies$ existen:
+            \begin{itemize}
+                \item $f_1: \mathbb{N} \to A$ sobreyectiva.
+                \item $f_2: \mathbb{N} \to B$ sobreyectiva.
+            \end{itemize}
+
+            Luego 
+            $f_1 \times f_2 = F: \mathbb{N} \times \mathbb{N} \to A \times B$
+            tal que
+            \begin{gather*}
+                F(n, m) = \left(f_1(n), f_2(m)\right)
+            \end{gather*}
+
+            \medskip
+
+            Veamos que $F$ es sobreyectiva.
+
+            Sea $(a,b) \in A \times B$.
+
+            $f_1$ sobreyectiva $\implies$ existe $n \in \mathbb{N}$
+            tal que $f_1(n) = a$
+
+            $f_2$ sobreyectiva $\implies$ existe $m \in \mathbb{N}$
+            tal que $f_2(m) = b$
+
+            Entonces
+            \begin{align*}
+                F(n, m) &= \left(f_1(n), f_2(m)\right) = (a,b) \\
+                \implies& F \text{ es sobreyectiva} \\
+                \implies& \# (
+                \underbrace{\mathbb{N} \times \mathbb{N}}_{\aleph_0}
+                ) 
+                \geq \# (A \times B)
+            \end{align*}
+
+            Por lo tanto, $A \times B$ es numerable.
+    \end{proof}
 \end{enumerate}
 
 \section{Sucesión}
@@ -829,7 +872,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
 \end{proof}
 
 \begin{definicion}{}{}
-    \[ \# [0,1] = C \]
+    \[ \# [0,1] = \mathfrak{C} \]
 \end{definicion}
 
 \subsection{Teorema}
@@ -963,7 +1006,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
 
 \subsubsection{Ejemplos}
 \begin{itemize}
-    \item $\# (0,1) = C$
+    \item $\# (0,1) = \mathfrak{C}$
 
         \begin{proof}\phantom{.}
 
@@ -976,13 +1019,13 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
 
     \item Analogamente, $(0,1] \sim [0,1]$
 
-    \item $\# (-10, 10) = C$
+    \item $\# (-10, 10) = \mathfrak{C}$
 
         ¡Sí!
 
         \begin{proof}\phantom{.}
-        Veamos que se puede generalizar como $\# (a, b) = C$, con $a, b$ 
-        números (ninguno es $\infty$).
+            Veamos que se puede generalizar como $\# (a, b) = \mathfrak{C}$, 
+            con $a, b$ números (ninguno es $\infty$).
 
         \begin{figure}[H]
             \centering
@@ -996,16 +1039,17 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
 
         \end{proof}
 
-    \item $\# \mathbb{R} = C$
+    \item $\# \mathbb{R} = \mathfrak{C}$
         \begin{proof}\phantom{.}
             
             Tomemos la función $\tan{(- \nicefrac{\pi}{2}, \nicefrac{\pi}{2})}
             \to \mathbb{R}$, que es biyectiva.
 
-            Por el item anterior, sabemos que $\# (a,b) = C$, entonces:
+            Por el item anterior, sabemos que $\# (a,b) = \mathfrak{C}$, 
+            entonces:
 
             \[ \# \left(-\frac{\pi}{2}, \frac{\pi}{2}\right) 
-            = \# \mathbb{R} = C \]
+            = \# \mathbb{R} = \mathfrak{C} \]
 
         \end{proof}
         
@@ -1323,13 +1367,13 @@ su suma también lo hace.
 
 \begin{teorema}{}{}
     \begin{gather*}
-        2^{\aleph_0} = C
+        2^{\aleph_0} = \mathfrak{C}
     \end{gather*}
 \end{teorema}
 
 \begin{proof}\phantom{.}
 
-    Sean $U = [0,1]$, $\# U = C$, 
+    Sean $U = [0,1]$, $\# U = \mathfrak{C}$, 
     $T = {\{0,1\}}^{\mathbb{N}} 
     = \{f:\mathbb{N} \to \{0,1\}/f \text{ es función}\}$, $\# T=2^{\aleph_0}$
 
@@ -1377,7 +1421,8 @@ su suma también lo hace.
         &\implies \# T_0 < \# \mathbb{N} = \aleph_0 \\
         &\implies T_0 \text{ es numerable} \\
         \\
-        & \therefore ~ \# (T-T_0) = \# T = C \notamath{ $T-T_0\sim T$\\ Con $T$
+        & \therefore ~ \# (T-T_0) = \# T = \mathfrak{C} 
+            \notamath{ $T-T_0\sim T$\\ Con $T$
             infinito no numerable, pues $2^{\aleph_0} > \aleph_0$ 
         (por el \nameref{teo:cantor}), $T_0$ numerable y, en consecuencia,
         $\# T = 2^{\aleph_0}$. }
@@ -1410,7 +1455,7 @@ su suma también lo hace.
 
     \begin{gather*}
         \widetilde{U} = (0,1] \sim [0,1] - \{ 0 \} \\
-        \therefore ~ \# \widetilde{U} = C
+        \therefore ~ \# \widetilde{U} = \mathfrak{C}
     \end{gather*}
 
     Queda entonces definida \nota{Con $\widetilde{U} = (0,1]$}%
@@ -1433,9 +1478,10 @@ su suma también lo hace.
     \end{gather*}
 
     Conclusión, $F$ es biyectiva y, entonces, $\# (T-T_0) = \# \widetilde{U}$.
-    Como $\#(T-T_0) = 2^{\aleph_0}$ y $\# \widetilde{U} = C$, queda probado que
+    Como $\#(T-T_0) = 2^{\aleph_0}$ y $\# \widetilde{U} = \mathfrak{C}$, 
+    queda probado que
 
-    \[ \boxed{2^{\aleph_0} = C} \]
+    \[ \boxed{2^{\aleph_0} = \mathfrak{C}} \]
 
 \end{proof}
 
@@ -1453,7 +1499,7 @@ Calcular ${\aleph_0}^{\aleph_0}$
     2^{\aleph_0} \leq {\aleph_0}^{\aleph_0} \leq 2^{\aleph_0 \cdot \aleph_0}
     = 2^{\aleph_0} \\
     &\implies C \leq {\aleph_0}^{\aleph_0} \leq C \\
-    &\implies \boxed{{\aleph_0}^{\aleph_0} = C}
+    &\implies \boxed{{\aleph_0}^{\aleph_0} = \mathfrak{C}}
 \end{align*}
 
 \section{Hipótesis del continuo}
