@@ -577,6 +577,15 @@ escrito de la siguiente manera:
         Por lo tanto, $T$ no es T.L.
 \end{itemize}
 
+\begin{definicion}{Base}{}
+    Una base de un espacio vectorial $V$ es un conjunto 
+    $\{ v_1, \dotsc, v_n \}$ 
+    tal que:
+    \begin{itemize}
+        \item El conjunto es linealmente independiente
+        \item Genera $V$
+    \end{itemize}
+\end{definicion}
 
 \begin{teorema}{}{base-tl}
     Sean $v, w$ un $K\mathrm{-}ev$. 
@@ -594,9 +603,10 @@ escrito de la siguiente manera:
     
 \end{teorema}
 
-\subsubsection{Ejemplo}
+\subsubsection{Ejemplos}
 
-Consideremos $V = W = \mathbb{R}^2$.
+\begin{itemize}
+    \item Consideremos $V = W = \mathbb{R}^2$.
 
 Hallar $\tilde{f} : V \to W$ que extienda a $f$ dada por:
 \begin{itemize}
@@ -650,3 +660,29 @@ Entonces
 \begin{gather*}
     \therefore \quad \tilde{f}(x,y) = \left(4x-4y, 5y - x\right)
 \end{gather*}
+
+\item Conseguir una TL de $T: \mathbb{R}_2[x] \to \mathbb{R}^3$ tal que
+    $T(1+x) = (2,0,0)$
+
+    \medskip
+
+    \nota{$B$ es base pues son 3 elementos LI en un espacio de dimensión 3.}%
+    \textit{Plan:} conseguir una base $B = \{ 1+x, 1, x^2 \}$
+    y después usar el Teorema \ref{teo:base-tl} para extender a todo 
+    $\mathbb{R}_2[x]$.
+
+    Propongamos
+    \begin{gather*}
+        \circled{$\star$}
+        \begin{cases}
+            T(1+x) = (2,0,0) \\
+            T(1) = (\pi, e, 0) \\
+            T(x^2) = (0,0,0)
+        \end{cases}
+    \end{gather*}
+
+    Usando el Teorema \ref{teo:base-tl}: existe una única
+    $T: \mathbb{R}_2[x] \to \mathbb{R}^3$
+    y, porque extiende a \circled{$\star$} $\implies$
+    $T(1+x) = (2,0,0)$
+\end{itemize}
