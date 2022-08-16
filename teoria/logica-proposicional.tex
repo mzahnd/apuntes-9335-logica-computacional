@@ -653,24 +653,57 @@ sí y sólo sí existe una cadena de formación de la misma.
     \end{itemize}
 \end{proof}
 
-\subsubsection{Ejemplo}
+\subsubsection{Ejemplos}
 
-Sea $\alpha = ( \neg \neg p_1)$, ¿pertenece $E$ a la fórmula ($F$)?
+\begin{itemize}
+    \item Sea $\alpha = ( \neg \neg p_1)$, ¿pertenece $E$ a la fórmula ($F$)?
 
-Supongamos que $\alpha \in F \implies \exists \; X_1, \dotsc, X_n = \alpha$ 
-CF.
+    Supongamos que 
+    $\alpha \in F \implies \exists \; X_1, \dotsc, X_n = \alpha$ 
+    CF.
+    
+    Como $X_n$ empieza con `(', por la definición de cadena de formación,
+    \begin{gather*}
+        \exists \; j, k \leq n-1 / E = (X_j * X_k)
+        \notamath{$* \in \{ \wedge, \vee, \to \}$}
+    \end{gather*}
+    
+    ¡Lo cual es un absurdo!
+    
+    \begin{gather*}
+        \therefore ~ E \notin F
+    \end{gather*}
 
-Como $X_n$ empieza con `(', por la definición de cadena de formación,
-\begin{gather*}
-    \exists \; j, k \leq n-1 / E = (X_j * X_k)
-    \notamath{$* \in \{ \wedge, \vee, \to \}$}
-\end{gather*}
+    \item $\alpha = (p_1$ no es una fórmula.
 
-¡Lo cual es un absurdo!
+    Supongamos que lo es.
 
-\begin{gather*}
-    \therefore ~ E \notin F
-\end{gather*}
+    Entonces existe una cadena de formación tal que
+    $X_1, \dotsc, X_n = \alpha$.
+
+    Por lo que $X_n$ es eslabón, y tiene tres opciones:
+    \begin{enumerate}
+        \item $X_n$ es una variable:
+            si lo fuese, $X_n = p_k \neq ( p_1$ pues $( p_1$ empieza con
+            $($ y $p_k$ no.
+            Absurdo.
+
+        \item $X_n = \neg X_i$, con $1 \leq i \leq n$.
+
+            Luego $\neg X_i = ( p_1$ pero $(p_1$ no empieza con $\neg$.
+            Absurdo.
+
+        \item $X_n = (X_i * X_j)$, con $1 \leq i,j \leq n$.
+
+            Pero $(X_i * X_j)$ termina con $)$ pero $( p_1$ no.
+            Absurdo.
+    \end{enumerate}
+
+    \begin{center}
+        $\therefore ~ (p_1$ no es una fórmula.
+    \end{center}
+
+\end{itemize}
 
 \subsection{Subcadena}
 
@@ -709,6 +742,14 @@ que es una cadena de formación minimal.
     Una cadena de formación es minimal si la única subcadena que tiene es
     ella misma.
 \end{definicion}
+
+\medskip
+\textit{Observación:}
+\begin{enumerate}
+    \item Toda fórmula tiene una cadena minimal.
+    \item \nota{Ver la siguiente observación.}%
+    \underline{Puede} tener más de una subcadena minimal. 
+\end{enumerate}
 
 \medskip
 \textit{Observación:}
@@ -758,6 +799,27 @@ Por otra parte, $m$ es mínimo si $m \leq b$, $\forall \, b \in X$
 
 Análogamente podemos definir máximo y maximal.
 
+\subsubsection{Ejemplo}
+
+Sea $\alpha = \neg p_1$. Entonces $X_1 = p_1$ y $X_2 = \neg p_1$ es minimal 
+pues:
+
+Si $Y_1, \dotsc, Y_k$ es subcadena $\implies k \leq 2$ 
+\nota{Pues $X_1$, $X_2$ tiene dos eslabones.}%
+\begin{itemize}
+    \item Si $k = 2$
+        \begin{gather*}
+            \implies Y_1 = X_1 ~ Y_2 = X_2 
+            \implies \text{ es la misma cadena.}
+        \end{gather*}
+    \item Si $k = 1$
+        
+        $\implies Y_1 = X_2 = \neg p_1$ 
+        \underline{no} es una cadena de formación pues no es variable 
+        y nose consigue de eslabones anteriores.
+\end{itemize}
+
+
 
 \subsection{Complejidad}
 
@@ -779,6 +841,10 @@ Análogamente podemos definir máximo y maximal.
             \textbf{Notación:} $cb(E) =$ complejidad binaria de $E$.
     \end{enumerate}
 \end{definicion}
+
+\bigskip
+\textit{Observación:}
+$c(p_k) = 0$
 
 \subsubsection{Ejemplos}
 
@@ -841,26 +907,54 @@ Análogamente podemos definir máximo y maximal.
     \end{enumerate}
 \end{lema}
 
-\begin{proof}
-    Tarea.
+\begin{proof} \phantom{.}
+    % Tarea.
 
-    \nota{Más que darnos una ``pista'', Noni demostró el lema oralmente.}%
-    \textit{Pista:} Si la complejidad de $\alpha$ es cero, quiere decir que no
-    tiene conectivos. La única fórmula que no tiene conectivos es una
-    variable.
-    
-    Si $\alpha$ es una fórmula, entonces existe una CF de $\alpha$ y, 
-    si además no tiene conectivos, entonces no la pude haber armado a partir
-    de eslabones anteriores. Entonces tiene que ser una variable.
+    % \nota{Más que darnos una ``pista'', Noni demostró el lema oralmente.}%
+    % \textit{Pista:} Si la complejidad de $\alpha$ es cero, quiere decir que no
+    % tiene conectivos. La única fórmula que no tiene conectivos es una
+    % variable.
+    % 
+    % Si $\alpha$ es una fórmula, entonces existe una CF de $\alpha$ y, 
+    % si además no tiene conectivos, entonces no la pude haber armado a partir
+    % de eslabones anteriores. Entonces tiene que ser una variable.
 
 
-    Si $\alpha$ tiene un conectivo o la negación, como es una fórmula, 
-    entonces existe una CF de $\alpha$, el último eslabón es una variable, una
-    negación de alguno anterior, o el $\wedge$, $\vee$ o $\to$ de un eslabón
-    previo.
+    % Si $\alpha$ tiene un conectivo o la negación, como es una fórmula, 
+    % entonces existe una CF de $\alpha$, el último eslabón es una variable, una
+    % negación de alguno anterior, o el $\wedge$, $\vee$ o $\to$ de un eslabón
+    % previo.
 
-    Como $c(\alpha)>0$, entonces el caso de la variable no tiene sentido y
-    caemos en los otros dos casos.
+    % Como $c(\alpha)>0$, entonces el caso de la variable no tiene sentido y
+    % caemos en los otros dos casos.
+
+    \begin{enumerate}
+        \item Como $\alpha \in \mathrm{FORM}$, existe $X_1, \dotsc, X_n$
+            cadena de formación tal que 
+            $X_n = \alpha$ y $c(\alpha) = c(X_1) = 0$.
+
+            $X_n$ tiene 3 opciones, veamos que sólo puede ser una variable:
+            \begin{enumerate}
+                \item[2)] $X_n = \neg X_i$ \nota{$1 \leq i \leq n$}%
+                    \begin{gather*}
+                        0 = c(x_n) = c(\neg X_i) \geq 1
+                    \end{gather*}
+
+                    ¡Absurdo!
+
+                \item[3)] $X_n = (X_i * X_j)$ \nota{$1 \leq i, j < n$}%
+                    \begin{gather*}
+                        0 = c(X_n) = c((X_i * X_j)) \geq 1
+                    \end{gather*}
+
+                    ¡Absurdo!
+            \end{enumerate}
+
+            La única opción posible es 1) $X_n = p_k \in \mathrm{VAR}$ y
+            entonces $\alpha = X_n = p_k$.
+
+        \item Tarea.
+    \end{enumerate}
 \end{proof}
 
 \subsection{Teorema}
@@ -873,9 +967,8 @@ Análogamente podemos definir máximo y maximal.
     Entonces:
     \begin{enumerate}
         \item $p(\alpha)= 0$
-        \item Si $\bullet$ es un conectivo binario que aparece en $\alpha$,
-            entonces la expresión $E$ a la izquierda de $\bullet$ en $\alpha$
-            verifica que tiene $p(E)>0$
+        \item Si $\alpha = E * F$ entonces $p(E)>0$
+            \nota{$* \in \{ \wedge, \vee, \to \}$}%
     \end{enumerate}
 \end{teorema}
 
@@ -900,7 +993,9 @@ entonces $p(E) = 3-1 = 2>0$
         \end{enumerate}
 
         Para escribir menos, vamos a llamar a ambos casos del teorema 
-        $\mathcal{P}(n)$ y vamos a decir que $c(\alpha)=n$.
+        $\mathcal{P}(n)$ y vamos a decir que $c(\alpha)=n$. 
+        Además, para evitar abuso de notación, al conectivo binario del caso
+        2 lo notaremos como $\bullet$.
 
         \item HI) $\mathcal{P}(k)$, $k \leq n$
         \item T) $\mathcal{P}(n+1)$
