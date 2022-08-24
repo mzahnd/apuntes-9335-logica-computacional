@@ -317,8 +317,11 @@ Por lo tanto
 
 \end{proof}
 
+\pagebreak
 \section{Sintaxis}
 
+\nota{Santiago: ``\textit{Truco: casi todos los ejercicios de este tema salen
+por inducción}''}%
 \begin{definicion}{Alfabeto de la lógica proposicional}{}
     
     \begin{gather*}
@@ -846,6 +849,14 @@ Si $Y_1, \dotsc, Y_k$ es subcadena $\implies k \leq 2$
 \textit{Observación:}
 $c(p_k) = 0$
 
+\bigskip
+\textit{Observación:}
+Si $\beta \in S(\alpha) \implies c(\beta) \leq c(\alpha)$
+
+\begin{proof}
+    Tarea. Sale por inducción.
+\end{proof}
+
 \subsubsection{Ejemplos}
 
 \begin{itemize}
@@ -1144,9 +1155,12 @@ Dicho de otra manera:
 
                     Entonces, por el Corolario \ref{corol:alfabeto-igual-long},
                     \begin{gather*}
-                        \beta_1 = \gamma_1 \text{ y } 
+                        \beta_1 = \gamma_1
+                        ~ \text{ y } ~
                         *\beta_2 = \circ \gamma_2
-                        \implies \beta_1 = \gamma_1, \; * = \circ \text{ y }
+                        \implies \beta_1 = \gamma_1,
+                        ~ * = \circ
+                        ~ \text{ y } ~
                         \beta_2 = \gamma_2
                     \end{gather*}
                     
@@ -1204,10 +1218,12 @@ Dicho de otra manera:
         \item Si $c(\alpha) > 0$
             \begin{enumerate}
                 \item $\alpha = \neg \beta$
+                    \nota{$\beta \in F$}%
                     \begin{gather*}
                         S(\alpha) = \{ \alpha \} \cup S(\beta)
                     \end{gather*}
-                \item \nota{$* \in \{ \wedge, \vee, \to \}$}%
+                \item \nota{$\beta_1, \beta_2 \in F$\\
+                    $* \in \{ \wedge, \vee, \to \}$}%
                     $\alpha = (\beta_1 * \beta_2)$
                     \begin{gather*}
                         S(\alpha)=\{ \alpha \}\cup S(\beta_1) \cup S(\beta_2)
@@ -1219,6 +1235,12 @@ Dicho de otra manera:
     \textbf{Notación:}
     $S(\alpha)$ es el conjunto de subfórmulas de $\alpha$.
 \end{definicion}
+
+\bigskip
+\textit{¡Atención!}
+\begin{gather*}
+    \# S((\beta_1 * \beta_2)) \leq \# S(\beta_1) + \# S(\beta_2)
+\end{gather*}
 
 \subsubsection{Ejemplos}
 
@@ -1249,6 +1271,85 @@ Dicho de otra manera:
         \begin{gather*}
             S(\alpha) = \{\alpha, (p_1\wedge p_2), p_1, p_2,\neg p_3, p_3 \}
         \end{gather*}
+
+    \item Sea $\beta \in S(\alpha)$, queremos ver que $\beta$ es un eslabón de
+    una cadena de $\alpha$.
+
+    \medskip
+    Lo vemos por inducción en la complejidad de $\alpha$.
+
+    \begin{itemize}
+        \item CB) $c(\alpha) = 0$
+
+            \begin{align*}
+                \implies& \alpha = p_k \in \mathrm{VAR}
+                \nota{x Propiedad} \\
+                \implies& \beta \in S(\alpha) = \{ p_k \} \\
+                \implies& \beta = p_k = \alpha
+            \end{align*}
+
+        \item HI)
+            Si $\alpha \in F$ tal que
+            $c(\alpha) \leq k$
+            y
+            $\beta \in S(\alpha)$
+            $\implies \beta$ aparece como eslabón en la cadena de $\alpha$.
+        \item TI)
+            Dada $\alpha \in F$ con
+            $c(\alpha) = k + 1$
+            y
+            $\beta \in S(\alpha)$.
+
+            \nota{$c(\alpha) > 1$}%
+            Queremos ver que $\beta$ aparece como eslabón de la cadena de
+            $\alpha$.
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item $\alpha = (\beta_1 * \beta_2)$
+                    \nota{$\beta_1, \beta_2 \in \mathrm{FORM}$}%
+
+                    \begin{align*}
+                        k + 1 =& c(\alpha) = c(\beta_1) + c(\beta_2) + 1 \\
+                        \implies& c(\beta_1), c(\beta_2) \leq k \\
+                        \implies& \beta \in S(\alpha) =
+                        \{ \alpha \} \cup S(\beta_1) \cup S(\beta_2)
+                    \end{align*}
+
+                    \begin{itemize}
+                        \item Si $\beta = \alpha$ $\implies$
+                            Por el mismo argumento del CB, $\beta$ está en
+                            toda cadena de formación.
+                        \item Si $\beta \neq \alpha$ $\implies$
+                            $\beta \in S(\beta_1)$ ó $\beta \in S(\beta_2)$
+
+                            Supongamos el primer caso, pues el segundo es
+                            análogo.
+
+                            Por HI, $\beta$ aparece en toda cadena de
+                            formación de $\beta_1$.
+
+                            Sea $X_1, \dotsc, X_n$ CF de $\alpha$.
+
+                            Entonces $\alpha = X_n = (\beta_1 * \beta_2)$.
+                            Como es cadena, entonces el único caso posible
+                            es $X_n = (X_i \cdot X_j)$ \nota{$i, j < n$}%
+
+                            Luego, por unicidad de escritura, $X_i = \beta_1$,
+                            $X_j = \beta_2$ y $\cdot = *$.
+                            Entonces $X_1, \dotsc, X_i = \beta_1$ es cadena
+                            $\implies$ $\beta = X_l$ \nota{$1 \leq l \leq i$}%
+                            $\implies$ $\beta$ aparece en la cadena de
+                            $\alpha$.
+                    \end{itemize}
+            \end{enumerate}
+    \end{itemize}
+
 \end{itemize}
 
 \pagebreak
@@ -1294,27 +1395,30 @@ No es una valuación, pues $v(p_1)=1$ y $v(\neg p_1) = 1$
     $v_f: \mathrm{FORM} \to \{ 0,1 \}$ que extiende a $f$.
 \end{teorema}
 
-Esto significa que $v$ restringido a las variables es igual a $f$:
+Esto significa que $\mathrm{VAR} \subseteq \mathrm{FORM}$ y $v$ restringido
+a las variables es igual a $f$:
 \begin{gather*}
     \frest{v}{\mathrm{VAR}} = f
 \end{gather*}
 
-Es decir, que $v(p_j) = f(p_j)$, con $p_j \in \mathrm{VAR}$.
+Es decir, que $v_f(p_j) = f(p_j)$, con $p_j \in \mathrm{VAR}$.
 
 
 \begin{proof} \phantom{.}
 
-    Sea $F_m = \{\alpha \in \mathrm{FORM} / c(\alpha) \leq m\}$, con $m \in \mathbb{N}$
+    Sea $F_m = \{\alpha \in \mathrm{FORM} / c(\alpha) \leq m\}$,
+    con $m \in \mathbb{N}$
 
-    Luego $F_0 = \mathrm{VAR}$, $F_1 = \mathrm{VAR} \cup \{ \alpha \in F / c(\alpha) = 1 \}$, y
+    Luego $F_0 = \mathrm{VAR}$,
+    $F_1 = \mathrm{VAR} \cup \{ \alpha \in F / c(\alpha) = 1 \}$, y
     así sucesivamente.
-    Es decir, estamos definiendo $(F_m)_{m \in \mathbb{N}}$ una sucesión creciente 
-    de conjuntos de fórmulas:
+    Es decir, estamos definiendo $(F_m)_{m \in \mathbb{N}}$ una sucesión
+    creciente de conjuntos de fórmulas:
     $F_0 \subseteq F_1 \subseteq F_2 \subseteq \dots$.
 
     \bigskip
 
-    Veamos por inducción que en $m$ que se cumple 
+    Veamos por inducción en $m$ que se cumple
     $\mathcal{P}(m)$ para todo $m \in \mathbb{N}$.
 
     Para ello, definamos $\mathcal{P}(m)$: 
@@ -1395,6 +1499,27 @@ Es decir, que $v(p_j) = f(p_j)$, con $p_j \in \mathrm{VAR}$.
 
 \end{proof}
 
+
+\subsubsection{Ejemplo}
+
+Sea $f: \mathrm{VAR} \to \{ 0, 1 \}$ tal que
+$f(p_k) = \begin{cases}
+    1 & \text{si } k \text{ es par} \\
+    0 & \text{si } k \text{ es impar}
+\end{cases}$
+
+\medskip
+Entonces, por el teorema, existe una única $v_f: \mathrm{FORM} \to \{ 0, 1 \}$
+tal que $v_f$ extiende a $f$.
+
+\begin{gather*}
+    v_f (p_1 \to (\neg p2 \vee p_3)) =
+    \max{
+        \{ \underbrace{1 - v_f (p_1)}_{= f(p_1) = 0},
+        v_f (\neg p_2 \vee p_3) \}
+    }
+    = 1
+\end{gather*}
 
 \subsection{Clasificación semántica de las fórmulas}
 
@@ -1519,6 +1644,40 @@ Clasificar las siguientes fórmulas:
                 \therefore ~  v(\alpha) = 1 ~ \forall v \text{ valuación}
             \end{gather*}
         \end{proof}
+
+    \item $\alpha = (p_1 \to \neg p_1)$
+        \begin{itemize}
+            \item Si $v(p_1) = 0$ $\implies$
+                $v(\alpha) = \max{\{ 1 - v(p_1), 1 - v(p_1) \}} = 1$
+            \item Si $v(p_1) = 1$ $\implies$
+                $v(\alpha) = \max{\{ 1 - v(p_1), 1 - v(p_1) \}} = 0$
+        \end{itemize}
+
+        \textit{Santiago:} \textbf{¡Cuidado!}
+        Tenemos un condicional, \textit{``si''}.
+        Para afirmar que es contingencia la valuación tiene que existir,
+        y no \textit{``existir condicionada''}.
+
+        Definamos $f: \mathrm{VAR} \to \{ 0, 1 \} / f(p_i) = \begin{cases}
+            0 & i = 1 \\
+            0 & \text{sino}
+        \end{cases}$.
+        Sea $v_f$ la valuación que extiende a $f$.
+
+        Entonces $v_f(\alpha) \underbrace{=}_{v_f(p_1) = f(p_1) = 0} 1$
+
+        Luego, definamos
+        $g: \mathrm{VAR} \to \{ 0, 1 \} / g(p_i) = \begin{cases}
+            1 & i = 1 \\
+            0 & \text{sino}
+        \end{cases}$.
+        Sea $v_g$ la valuación que extiende a $g$.
+
+        Entonces $v_g(\alpha) \underbrace{=}_{v_g(p_1) = g(p_1) = 0} 0$
+
+        \begin{center}
+            $\therefore ~ \alpha$ es contingencia.
+        \end{center}
 \end{enumerate} 
 
 
@@ -1567,7 +1726,7 @@ Clasificar las siguientes fórmulas:
 
             \medskip
 
-            Por simplicidad, vamos a llamar a lo que acabamos de escribir 
+            Por simplicidad, vamos a llamar a lo que acabamos de escribir
             $\mathcal{P}(k)$.
 
             Así, la hipótesis inductiva es $\mathcal{P}(k)$, con $k \leq n$.
@@ -1604,7 +1763,7 @@ Clasificar las siguientes fórmulas:
                 \implies& \boxed{ v(\alpha) = w(\alpha) }
             \end{align*}
 
-    \item $\alpha = (\beta_1 \wedge \beta_2)$
+    \item $\alpha = (\beta_1 \vee \beta_2)$
 
     \begin{align*}
         c(\alpha) =& \, n + 1 \\
@@ -1687,6 +1846,43 @@ Clasificar las siguientes fórmulas:
         \frest{v_f}{\mathrm{VAR}(\alpha)} = \frest{v_g}{\mathrm{VAR}(\alpha)} 
         \implies v_f(\alpha) = v_g(\alpha)
     \end{gather*}
+
+     \item $\alpha = (\neg p_1 \to (p_2 \vee p_3))$
+
+         Defino $f: \mathrm{VAR} \to \{ 0, 1 \}$ tal que
+         $f(p_i) = \begin{cases}
+             0 & i = 1, 2 \\
+             1 & \text{en otro caso}
+         \end{cases}$
+
+         Entonces existe una única $v_f \in \mathrm{VAL}$ tal que $v_f$ 
+         extiende a $f$.
+
+
+         \begin{align*}
+             v_f(\alpha) &= \max{\{ 1 - v_f(\neg p_1), v_f(p_2 \vee p_3) \}}\\
+                         &= \max{\{ v_f(p_1),
+                            \max{\{ v_f(p_2), v_f(p_3) \}} \}} \\
+                         &= 1
+         \end{align*}
+
+         Defino $g: \mathrm{VAR} \to \{ 0, 1 \}$ tal que
+         $g(p_i) = \begin{cases}
+             1 & i = 3 \\
+             0 & \text{en otro caso}
+         \end{cases}$
+
+        Entonces $v_g \in \mathrm{VAL}$ extiende a
+        $v_g(\alpha) = v_f(\alpha) = 1$
+        porque:
+        \begin{itemize}
+            \item $\frest{g}{\mathrm{VAR}(\alpha)} =
+                \frest{f}{\mathrm{VAR}(\alpha)}$
+        \item $\frest{v_g}{\mathrm{VAR}(\alpha)} =
+            \frest{g}{\mathrm{VAR}(\alpha)}$
+        \item $\frest{v_f}{\mathrm{VAR}(\alpha)} =
+            \frest{f}{\mathrm{VAR}(\alpha)}$
+        \end{itemize}
 \end{itemize}
 
 
@@ -2026,6 +2222,86 @@ conjuntos.
         que $c(p_1) = 0$ y es siempre más fácil trabajar con fórmulas de 
         complejidad mínima.
 \end{enumerate}
+
+En general, dada $\alpha$ tal que
+$var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$, podemos
+definir para cada $a \in {\{ 0, 1 \}}^n$ una función
+$f_a : \mathrm{VAR} \to \{ 0, 1 \} /
+f_a(p_k) = \begin{cases}
+    a_k & \text{si } 0 \leq k \leq n-1 \\
+    1 & \text{sino}
+\end{cases}$
+
+Siendo $v_{f_a}$ la valuación que extiende a $f_a$.
+
+Definiendo luego $f_\alpha : {\{ 0, 1 \}}^n \to \{ 0, 1 \}$, entonces
+$f_\alpha(a) = v_{f_a} (\alpha)$
+
+\subsection{Propiedad}
+
+\begin{itemize}
+    \item Sean $var(\alpha), var(\beta) \subseteq \{ p_0, \dotsc, p_{n-1} \}$.
+
+        Entonces
+        $\alpha \equiv \beta \iff f_\alpha = f_\beta$
+\end{itemize}
+
+\begin{proof} \phantom{.}
+
+    \begin{itemize}
+        \item $\implies$)
+            Sean
+                $f_\alpha : {\{ 0, 1 \}}^n \to \{ 0, 1 \}$
+                y
+                $f_\beta : {\{ 0, 1 \}}^n \to \{ 0, 1 \}$
+
+            Luego
+            \begin{gather*}
+                f_\alpha (a) = v_{f_a}(\alpha)
+                \underbrace{=}_{\alpha \equiv \beta}
+                v_{f_a}(\beta) = f_\beta (a)
+                \notamath{$\forall a \in {\{ 0, 1 \}^n}$} \\
+                \implies f_\alpha = f_\beta
+            \end{gather*}
+        \item $\impliedby$)
+            Si $\alpha \not \equiv \beta$ $\implies$ existe
+            $v \in \mathrm{VAL}$ tal que $v(\alpha) \neq v(\beta)$.
+
+            Sin pérdida de generalidad, podemos afirmar que
+            $v(\alpha) = 1$,
+            $v(\beta) = 0$
+            y
+            $a = (v(p_0), v(p_1), \dotsc, v(p_k))$
+
+            \nota{Por hipótesis}%
+            Luego $v_{f_a}(\alpha) = f_\alpha (a) = f_\beta (a)$
+
+            Entonces $f_a (p_k) = \begin{cases}
+                a_k = v(p_k) & \text{si } 0 \leq k \leq n - 1 \\
+                1 & \text{sino}
+            \end{cases}$
+
+            $\implies$ $v_{f_a}(p_k) = v(p_k)$ si $0 \leq k \leq n - 1$
+
+            Por otra parte, como
+            $var(\alpha), var(\beta) \subseteq \{ p_0, \dotsc, p_{n-1} \}$,
+            entonces
+            \begin{gather*}
+            \frest{v_{f_a}}{var(\alpha)} = \frest{v}{var(\alpha)}
+            ~ \text{y} ~
+            \frest{v_{f_a}}{var(\beta)} = \frest{v}{var(\beta)}
+            \end{gather*}
+
+            Por lo tanto, por teorema,
+            $v_{f_a}(\alpha) = v(\alpha) = 1$.
+            Y esto a su vez es igual a $f_\alpha(a)$, que es igual a
+            $v_{f_a}(\beta) = v(\beta) = 0$
+
+            Lo cual es un absurdo.
+
+            Por lo tanto, $\alpha \equiv \beta$.
+    \end{itemize}
+\end{proof}
 
 \subsection{Conectivos adecuados}
 
