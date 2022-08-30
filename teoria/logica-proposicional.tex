@@ -258,7 +258,7 @@ Por lo tanto
         align=left,
         leftmargin=2\parindent,
         label=Caso \arabic*)]
-        \item $G \neq \lambda$ y $G = g_1, g_2 \dots g_k$
+        \item $G \neq \lambda$ y $G = g_1 g_2 \dots g_k$
            
             \begin{gather*}
                 E = e_1 \underbrace{e_2 \dots e_{n+1}}_{\widetilde{E}} \; \; 
@@ -275,7 +275,7 @@ Por lo tanto
             \begin{align*}
                 \notamath{Por HI} 
                 &\implies \exists \; H' \big/ \widetilde{E} = \widetilde{G} H' \\
-                &\implies e_1 \widetilde{E} = e_1 \widetilde{G} H' \\
+                &\implies e_1 \widetilde{E} = g_1 \widetilde{G} H' \\
                 &\implies E = GH'
             \end{align*}
 
@@ -328,10 +328,9 @@ por inducción}''}%
         A = \mathrm{VAR} \cup \{ (, ) \} \cup C
     \end{gather*}
 
-    \nota{$Card(\mathrm{VAR}) = \aleph_0$}%
-
     Siendo
     \begin{gather*}
+        \notamath{$Card(\mathrm{VAR}) = \aleph_0$}
         \mathrm{VAR} = \{ p_n / n \in \mathbb{N} \} = \{ p_0, p_1, p_2, \dots \}
     \end{gather*}
 
@@ -365,7 +364,7 @@ por inducción}''}%
     \bigskip
     \textbf{Notación:}
     Al conjunto de fórmulas del lenguaje proposicional lo llamamos 
-    $\mathrm{FORM}$ o $F \subset A^{*}$.
+    ``$\mathrm{FORM}$'' o ``$F \subset A^{*}$''.
 \end{definicion}
 
 \bigskip 
@@ -459,8 +458,12 @@ sí y sólo sí existe una cadena de formación de la misma.
         \begin{itemize}
             \item CB) $n=1$
 
-                Sea $X_1$ CF
-                $\implies X_i \in \mathrm{VAR} \subseteq \mathrm{FORM}$
+                Sea
+                $\alpha \in \mathrm{FORM} / long(\alpha) = 1$
+                $\implies$ 
+                $\alpha = X_1 \in \mathrm{VAR} \subseteq \mathrm{FORM}$
+                $\implies$ 
+                $X_1$ CF
             \item HI) Sea $\alpha \in \mathrm{FORM}/ long(\alpha) = n \implies$ 
                 existe una CF de $\alpha$
                 \nota{$\exists\; X_1,\dotsc,X_k=\alpha$}%
@@ -488,7 +491,8 @@ sí y sólo sí existe una cadena de formación de la misma.
 
                 Recordando que $long(\alpha) = n+1$,
                 \begin{gather*}
-                    long(\alpha) = long(\beta) + 1 = n + 1 \implies 
+                    long(\alpha) = long(\beta) + 1
+                    \implies
                     long(\beta) = n
                 \end{gather*}
 
@@ -559,8 +563,8 @@ sí y sólo sí existe una cadena de formación de la misma.
                 y (3)
                 $Z_{r+s+1} = (Z_r * Z_{r+s})$ 
                 \nota{$\alpha = (\beta_1 * \beta_2)$}%
-                es un conectivo binario ($*$) de
-                conectivos que están antes.
+                es un conectivo binario, $*$, entre
+                cadenas de formación definidas previamente.
                 
         \end{enumerate}
 
@@ -575,10 +579,10 @@ sí y sólo sí existe una cadena de formación de la misma.
                 \item CB) $n=1$ 
 
                     $X_1$ es una cadena de formación $\implies$
-                    $X_1 \in \mathrm{VAR}S \subseteq \mathrm{FORM}$
+                    $X_1 \in \mathrm{VAR} \subseteq \mathrm{FORM}$
 
-                \item HI) Sea $X_1, \dotsc, X_k$ CF
-                    $\implies$ $X_k \in F$
+                \item HI) Sea $X_1, \dotsc, X_n$ CF
+                    $\implies$ $X_n \in F$
                     
                 \item T) Sea $X_1, \dotsc, X_{n+1}$ CF
                     $\implies$ $X_{n+1}\in F$
@@ -600,10 +604,10 @@ sí y sólo sí existe una cadena de formación de la misma.
                     que $X_1, \dotsc, X_j$ es una CF.
 
                     \medskip
-                    Acá nos damos cuenta que necesitamos inducción completa.
-
                     \nota{Así permitimos cualquier longitud de cadena de 
                     formación menor o igual que $n$.}%
+                    Acá nos damos cuenta que necesitamos inducción completa.
+
                     Nuevamente, cambiamos la hipótesis inductiva:
 
                     \begin{center}
@@ -624,15 +628,13 @@ sí y sólo sí existe una cadena de formación de la misma.
 
                     Entonces, por HI, $X_j \in \mathrm{FORM}$
 
-                    \begin{center}
-                        Por lo tanto, por definición de fórmula,
-                        $\neg X_j \in \mathrm{FORM}$
-                    \end{center}
+                    Por lo tanto, por definición de fórmula,
+                    $\neg X_j \in \mathrm{FORM}$
 
                 \item Si $X_{n+1} = (X_j * X_t)$, con 
-                    $* \in \{ \wedge, \vee, \to \}$ y $j, t \leq n$
+                    $* \in \{ \wedge, \vee, \to \}$ y $j, t \leq n$,
+                    tenemos que:
 
-                    Tenemos que:
                     \begin{align*}
                         X_1, \dotsc, X_{n+1} &
                         \text{ es una cadena de formación } \\
@@ -643,7 +645,7 @@ sí y sólo sí existe una cadena de formación de la misma.
                         X_1, \dotsc, X_{n+1} &
                         \text{ es una cadena de formación } \\
                         &\implies X_1, \dotsc, X_t
-                        \text{ es una cadena de formación para } 
+                        \text{ es una cadena de formación } 
                         \notamath{$t \leq n < n+1$} \\
                         &\implies X_t \in \mathrm{FORM} \notamath{Por HI} \\
                     \end{align*}
@@ -698,7 +700,7 @@ sí y sólo sí existe una cadena de formación de la misma.
 
         \item $X_n = (X_i * X_j)$, con $1 \leq i,j \leq n$.
 
-            Pero $(X_i * X_j)$ termina con $)$ pero $( p_1$ no.
+            Pero $(X_i * X_j)$ termina con $)$ y $( p_1$ no.
             Absurdo.
     \end{enumerate}
 
@@ -819,7 +821,7 @@ Si $Y_1, \dotsc, Y_k$ es subcadena $\implies k \leq 2$
         
         $\implies Y_1 = X_2 = \neg p_1$ 
         \underline{no} es una cadena de formación pues no es variable 
-        y nose consigue de eslabones anteriores.
+        y no se consigue de eslabones anteriores.
 \end{itemize}
 
 
@@ -851,6 +853,7 @@ $c(p_k) = 0$
 
 \bigskip
 \textit{Observación:}
+\nota{``$\beta$ es una \nameref{def:subformula} de $\alpha$''.}%
 Si $\beta \in S(\alpha) \implies c(\beta) \leq c(\alpha)$
 
 \begin{proof}
@@ -1124,10 +1127,10 @@ entonces $p(E) = 3-1 = 2>0$
 Dicho de otra manera:
 \begin{align*}
     (\beta_1 * \beta_2 ) = (\gamma_1 \circ \gamma_2) 
-    &\implies& \beta_1 = \gamma_1 \notamath{$* = \circ$} \\
-    &\phantom{\implies}& 
-    \beta_2=\gamma_2 \\
-    \neg \beta_1 = \neg \beta_2 &\implies& \beta_1 = \beta_2
+    \implies& \beta_1 = \gamma_1, ~
+    \beta_2 = \gamma_2 ~ \text{y} ~
+    * = \circ \\
+    \neg \beta_1 = \neg \beta_2 \implies& \beta_1 = \beta_2
 \end{align*}
 
 \begin{proof} \phantom{.}
@@ -1170,7 +1173,7 @@ Dicho de otra manera:
 
                     Como las longitudes son mayores estrictas, entonces $H'$
                     tiene al menos un caracter y, en consecuencia, 
-                    $H'=\circ H''$, con $H'' \in A^{*}$
+                    $H'=\circ H''$, con $H'' \in A^{*}$.
 
                     Como $\beta_1 \in F$, la expresión a la izquierda de 
                     $\circ$ en $\beta_1$ tiene peso positivo.
@@ -1201,7 +1204,7 @@ Dicho de otra manera:
 
 \subsection{Subfórmula}
 
-\begin{definicion}{Subfórmula}{}
+\begin{definicion}{Subfórmula}{subformula}
     Sea $\alpha \in F$.
 
     \medskip
@@ -1951,7 +1954,7 @@ de que \textit{algo} está mal en la misma.
 
 \medskip
 
-El error fundamental de la demostración está en el último $\iff$ pues
+El error fundamental de la demostración está en el último ``$\iff$'' pues
 el ``\verb+para todo+'' \textbf{no} se distribuye con el ``\verb+ó+''.
 
 Es decir, es falso que
