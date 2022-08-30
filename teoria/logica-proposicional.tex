@@ -2306,12 +2306,135 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
     \end{itemize}
 \end{proof}
 
+\begin{teorema}{}{}
+    Sea $f: {\{ 0, 1 \}}^n \to \{ 0, 1 \}$ función booleana.
+
+    \medskip
+
+    \nota{Recuerdo:\\
+        $f_{\alpha} (a_0, \dotsc, a_{n-1}) 
+        = v_{f_{(a_0, \dotsc, a_{n-1})}} (\alpha)$
+
+        $f_{(a_0, \dotsc, a_{n-1})} (p_k) = \begin{cases}
+            a_i & \text{si } k=i \\
+            0 & \text{sino}
+        \end{cases}$
+    }%
+    Existe $\alpha \in F$ tal que 
+    $var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$
+    y
+    $f_{\alpha} : {\{ 0, 1 \}}^n \to \{ 0, 1 \}$
+    y
+    $f = f_{\alpha}$
+\end{teorema}
+
+\begin{proof} \phantom{.}
+
+    Si $f(a) = 0$, $\forall ~ a \in {\{ 0, 1 \}}^n$
+
+    Sea $\alpha = p_0 \wedge \neg p_0$.
+    Luego $f_{\alpha}(a) = 0$ pues $\alpha$ es contradicción.
+
+    Por lo tanto, $f_{\alpha} = f$.
+
+    Por otra parte, si 
+    $T = \{ a \in {\{ 0, 1 \}}^n / f(a) = 0 \} \neq \varnothing$
+
+    Entonces
+    $(a \in T \iff f(a) = 1)$
+
+    Sea $a \in T$
+    $\implies a = (a_0, \dotsc, a_{n-1})$
+
+    Sea $x_i = \begin{cases}
+        p_i & a_i = 1 \\
+        \neq p_i & a_i = 0
+    \end{cases}$
+
+    Luego, $\beta_a = ( \dots ((x_0 \wedge x_1) \wedge \dots x_{n-1}) \dots)$
+
+    \bigskip
+    \textit{Observación:}
+    Si $v$ es una valuación cualquiera, entonces
+    \begin{align*}
+        v(\beta_a) = 1 \iff& v(x_i) = 1 
+        \notamath{$\forall \; 0 \leq i \leq n-1$} \\
+        \iff& v(p_i) = a_i
+        \notamath{$\forall \; 0 \leq i \leq n-1$} 
+    \end{align*}
+
+    Sea 
+    $\alpha = \vee_{a \in T} \beta_a 
+    =
+    \beta_{0, 0, \dotsc, 1, 0)} \vee \beta_{0, 0, \dotsc, 1, 1)} \vee \dots$
+
+    Sea $v \in \mathrm{Val}$ tal que $v(\alpha) = 1$.
+    \begin{align*}
+        v(\alpha) = 1 \iff& \text{existe } a \in T: v(\beta_a) = 1 \\
+        \iff& \text{existe } a \in T: v(p_i) = a_i
+        \notamath{$\forall \; 0 \leq i \leq n-1$}
+    \end{align*}
+
+    Como $var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$,
+    $v(\alpha)$ ``sólo depende de $v(p_0), \dotsc, v(p_{n-1})$''
+
+    \begin{align*}
+        f_{\alpha} (a_0, \dotsc, a_{n-1})
+        =& v_{f_{(a_0, \dotsc, a_{n-1})}}(\alpha) \\
+        =& 1 \\
+        v_{f_{(a_0, \dotsc, a_{n-1})}}(p_k) =& \begin{cases}
+            a_i & \text{si } k = i, 0 \leq i \leq n-1 \\
+            0
+        \end{cases}\\
+    \end{align*}
+
+    Es decir:
+    \begin{align*}
+        f_{\alpha}(a) = 1 \iff& a \in T \iff f(a) = 1 \\
+        \implies& f_{\alpha} = f
+        \notamath{Pues si\\$f_{\alpha} (a) = 0 \Leftrightarrow f(a) = 0$}
+    \end{align*}
+\end{proof}
+
+\bigskip
+\textit{Observación:}
+\begin{definicion}{Forma disyuntiva normal}{}
+    A la fórmula de $\alpha$ del teorema anterior se le dice ser la 
+    ``forma disyuntiva normal'' de la función $f$.
+
+    \bigskip
+    \textbf{Notación:}
+    FDN
+\end{definicion}
+
+\begin{corolario}{}{}
+    Sea $\alpha \in \mathrm{FORM}$
+
+    \medskip
+
+    Entonces existe una fórmula $\gamma$ en FDN tal que 
+    $\alpha \equiv \gamma$.
+\end{corolario}
+
+\begin{proof} \phantom{.}
+
+    Dado $var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$, sea
+    $f_{\alpha} : {\{ 0, 1 \}}n \to \{ 0, 1 \}$ su función booleana asociada.
+
+    $\implies$ Por el teorema anterior y la observación, existe
+    $\gamma \in \mathrm{FORM}$ en FDN tal que $f_{\alpha} = f_{\gamma}$,
+    $var(\gamma) \subseteq \{ p_0, \dotsc, p_{n-1} \}$
+
+    \nota{Por propiedad}%
+    $\implies$ $\alpha \equiv \gamma$
+\end{proof}
+
 \subsection{Conectivos adecuados}
 
 \begin{definicion}{Conectivos adecuados}{}
     Sea $C$ un conjunto de conectivos. 
 
-    $F_C = \{$ fórmulas que tienen conectivos de $ C \} \cup \mathrm{VAR}$
+    $F_C = \{$fórmulas que tienen conectivos de $C \} \cup \mathrm{VAR}$
 
     \medskip
 
@@ -2439,7 +2562,83 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
             \end{center}
 
         \end{proof}
+
+    \item Dado $C = \{ \downarrow \}$, que se interpreta como 
+        $\alpha \downarrow \beta \equiv \neg \alpha \wedge \neg \beta$
+
+        Decidir si es adecuado.
+
+        Para conseguir $\neg$, propongo
+        \begin{gather*}
+            \alpha \downarrow \alpha \equiv
+             \neg \alpha \wedge \neg \alpha \equiv
+             \neg \alpha
+        \end{gather*}
+
+        Luego, para conseguir el $\wedge$:
+        \begin{gather*}
+            \alpha \wedge \beta \equiv
+            \neg \alpha \downarrow \neg \beta \equiv
+            (\alpha \downarrow \alpha) \downarrow (\beta \downarrow \beta)
+        \end{gather*}
+
+        Por lo tanto, como puedo conseguir $\{ \neg, \wedge \}$ a partir de
+        $C$, y como $\{ \neg, \wedge \}$ es adecuado
+        $\implies C$ es adecuado
+
+    \item $C = \{ \neg \}$ no es adecuado.
+
+        Sea $\alpha = (p_0 \vee \neg p_0)$
+
+        Afirmamos que no hay fórmula $\gamma \in \mathrm{FORM}_C$ tal que
+        $\gamma \equiv \alpha$.
+
+        Supongamos que sí existe $\gamma \equiv \alpha$.
+
+        Si $c(\gamma) = 0 \implies \gamma = p_k$.
+        Sea $f: var \to \{ 0, 1 \} / f(p_k) = 0 \; \forall \; k$ y
+        sea $v_f$ la valuación que la extiende.
+
+        Tomando $v_f (\alpha) = 1$ y $v_f (\gamma) = f(p_k) = 0$, notamos que
+        no son equivalentes.
+    
+        Si $c(\gamma) \geq 1$. 
+        Tomando $\gamma = \underbrace{\neg \dots \neg}_{n} p_k$ tenemos
+        dos posibilidades:
+        \begin{itemize}
+            \item $n$ es par.
+                \begin{gather*}
+                    v(\gamma) = v(p_k) 
+                    \implies 
+                    v_f(\gamma) = v_f(p_k) = 0 
+                    ~ \wedge ~
+                    v_f(\alpha) = 1 \\
+                    \implies \gamma \not\equiv \alpha
+                \end{gather*}
+            \item $n$ es impar.
+
+                \begin{gather*}
+                    v(\gamma) = 1 - v(p_k) 
+                \end{gather*}
+
+                Sea $g: var \to \{ 0, 1 \} / g(p_k) = 1 \; \forall \; k$, y
+                sea $v_g$ la valuación que extiende a $g$.
+
+                \begin{gather*}
+                    v_g(\gamma) = 1 - v_g(p_k) = 1 - 1 = 0 
+                    \text{ y }
+                    v_g(\gamma) = 1 \\
+                    \implies \alpha \not\equiv \gamma
+                \end{gather*}
+        \end{itemize}
 \end{enumerate}
+
+\subsection{Propiedad}
+
+Sea $C$ un conjunto de conectivos (no vacío) tal que podemos ``reconstruir''
+un conjunto de conectivos que ya es adecuado.
+
+Entonces $C$ es adecuado.
 
 \subsection{Definiciones}
 
