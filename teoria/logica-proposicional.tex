@@ -3934,9 +3934,15 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 \end{itemize}
 
 \begin{proposicion}{}{}
+    \nota{\textit{Santiago:} 
+    `` ``Son equivalentes'' quiere decir que si una afirmación es válida,
+    todas lo son.''}%
     Son equivalentes:
     \begin{enumerate}[label=\protect\circled{\arabic*}]
         \item \nameref{teo:compacidad}
+        \item $\Gamma$ es insatisfacible 
+            $\iff$ $\exists \; \Gamma' \subseteq \Gamma$ 
+            finito tal que $\Gamma'$ es insatisfacible.
         \item $\alpha \in C(\Gamma) \implies 
             \exists \; \Gamma'$ finito tal que $\Gamma' \subseteq \Gamma$ y
             $\alpha \in C(\Gamma')$
@@ -3951,16 +3957,86 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
     \end{center}
 
     \begin{itemize}
-        \item $\circled{1} \implies \circled{2}$) Sea $\alpha \in C(\Gamma)$
-            $\underbrace{\implies}_{\text{Ya probado}}
-            \Gamma \cup \{ \neg \alpha \}$ es insatisfacible.
+        \item $\circled{1} \iff \circled{2}$) 
+            Es el contrarecíproco.
 
-            \begin{gather*}
-                \therefore ~ \text{ Por \nameref{teo:compacidad} } \exists \;
-                \Gamma' \text{ finito insatisfacible} / 
-                \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
-            \end{gather*}
+        % \item $\circled{1} \implies \circled{2}$) Sea $\alpha \in C(\Gamma)$
+        %     $\underbrace{\implies}_{\text{Ya probado}}
+        %     \Gamma \cup \{ \neg \alpha \}$ es insatisfacible.
 
+        %     \begin{gather*}
+        %         \therefore ~ \text{ Por \nameref{teo:compacidad} } \exists \;
+        %         \Gamma' \text{ finito insatisfacible} / 
+        %         \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
+        %     \end{gather*}
+
+        %     \begin{enumerate}[%
+        %                     labelindent=*,
+        %                     style=multiline,
+        %                     leftmargin=*,
+        %                     align=left,
+        %                     leftmargin=2\parindent,
+        %                     label=Caso \arabic*)]
+        %         \item $\Gamma' \subseteq \Gamma$
+
+        %             Entonces $C(\Gamma ') = \mathrm{FORM}$, $\Gamma '$ finito.
+
+        %             Como $\Gamma'$ es insatisfacible 
+        %             $\implies \alpha \in C(\Gamma')$
+
+        %         \item $\Gamma' \nsubseteq \Gamma$
+
+        %             \begin{gather*}
+        %                 \implies \Gamma ' = \Gamma '' \cup \{ \neg\alpha \} 
+        %                 \notamath{$\Gamma '' \subset \Gamma$}
+        %             \end{gather*}
+                    
+        %             \medskip
+
+        %             \nota{Si pruebo esto ya está, pues $\Gamma''$ es finito y
+        %             Queremos ver que $\alpha \in C(\Gamma'')$. 
+        %             $\Gamma'' \subset \Gamma$}%
+
+        %             Supongo que $\alpha \notin C(\Gamma '')$
+
+        %             \begin{align*}
+        %                 \implies& \exists \; v \text{ valuación}/ 
+        %                 v(\Gamma'')=1 \text{ y } v(\alpha)=0 \\
+        %                 \implies& v(\Gamma '' \cup \{ \neg \alpha \} ) = 1 \\
+        %                 \implies& v(\Gamma ') = 1
+        %             \end{align*}
+
+        %             Lo cual es un absurdo pues $\Gamma '$ es insatisfacible.
+
+        %             El mismo vino de suponer que $\alpha \notin C(\Gamma'')$.
+        %             Por lo tanto, $\alpha \in C(\Gamma'')$ y, entonces,
+        %             $\Gamma ''$ es finito y $\Gamma'' \subset \Gamma$.
+        %     \end{enumerate}
+
+
+        % \item $\circled{2} \implies \circled{1}$) Como $\Gamma$ es 
+        %     satisfacible $\implies \Gamma$ es finitamente satisfacible.
+        %     \nota{Sale igual que cuando probamos el T. de Compacidad.}%
+
+        %     Sea $\Gamma$ satisfacible
+        %     \begin{align*}
+        %         \implies& \exists v \text{ valuación} / v(\Gamma)= 1 \\
+        %         \implies& v(\alpha)=1 \notamath{$\forall \alpha \in \Gamma$}
+        %     \end{align*}
+
+        %     Sea $\Sigma = \{ \alpha_1, \dotsc, \alpha_n \} \subseteq \Gamma$
+        %     $\implies v(\alpha_i) = 1$, $1 \leq i \leq n$, porque 
+        %     $\alpha_i \in \Gamma$
+        %     \nota{Observemos que en este caso no usamos \circled{2}.}%
+        %     \begin{gather*}
+        %         \therefore ~ v(\Sigma) = 1
+        %     \end{gather*}
+
+        %     Por lo tanto, $\Gamma$ es f.s.
+
+        % \bigskip
+
+        \item $\circled{2} \implies \circled{3}$) 
             \begin{enumerate}[%
                             labelindent=*,
                             style=multiline,
@@ -3968,100 +4044,88 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                             align=left,
                             leftmargin=2\parindent,
                             label=Caso \arabic*)]
-                \item $\Gamma' \subseteq \Gamma$
+                \item $\implies$)
+                Si $\alpha \in C(\Gamma)$
+                \begin{align*}
+                    \implies& \Gamma \cup \{ \neg \alpha \}
+                    \text{ es insatisfacible.}
+                    \notamath{Propoiedad} \\
+                    \implies& \text{ Existe } 
+                    \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
+                    \text{ insatisfacible} 
+                    \notamath{Por \circled{3}}
+                \end{align*}
 
-                    Entonces $C(\Gamma ') = \mathrm{FORM}$, $\Gamma '$ finito.
-
-                    Como $\Gamma'$ es insatisfacible 
-                    $\implies \alpha \in C(\Gamma')$
-
-                \item $\Gamma' \nsubseteq \Gamma$
-
-                    \begin{gather*}
-                        \implies \Gamma ' = \Gamma '' \cup \{ \neg\alpha \} 
-                        \notamath{$\Gamma '' \subset \Gamma$}
-                    \end{gather*}
-                    
-                    \medskip
-
-                    \nota{Si pruebo esto ya está, pues $\Gamma''$ es finito y
-                    Queremos ver que $\alpha \in C(\Gamma'')$. 
-                    $\Gamma'' \subset \Gamma$}%
-
-                    Supongo que $\alpha \notin C(\Gamma '')$
-
-                    \begin{align*}
-                        \implies& \exists \; v \text{ valuación}/ 
-                        v(\Gamma'')=1 \text{ y } v(\alpha)=0 \\
-                        \implies& v(\Gamma '' \cup \{ \neg \alpha \} ) = 1 \\
-                        \implies& v(\Gamma ') = 1
-                    \end{align*}
-
-                    Lo cual es un absurdo pues $\Gamma '$ es insatisfacible.
-
-                    El mismo vino de suponer que $\alpha \notin C(\Gamma'')$.
-                    Por lo tanto, $\alpha \in C(\Gamma'')$ y, entonces,
-                    $\Gamma ''$ es finito y $\Gamma'' \subset \Gamma$.
+                Como $\Gamma' \cup \{ \neg \alpha \}$ es finito 
+                e insatisfacible
+                $\implies$ $\alpha \in C(\Gamma')$ 
+                \nota{Por propiedad}%
+            \item $\impliedby$)
+                Tarea.
             \end{enumerate}
 
 
-        \item $\circled{2} \implies \circled{1}$) Como $\Gamma$ es 
-            satisfacible $\implies \Gamma$ es finitamente satisfacible.
-            \nota{Sale igual que cuando probamos el T. de Compacidad.}%
+        % \item $\circled{3} \implies \circled{1}$) $\Gamma$ f.s. 
+        %     $\implies \Gamma$ satisfacible
+        %     \nota{Otra forma, usando \circled{2}}%
 
-            Sea $\Gamma$ satisfacible
-            \begin{align*}
-                \implies& \exists v \text{ valuación} / v(\Gamma)= 1 \\
-                \implies& v(\alpha)=1 \notamath{$\forall \alpha \in \Gamma$}
-            \end{align*}
+        %     Supongamos $\Gamma$ insatisfacible.
+        %     \begin{align*}
+        %         \implies& C(\Gamma) = \mathrm{FORM} \\
+        %         \implies& \alpha = (p_1 \wedge \neg p_1) \in C(\Gamma)
+        %     \end{align*}
 
-            Sea $\Sigma = \{ \alpha_1, \dotsc, \alpha_n \} \subseteq \Gamma$
-            $\implies v(\alpha_i) = 1$, $1 \leq i \leq n$, porque 
-            $\alpha_i \in \Gamma$
-            \nota{Observemos que en este caso no usamos \circled{2}.}%
-            \begin{gather*}
-                \therefore ~ v(\Sigma) = 1
-            \end{gather*}
+        %     \begin{center}
+        %         $\therefore$ Por \circled{2} existe $\Gamma' \subseteq\Gamma$,
+        %         $\Gamma'$ finito, $/ (p_1 \wedge \neg p_1) \in C(\Gamma')$
+        %     \end{center}
 
-            Por lo tanto, $\Gamma$ es f.s.
+        %     Veamos que $\Gamma'$ es insatisfacible.
 
-        \bigskip
+        %     Supongo $\Gamma'$ satisfacible.
+        %     \begin{align*}
+        %         \implies& \exists \; w \text{ valuación}/ w(\Gamma') = 1\\
+        %         \implies& w(p_1 \wedge \neg p_1)=1
+        %         \notamath{$p_1 \wedge \neg p_1 \in C(\Gamma')$}
+        %     \end{align*}
 
-        \item $\circled{2} \implies \circled{1}$) $\Gamma$ f.s. 
-            $\implies \Gamma$ satisfacible
-            \nota{Otra forma, usando \circled{2}}%
+        %     Lo cual es un absurdo, pues $p_1 \wedge \neg p_1$ es una 
+        %     contradicción.
 
-            Supongamos $\Gamma$ insatisfacible.
-            \begin{align*}
-                \implies& C(\Gamma) = \mathrm{FORM} \\
-                \implies& \alpha = (p_1 \wedge \neg p_1) \in C(\Gamma)
-            \end{align*}
+        %     Entonces, probamos que $\Gamma'$ es insatisfacible.
 
-            \begin{center}
-                $\therefore$ Por \circled{2} existe $\Gamma' \subseteq\Gamma$,
-                $\Gamma'$ finito, $/ (p_1 \wedge \neg p_1) \in C(\Gamma')$
-            \end{center}
+        %     Por lo tanto, $\Gamma'$ es insatisfacible y finito. Además,
+        %     $\Gamma ' \subset \Gamma$
 
-            Veamos que $\Gamma'$ es insatisfacible.
+        %     \begin{center}
+        %         $\therefore ~ \Gamma$ no es f.s.                
+        %     \end{center}
+        \item $\circled{3} \implies \circled{1}$) 
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item $\implies)$ Tarea. Sale de la definición.
+                \item $\impliedby)$ Sea $\Gamma$ f.s., queremos ver que
+                    $\Gamma$ es satisfacible.
 
-            Supongo $\Gamma'$ satisfacible.
-            \begin{align*}
-                \implies& \exists \; w \text{ valuación}/ w(\Gamma') = 1\\
-                \implies& w(p_1 \wedge \neg p_1)=1
-                \notamath{$p_1 \wedge \neg p_1 \in C(\Gamma')$}
-            \end{align*}
+                    Supongamos que no, entonces $\Gamma$ es insatisfacible.
 
-            Lo cual es un absurdo, pues $p_1 \wedge \neg p_1$ es una 
-            contradicción.
+                    Como $(p_0 \wedge \neg p_0) \in C(\Gamma) = \mathrm{FORM}$
+                    entonces, por \circled{3}, existe 
+                    $\Gamma' \subseteq \Gamma$ tal que $\Gamma'$ es finito
+                    y $p_0 \wedge \neg p_0 \in C(\Gamma')$.
 
-            Entonces, probamos que $\Gamma'$ es insatisfacible.
+                    Pero $\Gamma'$ no es satisfacible, pues si lo fuera
+                    $(p_0 \wedge \neg p_0)$ también lo sería. ¡Absurdo!
 
-            Por lo tanto, $\Gamma'$ es insatisfacible y finito. Además,
-            $\Gamma ' \subset \Gamma$
-
-            \begin{center}
-                $\therefore ~ \Gamma$ no es f.s.                
-            \end{center}
+                    Por lo tanto, $\Gamma'$ no es satisfacible $\implies$
+                    $\Gamma$ no es f.s.: ¡Absurdo! $\implies$ $\Gamma$ es
+                    satisfacible.
+            \end{enumerate}
     \end{itemize}
 \end{proof}
 
@@ -4289,8 +4353,8 @@ Entonces, $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \alpha_5=\gamma \to \gamma$
 
     Decimos que $\alpha$ se deduce de $\Gamma$ si existe una sucesión finita
     de fórmulas $\alpha_1, \alpha_2, \dotsc, \alpha_n = \alpha$ que verifica
-    alguno de los siguientes casos 
-    \nota{Es un ``o'' entre cada casa.}%
+    alguno de los siguientes casos:
+    \nota{Es un ``o'' entre cada caso.}%
 
     \begin{center}
         \begin{enumerate}[%
@@ -4343,7 +4407,6 @@ $\Gamma = \{\alpha, (\alpha \to \beta)\}$
     \item $(\alpha \to \beta)$ \nota{Dato: $(\alpha\to\beta)\in\Gamma$}%
     \item $\beta$ \nota{MP 1 y 2}%
 \end{enumerate}
-
 
 \subsection{Teorema de la deducción}
 
@@ -4556,29 +4619,55 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
     \end{itemize}
 \end{proof}
 
-\subsubsection{Ejemplo}
+\subsubsection{Ejemplos}
 
-Probar que $(\gamma \to \gamma)$ es demostrable.
+\begin{itemize}
+    \item Probar que $(\gamma \to \gamma)$ es demostrable.
 
-\begin{proof} \phantom{.}
+    \begin{proof} \phantom{.}
+    
+        Queremos ver que $\varnothing\vdash(\gamma\to\gamma)$
+    
+        \begin{align*}
+            \varnothing \vdash (\gamma \to \gamma)
+            &\iff \varnothing \cup \{ \gamma \} \vdash \gamma 
+            \notamath{Teorema \ref{teo:deduccion-axiomatica}}\\
+            &\iff \underbrace{\{ \gamma \} \vdash \gamma}_{\text{Verdadero}}
+        \end{align*}
+    
+        Podemos afirmar que esto último es verdadero pues:
+        \begin{enumerate}
+            \item $\gamma$ (dato)
+            \nota{$\gamma \subseteq \{ \gamma \}$}%
+        \end{enumerate}
+    
+    \end{proof}
 
-    Queremos ver que $\varnothing\vdash(\gamma\to\gamma)$
+    \item Dado
+        $\Gamma = \{ (p_3 \to (p_4 \to p_3)) \to ((p_1 \to p_6) \to p_7) \}$.
 
-    \begin{align*}
-        \varnothing \vdash (\gamma \to \gamma)
-        &\iff \varnothing \cup \{ \gamma \} \vdash \gamma 
-        \notamath{Teorema \ref{teo:deduccion-axiomatica}}\\
-        &\iff \underbrace{\{ \gamma \} \vdash \gamma}_{\text{Verdadero}}
-    \end{align*}
+        Dar una prueba de 
+        $p_3 \to ((p_1 \to p_6) \to p_7)$
+        a partir de $\Gamma$.
 
-    Podemos afirmar que esto último es verdadero pues:
-    \begin{enumerate}
-        \item $\gamma$ (dato)
-        \nota{$\gamma \subseteq \{ \gamma \}$}%
-    \end{enumerate}
+        \begin{align*}
+            \Gamma \vdash p_3 \to ((p_1 \to p_6) \to p_7) \iff&
+            \notamath{Ambos $\iff$ por \nameref{teo:deduccion-axiomatica}} \\
+            \iff& \Gamma \cup \{ p_3 \} \vdash (p_1 \to p_6) \to p_7
+            \\
+            \iff& \Gamma \cup \{ p_3, p1 \to p_6 \} \vdash p_7
+        \end{align*}
 
-\end{proof}
+        Luego
 
+        \begin{enumerate}
+            \item $p_3 \to (p_4 \to p_3)$ \nota{Axioma 1}%
+            \item $\alpha$ \nota{Hipótesis}%
+            \item $(p_1 \to p_6) \to p_7$ \nota{MP 1 y 2}%
+            \item $p_1 \to p_6$ \nota{Hipótesis}%
+            \item $p_7$ \nota{MP 3 y 4}%
+        \end{enumerate}
+\end{itemize}
 \bigskip
 \textit{Observación:}
 
