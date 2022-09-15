@@ -4759,6 +4759,8 @@ $\implies$ tienen que hacer una prueba.
 
 \bigskip
 \textit{Observación:}
+\nota{Su contrarrecíproco es: 
+``Si $\Gamma$ es inconsistente $\Rightarrow$ $\Gamma$ es insatisfacible.''}%
 Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
 
 \begin{proof} \phantom{.}
@@ -4815,6 +4817,15 @@ Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
 
 \end{definicion}
 
+\bigskip
+\textit{Observación:}
+El maximal \underline{no} es único.
+
+\subsubsection{Ejemplo}
+
+Dado $\{ p_0 \} = \Gamma$, son maximales consistentes $\{ p_0, \neg p_1 \}$ y
+$\{ p_0, p_1 \}$.
+
 \subsection{Lema de Lindenbaum}
 
 \begin{lema}{Lema de Lindenbaum}{lindenbaum}
@@ -4850,8 +4861,8 @@ maximal consistente que lo contiene.
                 \dashbox{
                 $\Gamma_{n+1} =
                 \begin{cases}
-                    \Gamma_r \cup \{ \varphi_n \} & \text{si } \Gamma_n
-                                        \cup \{ \varphi_n \}
+                    \Gamma_r \cup \{ \varphi_{n+1} \} & \text{si } \Gamma_n
+                    \cup \{ \varphi_{n+1} \}
                                         \text{ es consistente} \\
                     \Gamma_n        & \text{sino}
                 \end{cases}$
@@ -4901,8 +4912,8 @@ maximal consistente que lo contiene.
                     Sea
                     \begin{gather*}
                         \Gamma_{n+1} = \begin{cases}
-                        \Gamma_r \cup \{ \varphi_n \} & \text{si } \Gamma_n
-                                            \cup \{ \varphi_n \}
+                            \Gamma_r \cup \{ \varphi_{n+1} \} & \text{si } 
+                                            \Gamma_n \cup \{ \varphi_{n+1} \}
                                             \text{ es consistente} \\
                         \underbrace{\Gamma_n}_{\circled{1}}  & \text{sino}
                         \end{cases}
@@ -4987,10 +4998,8 @@ maximal consistente que lo contiene.
                 \Gamma' \cup \{ \varphi_N \} \vdash \neg \psi
             \end{gather*}
 
-            \smallskip
-
-            Por lo tanto, $\Gamma'$ es maximal. \nota{Está cumpliendo la
-            definición de maximal consistente.}%
+            \nota{Está cumpliendo la definición de maximal consistente.}%
+            Por lo tanto, $\Gamma'$ es maximal. 
     \end{enumerate}
 \end{proof}
 
@@ -5011,19 +5020,17 @@ maximal consistente que lo contiene.
 
         \item \phantom{.}
             \begin{itemize}
-                \item[$\impliedby$)] $\Gamma \vdash \neg \varphi $ 
-
+                \item[$\impliedby$)] Si $\Gamma \vdash \neg \varphi$:
                     \begin{align*}
                         \implies& \Gamma\cup\{\varphi\}\vdash \neg \varphi \\
-                        & \text{ y }\Gamma\cup\{\varphi\}\vdash \varphi 
+                        \text{ y }& \Gamma\cup\{\varphi\}\vdash \varphi 
                         \notamath{Por dato.} \\
                         \implies& \Gamma \cup \{ \varphi \} 
                         \text{ es inconsistente}
                     \end{align*}
 
-                \item[$\implies$)] $\Gamma \cup \{ \varphi \}$ es 
-                    inconsistente.
-
+                \item[$\implies$)] Si $\Gamma \cup \{ \varphi \}$ es 
+                    inconsistente:
                     \begin{align*}
                         \implies& \exists\; \psi \in \mathrm{FORM} / 
                         \Gamma \cup \{ \varphi \} \vdash \psi \text{ y }
@@ -5050,19 +5057,19 @@ maximal consistente que lo contiene.
                             \nota{Tarea.}%
                         \item $\varphi\to\psi$
                             \nota{Por \circled{1}}%
-                        \item $\neg\neg\varphi \to \neg\neg \varphi$
-                            \nota{MP entre 2 y 3}%
+                        \item $\neg\neg\varphi \to \neg\neg \psi$
+                            \nota{MP entre b y c}%
                         \item $(\neg\neg\varphi\to\neg\psi)\to\neg\varphi$
-                            \nota{MP entre 1 y 4}%
+                            \nota{MP entre a y d}%
                         \item $\varphi\to\neg\psi$
                             \nota{Por \circled{2}}%
                         \item $(\varphi\to\neg\psi)\to
                             (\neg\neg\varphi\to\neg\psi)$
                             \nota{Tarea.}%
                         \item $\neg\neg\varphi\to\neg\psi$
-                            \nota{MP entre 6 y 7}%
+                            \nota{MP entre f y g}%
                         \item $\neg\varphi$
-                            \nota{MP entre 5 y 8}%
+                            \nota{MP entre e y h}%
                     \end{enumerate}
 
                     \medskip
@@ -5080,9 +5087,10 @@ maximal consistente que lo contiene.
 
     \medskip
 
+    Entonces 
     \begin{gather*}
+        \forall \varphi \in \mathrm{FORM}: ~
         \varphi \in \Gamma' \text{ o } \neg \varphi \in \Gamma'
-        \notamath{$\forall \varphi \in \mathrm{FORM}$}
     \end{gather*}    
 \end{proposicion}
 
@@ -5241,9 +5249,9 @@ maximal consistente que lo contiene.
                 &\iff \alpha \in \Gamma'
             \end{align*}
 
-        \item Sea $\alpha=(\beta_1\to\beta_2)
+        \item Sea $\alpha=(\beta_1\to\beta_2) \implies
                 \underbrace{c(\beta_1)}_{\geq 0} + 
-                \underbrace{c(\beta_2)}_{\geq 0} = 0
+                \underbrace{c(\beta_2)}_{\geq 0} = 0 \implies
                 c(\beta_i) \leq n$
             \nota{$i \in \{ 1,2 \}$}%
 
@@ -5365,7 +5373,7 @@ maximal consistente que lo contiene.
 \begin{proof} \phantom{.}
 
     \begin{align*}
-        \alpha \in C(\Gamma) & \\
+        \text{Si } \alpha \in C(\Gamma) & \\
         &\implies \Gamma \cup \{ \neg\alpha \} \text{ es insatisfacible} \\
         &\implies \Gamma \cup \{\neg\alpha\} \text{ es inconsistente} \\
         &\implies \Gamma \vdash \alpha
