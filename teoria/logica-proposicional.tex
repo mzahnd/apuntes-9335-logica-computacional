@@ -571,8 +571,11 @@ sí y sólo sí existe una cadena de formación de la misma.
         \item $\impliedby$) Sea $X_1, \dotsc, X_n$ una CF.
             Queremos probar que $X_n \in F$.
 
+
+            Vamos a probar que 
             \nota{$1 \leq i \leq n$}%
-            Vamos a probar que $X_i \in F$ por inducción en $n$ 
+            $X_i \in F$ 
+            por inducción en $n$ 
             (es decir, en la longitud de la cadena de formación).
 
             \begin{itemize}
@@ -775,7 +778,7 @@ $A \mathcal{R} B$ si $A$ es subcadena de $B$.
 Además, $\mathcal{R}$ es de orden.
 \end{definicion}
 
-\begin{proof}[Demostración de que $\mathcal{R}$ es de orden:] Tarea.
+\begin{proof}[Demostración que $\mathcal{R}$ es de orden:] Tarea.
 \end{proof}
 
 \textit{Observación:}
@@ -798,7 +801,7 @@ relación no es de orden total.
 
 Sea $X$ un conjunto y $m \in X$.
 
-$m$ es minimal si $\nexists \; a \in X / a < m$
+Decimos que $m$ es minimal si $\nexists \; a \in X / a < m$
 
 Por otra parte, $m$ es mínimo si $m \leq b$, $\forall \, b \in X$
 
@@ -988,7 +991,7 @@ Si $\beta \in S(\alpha) \implies c(\beta) \leq c(\alpha)$
 
 \subsubsection{Ejemplo}
 
-Si tengo $\alpha = \underbrace{((p_1 \to p_2) \vee (p_3}_{E} \bullet p_4))$, 
+Si tengo $\alpha = \underbrace{((p_1 \to p_2) \vee (p_3}_{E} \wedge p_4))$, 
 entonces $p(E) = 3-1 = 2>0$
 
 
@@ -1169,7 +1172,10 @@ Dicho de otra manera:
                     
                 \item Supongamos $long(\beta_1) > long(\gamma_1)$.
 
-                    Entonces $\exists \; H'\in A^{*} / \beta_1 = \gamma_1 H'$.
+                    Entonces 
+                    \nota{Por el Teorema \ref{teo:efgh-longe-geq-longg}}%
+                    $\exists \; H'\in A^{*} / \beta_1 = \gamma_1 H'$
+                    .
 
                     Como las longitudes son mayores estrictas, entonces $H'$
                     tiene al menos un caracter y, en consecuencia, 
@@ -1260,7 +1266,7 @@ Dicho de otra manera:
     \end{align*}
 
     \item Sea $\alpha = (\overbrace{(p_1 \wedge p_2)}^{\beta_1} 
-        \to \overbrace{p_3}^{\beta_2})$
+        \to \overbrace{\neg p_3}^{\beta_2})$
 
         \begin{align*}
             S(\alpha) &= \{ \alpha \} \cup S(\beta_1) \cup S(\beta_2) \\
@@ -1286,7 +1292,7 @@ Dicho de otra manera:
 
             \begin{align*}
                 \implies& \alpha = p_k \in \mathrm{VAR}
-                \nota{x Propiedad} \\
+                \nota{Por propiedad} \\
                 \implies& \beta \in S(\alpha) = \{ p_k \} \\
                 \implies& \beta = p_k = \alpha
             \end{align*}
@@ -1350,6 +1356,9 @@ Dicho de otra manera:
                             $\implies$ $\beta$ aparece en la cadena de
                             $\alpha$.
                     \end{itemize}
+                \item $\alpha = \neg \beta$
+
+                    Trivial.
             \end{enumerate}
     \end{itemize}
 
@@ -1459,8 +1468,8 @@ Es decir, que $v_f(p_j) = f(p_j)$, con $p_j \in \mathrm{VAR}$.
             lo está haciendo y $v_m$ lo hace por HI.
 
             También es única la manera de definirla, ya que la primer igualdad
-            es única, sino no cumpliría la definición de valuación; en el
-            segundo igual, si no cumpliera habría otra forma de definir
+            es única, sino no cumpliría la definición de valuación; la
+            segunda igual, si no cumpliera habría otra forma de definir
             $v_m$ y no estaríamos cumpliendo con la HI.
 
             \item $\alpha = (\beta_1 \wedge \beta_2)$
@@ -1518,7 +1527,7 @@ tal que $v_f$ extiende a $f$.
 \begin{gather*}
     v_f (p_1 \to (\neg p2 \vee p_3)) =
     \max{
-        \{ \underbrace{1 - v_f (p_1)}_{= f(p_1) = 0},
+        \{ 1 - \underbrace{v_f (p_1)}_{= f(p_1) = 0},
         v_f (\neg p_2 \vee p_3) \}
     }
     = 1
@@ -1657,26 +1666,28 @@ Clasificar las siguientes fórmulas:
         \end{itemize}
 
         \textit{Santiago:} \textbf{¡Cuidado!}
-        Tenemos un condicional, \textit{``si''}.
+        Tenemos un condicional: \textit{``si''}.
         Para afirmar que es contingencia la valuación tiene que existir,
         y no \textit{``existir condicionada''}.
 
         Definamos $f: \mathrm{VAR} \to \{ 0, 1 \} / f(p_i) = \begin{cases}
             0 & i = 1 \\
-            0 & \text{sino}
+            1 & \text{sino}
         \end{cases}$.
+
         Sea $v_f$ la valuación que extiende a $f$.
 
-        Entonces $v_f(\alpha) \underbrace{=}_{v_f(p_1) = f(p_1) = 0} 1$
+        Entonces $v_f(\alpha) \underbrace{=}_{v_f(p_1) = f(p_1) = 0} 0$
 
         Luego, definamos
         $g: \mathrm{VAR} \to \{ 0, 1 \} / g(p_i) = \begin{cases}
             1 & i = 1 \\
             0 & \text{sino}
         \end{cases}$.
+
         Sea $v_g$ la valuación que extiende a $g$.
 
-        Entonces $v_g(\alpha) \underbrace{=}_{v_g(p_1) = g(p_1) = 0} 0$
+        Entonces $v_g(\alpha) \underbrace{=}_{v_g(p_1) = g(p_1) = 0} 1$
 
         \begin{center}
             $\therefore ~ \alpha$ es contingencia.
@@ -1772,7 +1783,7 @@ Clasificar las siguientes fórmulas:
         c(\alpha) =& \, n + 1 \\
         =& \, 1 + \underbrace{c(\beta_1)}_{\geq 0} 
         + \underbrace{c(\beta_2)}_{\geq 0} \\
-        \implies& c(\beta_1) + c(\beta) = n \\
+        \implies& c(\beta_1) + c(\beta_2) = n \\
         \implies& \dashbox{$c(\beta_1) \leq n \text{ y } c(\beta_2) \leq n$}
     \end{align*}
 
@@ -1843,10 +1854,10 @@ Clasificar las siguientes fórmulas:
     y $g$ respectivamente.
  
     Sea $\alpha = (p_0 \to (\neg p_2 \wedge p_4))$, 
-    $\mathrm{VAR}(\alpha) = \{ p_0,p_2,p_4 \}$
+    $\mathrm{var}(\alpha) = \{ p_0,p_2,p_4 \}$
 
     \begin{gather*}
-        \frest{v_f}{\mathrm{VAR}(\alpha)} = \frest{v_g}{\mathrm{VAR}(\alpha)} 
+        \frest{v_f}{\mathrm{var}(\alpha)} = \frest{v_g}{\mathrm{var}(\alpha)} 
         \implies v_f(\alpha) = v_g(\alpha)
     \end{gather*}
 
@@ -1879,12 +1890,12 @@ Clasificar las siguientes fórmulas:
         $v_g(\alpha) = v_f(\alpha) = 1$
         porque:
         \begin{itemize}
-            \item $\frest{g}{\mathrm{VAR}(\alpha)} =
-                \frest{f}{\mathrm{VAR}(\alpha)}$
-        \item $\frest{v_g}{\mathrm{VAR}(\alpha)} =
-            \frest{g}{\mathrm{VAR}(\alpha)}$
-        \item $\frest{v_f}{\mathrm{VAR}(\alpha)} =
-            \frest{f}{\mathrm{VAR}(\alpha)}$
+            \item $\frest{g}{\mathrm{var}(\alpha)} =
+                \frest{f}{\mathrm{var}(\alpha)}$
+        \item $\frest{v_g}{\mathrm{var}(\alpha)} =
+            \frest{g}{\mathrm{var}(\alpha)}$
+        \item $\frest{v_f}{\mathrm{var}(\alpha)} =
+            \frest{f}{\mathrm{var}(\alpha)}$
         \end{itemize}
 \end{itemize}
 
@@ -2489,20 +2500,21 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
             valuación que extiende a $f$.
 
             Veamos que $v_f(\alpha) = 1$ $\forall \alpha \in F_C$.
-            \nota{\textit{Noni:} ``Si digo ``\underline{La} novia de Juan'' 
-                está clarísimo que tiene una única novia; ``\underline{Una} 
-                novia de Juan'' implica que puede haber más.
-                Lo mismo ocurre acá: al decir ``\underline{la}'' 
+            \nota{\textit{Noni:} ``Si digo «\underline{La} novia de Juan»
+                está clarísimo que tiene una única novia; «\underline{Una} 
+                novia de Juan» implica que puede haber más.
+                Lo mismo ocurre acá: al decir «\underline{la}» 
                 es única.''}%
 
-            Sea $C(\alpha) = $ cantidad de veces que aparece $\wedge, \to$ en
-            $\alpha$. Por inducción en $C$.
+            Sea $c(\alpha) = $ cantidad de veces que aparece $\wedge, \to$ en
+            $\alpha$. Por inducción en $c$:
 
             \begin{itemize}
-                \item CB) $c(\alpha) = 0 \implies \alpha = p_j \in \mathrm{VAR}$
-                   \begin{gather*}
-                       \implies v_f(\alpha) = f(p_j) = 1
-                   \end{gather*} 
+                \item CB) 
+                    $c(\alpha) = 0 \implies \alpha = p_j \in \mathrm{VAR}$
+                    \begin{gather*}
+                        \implies v_f(\alpha) = f(p_j) = 1
+                    \end{gather*} 
 
                 \item HI) $\alpha \in F_C / c(\alpha) \leq n 
                     \implies v_f(\alpha)=1$
@@ -2584,7 +2596,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
 
         Por lo tanto, como puedo conseguir $\{ \neg, \wedge \}$ a partir de
         $C$, y como $\{ \neg, \wedge \}$ es adecuado
-        $\implies C$ es adecuado
+        $\implies C$ es adecuado.
 
     \item $C = \{ \neg \}$ no es adecuado.
 
@@ -2596,7 +2608,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
         Supongamos que sí existe $\gamma \equiv \alpha$.
 
         Si $c(\gamma) = 0 \implies \gamma = p_k$.
-        Sea $f: var \to \{ 0, 1 \} / f(p_k) = 0 \; \forall \; k$ y
+        Sea $f: \mathrm{VAR} \to \{ 0, 1 \} / f(p_k) = 0 ~ \forall \; k$ y
         sea $v_f$ la valuación que la extiende.
 
         Tomando $v_f (\alpha) = 1$ y $v_f (\gamma) = f(p_k) = 0$, notamos que
@@ -2621,13 +2633,14 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
                     v(\gamma) = 1 - v(p_k) 
                 \end{gather*}
 
-                Sea $g: var \to \{ 0, 1 \} / g(p_k) = 1 \; \forall \; k$, y
-                sea $v_g$ la valuación que extiende a $g$.
+                Sea 
+                $g: \mathrm{VAR} \to \{ 0, 1 \} / g(p_k) = 1 ~ \forall \; k$,
+                y sea $v_g$ la valuación que extiende a $g$.
 
                 \begin{gather*}
                     v_g(\gamma) = 1 - v_g(p_k) = 1 - 1 = 0 
                     \text{ y }
-                    v_g(\gamma) = 1 \\
+                    v_g(\alpha) = 1 \\
                     \implies \alpha \not\equiv \gamma
                 \end{gather*}
         \end{itemize}
@@ -2640,14 +2653,14 @@ un conjunto de conectivos que ya es adecuado.
 
 Entonces $C$ es adecuado.
 
-\subsection{Definiciones}
+\subsection{Valuación, fórmula y conjunto satisfacible}
 
 \begin{definicion}{}{}
     Sean $\alpha \in F$ y $v$ valuación.
 
     \medskip 
 
-    Decimos que $v$ satisface $\alpha$ si $v(\alpha)=1$
+    Decimos que $v$ \textit{satisface} $\alpha$ si $v(\alpha)=1$
 \end{definicion}
 
 \medskip
@@ -2657,7 +2670,7 @@ Entonces $C$ es adecuado.
     
     \medskip
 
-    Decimos que $\alpha$ es satisfacible si $\exists \; v$ valuación tal que
+    Decimos que $\alpha$ es \textit{satisfacible} si $\exists \; v$ valuación tal que
     $v(\alpha) = 1$.
 \end{definicion}
 
@@ -2822,7 +2835,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
     \item $\Gamma = \{ p_1, (p_1 \to p_2) \}$, $\alpha = p_2$
 
         \nota{\textit{Noni}: ``Esto es siempre igual. No innoven por favor.''}%
-        Vamos que $\alpha \in C(\Gamma)$
+        Veamos que $\alpha \in C(\Gamma)$.
 
         \begin{proof} \phantom{.}
         
@@ -2847,7 +2860,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
     \item $\Gamma = \{ p_1, (p_1 \to p_2) \}$, $\alpha = p_3$
 
-        Veamos que $\alpha \notin C(\Gamma)$
+        Veamos que $\alpha \notin C(\Gamma)$.
 
         \begin{proof} \phantom{.}
         
@@ -2856,7 +2869,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                 1 & \text{sino}
             \end{cases}$
 
-            Sea $v_f$ la valuación que extiende a $f$
+            Sea $v_f$ la valuación que extiende a $f$.
 
             \begin{gather*}
                 \left.\begin{aligned}
@@ -2977,7 +2990,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
                 \medskip
 
-                $V(\Gamma)=1$ es absurdo pues $\Gamma$ es insatisfacible.
+                $v(\Gamma)=1$ es absurdo pues $\Gamma$ es insatisfacible.
 
                 El mismo vino de suponer que había una fórmula que no está
                 en las consecuencias de $\Gamma$.
@@ -3018,7 +3031,6 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
 \subsection{Teorema}
 
-\nota{\textit{Noni}: ``Entra en la categoría de \textit{``fácil''} ''}%
 \begin{teorema}{}{}
     Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
 
@@ -3251,8 +3263,11 @@ Decidir si los siguientes conjuntos son independientes.
                         align=left,
                         leftmargin=2\parindent,
                         label=Caso \arabic*)]
-            \item $\alpha = p_1$ %$p_1 \notin C(\Gamma - \{ p_1 \})
-                %= C\left(\{(p_1\to p_2)\}\right)$
+            \item $\alpha = p_1$ 
+
+                Queremos ver que
+                $p_1 \notin C(\Gamma - \{ p_1 \})$
+                $= C\left(\{(p_1\to p_2)\}\right)$
                 
                     \nota{$i=\{ 1,2 \}$}%
                     Sea $f:\mathrm{VAR}\to \{ 0,1 \} / f(p_i)=0$ 
@@ -3267,20 +3282,27 @@ Decidir si los siguientes conjuntos son independientes.
                         = 1
                     \end{align*}
 
-                    Entonces,
+                    \nota{$\Gamma \backslash \{ \alpha \}$ 
+                        equivale a
+                        $\Gamma \mathrm{-} \{ \alpha \}$}%
+                    Entonces, como 
+                    $v_f(\alpha) = 0 \neq 
+                    v_f(\Gamma \backslash \{ \alpha \}) = 1$,
+
                     \begin{gather*}
+                        \implies 
                         \alpha \notin C(\Gamma \backslash \{ \alpha \})
-                        \notamath{$\Gamma \backslash \{ \alpha \}$ equivale
-                        a $\Gamma \mathrm{-} \{ \alpha \}$}
                     \end{gather*}
 
             \item $\alpha = (p_1 \to p_2)$ 
-                %$(p_1 \to p_2) \notin C(\Gamma - \{ (p_1\to p_2) \}
-                %= C(\{ p_1 \})$
+
+                Queremos ver que
+                $(p_1 \to p_2) \notin C(\Gamma - \{ (p_1\to p_2) \}$
+                $= C(\{ p_1 \})$
 
                     Sea $g: \mathrm{VAR}\to \{ 0,1 \} / f(p_i) = \begin{cases}
-                        1 & \text{si } i=2 \\
-                        0 & \text{si } i\neq 2
+                        1 & \text{si } i = 1 \\
+                        0 & \text{si } i \neq 1
                     \end{cases}$
 
                     Sea $v_g$ la única valuación que extiende a $g$.
@@ -3324,7 +3346,7 @@ Decidir si los siguientes conjuntos son independientes.
 
             En particular,
             \begin{align*}
-                v(p_1) = v(p_2) = 1 \\
+                & v(p_1) = v(p_2) = 1 \\
                 & v(p_1\to p_2) = \max \{1-v(p_1), 
                 \underbrace{v(p_2)}_{=1}\} = 1
             \end{align*}
@@ -3337,7 +3359,7 @@ Decidir si los siguientes conjuntos son independientes.
             \end{gather*}
         \end{proof}
 
-    \item $\Gamma=\{ (p_n \wedge p_{n+1} / n \in \mathbb{N} \}$
+    \item $\Gamma=\{ (p_n \wedge p_{n+1}) / n \in \mathbb{N} \}$
 
         Notemos que $\Gamma = \{(p_0 \wedge p_1), (p_1\wedge p_2),
         (p_2 \wedge p_3), \dotsc\}$
@@ -3404,10 +3426,9 @@ dado si no hay ningún otro objeto estrictamente más grande. Esto es distinto
 a ``máximo''.
 
 El orden que nos interesa en el caso de una base, donde $\Gamma$ es un
-conjunto de fórmulas, es la contención de conjuntos. Entonces, cuando decimos
-un conjunto maximal estamos diciendo que no hay ningún otro conjunto que lo
-contenga que sea independiente.
-
+conjunto de fórmulas, es la contención de conjuntos. 
+Por lo tanto, cuando decimos que un conjunto es maximal estamos diciendo que no
+hay ningún otro conjunto que lo contenga y sea independiente.
 
 Formalmente, si $\Sigma$ es un conjunto independiente y 
 $\Gamma \subseteq \Sigma$ $\implies \Gamma = \Sigma$
@@ -3438,7 +3459,7 @@ Decidir si los siguiente conjuntos son bases.
             \item Veamos si es maximal.
 
                 El conjunto $\Gamma$ es insatisfacible pues las dos fórmulas
-                que lo definen son contradictorias entre sí. Recordando
+                que lo definen son contradictorias entre sí. Recordemos
                 que cuando un conjunto es insatisfacible la consecuencia del 
                 mismo son todas las fórmulas.
 
@@ -3510,7 +3531,7 @@ Decidir si los siguiente conjuntos son bases.
                         Como $\exists !$ valuación que satisface a $\Gamma$ y
                         es $v \implies \alpha \in C(\Gamma)$
                         $\implies \alpha \in 
-                        \underbrace{C(\Sigma \backslash \{\alpha\})}_{\Gamma}$
+                        C(\underbrace{\Sigma \backslash \{\alpha\}}_{\Gamma})$
 
                         \begin{gather*}
                             \implies \Sigma \text{ es dependiente.}
@@ -3519,7 +3540,7 @@ Decidir si los siguiente conjuntos son bases.
                     \item Si $v(\alpha) = 0 \implies \Sigma$ es 
                         insatisfacible.
 
-                        Sea $\beta = p_i$, con $p_i \notin \mathrm{VAR}(\alpha)$.
+                        Sea $\beta = p_i$, con $p_i \notin var(\alpha)$.
                         Veamos que $\Sigma \backslash \{ \beta \}$ es
                         insatisfacible.
 
@@ -3527,21 +3548,21 @@ Decidir si los siguiente conjuntos son bases.
                         satisfacible.
                         \begin{gather*}
                             \implies \exists \; w \text{ valuación} /
-                            w(\Sigma \backslash \{\beta\} = 1
+                            w(\Sigma \backslash \{\beta\}) = 1
                         \end{gather*}
 
                         Entonces, $w(\alpha) = 1$ pues
                         $\alpha \in \Sigma \backslash \{ \beta \}$
 
-                        Además, $\frest{w}{\mathrm{VAR}(\alpha)} = 1$ y
-                        $\frest{v}{\mathrm{VAR}(\alpha)} = 1$
+                        Además, $\frest{w}{\mathrm{var}(\alpha)} = 1$ y
+                        $\frest{v}{\mathrm{var}(\alpha)} = 1$
 
                         Por lo tanto $\underbrace{w(\alpha)}_{=1} 
                             = \underbrace{v(\alpha)}_{= 0}$.
                         Lo cual es un absurdo.
 
                         \bigskip
-                        Otra forma, usando el \nameref{teo:compacidad}
+                        Otra forma, usando el \nameref{teo:compacidad}.
 
                         Recordemos: Si $v(\alpha) = 0 \implies \Sigma$ es 
                         insatisfacible.
@@ -3556,11 +3577,11 @@ Decidir si los siguiente conjuntos son bases.
 
                         Entonces
                         \begin{align*}
-                            & \underbrace{c(\Sigma')}_{\mathrm{FORM}} 
-                            \subseteq c(\Sigma \backslash \{\beta\} \\
-                            \implies & c(\Sigma \backslash \{ \beta \}) = F \\
+                            & \underbrace{C(\Sigma')}_{\mathrm{FORM}} 
+                            \subseteq C(\Sigma \backslash \{\beta\}) \\
+                            \implies & C(\Sigma \backslash \{ \beta \}) = F \\
                             \implies & \beta \in 
-                            c(\Sigma\backslash \{ \beta \})
+                            C(\Sigma\backslash \{ \beta \})
                         \end{align*}
                 \end{enumerate}
 
@@ -3585,7 +3606,7 @@ Decidir si los siguiente conjuntos son bases.
     \medskip
 
 
-    \nota{\textit{Noni:} ``Es un ``o'' común. Pueden ocurrir ambas cosas a la 
+    \nota{\textit{Noni:} ``Es un «o» común. Pueden ocurrir ambas cosas a la 
     vez o solamente una.''}%
     Entonces $\Gamma \cup \{ p_i \}$ es f.s. o $\Gamma \cup \{ \neg p_i \}$
     es f.s.
@@ -3601,7 +3622,7 @@ Si tomamos $\Gamma \cup \{ p_2 \}$, también es f.s. (por el mismo motivo) y
 $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
 
 
-\begin{proof} \phantom{.} \nota{Del Lema \ref{lema:gamma-pi-no-pi-esfs}}%
+\begin{proof}[Demostración del Lema \ref{lema:gamma-pi-no-pi-esfs}] \phantom{.}
 
     Supongo que existe $p_i \in \mathrm{VAR} / 
     \underbrace{\Gamma \cup \{ p_i \} \text{ no es f.s.}}_{\circled{1}} 
@@ -3631,8 +3652,9 @@ $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
 
 \end{enumerate}
 
-\nota{$X'\subseteq \Gamma$, $Y' \subseteq \Gamma$, 
-$\implies X'\cup Y' \subseteq \Gamma$}%
+\nota{$X', Y' \subseteq \Gamma$
+$\implies$ 
+$X'\cup Y' \subseteq \Gamma$}%
 Entonces, $X' \cup Y' \subseteq \Gamma$; $X' \cup Y'$ es finito, pues $X'$ e
 $Y'$ lo son, y como $\Gamma$ es f.s. $\implies \exists \; v \text{ valuación}/
 v(X' \cup Y') = 1$ 
@@ -3805,7 +3827,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                 \begin{proof} \phantom{.}
                 
                     \nota{\textit{Noni:} ``¡No pueden utilizar la notación
-                    $v_f(\Gamma)=0$ ! No es estándar y se presta a confusión:
+                    $v_f(\Gamma)=0$! No es estándar y se presta a confusión:
                     no queda claro si estoy diciendo que no satisface a
                     $\Gamma$ o que no satisface a ninguna fórmula de 
                     $\Gamma$.''}%
@@ -3935,7 +3957,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
 \begin{proposicion}{}{}
     \nota{\textit{Santiago:} 
-    `` ``Son equivalentes'' quiere decir que si una afirmación es válida,
+    ``«Son equivalentes» quiere decir que si una afirmación es válida,
     todas lo son.''}%
     Son equivalentes:
     \begin{enumerate}[label=\protect\circled{\arabic*}]
@@ -4049,11 +4071,11 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                 \begin{align*}
                     \implies& \Gamma \cup \{ \neg \alpha \}
                     \text{ es insatisfacible.}
-                    \notamath{Propoiedad} \\
+                    \notamath{Propiedad} \\
                     \implies& \text{ Existe } 
                     \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
                     \text{ insatisfacible} 
-                    \notamath{Por \circled{3}}
+                    \notamath{Por \circled{2}}
                 \end{align*}
 
                 Como $\Gamma' \cup \{ \neg \alpha \}$ es finito 
@@ -4117,7 +4139,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                     Como $(p_0 \wedge \neg p_0) \in C(\Gamma) = \mathrm{FORM}$
                     entonces, por \circled{3}, existe 
                     $\Gamma' \subseteq \Gamma$ tal que $\Gamma'$ es finito
-                    y $p_0 \wedge \neg p_0 \in C(\Gamma')$.
+                    y $(p_0 \wedge \neg p_0) \in C(\Gamma')$.
 
                     Pero $\Gamma'$ no es satisfacible, pues si lo fuera
                     $(p_0 \wedge \neg p_0)$ también lo sería. ¡Absurdo!
@@ -4149,7 +4171,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 \bigskip
 \textit{Observación:}
 
-Los axiomas de la Definición \ref{def:axiomas} son tautologías.
+Los \nameref{def:axiomas} son tautologías.
 
 \begin{proof} \phantom{.}
     Tarea.
@@ -4273,7 +4295,7 @@ Entonces, $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \alpha_5=\gamma \to \gamma$
             Como es una única fórmula (no hay anteriores), la única 
             posibilidad es que $\alpha$ sea un axioma. Luego, $\alpha$ es
             tautología.
-            \nota{Por la observación presentada junto a la Definición de
+            \nota{Por la observación presentada junto a la definición de
                 \nameref{def:axiomas}.}%
 
         \item HI) $\exists \; \alpha_1, \dotsc, \alpha_k = \alpha$ es prueba 
@@ -4696,10 +4718,10 @@ $\implies$ tienen que hacer una prueba.
     \begin{itemize}
         \item Versión débil:
             \begin{gather*}
-                \underbrace{\alpha \text{ demostrable}}_{\vdash \gamma} 
+                \underbrace{\alpha \text{ demostrable}}_{\vdash \, \gamma} 
                 \implies 
                 \underbrace{\alpha \text{ tautología}}_{%
-                \alpha \in C(\varnothing)}
+                \alpha \, \in \, C(\varnothing)}
             \end{gather*}
         \item Versión fuerte:
             \begin{gather*}
@@ -4861,7 +4883,7 @@ maximal consistente que lo contiene.
                 \dashbox{
                 $\Gamma_{n+1} =
                 \begin{cases}
-                    \Gamma_r \cup \{ \varphi_{n+1} \} & \text{si } \Gamma_n
+                    \Gamma_n \cup \{ \varphi_{n+1} \} & \text{si } \Gamma_n
                     \cup \{ \varphi_{n+1} \}
                                         \text{ es consistente} \\
                     \Gamma_n        & \text{sino}
@@ -4912,7 +4934,7 @@ maximal consistente que lo contiene.
                     Sea
                     \begin{gather*}
                         \Gamma_{n+1} = \begin{cases}
-                            \Gamma_r \cup \{ \varphi_{n+1} \} & \text{si } 
+                            \Gamma_n \cup \{ \varphi_{n+1} \} & \text{si } 
                                             \Gamma_n \cup \{ \varphi_{n+1} \}
                                             \text{ es consistente} \\
                         \underbrace{\Gamma_n}_{\circled{1}}  & \text{sino}
@@ -5113,7 +5135,7 @@ maximal consistente que lo contiene.
 
             Como $\varphi \notin \Gamma'$
             \begin{align*}
-                \implies& \Gamma \cup \{\varphi\} \text{ es consistente}\\
+                \implies& \Gamma \cup \{\varphi\} \text{ es inconsistente}\\
                 \implies& \Gamma' \vdash \neg\varphi
                 \notamath{Por la observación anterior.} \\
             \end{align*}
