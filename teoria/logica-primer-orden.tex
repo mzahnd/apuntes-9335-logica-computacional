@@ -15,9 +15,13 @@ necesario comenzar definiendo un alfabeto.
     El alfabeto que utilizamos para lógica de primer orden se define como:
 
     \begin{gather*}
-        A_{\mathcal{F}, \mathcal{C}, \mathcal{P}} = 
-        \mathrm{VAR} \cup \mathrm{ CONECTIVOS } \cup \{\;(\;,\; )\;\} \cup \mathcal{F}
-        \cup \mathcal{C} \cup \mathcal{P}
+        A_{\mathcal{F}, \mathcal{C}, \mathcal{P}} =
+        \mathrm{VAR}
+        \cup \mathrm{ CONECTIVOS }
+        \cup \{\;(\;,\; )\;\}
+        \cup \mathcal{F}
+        \cup \mathcal{C}
+        \cup \mathcal{P}
     \end{gather*}
 
     \medskip
@@ -43,7 +47,7 @@ necesario comenzar definiendo un alfabeto.
     \bigskip
     \textbf{Notación:}
     $f_i^k, g_i^k, h_i^k$
-    \nota{$k$ se denomina ``ariedad''}%
+    \nota{$k$ se denomina ``aridad''}%
 
     \item $\mathcal{C} = $ es un conjunto cuyos elementos se llaman símbolos de
     constantes.
@@ -59,7 +63,7 @@ necesario comenzar definiendo un alfabeto.
     \bigskip
     \textbf{Notación:}
     $P_i^k, Q_i^k, R_i^k$
-    \nota{$k$ se denomina ``ariedad''}%
+    \nota{$k$ se denomina ``aridad''}%
     \end{itemize}
 \end{definicion}
 
@@ -172,6 +176,10 @@ estamos definiendo infinitos alfabetos que dependen de estos tres conjuntos.
     \begin{gather*}
         \mathcal{L} = \mathrm{FORM} \cup \mathrm{TERM}
     \end{gather*}
+
+    \bigskip
+    \textbf{Notación:}
+    $\mathcal{L} = <\mathcal{C}, \mathcal{F}, \mathcal{P}>$
 \end{definicion}
 
 
@@ -218,7 +226,8 @@ veamos primero los siguiente ejemplos.
 \medskip
 
 \begin{definicion}{Enunciado}{}
-    Una fórmula se llama enunciado si todas sus variables están ligadas.
+    Una fórmula se llama \textit{enunciado} o \textit{sentencia} si todas sus 
+    variables están ligadas.
 \end{definicion}
 
 
@@ -274,7 +283,7 @@ veamos primero los siguiente ejemplos.
 
     \medskip
 
-    $\mathcal{I}$ se llama \textit{interpretación} de $\mathcal{L}$ o se llama
+    $\mathcal{I}$ se llama \textit{interpretación de $\mathcal{L}$} o
    $\mathcal{L}\mathrm{-}estructura$.
 \end{definicion}
 
@@ -353,9 +362,7 @@ Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden tal que:
 \begin{definicion}{Valuación}{}
     Dado un lenguaje de primer orden y una interpretación $\mathcal{I}$ de
     $\mathcal{L}$, definimos valuación como una función 
-    \begin{gather*}
-        v: \mathrm{VAR} \to \mathcal{U}
-    \end{gather*}
+    $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$.
 \end{definicion}
 
 \medskip
@@ -388,7 +395,8 @@ Definamos para ello una extensión de $v$.
 \begin{definicion}{Valuación modificada}{}
     Dada $v$ valuación, definimos valuación modificada como:
     \begin{gather*}
-        v_{x_{1} = a}: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}} / v(x)_{x_{1}=a} =
+        v_{x_{1} = a}: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}} / 
+        v_{x_{1}=a}(x) =
         \begin{cases}
             v(x) & \text{si } x \neq x_1 \\
             a & \text{si } x = x_1
@@ -556,110 +564,267 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
             \{ 1-V_{\mathcal{I}, v}(\beta_1), V_{\mathcal{I}, v}(\beta_2) \}
         \end{gather*}
 
-    \item $\alpha = \forall x \quad \beta$
-        \nota{$\beta \in \mathrm{FORM}$, $x \in \mathrm{VAR}$}%
+    \item $\alpha = \forall x_i \quad \beta$
+        \nota{$\beta \in \mathrm{FORM}$, $x_i \in \mathrm{VAR}$\\
+        Es decir, el valor de verdad es 1 si es verdadero en $\beta$ sin
+        importar $x_i$. 
+        No importa qué hace la valuación original en $x_i$, solamente importa 
+        qué hace la de $\beta$.}%
         \begin{gather*}
             V_{\mathcal{I}, v}(\alpha) = 1 \iff
-            V_{\mathcal{I}, v_{x=a}}(\beta) = 1
+            V_{\mathcal{I}, v_{x_i=a}}(\beta) = 1
         \end{gather*}
         Para todo elemento $a \in \mathcal{U}_{\mathcal{I}}$.
-
-    \item $\alpha = \exists x \quad \beta$
+    \item $\alpha = \exists x_i \quad \beta$
         \begin{gather*}
             V_{\mathcal{I}, v}(\alpha) = 1 \iff
-            V_{\mathcal{I}, v_{x=a}}(\beta) = 1
+            V_{\mathcal{I}, v_{x_i=a}}(\beta) = 1
         \end{gather*}
         Para algún $a \in \mathcal{U}_{\mathcal{I}}$.
 \end{enumerate}     
 \end{definicion}
 
+\bigskip
+\textit{Observación:}
+Si $\alpha$ es enunciado, entonces $V_{\mathcal{I}, v}(\alpha)$ no depende
+de $v$.
 
-\subsubsection{Ejemplo}
+Es decir, si cambiamos $v$ por $w$ valuación $\implies$ 
+\nota{$\forall v, w$ valuación}%
+$V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
 
-Dado $\mathcal{I} = ( \mathbb{Z}, \;
-    0 , \;
-    + , \;
-    \{ (x,y)/x \equiv y(2) \})$,
-$v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
+\subsubsection{Ejemplos}
 
-\underline{Hallar $V_{\mathcal{I}, v} (\alpha)$ }
+\begin{itemize}
+    \item Dado $\mathcal{I} = ( \mathbb{Z}, \;
+        0 , \;
+        + , \;
+        \{ (x,y)/x \equiv y(2) \})$,
+    $v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
+    
+    \underline{Hallar $V_{\mathcal{I}, v} (\alpha)$ }
+    
+    \begin{enumerate}
+        \item $\alpha = P(x_1, x_4)$
+            \begin{align*}
+                V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                &\iff (\bar{v}(x_1), \bar{v}(x_4)) \in P_{\mathcal{I}} \\
+                &\iff \bar{v}(x_1) \equiv \bar{v}(x_4) \; (2) \\
+                &\iff v(x_1) \equiv v(x_4) \; (2) \\
+                &\iff 2 \, . \, 1 \equiv 2 \, . \, 4 \; (2) \\
+                &\iff 0 \equiv 0 \; (2)
+            \end{align*}
+    
+            \begin{gather*}
+                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+            \end{gather*}
+    
+        \item $\alpha = \forall x_1 \quad \forall x_2 \quad P(x_1, x_2)$
+            \begin{align*}
+                V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                &\iff V_{\mathcal{I}, {v_{x_1 = a}}}
+                    (\forall x_2 \quad P(x_1,x_2)) = 1
+                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$}\\
+                &\iff V_{\mathcal{I}, {v_{x_1 = a, x_2 = b}}} (P(x_1,x_2))=1 \\
+                &\iff (\bar{v}_{x_1 = a, x_2 = b} (x_1),
+                \bar{v}_{x_1 = a, x_2 = b} (x_2)) \in P_{\mathcal{I}} 
+                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
+                y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
+                &\iff v_{x_1 = a, x_2 = b} (x_1) \equiv 
+                v_{x_1 = a, x_2 = b} (x_2) \; (2) \\
+                &\iff a \equiv b \; (2)
+                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
+                y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
+            \end{align*}
+    
+            Es falso pues basta tomar $a=1$, $b=0$ y $1 \not\equiv 0 \; (2)$
+            \begin{center}
+                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 0$}
+            \end{center}
+    
+        \item $\alpha = \forall x \quad \exists \; y \quad P(x,y)$
+            \begin{align*}
+                V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                &\iff V_{\mathcal{I}, v_{x=a}}(\exists \quad P(x,y)) = 1
+                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$} \\
+                &\iff V_{\mathcal{I}, v_{x=a, y=b}}(P(x,y)) = 1
+                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$ existe
+                $b \in \mathcal{U}_{\mathcal{I}}$} \\
+                &\iff \text{Dado $a \in \mathcal{U}$, existe } 
+                b \in \mathcal{U} /
+                a \equiv b (2)
+            \end{align*}
+    
+            Esto es verdadero pues basta tomar $b=a$.
+            \begin{gather*}
+                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+            \end{gather*}
+    
+        \item $\exists \; y \quad \forall x \quad P(x,y)$
+            \begin{align*}
+             V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                &\iff V_{\mathcal{I}, v_{y=b}}(\forall x \quad P(x,y)) = 1
+                \notamath{Para algún $b \in \mathcal{U}_{\mathcal{I}}$} \\
+                &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
+                V_{\mathcal{I}, v_{y=b,x=a}}(P(x,y)) = 1
+                \notamath{Para todo $a \in \mathcal{U}_{\mathcal{I}}$} \\
+                &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
+                a \equiv b(2)
+                \notamath{Para todo $a \in \mathcal{U_{\mathcal{I}}}$}
+            \end{align*}
+    
+            Siendo esta última afirmación falsa.
+    
+            Fijo $b \in \mathcal{U}$ y tomo $a = b+1$
+            \begin{gather*}
+                \implies 1 \equiv 0 (2)
+            \end{gather*}
+            ¡Lo cual es un absurdo!
+    \end{enumerate}
 
-\begin{enumerate}
-    \item $\alpha = P(x_1, x_4)$
-        \begin{align*}
-            V_{\mathcal{I}, v}(\alpha) &= 1  \\
-            &\iff (\bar{v}(x_1), \bar{v}(x_4)) \in P_{\mathcal{I}} \\
-            &\iff \bar{v}(x_1) \equiv \bar{v}(x_4) \; (2) \\
-            &\iff v(x_1) \equiv v(x_4) \; (2) \\
-            &\iff 2 \, . \, 1 \equiv 2 \, . \, 4 \; (2) \\
-            &\iff 0 \equiv 0 \; (2)
-        \end{align*}
+    \item $\mathcal{L} = <\{ c \}, \{ f^1 \}, \{ P^2 \}>$
+
+        \begin{itemize}
+            \item $\mathcal{U}_{\mathcal{I}} = \mathbb{N}$
+            \item $c_{\mathcal{I}} = 0$
+            \item $f_{\mathcal{I}}^{1} = \mathbb{N} \to \mathbb{N}/$
+            $f_{\mathcal{I}}^{1} (n) = 3n$
+            \item $\mathcal{P}_{\mathcal{I}}^{2} = 
+                \{ (x,y) \in \mathbb{N}^2 / \divides{x}{y} \}$
+            \item $v: \mathrm{VAR} \to \mathbb{N}:$
+                \nota{$\forall i \in \mathbb{N}$}%
+                $v(x_i) = 1$ 
+        \end{itemize}
 
         \begin{gather*}
-            \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+            \alpha = \forall x_1 ~ \exists x_2 ~ 
+            \left( P^2(x,c) \to P^2(f'(x_2),f'(x_1))\right)
         \end{gather*}
 
-    \item $\alpha = \forall x_1 \quad \forall x_2 \quad P(x_1, x_2)$
         \begin{align*}
-            V_{\mathcal{I}, v}(\alpha) &= 1  \\
-            &\iff V_{\mathcal{I}, {v_{x_1 = a}}}
-                (\forall x_2 \quad P(x_1,x_2)) = 1
-            \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$}\\
-            &\iff V_{\mathcal{I}, {v_{x_1 = a, x_2 = b}}} (P(x_1,x_2))=1 \\
-            &\iff (\bar{v}_{x_1 = a, x_2 = b} (x_1),
-            \bar{v}_{x_1 = a, x_2 = b} (x_2)) \in P_{\mathcal{I}} 
-            \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
-            y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
-            &\iff v_{x_1 = a, x_2 = b} (x_1) \equiv 
-            v_{x_1 = a, x_2 = b} (x_2) \; (2) \\
-            &\iff a \equiv b \; (2)
-            \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
-            y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
+            V_{\mathcal{I}, v}(\alpha) = 1 \iff& 
+            \text{si } \forall a \in \mathcal{U}_{\mathcal{I}} = \mathbb{N}
+            \text{ vale que} \\
+            & V_{\mathcal{I}, v_{x_1 = a}} \left(\exists x_2 ~ 
+            \left( P^2(x,c) \to P^2(f'(x_2),f'(x_1))\right)\right) \\
+            \iff& \text{si } \forall a \in \mathbb{N} ~ 
+            \exists \; b \in \mathbb{N} \text{ tal que}\\
+            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}}
+            \left(P^2(x,c)\to P^2(f'(x_2), f'(x_1))\right) = 1 \\
+            \iff& \forall a \in \mathbb{N} ~ 
+            \exists \; b \in \mathbb{N} \text{ tal que}\\
+            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
+            \\ & \text{ ó }\\
+            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
+            \left(P^2(f'(x_2), f'(x_1))\right) = 1
         \end{align*}
 
-        Es falso pues basta tomar $a=1$, $b=0$ y $1 \not\equiv 0 \; (2)$
-        \begin{center}
-            \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 0$}
-        \end{center}
-
-    \item $\alpha = \forall x \quad \exists \; y \quad P(x,y)$
+        Luego,
         \begin{align*}
-            V_{\mathcal{I}, v}(\alpha) &= 1  \\
-            &\iff V_{\mathcal{I}, v_{x=a}}(\exists \quad P(x,y)) = 1
-            \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$} \\
-            &\iff V_{\mathcal{I}, v_{x=a, y=b}}(P(x,y)) = 1
-            \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$ existe
-            $b \in \mathcal{U}_{\mathcal{I}}$} \\
-            &\iff \text{Dado $a \in \mathcal{U}$, existe } b \in \mathcal{U} /
-            a \equiv b (2)
+            V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
+            &\iff (\bar{v}_{x_1 = a, x_2 = b}, \bar{v}(c)) 
+            \notin P^2_{\mathcal{I}} \\
+            &\iff \notdivides{a}{0}
+        \end{align*}
+        Y
+        \begin{align*}
+            V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
+            \left(P^2(f'(x_2), f'(x_1))\right) = 1
+            &\iff (3b, 3a) \in P^2_{\mathcal{I}} \\
+            &\iff \divides{3b}{3a}
         \end{align*}
 
-        Esto es verdadero pues basta tomar $b=a$.
+        Y esto ocurre sí y sólo sí $\forall a \in \mathbb{N}$, 
+        $\exists \; b \in \mathbb{N} /$ 
+        $\notdivides{a}{0}$
+        o
+        $\divides{3b}{3a}$
+
+        Tomando
+        $a \neq 0 \implies b = 1$ 
+        cumple que 
+        $\divides{3b}{3a}$.
+
+        Por otra parte, si 
+        $a = 0 \implies b = 0 \implies$
+        $\divides{3\, . \, 0 = 0}{3\, . \, 0 = 0}$
+
         \begin{gather*}
-            \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+            \therefore ~ V_{\mathcal{I}, v}(\alpha) = 1
         \end{gather*}
 
-    \item $\exists \; y \quad \forall x \quad P(x,y)$
+    \item Dado 
+        \nota{Esto se lee como 
+        $\mathcal{L} = <\varnothing, \{ f^2 \}, \{ = \}>$}%
+        $\mathcal{I} = \left(\mathbb{R}, +, =\right)$ 
+        y
+        $\alpha = \forall x ~ \forall y ~ (f^2(x,y) = f^2(y,x))$, 
+        interpretar $\alpha$.
+
+        Al interpretar $\alpha$ en $\mathcal{I}$, expresa la propiedad
+        \begin{gather*}
+            \notamath{Es cierto $\forall$ valuación}
+            \forall x \in \mathbb{R} ~ \forall y \in \mathbb{R} ~
+            (x + y = y + x)
+        \end{gather*}
+
+        $\alpha$ es válida en $\mathcal{I}$.
+
+    \item $\mathcal{J} = (\mathbb{R}, -, =)$
+
+        $\alpha$ se interpreta como
+        \begin{gather*}
+            \forall x, y \in \mathbb{R} ~ (x - y = y - x)
+        \end{gather*}
+
+        No es cierto, pues si $x = 1$ e $y = 2$, entonces $\alpha$ no es
+        válida en $\mathcal{J}$.
+
+        Por lo tanto, $\alpha$ \underline{no} es universalmente válida.
+
+    \item $\mathcal{L} = <\varnothing, \varnothing, \{ P^1 \}>$,
+        $\alpha = (\forall x ~ P^1(x)) \to P^1(x)$
+
+        Sea $\mathcal{I}$ interpretación. 
+        $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$ valuación.
+
         \begin{align*}
-         V_{\mathcal{I}, v}(\alpha) &= 1  \\
-            &\iff V_{\mathcal{I}, v_{y=b}}(\forall x \quad P(x,y)) = 1
-            \notamath{Para algún $b \in \mathcal{U}_{\mathcal{I}}$} \\
-            &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
-            V_{\mathcal{I}, v_{y=b,x=a}}(P(x,y)) = 1
-            \notamath{Para todo $a \in \mathcal{U}_{\mathcal{I}}$} \\
-            &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
-            a \equiv b(2)
-            \notamath{Para todo $a \in \mathcal{U_{\mathcal{I}}}$}
+            V_{\mathcal{I}, v}(\alpha) = 1 &\iff
+            V_{\mathcal{I}, v}(\forall x ~ P^1(x)) = 0 
+            \text{ o }
+            V_{\mathcal{I}, v}(P^1(x)) = 1 \\
+            &\iff \left(\exists \; a \in \mathcal{U}_{\mathcal{I}} 
+                \text{ tal que } a \notin P^1_{\mathcal{I}}\right)
+            \text{ o }
+            \left(v(x) \in P^1_{\mathcal{I}}\right)
         \end{align*}
 
-        Siendo esta última afirmación falsa.
-
-        Fijo $b \in \mathcal{U}$ y tomo $a = b+1$
-        \begin{gather*}
-            \implies 1 \equiv 0 (2)
-        \end{gather*}
-        ¡Lo cual es un absurdo!
-\end{enumerate}
+        \begin{enumerate}[%
+                        labelindent=*,
+                        style=multiline,
+                        leftmargin=*,
+                        align=left,
+                        leftmargin=2\parindent,
+                        label=Caso \arabic*)]
+            \item Si $v(x) \in P^1_{\mathcal{I}}$
+                $\implies$
+                $V_{\mathcal{I}, v}(\alpha) = 1$
+            \item Si $v(x) \notin P^1_{\mathcal{I}}$
+                $\implies$
+                $v(x) = b \in \mathcal{U}_{\mathcal{I}}$ y cumple que
+                $b \notin P^1_{\mathcal{I}}$
+                $\implies$
+                \nota{$a = b$}%
+                $\exists \; a \in \mathcal{U}_{\mathcal{I}} / 
+                a \notin P^1_{\mathcal{I}}$
+                $\implies$
+                $V_{\mathcal{I}, v}(\alpha) = 1$
+        \end{enumerate}
+        
+        Por lo tanto, vale $\forall \mathcal{F}$, $\forall v$
+        $\implies$
+        $\alpha$ es universalmente válido.
+\end{itemize}
 
 \subsection{Igualdad}
 
@@ -672,7 +837,8 @@ $v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
 
 Sea $\mathcal{L}$ un lenguaje con igualdad.
 
-Hallar $\alpha \in \mathrm{FORM} / \{ \mathcal{I} / \mathcal{I} \vDash \alpha \}$
+Hallar 
+$\alpha \in \mathrm{FORM} / \{ \mathcal{I} / \mathcal{I} \vDash \alpha \}$
 es la clase de modelos cuyo universo tiene exactamente 2 elementos.
 
 Propongo
@@ -709,8 +875,51 @@ Ahora probemos que cumple con lo pedido.
         \end{gather*}
 \end{enumerate}
 
+\subsection{Propiedades}
+
+\begin{enumerate}
+    \item $\vDash \alpha \iff \neg \alpha$ es insatisfacible.
+    \item $\begin{rcases*}
+            \mathcal{I} \vDash \alpha[v] & \\
+            \mathcal{I} \vDash \alpha \to \beta[v] &
+        \end{rcases*}
+        \mathcal{I} \vDash \beta[v]$
+    \item Idem anterior, sacando $v$ e $\mathcal{I}$.
+    \item $\mathcal{I} \vDash \alpha
+        \implies
+        \mathcal{I} \vDash \forall x_i \alpha$
+    \item $\vDash \alpha \implies \vDash \forall x_i \alpha$
+\end{enumerate}
+
+\begin{proof} 
+    Tarea.
+\end{proof}
 
 \section{Conjuntos expresables}
+
+\begin{definicion}{Consecuencia}{}
+    Dado $\mathcal{L}$ un lenguaje de primer orden y 
+    $\Gamma \subseteq \mathrm{FORM}(\mathcal{L})$
+    y
+    $\alpha \in \mathrm{FORM}(\mathcal{L})$
+
+    \medskip
+
+    Decimos que $\alpha$ es consecuencia de $\Gamma$ si
+    $\forall \mathcal{I}$ interpretación y toda valuación 
+    $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$
+    que cumple
+    $\left(\mathcal{I} \vDash \gamma[v] ~ \forall \gamma \in \Gamma\right)$
+    \begin{gather*}
+        \implies \mathcal{I} \vDash \alpha [v]
+    \end{gather*}
+
+    \bigskip
+    \textbf{Notación:}
+    $\Gamma \vDash \alpha$
+\end{definicion}
+
+\medskip
 
 \begin{definicion}{Conjuntos expresables}{}
     Sea $\mathcal{L}$ un lenguaje de primer orden.
@@ -722,19 +931,21 @@ Ahora probemos que cumple con lo pedido.
 
     \medskip
 
-    Decimos que $A$ es expresable en $\mathcal{I}$ si existe 
+    Decimos que $A$ es \textit{expresable} o \textit{definible} en 
+    $\mathcal{I}$ si existe 
     $\alpha \in \mathrm{FORM}$ con una única  variable libre y todas las demás 
     variables ligadas tal que
     \nota{Decimos que $\alpha(x)$ expresa $A$.}%
     \begin{gather*}
-        V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff x \in A
+        V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff a \in A
     \end{gather*}
 
     \medskip
 
     Dicho de otro modo:
     \begin{gather*}
-        A = \{ a \in \mathcal{U} / V_{\mathcal{I}, v_{x=a}} (\alpha(x))=1 \}
+        A = \{ a \in \mathcal{U}_{\mathcal{I}} /
+        V_{\mathcal{I}, v_{x=a}} (\alpha(x))=1 \}
     \end{gather*}
     Es decir
     \begin{gather*}
@@ -747,9 +958,43 @@ Ahora probemos que cumple con lo pedido.
     $\alpha(x)$, donde $x$ es la variable libre.
 \end{definicion}
 
+\bigskip
+\textit{Observación:}
+\underline{No} depende de $v$ pues las otras variables de $\alpha$ están 
+ligadas.
+
 \subsubsection{Ejemplos}
 
 \begin{itemize}
+    \item $\mathcal{I} = (\mathbb{Z}, -)$,
+        $\alpha(x) = \forall y (f^2(x,y) = f^2(y,x))$
+
+        \begin{align*}
+            V_{\mathcal{I}, v_{x = a}}(\alpha(x)) = 1 
+            &\iff
+            \forall y \in \mathbb{Z} ~ (\underbrace{a - y = y - a}_{%
+            \substack{x = a\\ 2a = 2y}}) \\
+            &\iff \forall y ~ a = y
+        \end{align*}
+
+        No importa $a$ siempre falso. Contraejemplo: $y = a - 1$
+        \begin{gather*}
+            \therefore ~ A = \varnothing
+        \end{gather*}
+
+    \item $\left(\mathbb{N}, +\right)$,
+        $\alpha(x) = \exists \; y ~ (f^2(y,y) = x)$
+
+        \begin{align*}
+            V_{\mathcal{I}, v_{x=a}}(\alpha(x)) = 1
+            &\iff \exists \; y \in \mathbb{N} / y + y = a\\
+            &\iff \exists \; y \in \mathbb{N} / 2 y = a \\
+            &\iff a \text{ es par}
+        \end{align*}
+        \begin{gather*}
+            \therefore ~ A = \{ n \in \mathbb{N} / n \text{ par} \}
+        \end{gather*}
+
     \item Sea $\mathcal{L}$ de primer orden con $=$ y $f^2$; 
         $\mathcal{I}=(\mathbb{R}, \cdot)$; $A = \{ 1, -1, 0 \}$.
 
@@ -1016,7 +1261,7 @@ $\mathcal{U}$.
         también lo es.''}%
         expresable.
     \item $A, B \subseteq \mathcal{U}$ expresables $\implies$ $A \cap B$,
-        $A \cup B$ son expresables.
+        $A \cup B$, $A - B$ y $A \triangle B$ son expresables.
     \item $\varnothing$ es expresable y $\mathcal{U}$ es expresable.
 \end{enumerate}
 
@@ -1057,6 +1302,8 @@ $\mathcal{U}$.
                         \implies  A \cap B \text{ es expresable.}
                     \end{gather*}
                 \item Unión: tarea. 
+                \item Diferencia: tarea. 
+                \item Diferencia simétrica: tarea. 
             \end{enumerate}
 
         \item $\mathcal{L}$ de 1\textsuperscript{er.} orden $\implies$
