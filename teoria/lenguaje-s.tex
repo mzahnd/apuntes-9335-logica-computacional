@@ -198,13 +198,13 @@
 
         Dado el siguiente programa
         \begin{align*}
-            [A_1] \quad &IF ~ X_1 \neq 0 \quad GOTO ~ B_1 \\
+            [A] \quad &IF ~ X_1 \neq 0 \quad GOTO ~ B \\
                         &Z_1 \gets Z_1 + 1 \\
-                        &IF ~ Z_1 \neq 0 \quad GOTO ~ E_1 \\
-            [B_1] \quad &X_1 \gets X_1 - 1 \\
+                        &IF ~ Z_1 \neq 0 \quad GOTO ~ E \\
+            [B] \quad &X_1 \gets X_1 - 1 \\
                         &Y \gets Y + 1 \\
                         &Z_1 \gets Z_1 + 1 \\
-                        &IF ~ Z_1 \neq 0 \quad GOTO ~ A_1
+                        &IF ~ Z_1 \neq 0 \quad GOTO ~ A
         \end{align*}
 
         Como la etiqueta $E_1$ no antecede a ninguna instrucción, cuando el
@@ -249,6 +249,9 @@ programa.
             &IF ~ V \neq 0 \quad GOTO ~ L
         \end{align*}
 
+        Donde $V$ es una variable temporal que no aparece en el resto del 
+        código.
+
     \item La macro \textit{asignación de cero} se representa como:
         \begin{gather*}
             V \gets 0
@@ -259,6 +262,8 @@ programa.
             [L] \quad &V \gets V - 1 \\
                       &IF ~ V \neq 0 \quad GOTO ~ L
         \end{align*}
+
+        Donde $L$ es una etiqueta que no aparece en el resto del programa.
 
     \item La macro \textit{asignación de variable} se representa como
         \begin{gather*}
@@ -271,17 +276,17 @@ programa.
         macro. Lo mismo para la variable auxiliar.}%
         \begin{align*}
                         &V_1 \gets 0 \\
-            [A_1] \quad &IF ~ V_2 \neq 0 \quad GOTO ~ B_1 \\
-                        &GOTO ~ C_1 \\
-            [B_1] \quad &V_2 \gets V_2 -1 \\
+            [L_1] \quad &IF ~ V_2 \neq 0 \quad GOTO ~ L_2 \\
+                        &GOTO ~ L_3 \\
+            [L_2] \quad &V_2 \gets V_2 -1 \\
                         &V_1 \gets V_1 + 1 \\
                         &Z_1 \gets Z_1 + 1 \\
-                        &GOTO ~ A_1 \\
-            [C_1] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ D_1 \\
-                        &GOTO ~ E_1 \\
-            [D_1] \quad &Z_1 \gets Z_1 - 1 \\
+                        &GOTO ~ L_1 \\
+            [L_3] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ L_4 \\
+                        &GOTO ~ L_5 \\
+            [L_4] \quad &Z_1 \gets Z_1 - 1 \\
                         &V_2 \gets V_2 + 1 \\
-                        &GOTO ~ C_1
+                        &GOTO ~ L_3
         \end{align*}
 
         \bigskip
@@ -303,12 +308,17 @@ programa.
         \begin{align*}
                         &Y \gets X_1 \\
                         &Z_1 \gets X_2 \\
-            [C_1] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ B_1 \\
-                        &GOTO ~ E_1 \\
-            [B_1] \quad &Z_1 \gets Z_1 - 1 \\
+            [B] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ A \\
+                        &GOTO ~ E \\
+            [A] \quad &Z_1 \gets Z_1 - 1 \\
                         &Y \gets Y + 1 \\
-                        &GOTO ~ C_1
+                        &GOTO ~ B
         \end{align*}
+
+        A partir de ahora podemos usar el macro
+        \begin{gather*}
+            V_1 \gets V_2 + V_3
+        \end{gather*}
 
     \item \textbf{Función producto} \label{ej:funcion-producto}
 
@@ -317,18 +327,18 @@ programa.
 
         \begin{align*}
                         &Z_2 \gets X_2 \\
-            [B_1] \quad &IF ~ Z_2 \neq 0 \quad GOTO ~ A_1 \\
-                        &GOTO ~ E_1 \\
-            [A_1] \quad &Z_2 \gets Z_2 - 1 \\
+            [B] \quad &IF ~ Z_2 \neq 0 \quad GOTO ~ A \\
+                        &GOTO ~ E \\
+            [A] \quad &Z_2 \gets Z_2 + 1 \\
                         &Z_1 \gets X_1 + Y \\
                         &Y \gets Z_1 \\
-                        &GOTO ~ B_1
+                        &GOTO ~ B
         \end{align*}
 
     \item \textbf{Función sucesor} \label{ej:funcion-sucesor}
 
         El siguiente programa computa la función
-        $f: \mathbb{N} \to \mathbb{N} / f(x) = x + 1$
+        $suc \mathbb{N} \to \mathbb{N} / suc(x) = x + 1$
 
         \begin{align*}
             &Y \gets X_1 \\
@@ -337,19 +347,44 @@ programa.
 
     \item \textbf{Función proyección} \label{ej:funcion-proyeccion}
 
+        \nota{$1 \leq i \leq k$}%
+        $\Pi^k_i: {\mathbb{N}}^k \to \mathbb{N} / 
+        \Pi_i (x_1, \dotsc, x_i, \dotsc, x_k) = x_i$
+
         Basta con cambiarle al programa que computa la función identidad su 
         variable $X_1$ por la variable $X_i$, 
         donde $X_i$ es la i-ésima variable que se quiere proyectar.
 
-
-        \nota{$1 \leq i \leq n$}%
-        $\Pi_i: {\mathbb{N}}^k \to \mathbb{N} / 
-        \Pi_i (x_1, \dotsc, x_i, \dotsc, x_n) = x_i$
-
         \begin{align*}
-            &Y \gets X_i \\
+            &Y \gets X_i
         \end{align*}
 \end{itemize}
+
+\bigskip
+\textit{Observación:}
+Si podemos programar la función $f: \mathbb{N}^k \to \mathbb{N}$, entonces
+podemos implementar el macro
+\begin{gather*}
+    Z \gets f(V_1, \dotsc, V_k)
+\end{gather*}
+
+Si $\mathcal{P}$ es el programa  de $f$, cambio las apariciones de $Y$ por la
+variable $Z$ y después las apariciones de $X_1, \dotsc, X_k$ por 
+$V_1, \dotsc, V_k$, respectivamente, y el macro se expande como
+\begin{gather*}
+   \begin{aligned}
+        Z_1 &\gets V_1 \\
+        Z_2 &\gets V_2 \\
+          &\vdots \\
+        Z_k &\gets V_k \\
+        \mathcal{P} \\
+        V_n &\gets Z_1 \\
+          &\vdots \\
+        V_k &\gets Z_k \\
+    \end{aligned}
+    \notamath{$Z_1, \dotsc, Z_k$ no aparecen en $\mathcal{P}$ ni en el resto 
+    del programa}
+\end{gather*}
 
 \section{Descripciones de programas}
 
@@ -395,7 +430,7 @@ Por otra parte, las siguientes secuencias \underline{no} son estados:
     X_1 = 2, Z_1 = 3 \quad \text{Falta una ecuación asociada a la 
     variable } Y \\
     Y = 1, X_1 = 6, Y = 2 \quad \text{Hay dos secuencias asociadas a la 
-    variable} Y
+    variable } Y
 \end{align*}
 
 \subsection{Descripción instantánea de un programa o Snapshot}
@@ -469,9 +504,9 @@ Por otra parte, las siguientes secuencias \underline{no} son estados:
 
 Para el siguiente programa $\mathcal{P}$:
 \begin{align*}
-    [A_1] \quad &X_1 \gets X_1 - 1 \\
+    [A] \quad &X_1 \gets X_1 - 1 \\
                 &Y \gets Y + 1 \\
-                &IF ~ X_1 \neq 0 \quad GOTO ~ A_1
+                &IF ~ X_1 \neq 0 \quad GOTO ~ A
 \end{align*}
 
 El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
@@ -519,7 +554,7 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
             \bigskip
             \textbf{Notación:}
-            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m)$ es el valor de $Y$
+            $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k)$ es el valor de $Y$
             en la descripción instantánea $d_k$.
 
         \item Existe una secuencia infinita $d_1, d_2, \dotsc$ siendo
@@ -528,8 +563,8 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
             \bigskip
             \textbf{Notación:}
-            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m) = \uparrow$ significa
-            que $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_m)$ está indefinido.
+            $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k) = \uparrow$ significa
+            que $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k)$ está indefinido.
     \end{enumerate}
 \end{definicion}
 
@@ -544,8 +579,8 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
     Donde si $x = (x_1, \dotsc, x_k) \in \mathbb{N}^k$ entonces
     \begin{itemize}
         \item Si $x \in Dom(f) \implies$
-            \nota{Para todo \\$(u_1, \dotsc, u_m) \in \mathbb{N}^m$}%
-            $f(u_1, \dotsc, u_m) = \Psi_{\mathcal{P}}^m (u_1, \dotsc, u_m)$
+            \nota{Para todo \\$(u_1, \dotsc, u_m) \in \mathbb{N}^k$}%
+            $f(u_1, \dotsc, u_k) = \Psi_{\mathcal{P}}^k (u_1, \dotsc, u_k)$
     \item Si $x \notin Dom(f) \implies$
             $\Psi_{\mathcal{P}}^k (x_1, \dotsc, x_k) = \uparrow$
     \end{itemize}
@@ -563,8 +598,10 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
 \medskip
 
-\begin{definicion}{Función computable}{}
-    Una función $f: \mathbb{N}^k \to \mathbb{N}$ es computable si es 
+\nota{Noni la llama \\``computable'' a secas;
+    Santiago usa el nombre completo: ``total computable''.}
+\begin{definicion}{Función total computable}{}
+    Una función $f: \mathbb{N}^k \to \mathbb{N}$ es total computable si es 
     parcialmente computable y total.
 \end{definicion}
 
@@ -615,25 +652,24 @@ $\{0\}$, siendo $f: \{ 0 \} \to \mathbb{N} / f(0) = 0$.
 \section{Teorema}
 
 \begin{teorema}{Composición de funciones computables}{composicion-computables}
-    Sean $f: \mathbb{N}^k \to \mathbb{N}$,
+    Sea $f: \mathbb{N}^k \to \mathbb{N}$ (parcialmente) computable,
 
-    \phantom{Sean }$g_1, g_2, \dotsc, g_k: \mathbb{N}^m \to \mathbb{N}$, y
-
-    \phantom{Sean }$h: \mathbb{N}^m \to \mathbb{N}$ tales que
-
-    \smallskip
-
-    $h(x_1, \dotsc, x_m) = f(g_1 (x_1, \dotsc, x_m), g_2 (x_1, \dotsc, x_m),
-    \dotsc, g_k (x_1, \dotsc, x_m))$
-
-    \smallskip
-
-    Es decir, $h = f \circ (g_1 \times g_2 \times \dotsc \times g_k)$
+    Sean $g_1, g_2, \dotsc, g_k: \mathbb{N}^m \to \mathbb{N}$ (parcialmente) 
+    computables
 
     \medskip
 
-    Si $f, g_1, g_2, \dotsc, g_k$ son (parcialmente) computables, entonces $h$ es
-    (parcialmente) computable.
+    Entonces $h: \mathbb{N}^m \to \mathbb{N}$ tal que
+    \begin{gather*}
+        \notamath{Es decir: \\
+        $h = f \circ (g_1 \times g_2 \times \dotsc \times g_k)$}%
+        h(x_1, \dotsc, x_m) = f(g_1 (x_1, \dotsc, x_m), g_2 (x_1, \dotsc, x_m),
+    \dotsc, g_k (x_1, \dotsc, x_m))
+    \end{gather*}
+
+    \smallskip
+
+    es (parcialmente) computable.
 \end{teorema}
 
 \begin{proof} \phantom{.}

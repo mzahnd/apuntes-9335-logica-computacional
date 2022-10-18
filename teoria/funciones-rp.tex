@@ -7,8 +7,7 @@
 
 \section{Esquemas recursivos}
 
-\nota{ERI}%
-\begin{definicion}{Esquema recursivo Tipo I}{}
+\begin{definicion}{Esquema de recursión primitiva tipo I}{}
     Sea $h: \mathbb{N} \to \mathbb{N}$
     
     Sea $g: \mathbb{N}^2 \to \mathbb{N}$
@@ -26,6 +25,7 @@
 \medskip
 
 \begin{teorema}{}{}
+    \nota{ERI: ``Esquema Recursivo Primitivo tipo 1''}%
     Si $h$ se obtiene a partir de $g$ por un ERI y $g$ es computable, 
     entonces $h$ es computable.
 \end{teorema}
@@ -33,12 +33,12 @@
 \begin{proof} \phantom{.}
     \begin{align*}
         &Y \gets K \\
-        [A_1] \quad &IF ~ X_1 = 0 \quad GOTO ~ E_1 
+        [A] \quad &IF ~ X_1 = 0 \quad GOTO ~ E 
         \notamath{Def. en ej. de la práctica}\\
         &Y \gets g(Z_1, Y) \\
         &Z_1 \gets Z_1 + 1 \\
         &X_1 \gets X_1 - 1 \\
-        &GOTO ~ A_1
+        &GOTO ~ A
     \end{align*}
 
     Notemos que
@@ -87,7 +87,7 @@ $g$ es computable por ser composición de funciones computables
 \bigskip
 
 \nota{ERII}%
-\begin{definicion}{Esquema recursivo Tipo II}{}
+\begin{definicion}{Esquema de recursión primitiva tipo II}{}
     Sea $h: \mathbb{N}^{n+1} \to \mathbb{N}$
     
     Sea $g: \mathbb{N}^{n+2} \to \mathbb{N}$
@@ -123,11 +123,11 @@ $g$ es computable por ser composición de funciones computables
 \begin{proof} \phantom{.}
     \begin{align*}
         &Y \gets q(X_1, \dotsc, X_n) \\
-        [A_1] \quad &IF ~ X_{n+1} = 0 \quad GOTO ~ E_1 \\
+        [A] \quad &IF ~ X_{n+1} = 0 \quad GOTO ~ E \\
         &Y \gets g(x_1, \dotsc, x_n, Z_1, Y) \\
         &Z_1 \gets Z_1 + 1 \\
         &X_{n+1} \gets X_{n+1} - 1 \\
-        &GOTO ~ A_1
+        &GOTO ~ A
     \end{align*}
 \end{proof}
 
@@ -161,6 +161,10 @@ Las siguientes funciones se denominan \underline{funciones iniciales}.
 
 \bigskip
 \textit{Observación:}
+$id: \mathbb{N} \to \mathbb{N} = \Pi_1^1: \mathbb{N} \to \mathbb{N}$
+
+\bigskip
+\textit{Observación:}
 Las funciones iniciales son computables.
 
 \begin{proof}
@@ -179,49 +183,82 @@ Las funciones iniciales son computables.
 \end{definicion}
 
 
-\subsubsection{Ejemplo}
+\subsubsection{Ejemplos}
 
-Probar que $\mathrm{SUMA}$ es RP, siendo
-\begin{gather*}
-    \mathrm{SUMA}: \mathbb{N}^2 \to \mathbb{N} / \mathrm{SUMA}(x,y) = x+y
-\end{gather*}
-
-\begin{proof} \phantom{.}
-
+\begin{itemize}
+    \item Probar que $\mathrm{SUMA}$ es RP, siendo
+    \begin{gather*}
+        \mathrm{SUMA}: \mathbb{N}^2 \to \mathbb{N} / \mathrm{SUMA}(x,y) = x+y
+    \end{gather*}
+    
+    \begin{proof} \phantom{.}
+    
+        \begin{align*}
+            \mathrm{SUMA}(x,0) &= x \underbrace{=}_{\text{Quiero}} g(x) \\
+            \mathrm{SUMA} (x,y+1) &= x + (y+1) = (x+y) + 1 \\ 
+            &= \mathrm{SUMA}(x,y)+1 \\
+            &= \mathrm{SUC}(\mathrm{SUMA}(x,y))
+            \underbrace{=}_{\text{Quiero}} 
+            f(x,y,\mathrm{SUC}(\mathrm{SUMA}(x,y)))
+        \end{align*}
+    
+        Definimos:
+        \begin{itemize}
+            \item $g: \mathbb{N} \to \mathbb{N} / g(x) = \Pi_1 (x)$
+        \nota{$g=\Pi_1$ es inicial}%
+    
+            \item $f: \mathbb{N}^3 \to \mathbb{N} / 
+                f(x,y,z) = z+1 = \mathrm{SUC}(\Pi_3 (x,y,z))$
+    
+            Es decir, 
+            $f = \mathrm{SUC} \circ \Pi_3$ 
+            es composición de iniciales.
+        \end{itemize}
+    
+        Con lo cual me queda que $\mathrm{SUMA}$ es RP pues es un ERII de $g$
+        inicial y de $f$ composición de iniciales.
+    
+    \end{proof}
+    
+    \textbf{Cuidado:} lo siguiente está mal.
     \begin{align*}
-        \mathrm{SUMA}(x,0) &= x \underbrace{=}_{\text{Quiero}} g(x) \\
-        \mathrm{SUMA} (x,y+1) &= x + (y+1) = (x+y) + 1 \\ 
-        &= \mathrm{SUMA}(x,y)+1
-        \underbrace{=}_{\text{Quiero}} f(x,y,\mathrm{SUMA}(x,y))
+        \mathrm{SUMA}(x,2) &= \mathrm{SUC}( \mathrm{SUC} (x)) \\
+        \mathrm{SUMA}(x,3) &= \mathrm{SUC}( \mathrm{SUC}( \mathrm{SUC} (x))) \\
+        \implies \mathrm{SUMA}(x,y) &= \underbrace{\mathrm{SUC} \circ \dotsc 
+        \circ \mathrm{SUC}}_{y \text{ veces}}(x) \\
+        \implies \mathrm{SUMA} &= \mathrm{SUC} \circ \dotsc \circ \mathrm{SUC} 
+        \circ \Pi_1
     \end{align*}
+    
+    El error es que no podemos decir cuántas veces estamos haciendo la 
+    composición porque depende de dónde evaluamos $\mathrm{SUM}$, y no puede 
+    depender de dónde la estamos evaluando.
 
-    Defino $g: \mathbb{N} \to \mathbb{N} / g(x) = \Pi_1 (x)$
-    \nota{$g=\Pi_1$ es inicial}%
+    \item Probar que $\mathrm{PROD}$ es RP, siendo
+    \begin{gather*}
+        \mathrm{PROD}: \mathbb{N} \times \mathbb{N} \to \mathbb{N} /
+        \mathrm{PROD}(x, y) = xy
+    \end{gather*}
 
-    Defino $f: \mathbb{N}^3 \to \mathbb{N} / f(x,y,z) = z+1 
-    = \mathrm{SUC}(\Pi_3 (x,y,z))$
+    Definamos
+    \begin{gather*}
+        \begin{cases}
+            \mathrm{PROD}(x,0) = 0 = \mathrm{CERO}(x) & \\
+            \mathrm{PROD}(x,y+1) = x(y+1) = xy+y = \mathrm{PROD}(x,y)+x &
+        \end{cases}
+    \end{gather*}
 
+    Como queremos que 
+    $\mathrm{PROD}(x,y)+x = g(x,y, \mathrm{PROD}(x,y))$,
+    definimos $g: \mathbb{N}^3 \to \mathbb{N}$ tal que:
+    \begin{gather*}
+        g(x,y,z) = \mathrm{SUMA}(z,x) 
+        = \mathrm{SUMA}(\Pi^3_3(x,y,z), \Pi^3_1(x,y,z))
+    \end{gather*}
 
-    Es decir, $f = \mathrm{SUC} \circ \Pi_3$ es composición de iniciales.
-
-    Con lo cual me queda que $\mathrm{SUMA}$ es RP pues es un ERII de $g$
-    inicial y de $f$ composición de iniciales.
-
-\end{proof}
-
-\textbf{Cuidado:} lo siguiente está mal.
-\begin{align*}
-    \mathrm{SUMA}(x,2) &= \mathrm{SUC}( \mathrm{SUC} (x)) \\
-    \mathrm{SUMA}(x,3) &= \mathrm{SUC}( \mathrm{SUC}( \mathrm{SUC} (x))) \\
-    \implies \mathrm{SUMA}(x,y) &= \underbrace{\mathrm{SUC} \circ \dotsc 
-    \circ \mathrm{SUC}}_{y \text{ veces}}(x) \\
-    \implies \mathrm{SUMA} &=  \mathrm{SUC} \circ \dotsc \circ \mathrm{SUC} 
-    \circ \Pi_1
-\end{align*}
-
-El error es que no podemos decir cuántas veces estamos haciendo la composición
-porque depende de dónde evaluamos $\mathrm{SUM}$, y no puede depender de dónde
-la estamos evaluando.
+    Entonces, $\mathrm{PROD}$ es RP pues se obtiene a partir de funciones
+    iniciales y finitos pasos de composición y ER.
+\end{itemize}
 
 \bigskip
 
