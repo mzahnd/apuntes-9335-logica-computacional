@@ -447,8 +447,8 @@ Definimos
     \end{cases} = \alpha(x \restatruncada y)
 \end{gather*}
 
-\nota{$\restatruncada$ significa ``resta truncada''\\
-$\alpha$ es una función de la práctica\\
+\nota{$\restatruncada$ significa ``resta truncada''.\\
+$\alpha$ es una función de la práctica.\\
 Ver ecuaciones \ref{eq:anexo-restatruncada} y \ref{eq:anexo-alpha}}%
 Entonces $C_{\mathcal{P}} 
 = \alpha \circ \restatruncada \circ (\Pi_1 \times \Pi_2)$.
@@ -470,7 +470,9 @@ RP.
 
 \begin{proof} \phantom{.}
     \begin{enumerate}
-        \item $\mathcal{P}^k$ es RP $\implies$ 
+        \item Veamos que son RP.
+
+            $\mathcal{P}^k$ es RP $\implies$ 
             $C_{{P}}: \mathbb{N}^k \to \mathbb{N}$ es RP.
 
             $\mathcal{Q}^k$ es RP $\implies$ 
@@ -527,7 +529,9 @@ RP.
 
             $\implies P \wedge Q$ es un predicado RP.
 
-        \item ${P}^k$ es computable $\implies$ 
+        \item Veamos que son computables.
+
+            ${P}^k$ es computable $\implies$ 
             $C_{{P}}: \mathbb{N}^k \to \mathbb{N}$ es computable.
 
             ${Q}^k$ es computable $\implies$ 
@@ -566,15 +570,16 @@ RP.
 \begin{corolario}{}{}
     \begin{enumerate}
         \item ${P}^k$, ${Q}^k$ son predicados RP $\implies$
-            $({P}^k \cup {Q}^k)$ y 
+            $({P}^k \vee {Q}^k)$ y 
             $({P}^k \to {Q}^k)$ son RP.
         \item ${P}^k$, ${Q}^k$ son computables $\implies$
-            $({P}^k \cup {Q}^k)$ y 
+            $({P}^k \vee {Q}^k)$ y 
             $({P}^k \to {Q}^k)$ son computables.
     \end{enumerate}
 \end{corolario}
 
 \begin{proof}
+    \nota{Truco para el $\vee$: $\alpha \circ \alpha$}%
     Tarea.
 \end{proof}
 
@@ -613,7 +618,7 @@ RP.
                 $\implies f$ es RP
             \end{center}
 
-        \item Tarea.
+        \item Tarea. Demostrar $f$ que es computable si $h, g$ y $P^n$ lo son.
     \end{enumerate}
 \end{proof}
 
@@ -638,9 +643,9 @@ Probar que $F$ es RP.
         \end{cases}
     \end{gather*}
 
-    $g(x,y) = x+y$, ya vimos que $g$ es RP.
+    $g(x,y) = x+y = \mathrm{SUMA}(x, y)$, ya vimos que $g$ es RP.
 
-    $h(x,y) = x \, . \, y$, ya vimos que $h$ es RP.
+    $h(x,y) = x \, . \, y = \mathrm{PROD}(x, y)$, ya vimos que $h$ es RP.
 
     Luego $P = \{ (x,y) \in \mathbb{N}^2 / x \leq y \}$, ya vimos que es RP.
 
@@ -720,23 +725,21 @@ Probar que $F$ es RP.
         = \prod_{k=0}^{y} f(\overrightarrow{x},k)
     \end{gather*}
 
-    \nota{$\overrightarrow{x} = (x_1, \dotsc, x_n)$, con 
-    $n \in \mathbb{N}$}%
+    \nota{$\overrightarrow{x} \in \mathbb{N}^n$\\
+    $y \in \mathbb{N}$}%
     
     \medskip
 
     Entonces $\mathcal{SA}_f$ y $\mathcal{PA}_f$ son RP (computables).
-
-    \bigskip
-    \textit{Observación:}
-    Si $n=0$
-
-    \begin{gather*}
-        \mathcal{SA}_f(y) = \sum_{k=0}^y f(k)
-        \quad \text{y} \quad
-        \mathcal{PA}_f (y) = \prod_{k=0}^y f(k)
-    \end{gather*}
 \end{teorema}
+\bigskip
+\textit{Observación:}
+Si $n=0$
+\begin{gather*}
+    \mathcal{SA}_f(y) = \sum_{k=0}^y f(k)
+    \quad \text{y} \quad
+    \mathcal{PA}_f (y) = \prod_{k=0}^y f(k)
+\end{gather*}
 
 \begin{proof} \phantom{.}
     \begin{enumerate}
@@ -827,64 +830,94 @@ Probar que $F$ es RP.
 
 \end{proof}
 
-\subsubsection{Ejemplo}
-Sea $q: \mathbb{N} \to \mathbb{N} / q(n) =$ suma de los primeros $n$ números 
-pares.
+\subsubsection{Ejemplos}
+\begin{itemize}
+    \item Sea $q: \mathbb{N} \to \mathbb{N} / q(n) =$ suma de los primeros $n$
+        números pares.
 
-Probar que $q$ es RP.
+    Probar que $q$ es RP.
+    
+    \medskip
+    
+    \begin{center}
+        \begin{tabular}{c c c}
+            $q(1)=0$ & $q(2)=0 + 2$ & $q(3)=0 + 2 + 4$ \\
+        \end{tabular}
+    
+        $q(0) = ? \rightarrow$ No tiene sentido.
+    \end{center}
+    Como el enunciado no nos dice nada, definimos $q(0)=0$
+    \begin{gather*}
+        q(n) = \underbrace{2 \, . \, 0 + 2 \, . \, 1 + \dots + 2 \, . \, 
+        (n-1)}_{%
+        \text{Los } n \text{ primeros pares}} \\
+        q(n) = \sum_{k=0}^{n-1} 2 k 
+        = \sum_{k=0}^{n-1} \overbrace{\mathrm{PROD}(2,k)}^{f(k)} 
+        \stackrel{?}{=} \sum_{k=0}^{n \restatruncada 1} f(k) \\
+        q(n) = \mathcal{SA}_f (n \restatruncada 1)
+    \end{gather*}
+    
+    Para responder a la pregunta de la ecuación anterior, notemos que si 
+    $n \geq 1$, entonces la igualdad se cumple; cuando $n = 0$, del lado
+    izquierdo de la igualdad, la suma desde 0 hasta $-1$ es cero, entonces
+    resulta que estamos evaluando si $0 \stackrel{?}{=} f(0)$.
+    Como  $f(0) = \mathrm{PROD}(2,0) = 0$, entonces $0 = f(0)$ y la igualdad
+    se cumple.
+    
+    Entonces $f: \mathbb{N} \to \mathbb{N} / f(k) = \mathrm{PROD}(h_2(k), k)$
+    
+    $f$ es RP por ser composición de 
+    $\underbrace{\mathrm{PROD}, \overbrace{h_2}^{\text{cte.}}}_{\text{RP}}$
+    \begin{gather*}
+        q(n) = \mathcal{SA}_f (\restatruncada (n, \underbrace{h_1(n)}_{1})
+    \end{gather*}
+    
+    $q$ es composición de $\underbrace{\mathcal{SA}_f}_{\substack{%
+    \text{RP pues }\\ f \text{ es RP}}}$,
+    $\underbrace{\restatruncada, h_1}_{\substack{\text{Ya vimos}\\%
+    \text{que son RP}}}$
+    \begin{center}
+        $\implies q$ es RP
+    \end{center}
+    
+    \textit{Noni}: En general el ejercicio de la práctica 5 y 6 lo hacen mal.
+    Sería bueno que lo muestren para ver si está bien hecho.
+    
+    Muchas veces escriben como que es composición pero se olvidan de fijarse de
+    si la composición depende de dónde están evaluando. Cuando depende de dónde
+    se está evaluando \underline{no es} composición de funciones.
+    
+    Notemos que acá armamos la ``suma acotada'' y no utilizamos composición
+    de sumas porque hasta dónde llega la suma depende de dónde evaluaba la 
+    función. Lo mismo con la productoria acotada.
 
-\medskip
+    \item $f(x) = \# \{$números pares entre $ 0 $ y $x \}$
 
-\begin{center}
-    \begin{tabular}{c c c}
-        $q(1)=0$ & $q(2)=0 + 2$ & $q(3)=0 + 2 + 4$ \\
-    \end{tabular}
+        Primero, definamos $\mathrm{PAR}(x)$ como
+        \begin{gather*}
+            \mathrm{PAR}(x) = \begin{cases}
+                1 & \text{si } x \text{ es par} \\
+                0 & \text{sino}
+            \end{cases}
+        \end{gather*}
 
-    $q(0) = ? \rightarrow$ No tiene sentido.
-\end{center}
-Como el enunciado no nos dice nada, definimos $q(0)=0$
-\begin{gather*}
-    q(n) = \underbrace{2 \, . \, 0 + 2 \, . \, 1 + \dots + 2 \, . \, (n-1)}_{%
-    \text{Los } n \text{ primeros pares}} \\
-    q(n) = \sum_{k=0}^{n-1} 2 k 
-    = \sum_{k=0}^{n-1} \overbrace{\mathrm{PROD}(2,k)}^{f(k)} 
-    \stackrel{?}{=} \sum_{k=0}^{n \restatruncada 1} f(k) \\
-    q(n) = \mathcal{SA}_f (n \restatruncada 1)
-\end{gather*}
+        $\mathrm{PAR}(x)$ es RP pues
+        \begin{gather*}
+            \begin{cases}
+                \mathrm{PAR}(0) = 1 \\
+                \mathrm{PAR}(y+1) = \alpha(\mathrm{PAR}(y)) 
+                = H(y, \mathrm{PAR}(y))
+            \end{cases}
+        \end{gather*}
 
-Para responder a la pregunta de la ecuación anterior, notemos que si 
-$n \geq 1$, entonces la igualdad se cumple; cuando $n = 0$, del lado
-izquierdo de la igualdad, la suma desde 0 hasta $-1$ es cero, entonces
-resulta que estamos evaluando si $0 \stackrel{?}{=} f(0)$.
-Como  $f(0) = \mathrm{PROD}(2,0) = 0$, entonces $0 = f(0)$ y la igualdad
-se cumple.
+        Como $H(y, z) = \alpha \circ \Pi_2(y, z)$, entonces $\mathrm{PAR}$ es
+        ERI de $H$.
 
-Entonces $f: \mathbb{N} \to \mathbb{N} / f(k) = \mathrm{PROD}(h_2(k), k)$
+        Luego, $f(x) = \sum_{k = 0}^{x} \mathrm{PAR}(k) 
+        = \mathcal{SA}_{\mathrm{PAR}}(x)$
 
-$f$ es RP por ser composición de 
-$\underbrace{\mathrm{PROD}, \overbrace{h_2}^{\text{cte.}}}_{\text{RP}}$
-\begin{gather*}
-    q(n) = \mathcal{SA}_f (\restatruncada (n, \underbrace{h_1(n)}_{1})
-\end{gather*}
-
-$q$ es composición de $\underbrace{\mathcal{SA}_f}_{\substack{%
-\text{RP pues }\\ f \text{ es RP}}}$,
-$\underbrace{\restatruncada, h_1}_{\substack{\text{Ya vimos}\\%
-\text{que son RP}}}$
-\begin{center}
-    $\implies q$ es RP
-\end{center}
-
-\textit{Noni}: En general el ejercicio de la práctica 5 y 6 lo hacen mal.
-Sería bueno que lo muestren para ver si está bien hecho.
-
-Muchas veces escriben como que es composición pero se olvidan de fijarse de
-si la composición depende de dónde están evaluando. Cuando depende de dónde
-se está evaluando \underline{no es} composición de funciones.
-
-Notemos que acá armamos la ``suma acotada'' y no utilizamos composición
-de sumas porque hasta dónde llega la suma depende de dónde evaluaba la 
-función. Lo mismo con la productoria acotada.
+        Entonces $f$ es RP.
+\end{itemize}
 
 \subsection{Cuantificadores acotados}
 
@@ -1017,7 +1050,8 @@ definida.
 
 \begin{align*}
     \mathrm{DIV}(x,y) = 1 
-    &\iff \exists \, t \text{ tal que } y = x \, . \, t \text{ y } x \neq 0 \\
+    &\iff \exists \, t \leq y \text{ tal que } y = x \, . \, t 
+    \text{ y } x \neq 0 \\
     &\iff \exists \, t \leq y \quad \mathrm{EQ}(\mathrm{PROD}(x,t),y)
     \wedge \alpha(\alpha(x))
 \end{align*}
@@ -1159,21 +1193,25 @@ es RP.
 
 \subsection{Minimización acotada}
 
-\begin{teorema}{Minimización acotada}{}
-    Sea $P^{n+1}$ un predicado RP (computable).
+\begin{definicion}{Minimización acotada}{}
+    Sea $P$ un predicado $n+1$-ario.
 
-    Sea $\mathrm{MA}_P: \mathbb{N}^{n+1} \to \mathbb{N}$ tal que
+    Se define la minización acotada como
+    $\mathrm{MA}_P: \mathbb{N}^{n+1} \to \mathbb{N}$
+    tal que
     \begin{gather*}
         \mathrm{MA}_P (\overrightarrow{x}, y) = \begin{cases}
+            \notamath{El mínimo $t$ que hace que $P(\vec{x},t)$ sea cierto.}
             \min_{t \leq y}{\{ C_P (\overrightarrow{x},t) \}} & \text{si 
             existe } t \leq y / C_P (\overrightarrow{x},t) = 1 \\
             0 & \text{sino}
         \end{cases}
     \end{gather*}
+\end{definicion}
 
-    \medskip
-
-    Entonces $\mathrm{MA}_P$ es RP (computable).
+\begin{teorema}{}{}
+    Si $P$ es un predicado RP (computable) 
+    entonces $\mathrm{MA}_P$ es RP (computable).
 \end{teorema}
 
 \begin{proof} \phantom{.}
@@ -1327,16 +1365,15 @@ tiene que ser RP lo que está adentro de la función \textbf{y} la cota.
         \min{~ A} & \text{si } A \neq \varnothing \\
         \uparrow & \text{si } A = \varnothing
     \end{cases}$
-
-    es parcialmente computable
+    es parcialmente computable.
 \end{teorema}
 
 \begin{proof} \phantom{.}
 
     \begin{align*}
-        [A_1] \quad &IF ~ C_P(\overrightarrow{x},y) \neq 0 \quad GOTO ~ E_1\\
+        [A] \quad &IF ~ C_P(\overrightarrow{x},y) \neq 0 \quad GOTO ~ E\\
                     &Y \gets Y + 1 \\
-                    &GOTO ~ A_1
+                    &GOTO ~ A
     \end{align*} 
 
     si $C_P(x_0, y)$ es falso, ejecuta la segunda instrucción; 
