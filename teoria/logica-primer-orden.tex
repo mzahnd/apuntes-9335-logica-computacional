@@ -110,8 +110,8 @@ estamos definiendo infinitos alfabetos que dependen de estos tres conjuntos.
 
     \begin{enumerate}
         \item Si $t_1, \dotsc, t_k \in  \mathrm{TERM}$ 
-            y $p^{k} \in \mathcal{P}$
-                $\implies p^{k}(t_1, \dotsc, t_k)$ es una fórmula.
+            y $P^{k} \in \mathcal{P}$
+                $\implies P^{k}(t_1, \dotsc, t_k)$ es una fórmula.
 
             Esta se denomina \textit{fórmula atómica}.
         \item $\alpha \in \mathrm{FORM}$
@@ -276,9 +276,9 @@ veamos primero los siguiente ejemplos.
             $\mathcal{U}$. 
             \nota{$f_\mathcal{I}^{k}: \mathcal{U}^k \to \mathcal{U} $}%
     
-        \item $\mathcal{P}^k \in \mathcal{P}$, entonces $\mathcal{P}^k$ se
+        \item $P^k \in \mathcal{P}$, entonces $P^k$ se
             interpreta como una relación $k\mathrm{-}aria$ en $\mathcal{U}$.
-            Es decir, $\mathcal{P}_\mathcal{I}^{k} \subseteq \mathcal{U}^k$
+            Es decir, $P_\mathcal{I}^{k} \subseteq \mathcal{U}^k$
     \end{enumerate}
 
     \medskip
@@ -308,7 +308,7 @@ Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden tal que:
         d_{\mathcal{I}_1} = -1, \\
         &f_{\mathcal{I}_1}^3 (x,y,z) = x+y-z, \quad
         g_{\mathcal{I}_1}^2 (x,y) = xy, \\
-        & \mathcal{P}_{\mathcal{I}_1}^2 = \{ (x,y)/ x \equiv y (3) \}
+        & P_{\mathcal{I}_1}^2 = \{ (x,y)/ x \equiv y (3) \}
         \subseteq \mathbb{Z}^{2} = \mathcal{U}^{2}
         \;)
     \end{align*}
@@ -336,7 +336,7 @@ Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden tal que:
         d_{\mathcal{I}_2} = 3, \;
         f_{\mathcal{I}_2}^3 (x,y,z) = x+y, \\
         g_{\mathcal{I}_2}^2 (x,y) = \nicefrac{x}{y}, \;
-        \mathcal{P}_{\mathcal{I}_2}^2 = \{ (x,y)/ xy=yx \}
+        P_{\mathcal{I}_2}^2 = \{ (x,y)/ xy=yx \}
         ) 
     \end{gather*}
 
@@ -414,11 +414,11 @@ Sea
     \mathcal{I} &= (\mathcal{U}_{\mathcal{I}} = \mathbb{Z}, \quad
             c_{\mathcal{I}} = 0, \quad
             f_{\mathcal{I}}^2 (x,y) = x+y, \quad
-            \mathcal{P}_{\mathcal{I}} = \{ (x,y)/ x \equiv y (2) \}
+            P_{\mathcal{I}} = \{ (x,y)/ x \equiv y (2) \}
     ) \\
-    &= ( \mathbb{Z}, \quad
-    0, \quad
-    +, \quad
+    &= ( \mathbb{Z}, ~
+    0, ~
+    +, ~
     \{ (x,y) / x \equiv y (2) \} )
 \end{align*}
 
@@ -427,6 +427,8 @@ Sea $v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
 Sean $t_1 = f^{2} (x_1, x_3)$ y $t_2 = f^{2} (x_5, c)$
 
 \underline{Se pide hallar $\bar{v}(t_1)$ y $\bar{v} (t_2)$}
+
+\medskip
 
 \begin{align*}
     \bar{v}(t_1) &= f_{\mathcal{I}}^{2}(\bar{v}(x_1), \bar{v}(x_3)) \\
@@ -689,7 +691,7 @@ $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
             \item $c_{\mathcal{I}} = 0$
             \item $f_{\mathcal{I}}^{1} = \mathbb{N} \to \mathbb{N}/$
             $f_{\mathcal{I}}^{1} (n) = 3n$
-            \item $\mathcal{P}_{\mathcal{I}}^{2} = 
+            \item $P_{\mathcal{I}}^{2} = 
                 \{ (x,y) \in \mathbb{N}^2 / \divides{x}{y} \}$
             \item $v: \mathrm{VAR} \to \mathbb{N}:$
                 \nota{$\forall i \in \mathbb{N}$}%
@@ -698,25 +700,25 @@ $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
 
         \begin{gather*}
             \alpha = \forall x_1 ~ \exists x_2 ~ 
-            \left( P^2(x,c) \to P^2(f'(x_2),f'(x_1))\right)
+            \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)
         \end{gather*}
 
         \begin{align*}
             V_{\mathcal{I}, v}(\alpha) = 1 \iff& 
-            \text{si } \forall a \in \mathcal{U}_{\mathcal{I}} = \mathbb{N}
+            \forall a \in \mathcal{U}_{\mathcal{I}} = \mathbb{N}
             \text{ vale que} \\
             & V_{\mathcal{I}, v_{x_1 = a}} \left(\exists x_2 ~ 
-            \left( P^2(x,c) \to P^2(f'(x_2),f'(x_1))\right)\right) \\
-            \iff& \text{si } \forall a \in \mathbb{N} ~ 
+            \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)\right) \\
+            \iff& \forall a \in \mathbb{N} ~ 
             \exists \; b \in \mathbb{N} \text{ tal que}\\
             &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}}
-            \left(P^2(x,c)\to P^2(f'(x_2), f'(x_1))\right) = 1 \\
+            \left(P^2(x,c)\to P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1 \\
             \iff& \forall a \in \mathbb{N} ~ 
             \exists \; b \in \mathbb{N} \text{ tal que}\\
             &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
             \\ & \text{ ó }\\
             &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
-            \left(P^2(f'(x_2), f'(x_1))\right) = 1
+            \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
         \end{align*}
 
         Luego,
@@ -729,7 +731,7 @@ $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
         Y
         \begin{align*}
             V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
-            \left(P^2(f'(x_2), f'(x_1))\right) = 1
+            \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
             &\iff (3b, 3a) \in P^2_{\mathcal{I}} \\
             &\iff \divides{3b}{3a}
         \end{align*}
@@ -737,7 +739,7 @@ $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
         Y esto ocurre sí y sólo sí $\forall a \in \mathbb{N}$, 
         $\exists \; b \in \mathbb{N} /$ 
         $\notdivides{a}{0}$
-        o
+        ó
         $\divides{3b}{3a}$
 
         Tomando
@@ -754,7 +756,7 @@ $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
         \end{gather*}
 
     \item Dado 
-        \nota{Esto se lee como 
+        \nota{Esto se lee como\\
         $\mathcal{L} = <\varnothing, \{ f^2 \}, \{ = \}>$}%
         $\mathcal{I} = \left(\mathbb{R}, +, =\right)$ 
         y
@@ -977,7 +979,7 @@ ligadas.
             &\iff \forall y ~ a = y
         \end{align*}
 
-        No importa $a$ siempre falso. Contraejemplo: $y = a - 1$
+        No importa $a$: es siempre falso. Contraejemplo: $y = a - 1$
         \begin{gather*}
             \therefore ~ A = \varnothing
         \end{gather*}
@@ -1041,7 +1043,7 @@ ligadas.
         \begin{align*}
             & \forall y \in \mathbb{R} \quad x \cdot y = x \iff \forall y \in
             \mathbb{R} \quad x(y-1) = 0 \\
-            \implies & ) \text{ En particular, tomando } y = 2: \quad x = 0 \\
+            \implies & ) \text{ En particular, tomando } y = 1: \quad x = 0 \\
             \impliedby & ) \text{ Si tomamos } x = 0: \quad 0(y-1) = 0 \quad
             \forall y \in \mathbb{R}
         \end{align*}
@@ -1081,9 +1083,9 @@ ligadas.
             Pues
             \begin{align*}
                 V_{\mathcal{I}}(\alpha_{-1}(x)) = 1 
-                & \iff V_{\mathcal{I}}(\alpha_A) = 1 \text{ y }
-                V_{\mathcal{I}}(\neg \alpha_1(x)) = 1 \text{ y }
-                V_{\mathcal{I}}(\neg \alpha_0 ) = 1 \\
+                & \iff V_{\mathcal{I}}(\alpha_A (x)) = 1 \text{ y }
+                V_{\mathcal{I}}(\neg \alpha_1(x)) = 1 \text{ y } \\
+                & \phantom{\iff} V_{\mathcal{I}}(\neg \alpha_0 (x)) = 1 \\
                 & \iff x \in A \text { y } V_{\mathcal{I}}(\alpha_1(x)) = 0
                 \text{ y } V_{\mathcal{I}}(\alpha_0 (x)) = 0 \\
                 & \iff x \in A \text { y } x \neq 1 \text{ y } x \neq 0 \\
@@ -1358,8 +1360,8 @@ $\mathcal{U}$.
 
 \subsubsection{Ejemplo}
 
-\nota{\textit{Noni:} Un conjunto $A=\{a,b,c\}$ puede ser expresable y ninguno
-de sus elementos distinguible.}%
+\nota{\textit{Noni:} ``Un conjunto $A=\{a,b,c\}$ puede ser expresable y ninguno
+de sus elementos distinguible.''}%
 Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden con $=$ y $f^2$;
 $\mathcal{I} = (\mathbb{N}, +)$.
 
@@ -1374,8 +1376,9 @@ Probar que todo $n \in \mathbb{N}$ es distinguible.
             \iff \forall y \quad x = 0
         \end{gather*}
 
-    \item $\alpha_1(x) = \forall w \forall z \quad ((\neg \alpha_0(w) \wedge
-        \neg \alpha_0(z))) \implies \neg x = f^2(w,z) \wedge \neg \alpha_0(x)$
+    \item $\alpha_1(x) = \neg \alpha_0(x) \wedge 
+        \forall w \forall z \quad ((\neg \alpha_0(w) \wedge \neg \alpha_0(z))) 
+        \implies \neg x = f^2(w,z)$
 
         \nota{Habiendo distinguido el $1$, puedo simular que tengo la 
         constante $1$. Usando esta idea distinguimos el resto.}%
