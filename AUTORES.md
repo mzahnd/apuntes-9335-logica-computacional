@@ -8,4 +8,5 @@
 
 - Abril Vilamowski
 - David Wischñevsky
+- Felipe Mindlin
 - Jonathan Liu
