@@ -568,10 +568,9 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
 
     \item $\alpha = \forall x_i \quad \beta$
         \nota{$\beta \in \mathrm{FORM}$, $x_i \in \mathrm{VAR}$\\
-        Es decir, el valor de verdad es 1 si es verdadero en $\beta$ sin
-        importar $x_i$. 
-        No importa qué hace la valuación original en $x_i$, solamente importa 
-        qué hace la de $\beta$.}%
+        El valor de verdad es 1 si es verdadero en $\beta$ sin importar $x_i$. 
+        No importa qué hace la valuación original en $x_i$, solo importa qué
+        hace la de $\beta$.}%
         \begin{gather*}
             V_{\mathcal{I}, v}(\alpha) = 1 \iff
             V_{\mathcal{I}, v_{x_i=a}}(\beta) = 1
@@ -1568,15 +1567,17 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
         Probar que $\mathcal{I}_1 \not\approx \mathcal{I}_2$
 
         Supongo que $\mathcal{I}_1 \approx \mathcal{I}_2$
+        % Puesta acá para correcta alineación con la página
+        \nota{\phantom{.}\\ % Alineación
+            $F(a+b)$ $=$ \\
+            $F(f_{\mathcal{I}_1}(a,b))$ $=$\\
+            $f_{\mathcal{I}_2}(F(a),F(b))$}%
         \begin{align*}
             \implies& \exists \; F: 
             \overbrace{\mathcal{U_1}}^{= \, \mathbb{N}} \to
             \overbrace{\mathcal{U_1}}^{= \, \mathbb{N}} \text{ isomorfismo}\\
             \implies& F \text{ biyectiva y }
             F(a+b) = F(a) + F(b)
-            \notamath{$F(a+b)$ $=$ \\
-                $F(f_{\mathcal{I}_1}(a,b))$ $=$\\
-                $f_{\mathcal{I}_2}(F(a),F(b))$}
         \end{align*}
 
         Luego
@@ -2181,7 +2182,7 @@ pero $F(2) = -2 \notin \mathbb{N}$.
 
     Sabemos que: 
     \nota{Por el Teorema \ref{teo:equiv-isomorfs}}%
-    $\mathcal{I}_1 \vDash \alpha[v] \overbrace{\iff}^{\bigstar}
+    $\mathcal{I}_1 \vDash \alpha[v] \overbrace{\iff}^{\star}
     \mathcal{I}_2 \vDash \alpha[h \circ v]$.
 
     Si $a \in \mathcal{U}_1$ es distinguible
@@ -2196,7 +2197,7 @@ pero $F(2) = -2 \notin \mathbb{N}$.
         \underbrace{h \circ v_{x=b}}_{{(h \circ v)}_{x = h(b)}}%
         ] 
         \text{ con } \underbrace{b \neq a}_{h(b) \neq h(a)} 
-        \notamath{Por $\bigstar$}
+        \notamath{Por $\star$}
     \end{align*}
 
     \begin{center}

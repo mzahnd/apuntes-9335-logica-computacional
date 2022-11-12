@@ -3128,12 +3128,13 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
              \medskip
 
-             Sea $v \text{ valuación}/v(\Gamma)=1$, quiero ver que 
-             $v(\alpha)=1$
+            % Puesta acá para correcta alineación con la página
+            \nota{Como $v(\Gamma)=1$, entonces $v$ de cada fórmula 
+            de $\Gamma$ vale uno, es decir, $v(\gamma_1) = 1, 
+            v(\gamma_2)=1$, etc.}%
+            Sea $v \text{ valuación}/v(\Gamma)=1$, quiero ver que 
+            $v(\alpha)=1$
              \begin{align*}
-                 \notamath{Como $v(\Gamma)=1$, entonces $v$ de cada fórmula 
-                 de $\Gamma$ vale uno, es decir, $v(\gamma_1) = 1, 
-                 v(\gamma_2)=1$, etc.}
                  1 &= v((\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha)\\
                    &= \max \{ 1-
                     \underbrace{v(\gamma_1 \wedge \dots \wedge \gamma_n)}_{=1},
