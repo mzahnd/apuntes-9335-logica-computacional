@@ -244,7 +244,7 @@ Las funciones iniciales son computables.
     \begin{gather*}
         \begin{cases}
             \mathrm{PROD}(x,0) = 0 = \mathrm{CERO}(x) & \\
-            \mathrm{PROD}(x,y+1) = x(y+1) = xy+y = \mathrm{PROD}(x,y)+x &
+            \mathrm{PROD}(x,y+1) = x(y+1) = xy+x = \mathrm{PROD}(x,y)+x &
         \end{cases}
     \end{gather*}
 
@@ -392,8 +392,8 @@ Faltaría ver que la función no es RP.
 \section{Predicados RP}
 
 \begin{definicion}{Predicado}{}
-    Un \textit{predicado} $\mathcal{P}^k$ de $k$ variables es una relación $k$-aria de
-    números naturales, es decir, $\mathcal{P}^k \subseteq \mathbb{N}^k$.
+    Un \textit{predicado} $P^k$ de $k$ variables es una relación $k$-aria de
+    números naturales, es decir, $P^k \subseteq \mathbb{N}^k$.
 \end{definicion}
 
 \medskip
@@ -406,8 +406,8 @@ Faltaría ver que la función no es RP.
         \notamath{$\overrightarrow{x} = (x_1, \dotsc, x_n)$, con 
                     $n \in \mathbb{N}$}
         C_{P^k} (\overrightarrow{x}) = \begin{cases}
-            1 & \text{si } \overrightarrow{x} \in \mathcal{P}^k\\
-            0 & \text{si } \overrightarrow{x} \notin \mathcal{P}^k
+            1 & \text{si } \overrightarrow{x} \in P^k\\
+            0 & \text{si } \overrightarrow{x} \notin P^k
         \end{cases}
     \end{gather*}
 
@@ -430,13 +430,13 @@ Faltaría ver que la función no es RP.
 
 \subsubsection{Ejemplo}
 
-Dada $\mathcal{P} = \{ (x,y) \in \mathbb{N}^2 / x \leq y \} \subsetneq \mathbb{N}^2$.
-Probar que $\mathcal{P}$ es RP.
+Dada $P = \{ (x,y) \in \mathbb{N}^2 / x \leq y \} \subsetneq \mathbb{N}^2$.
+Probar que $P$ es RP.
 
 Definimos
 
 \begin{gather*}
-    C_{\mathcal{P}}: \mathbb{N}^2 \to \mathbb{N} / C_{\mathcal{P}} (x,y) =
+    C_{P}: \mathbb{N}^2 \to \mathbb{N} / C_{P} (x,y) =
     \begin{cases}
         1 & \text{si } x \leq y \\
         0 & \text{si } x > y
@@ -450,11 +450,11 @@ Definimos
 \nota{$\restatruncada$ significa ``resta truncada''.\\
 $\alpha$ es una función de la práctica.\\
 Ver ecuaciones \ref{eq:anexo-restatruncada} y \ref{eq:anexo-alpha}}%
-Entonces $C_{\mathcal{P}} 
+Entonces $C_{P} 
 = \alpha \circ \restatruncada \circ (\Pi_1 \times \Pi_2)$.
 
-Por lo tanto, $C_{\mathcal{P}}$ es composición de $\alpha$, $\restatruncada$,
-$\Pi_j$, que son RP $\implies C_{\mathcal{P}}$ es RP $\implies \mathcal{P}$ es
+Por lo tanto, $C_{P}$ es composición de $\alpha$, $\restatruncada$,
+$\Pi_j$, que son RP $\implies C_{P}$ es RP $\implies P$ es
 RP.
 
 \subsection{Teorema}
@@ -1058,8 +1058,8 @@ definida.
 
 Hasta acá tenemos un $\mathrm{AND}$ de funciones RP, pero con un pequeño
 \nota{Recordemos: \\
-    $\mathrm{EA}(x,y)$ $=$ \\
-$=$ $\exists \; t \leq y \quad C_P (x,t)$}%
+$\mathrm{EA}_{P}(\overrightarrow{x},y)$ $=$ \\
+$=$ $\exists \; t \leq y \quad C_P (\overrightarrow{x},t)$}%
 problema: lo que tenemos definido \textit{no} es el existencial acotado pues,
 por la definición que dimos, el predicado $C_P$ no puede tener la $y$, que
 sí tenemos en $\mathrm{EQ}$.
@@ -1180,7 +1180,7 @@ es RP.
             \mathrm{UA}_Q(\overbrace{\overrightarrow{x}, y}^{\circled{4}},
               \overbrace{y}^{\circled{5}}) = \\
             &= \forall t \leq \underbrace{y}_{\circled{5}} \quad 
-                (C_Q(\underbrace{\overrightarrow{x}, y}_{\circled{4}}, t)
+                C_Q(\underbrace{\overrightarrow{x}, y}_{\circled{4}}, t)
         \end{align*}
 
         Donde $C_Q(\overrightarrow{x}, y, t) = C_P(\overrightarrow{x},t)
