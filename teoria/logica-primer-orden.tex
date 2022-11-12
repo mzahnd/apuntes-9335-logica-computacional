@@ -587,798 +587,798 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
 \end{definicion}
 
 \bigskip
-\textit{Observación:}
-Si $\alpha$ es enunciado, entonces $V_{\mathcal{I}, v}(\alpha)$ no depende
-de $v$.
+    \textit{Observación:}
+    Si $\alpha$ es enunciado, entonces $V_{\mathcal{I}, v}(\alpha)$ no depende
+    de $v$.
 
-Es decir, si cambiamos $v$ por $w$ valuación $\implies$ 
-\nota{$\forall v, w$ valuación}%
-$V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
+    Es decir, si cambiamos $v$ por $w$ valuación $\implies$ 
+    \nota{$\forall v, w$ valuación}%
+    $V_{\mathcal{I}, v}(\alpha) = V_{\mathcal{I}, w}(\alpha)$
 
-\subsubsection{Ejemplos}
+    \subsubsection{Ejemplos}
 
-\begin{itemize}
-    \item Dado $\mathcal{I} = ( \mathbb{Z}, \;
-        0 , \;
-        + , \;
-        \{ (x,y)/x \equiv y(2) \})$,
-    $v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
-    
-    \underline{Hallar $V_{\mathcal{I}, v} (\alpha)$ }
-    
-    \begin{enumerate}
-        \item $\alpha = P(x_1, x_4)$
-            \begin{align*}
-                V_{\mathcal{I}, v}(\alpha) &= 1  \\
-                &\iff (\bar{v}(x_1), \bar{v}(x_4)) \in P_{\mathcal{I}} \\
-                &\iff \bar{v}(x_1) \equiv \bar{v}(x_4) \; (2) \\
-                &\iff v(x_1) \equiv v(x_4) \; (2) \\
-                &\iff 2 \, . \, 1 \equiv 2 \, . \, 4 \; (2) \\
-                &\iff 0 \equiv 0 \; (2)
-            \end{align*}
-    
-            \begin{gather*}
-                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
-            \end{gather*}
-    
-        \item $\alpha = \forall x_1 \quad \forall x_2 \quad P(x_1, x_2)$
-            \begin{align*}
-                V_{\mathcal{I}, v}(\alpha) &= 1  \\
-                &\iff V_{\mathcal{I}, {v_{x_1 = a}}}
-                    (\forall x_2 \quad P(x_1,x_2)) = 1
-                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$}\\
-                &\iff V_{\mathcal{I}, {v_{x_1 = a, x_2 = b}}} (P(x_1,x_2))=1 \\
-                &\iff (\bar{v}_{x_1 = a, x_2 = b} (x_1),
-                \bar{v}_{x_1 = a, x_2 = b} (x_2)) \in P_{\mathcal{I}} 
-                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
-                y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
-                &\iff v_{x_1 = a, x_2 = b} (x_1) \equiv 
-                v_{x_1 = a, x_2 = b} (x_2) \; (2) \\
-                &\iff a \equiv b \; (2)
-                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
-                y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
-            \end{align*}
-    
-            Es falso pues basta tomar $a=1$, $b=0$ y $1 \not\equiv 0 \; (2)$
-            \begin{center}
-                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 0$}
-            \end{center}
-    
-        \item $\alpha = \forall x \quad \exists \; y \quad P(x,y)$
-            \begin{align*}
-                V_{\mathcal{I}, v}(\alpha) &= 1  \\
-                &\iff V_{\mathcal{I}, v_{x=a}}(\exists \quad P(x,y)) = 1
-                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$} \\
-                &\iff V_{\mathcal{I}, v_{x=a, y=b}}(P(x,y)) = 1
-                \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$ existe
-                $b \in \mathcal{U}_{\mathcal{I}}$} \\
-                &\iff \text{Dado $a \in \mathcal{U}$, existe } 
-                b \in \mathcal{U} /
-                a \equiv b (2)
-            \end{align*}
-    
-            Esto es verdadero pues basta tomar $b=a$.
-            \begin{gather*}
-                \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
-            \end{gather*}
-    
-        \item $\exists \; y \quad \forall x \quad P(x,y)$
-            \begin{align*}
-             V_{\mathcal{I}, v}(\alpha) &= 1  \\
-                &\iff V_{\mathcal{I}, v_{y=b}}(\forall x \quad P(x,y)) = 1
-                \notamath{Para algún $b \in \mathcal{U}_{\mathcal{I}}$} \\
-                &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
-                V_{\mathcal{I}, v_{y=b,x=a}}(P(x,y)) = 1
-                \notamath{Para todo $a \in \mathcal{U}_{\mathcal{I}}$} \\
-                &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
-                a \equiv b(2)
-                \notamath{Para todo $a \in \mathcal{U_{\mathcal{I}}}$}
-            \end{align*}
-    
-            Siendo esta última afirmación falsa.
-    
-            Fijo $b \in \mathcal{U}$ y tomo $a = b+1$
-            \begin{gather*}
-                \implies 1 \equiv 0 (2)
-            \end{gather*}
-            ¡Lo cual es un absurdo!
-    \end{enumerate}
-
-    \item $\mathcal{L} = <\{ c \}, \{ f^1 \}, \{ P^2 \}>$
-
-        \begin{itemize}
-            \item $\mathcal{U}_{\mathcal{I}} = \mathbb{N}$
-            \item $c_{\mathcal{I}} = 0$
-            \item $f_{\mathcal{I}}^{1} = \mathbb{N} \to \mathbb{N}/$
-            $f_{\mathcal{I}}^{1} (n) = 3n$
-            \item $P_{\mathcal{I}}^{2} = 
-                \{ (x,y) \in \mathbb{N}^2 / \divides{x}{y} \}$
-            \item $v: \mathrm{VAR} \to \mathbb{N}:$
-                \nota{$\forall i \in \mathbb{N}$}%
-                $v(x_i) = 1$ 
-        \end{itemize}
-
-        \begin{gather*}
-            \alpha = \forall x_1 ~ \exists x_2 ~ 
-            \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)
-        \end{gather*}
-
-        \begin{align*}
-            V_{\mathcal{I}, v}(\alpha) = 1 \iff& 
-            \forall a \in \mathcal{U}_{\mathcal{I}} = \mathbb{N}
-            \text{ vale que} \\
-            & V_{\mathcal{I}, v_{x_1 = a}} \left(\exists x_2 ~ 
-            \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)\right) \\
-            \iff& \forall a \in \mathbb{N} ~ 
-            \exists \; b \in \mathbb{N} \text{ tal que}\\
-            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}}
-            \left(P^2(x,c)\to P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1 \\
-            \iff& \forall a \in \mathbb{N} ~ 
-            \exists \; b \in \mathbb{N} \text{ tal que}\\
-            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
-            \\ & \text{ ó }\\
-            &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
-            \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
-        \end{align*}
-
-        Luego,
-        \begin{align*}
-            V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
-            &\iff (\bar{v}_{x_1 = a, x_2 = b}, \bar{v}(c)) 
-            \notin P^2_{\mathcal{I}} \\
-            &\iff \notdivides{a}{0}
-        \end{align*}
-        Y
-        \begin{align*}
-            V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
-            \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
-            &\iff (3b, 3a) \in P^2_{\mathcal{I}} \\
-            &\iff \divides{3b}{3a}
-        \end{align*}
-
-        Y esto ocurre sí y sólo sí $\forall a \in \mathbb{N}$, 
-        $\exists \; b \in \mathbb{N} /$ 
-        $\notdivides{a}{0}$
-        ó
-        $\divides{3b}{3a}$
-
-        Tomando
-        $a \neq 0 \implies b = 1$ 
-        cumple que 
-        $\divides{3b}{3a}$.
-
-        Por otra parte, si 
-        $a = 0 \implies b = 0 \implies$
-        $\divides{3\, . \, 0 = 0}{3\, . \, 0 = 0}$
-
-        \begin{gather*}
-            \therefore ~ V_{\mathcal{I}, v}(\alpha) = 1
-        \end{gather*}
-
-    \item Dado 
-        \nota{Esto se lee como\\
-        $\mathcal{L} = <\varnothing, \{ f^2 \}, \{ = \}>$}%
-        $\mathcal{I} = \left(\mathbb{R}, +, =\right)$ 
-        y
-        $\alpha = \forall x ~ \forall y ~ (f^2(x,y) = f^2(y,x))$, 
-        interpretar $\alpha$.
-
-        Al interpretar $\alpha$ en $\mathcal{I}$, expresa la propiedad
-        \begin{gather*}
-            \notamath{Es cierto $\forall$ valuación}
-            \forall x \in \mathbb{R} ~ \forall y \in \mathbb{R} ~
-            (x + y = y + x)
-        \end{gather*}
-
-        $\alpha$ es válida en $\mathcal{I}$.
-
-    \item $\mathcal{J} = (\mathbb{R}, -, =)$
-
-        $\alpha$ se interpreta como
-        \begin{gather*}
-            \forall x, y \in \mathbb{R} ~ (x - y = y - x)
-        \end{gather*}
-
-        No es cierto, pues si $x = 1$ e $y = 2$, entonces $\alpha$ no es
-        válida en $\mathcal{J}$.
-
-        Por lo tanto, $\alpha$ \underline{no} es universalmente válida.
-
-    \item $\mathcal{L} = <\varnothing, \varnothing, \{ P^1 \}>$,
-        $\alpha = (\forall x ~ P^1(x)) \to P^1(x)$
-
-        Sea $\mathcal{I}$ interpretación. 
-        $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$ valuación.
-
-        \begin{align*}
-            V_{\mathcal{I}, v}(\alpha) = 1 &\iff
-            V_{\mathcal{I}, v}(\forall x ~ P^1(x)) = 0 
-            \text{ o }
-            V_{\mathcal{I}, v}(P^1(x)) = 1 \\
-            &\iff \left(\exists \; a \in \mathcal{U}_{\mathcal{I}} 
-                \text{ tal que } a \notin P^1_{\mathcal{I}}\right)
-            \text{ o }
-            \left(v(x) \in P^1_{\mathcal{I}}\right)
-        \end{align*}
-
-        \begin{enumerate}[%
-                        labelindent=*,
-                        style=multiline,
-                        leftmargin=*,
-                        align=left,
-                        leftmargin=2\parindent,
-                        label=Caso \arabic*)]
-            \item Si $v(x) \in P^1_{\mathcal{I}}$
-                $\implies$
-                $V_{\mathcal{I}, v}(\alpha) = 1$
-            \item Si $v(x) \notin P^1_{\mathcal{I}}$
-                $\implies$
-                $v(x) = b \in \mathcal{U}_{\mathcal{I}}$ y cumple que
-                $b \notin P^1_{\mathcal{I}}$
-                $\implies$
-                \nota{$a = b$}%
-                $\exists \; a \in \mathcal{U}_{\mathcal{I}} / 
-                a \notin P^1_{\mathcal{I}}$
-                $\implies$
-                $V_{\mathcal{I}, v}(\alpha) = 1$
-        \end{enumerate}
+    \begin{itemize}
+        \item Dado $\mathcal{I} = ( \mathbb{Z}, \;
+            0 , \;
+            + , \;
+            \{ (x,y)/x \equiv y(2) \})$,
+        $v: \mathrm{VAR} \to \mathbb{Z} / v(x_i) = 2i$
         
-        Por lo tanto, vale $\forall \mathcal{F}$, $\forall v$
-        $\implies$
-        $\alpha$ es universalmente válido.
-\end{itemize}
+        \underline{Hallar $V_{\mathcal{I}, v} (\alpha)$ }
+        
+        \begin{enumerate}
+            \item $\alpha = P(x_1, x_4)$
+                \begin{align*}
+                    V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                    &\iff (\bar{v}(x_1), \bar{v}(x_4)) \in P_{\mathcal{I}} \\
+                    &\iff \bar{v}(x_1) \equiv \bar{v}(x_4) \; (2) \\
+                    &\iff v(x_1) \equiv v(x_4) \; (2) \\
+                    &\iff 2 \, . \, 1 \equiv 2 \, . \, 4 \; (2) \\
+                    &\iff 0 \equiv 0 \; (2)
+                \end{align*}
+        
+                \begin{gather*}
+                    \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+                \end{gather*}
+        
+            \item $\alpha = \forall x_1 \quad \forall x_2 \quad P(x_1, x_2)$
+                \begin{align*}
+                    V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                    &\iff V_{\mathcal{I}, {v_{x_1 = a}}}
+                        (\forall x_2 \quad P(x_1,x_2)) = 1
+                    \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$}\\
+                    &\iff V_{\mathcal{I}, {v_{x_1 = a, x_2 = b}}} (P(x_1,x_2))=1 \\
+                    &\iff (\bar{v}_{x_1 = a, x_2 = b} (x_1),
+                    \bar{v}_{x_1 = a, x_2 = b} (x_2)) \in P_{\mathcal{I}} 
+                    \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
+                    y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
+                    &\iff v_{x_1 = a, x_2 = b} (x_1) \equiv 
+                    v_{x_1 = a, x_2 = b} (x_2) \; (2) \\
+                    &\iff a \equiv b \; (2)
+                    \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$,
+                    y $\forall b \in \mathcal{U}_{\mathcal{I}}$}  \\
+                \end{align*}
+        
+                Es falso pues basta tomar $a=1$, $b=0$ y $1 \not\equiv 0 \; (2)$
+                \begin{center}
+                    \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 0$}
+                \end{center}
+        
+            \item $\alpha = \forall x \quad \exists \; y \quad P(x,y)$
+                \begin{align*}
+                    V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                    &\iff V_{\mathcal{I}, v_{x=a}}(\exists \quad P(x,y)) = 1
+                    \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$} \\
+                    &\iff V_{\mathcal{I}, v_{x=a, y=b}}(P(x,y)) = 1
+                    \notamath{$\forall a \in \mathcal{U}_{\mathcal{I}}$ existe
+                    $b \in \mathcal{U}_{\mathcal{I}}$} \\
+                    &\iff \text{Dado $a \in \mathcal{U}$, existe } 
+                    b \in \mathcal{U} /
+                    a \equiv b (2)
+                \end{align*}
+        
+                Esto es verdadero pues basta tomar $b=a$.
+                \begin{gather*}
+                    \dashbox{$\therefore ~ V_{\mathcal{I},v} (\alpha) = 1$}
+                \end{gather*}
+        
+            \item $\exists \; y \quad \forall x \quad P(x,y)$
+                \begin{align*}
+                 V_{\mathcal{I}, v}(\alpha) &= 1  \\
+                    &\iff V_{\mathcal{I}, v_{y=b}}(\forall x \quad P(x,y)) = 1
+                    \notamath{Para algún $b \in \mathcal{U}_{\mathcal{I}}$} \\
+                    &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
+                    V_{\mathcal{I}, v_{y=b,x=a}}(P(x,y)) = 1
+                    \notamath{Para todo $a \in \mathcal{U}_{\mathcal{I}}$} \\
+                    &\iff \text{Fijando algún $b$ en $\mathcal{U}_{\mathcal{I}}$, }
+                    a \equiv b(2)
+                    \notamath{Para todo $a \in \mathcal{U_{\mathcal{I}}}$}
+                \end{align*}
+        
+                Siendo esta última afirmación falsa.
+        
+                Fijo $b \in \mathcal{U}$ y tomo $a = b+1$
+                \begin{gather*}
+                    \implies 1 \equiv 0 (2)
+                \end{gather*}
+                ¡Lo cual es un absurdo!
+        \end{enumerate}
 
-\subsection{Igualdad}
+        \item $\mathcal{L} = <\{ c \}, \{ f^1 \}, \{ P^2 \}>$
 
-\begin{definicion}{}{}
-    $\mathcal{L}$ es un lenguaje con igualdad ($\,=\,$) si tiene un símbolo
-    de predicado binario que obligatorialemtne se interpreta con la igualdad.
-\end{definicion}
-
-\subsubsection{Ejemplo}
-
-Sea $\mathcal{L}$ un lenguaje con igualdad.
-
-Hallar 
-$\alpha \in \mathrm{FORM} / \{ \mathcal{I} / \mathcal{I} \vDash \alpha \}$
-es la clase de modelos cuyo universo tiene exactamente 2 elementos.
-
-Propongo
-\begin{gather*}
-    \alpha = \exists x \quad \exists y ( \underbrace{\neg x = y}_{\neg P(x,y)}
-    \wedge \forall z \quad (z = x \vee z = y)) 
-\end{gather*}
-
-Ahora probemos que cumple con lo pedido.
-\begin{enumerate}
-    \item Sea $\mathcal{I} / \# \mathcal{U} = 1$, $\mathcal{U} = \{ a \}$
-
-        El único valor que puede tomar $x$ es $a$.
-
-        El único valor que puede tomar $y$ es $a$.
-        \begin{center}
-            $\neg a = a$ es falso, por lo que $V_{\mathcal{I}}(\alpha) = 0$
-        \end{center}
-
-    \item Sea $\mathcal{I} / \# \mathcal{U} \geq 3$,.
-
-        Eligiendo $z$ diferente a como elegí $x$ e $y$:
-        \begin{gather*}
-            z = x \vee z = y \text{ que es falso. }\\ 
-            \therefore ~ V_{\mathcal{I}} (\alpha) = 0
-        \end{gather*}
-
-    \item Sea $\mathcal{I}/ \# \mathcal{U} = 2$, $\mathcal{U} = \{ a,b \}$
-
-        Tomo $x = a$, $y = b$.
-        \begin{gather*}
-            \neg a = b \wedge \forall z \in \mathcal{U} \quad (z=a \vee z=b) \\
-            \therefore ~ V_{\mathcal{I}} (\alpha) =  1
-        \end{gather*}
-\end{enumerate}
-
-\subsection{Propiedades}
-
-\begin{enumerate}
-    \item $\vDash \alpha \iff \neg \alpha$ es insatisfacible.
-    \item $\begin{rcases*}
-            \mathcal{I} \vDash \alpha[v] & \\
-            \mathcal{I} \vDash \alpha \to \beta[v] &
-        \end{rcases*}
-        \mathcal{I} \vDash \beta[v]$
-    \item Idem anterior, sacando $v$ e $\mathcal{I}$.
-    \item $\mathcal{I} \vDash \alpha
-        \implies
-        \mathcal{I} \vDash \forall x_i \alpha$
-    \item $\vDash \alpha \implies \vDash \forall x_i \alpha$
-\end{enumerate}
-
-\begin{proof} 
-    Tarea.
-\end{proof}
-
-\section{Conjuntos expresables}
-
-\begin{definicion}{Consecuencia}{}
-    Dado $\mathcal{L}$ un lenguaje de primer orden y 
-    $\Gamma \subseteq \mathrm{FORM}(\mathcal{L})$
-    y
-    $\alpha \in \mathrm{FORM}(\mathcal{L})$
-
-    \medskip
-
-    Decimos que $\alpha$ es consecuencia de $\Gamma$ si
-    $\forall \mathcal{I}$ interpretación y toda valuación 
-    $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$
-    que cumple
-    $\left(\mathcal{I} \vDash \gamma[v] ~ \forall \gamma \in \Gamma\right)$
-    \begin{gather*}
-        \implies \mathcal{I} \vDash \alpha [v]
-    \end{gather*}
-
-    \bigskip
-    \textbf{Notación:}
-    $\Gamma \vDash \alpha$
-\end{definicion}
-
-\medskip
-
-\begin{definicion}{Conjuntos expresables}{}
-    Sea $\mathcal{L}$ un lenguaje de primer orden.
-
-    Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo 
-    $\mathcal{U}$.
-
-    Sea $A \subseteq \mathcal{U}$.
-
-    \medskip
-
-    Decimos que $A$ es \textit{expresable} o \textit{definible} en 
-    $\mathcal{I}$ si existe 
-    $\alpha \in \mathrm{FORM}$ con una única  variable libre y todas las demás 
-    variables ligadas tal que
-    \nota{Decimos que $\alpha(x)$ expresa $A$.}%
-    \begin{gather*}
-        V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff a \in A
-    \end{gather*}
-
-    \medskip
-
-    Dicho de otro modo:
-    \begin{gather*}
-        A = \{ a \in \mathcal{U}_{\mathcal{I}} /
-        V_{\mathcal{I}, v_{x=a}} (\alpha(x))=1 \}
-    \end{gather*}
-    Es decir
-    \begin{gather*}
-        \text{Si } x \in A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1\\
-        \text{Si } x \notin A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x))=0
-    \end{gather*}
-
-    \bigskip
-    \textbf{Notación:}
-    $\alpha(x)$, donde $x$ es la variable libre.
-\end{definicion}
-
-\bigskip
-\textit{Observación:}
-\underline{No} depende de $v$ pues las otras variables de $\alpha$ están 
-ligadas.
-
-\subsubsection{Ejemplos}
-
-\begin{itemize}
-    \item $\mathcal{I} = (\mathbb{Z}, -)$,
-        $\alpha(x) = \forall y (f^2(x,y) = f^2(y,x))$
-
-        \begin{align*}
-            V_{\mathcal{I}, v_{x = a}}(\alpha(x)) = 1 
-            &\iff
-            \forall y \in \mathbb{Z} ~ (\underbrace{a - y = y - a}_{%
-            \substack{x = a\\ 2a = 2y}}) \\
-            &\iff \forall y ~ a = y
-        \end{align*}
-
-        No importa $a$: es siempre falso. Contraejemplo: $y = a - 1$
-        \begin{gather*}
-            \therefore ~ A = \varnothing
-        \end{gather*}
-
-    \item $\left(\mathbb{N}, +\right)$,
-        $\alpha(x) = \exists \; y ~ (f^2(y,y) = x)$
-
-        \begin{align*}
-            V_{\mathcal{I}, v_{x=a}}(\alpha(x)) = 1
-            &\iff \exists \; y \in \mathbb{N} / y + y = a\\
-            &\iff \exists \; y \in \mathbb{N} / 2 y = a \\
-            &\iff a \text{ es par}
-        \end{align*}
-        \begin{gather*}
-            \therefore ~ A = \{ n \in \mathbb{N} / n \text{ par} \}
-        \end{gather*}
-
-    \item Sea $\mathcal{L}$ de primer orden con $=$ y $f^2$; 
-        $\mathcal{I}=(\mathbb{R}, \cdot)$; $A = \{ 1, -1, 0 \}$.
-
-        Expresar $A$.
-
-        \begin{itemize}
-        \item Armemos la fórmula:
-        \begin{gather*}
-            \alpha_1(x) = \forall y \quad f^2(x,y) = y
-        \end{gather*}
-
-        Observemos que es una fórmula bien definida porque el $=$ es un 
-        predicado que está aplicado a dos términos, una variable y una 
-        función evaluada en dos variables; $y$ está ligada; y $x$ es 
-        una variable libre.
-
-        Interpretando $\alpha_1$:
-        \begin{align*}
-            & \forall y \in \mathbb{R} \quad x \cdot y = y 
-            \iff \forall y \in \mathbb{R} \quad (x-1) y = 0 \\
-            \implies) & \notamath{En particular para $y = 3$}
-            3 (x-1) = 0 \\
-            &\implies x = 1 \\
-            \impliedby) & \notamath{x = 1}
-            (1-1) y = 0 \quad \forall y \in \mathbb{R} \\
-        \end{align*}
-        \begin{gather*}
-            \therefore ~ V_{\mathcal{I}, v_{x=1}}(\alpha_1(x)) = 1 \iff x = 1
-        \end{gather*}
-
-        Entonces la fórmula $\alpha_1(x)$ expresa $B = \{ 1 \}$. Es decir,
-        $B$ es expresable en $\mathcal{I}$.
-
-
-        No es lo que me pedían en este ejercicio, pero nos damos cuenta que 
-        al 1 lo podemos describir de esta forma.
-
-
-        \item Supongamos que queremos expresar el 0, y propongamos:
-        \begin{gather*}
-            \alpha_0(x) = \forall y \quad f^2(x,y) = x
-        \end{gather*}
-
-        \begin{align*}
-            & \forall y \in \mathbb{R} \quad x \cdot y = x \iff \forall y \in
-            \mathbb{R} \quad x(y-1) = 0 \\
-            \implies & ) \text{ En particular, tomando } y = 1: \quad x = 0 \\
-            \impliedby & ) \text{ Si tomamos } x = 0: \quad 0(y-1) = 0 \quad
-            \forall y \in \mathbb{R}
-        \end{align*}
-        \begin{gather*}
-            \therefore ~ V_{\mathcal{I}}(\alpha_0) = 1 \iff x = 0
-        \end{gather*}
-
-
-        \item Por último, el $-1$ no lo podemos expresar utilizando la misma 
-        idea que en los otros dos casos.
-
-        Propongamos lo siguiente:
-        \begin{gather*}
-            \alpha_A(x) = f^2 (x, f^2 (x,x)) = x
-        \end{gather*}
-
-        Interpretando $\alpha_A$, notamos que tenemos:
-        \begin{gather*}
-            x \cdot x \cdot x = x \iff x(x^2-1) = 0 
-            \iff x = 0 \vee x = 1 \vee x = -1
-        \end{gather*}
-
-        \begin{gather*}
-            \therefore ~ \boxed{\alpha_A \text{ expresa } A}
-        \end{gather*}
-
-        Notemos que con este caso resolvimos el ejercicio.
-
-        \item Si insistimos con expresar el conjunto que tiene al $-1$ lo
-            hacemos del siguiente modo:
+            \begin{itemize}
+                \item $\mathcal{U}_{\mathcal{I}} = \mathbb{N}$
+                \item $c_{\mathcal{I}} = 0$
+                \item $f_{\mathcal{I}}^{1} = \mathbb{N} \to \mathbb{N}/$
+                $f_{\mathcal{I}}^{1} (n) = 3n$
+                \item $P_{\mathcal{I}}^{2} = 
+                    \{ (x,y) \in \mathbb{N}^2 / \divides{x}{y} \}$
+                \item $v: \mathrm{VAR} \to \mathbb{N}:$
+                    \nota{$\forall i \in \mathbb{N}$}%
+                    $v(x_i) = 1$ 
+            \end{itemize}
 
             \begin{gather*}
-                \alpha_{-1}(x) = \alpha_A (x) \wedge \neg \alpha_1(x) \wedge
-                \neg \alpha_0 (x)
+                \alpha = \forall x_1 ~ \exists x_2 ~ 
+                \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)
             \end{gather*}
-            
-            Pues
+
             \begin{align*}
-                V_{\mathcal{I}}(\alpha_{-1}(x)) = 1 
-                & \iff V_{\mathcal{I}}(\alpha_A (x)) = 1 \text{ y }
-                V_{\mathcal{I}}(\neg \alpha_1(x)) = 1 \text{ y } \\
-                & \phantom{\iff} V_{\mathcal{I}}(\neg \alpha_0 (x)) = 1 \\
-                & \iff x \in A \text { y } V_{\mathcal{I}}(\alpha_1(x)) = 0
-                \text{ y } V_{\mathcal{I}}(\alpha_0 (x)) = 0 \\
-                & \iff x \in A \text { y } x \neq 1 \text{ y } x \neq 0 \\
-                & \iff x = - 1
+                V_{\mathcal{I}, v}(\alpha) = 1 \iff& 
+                \forall a \in \mathcal{U}_{\mathcal{I}} = \mathbb{N}
+                \text{ vale que} \\
+                & V_{\mathcal{I}, v_{x_1 = a}} \left(\exists x_2 ~ 
+                \left( P^2(x,c) \to P^2(f^{1}(x_2),f^{1}(x_1))\right)\right) \\
+                \iff& \forall a \in \mathbb{N} ~ 
+                \exists \; b \in \mathbb{N} \text{ tal que}\\
+                &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}}
+                \left(P^2(x,c)\to P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1 \\
+                \iff& \forall a \in \mathbb{N} ~ 
+                \exists \; b \in \mathbb{N} \text{ tal que}\\
+                &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
+                \\ & \text{ ó }\\
+                &V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
+                \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
             \end{align*}
 
-            Por lo tanto, $\alpha_{-1}(x)$ expresa $\{ -1 \}$.
-        \end{itemize}
+            Luego,
+            \begin{align*}
+                V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} \left(P^2(x,c)\right) = 0
+                &\iff (\bar{v}_{x_1 = a, x_2 = b}, \bar{v}(c)) 
+                \notin P^2_{\mathcal{I}} \\
+                &\iff \notdivides{a}{0}
+            \end{align*}
+            Y
+            \begin{align*}
+                V_{\mathcal{I}, v_{x_1 = a, x_2 = b}} 
+                \left(P^2(f^{1}(x_2), f^{1}(x_1))\right) = 1
+                &\iff (3b, 3a) \in P^2_{\mathcal{I}} \\
+                &\iff \divides{3b}{3a}
+            \end{align*}
 
-    \item Sea $\mathcal{L}$ un lenguaje de primer orden con $=$ y $f^2$.
+            Y esto ocurre sí y sólo sí $\forall a \in \mathbb{N}$, 
+            $\exists \; b \in \mathbb{N} /$ 
+            $\notdivides{a}{0}$
+            ó
+            $\divides{3b}{3a}$
 
-        Demostrar que $A = \{ n \in \mathbb{N} / n $ es par$\}$ es expresable
-        en $\mathcal{I}=(\mathbb{N}, +)$.
+            Tomando
+            $a \neq 0 \implies b = 1$ 
+            cumple que 
+            $\divides{3b}{3a}$.
 
+            Por otra parte, si 
+            $a = 0 \implies b = 0 \implies$
+            $\divides{3\, . \, 0 = 0}{3\, . \, 0 = 0}$
 
-        \nota{Notemos que no tenemos ni el `2', ni el `$*$' (``por'')}%
-        Sabemos que $n$ es par si y sólo si $\exists\; q / n = 2q = q+q$.
+            \begin{gather*}
+                \therefore ~ V_{\mathcal{I}, v}(\alpha) = 1
+            \end{gather*}
 
-        Una fórmula que nos sirve es:
-        \begin{gather*}
-            \alpha(x) = \exists \; q \quad f^2(q,q)=x
-        \end{gather*}
+        \item Dado 
+            \nota{Esto se lee como\\
+            $\mathcal{L} = <\varnothing, \{ f^2 \}, \{ = \}>$}%
+            $\mathcal{I} = \left(\mathbb{R}, +, =\right)$ 
+            y
+            $\alpha = \forall x ~ \forall y ~ (f^2(x,y) = f^2(y,x))$, 
+            interpretar $\alpha$.
 
-        Entonces
-        \begin{align*}
-            V_{\mathcal{I}}(\alpha)=1 \iff& \exists \; q \in \mathbb{N} /
-            q+q = x \\
-            \iff & \exists \; q \in \mathbb{N} / 2q = x \\
-            \iff & x \text{ es par}
-        \end{align*}
+            Al interpretar $\alpha$ en $\mathcal{I}$, expresa la propiedad
+            \begin{gather*}
+                \notamath{Es cierto $\forall$ valuación}
+                \forall x \in \mathbb{R} ~ \forall y \in \mathbb{R} ~
+                (x + y = y + x)
+            \end{gather*}
 
-    \item Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden 
-        con $=$ y $f^2$.
-        Sea $\alpha(x) = \forall y \quad f^2(x,y) = f^2(y,x)$.
-        \nota{La variable $y$ está ligada; $x$ está libre.}%
+            $\alpha$ es válida en $\mathcal{I}$.
 
-        \begin{enumerate}[label=\alph*)]
-            \item $\mathcal{I}_1 = (\mathbb{R}^{2 \times 2}, \cdot)$
+        \item $\mathcal{J} = (\mathbb{R}, -, =)$
 
-                En este caso, que el universo son las matrices de $2\times 2$
-                con coeficientes reales y tengo el producto, tenemos:
+            $\alpha$ se interpreta como
+            \begin{gather*}
+                \forall x, y \in \mathbb{R} ~ (x - y = y - x)
+            \end{gather*}
 
-                \begin{gather*}
-                    V_{\mathbb{I}_1}(\alpha(x)) = 1 
-                    \iff \forall Y \quad XY = YX
-                \end{gather*}
+            No es cierto, pues si $x = 1$ e $y = 2$, entonces $\alpha$ no es
+            válida en $\mathcal{J}$.
 
-                \begin{itemize}
-                    \item $\implies)$ En particular
+            Por lo tanto, $\alpha$ \underline{no} es universalmente válida.
 
-                    \begin{align*}
-                        & \underbrace{%
-                        \begin{pmatrix}
-                            x_{11} & x_{12} \\
-                            x_{21} & x_{22}
-                        \end{pmatrix}}_{X} 
-                        \begin{pmatrix}
-                            1 & 0 \\
-                            0 & 0
-                        \end{pmatrix}
-                        =
-                        \begin{pmatrix}
-                            1 & 0 \\
-                            0 & 0
-                        \end{pmatrix}
-                        \begin{pmatrix}
-                            x_{11} & x_{12} \\
-                            x_{21} & x_{22}
-                        \end{pmatrix} \\
-                        \implies &
-                        \begin{pmatrix}
-                            x_{11} & 0 \\
-                            x_{21} & 0
-                        \end{pmatrix}
-                        =
-                        \begin{pmatrix}
-                            x_{11} & x_{12} \\
-                            0 & 0
-                        \end{pmatrix} \\
-                        \implies& x_{12} = 0 \wedge x_{21}= 0 \\
-                    \end{align*}
+        \item $\mathcal{L} = <\varnothing, \varnothing, \{ P^1 \}>$,
+            $\alpha = (\forall x ~ P^1(x)) \to P^1(x)$
 
-                    En particular
-                    \begin{align*}
-                        & \begin{pmatrix}
-                            x_{11} & 0 \\
-                            0 & x_{22}
-                        \end{pmatrix}
-                        \begin{pmatrix}
-                            0 & 0 \\
-                            1 & 0
-                        \end{pmatrix} =
-                        \begin{pmatrix}
-                            0 & 0 \\
-                            1 & 0
-                        \end{pmatrix}
-                        \begin{pmatrix}
-                            x_{11} & 0 \\
-                            0 & x_{22}
-                        \end{pmatrix} \\
-                        \implies &
-                        \begin{pmatrix}
-                            0 & 0 \\ x_{22} & 0
-                        \end{pmatrix}
-                        =
-                        \begin{pmatrix}
-                            0 & 0 \\ x_{11} & 0
-                        \end{pmatrix} \\
-                        \implies & x_{11} = x_{22}
-                    \end{align*}
+            Sea $\mathcal{I}$ interpretación. 
+            $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$ valuación.
 
-                    \begin{gather*}
-                        \therefore ~ V_{\mathcal{I}}(\alpha)=1
-                        \implies X =
-                        \begin{pmatrix}
-                            x_{11} & 0 \\ 0 & x_{11}
-                        \end{pmatrix}
-                        \notamath{$x_{11} \in \mathbb{R}$}
-                        = x_{11}
-                        \begin{pmatrix}
-                            1 & 0 \\ 0 & 1
-                        \end{pmatrix}
-                        = x_{11} \, Id
-                    \end{gather*}
+            \begin{align*}
+                V_{\mathcal{I}, v}(\alpha) = 1 &\iff
+                V_{\mathcal{I}, v}(\forall x ~ P^1(x)) = 0 
+                \text{ o }
+                V_{\mathcal{I}, v}(P^1(x)) = 1 \\
+                &\iff \left(\exists \; a \in \mathcal{U}_{\mathcal{I}} 
+                    \text{ tal que } a \notin P^1_{\mathcal{I}}\right)
+                \text{ o }
+                \left(v(x) \in P^1_{\mathcal{I}}\right)
+            \end{align*}
 
-                \item $\impliedby$) Sea $X = x_{11} \, Id$. ¿Conmuta con todo
-                    $Y$?
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+                \item Si $v(x) \in P^1_{\mathcal{I}}$
+                    $\implies$
+                    $V_{\mathcal{I}, v}(\alpha) = 1$
+                \item Si $v(x) \notin P^1_{\mathcal{I}}$
+                    $\implies$
+                    $v(x) = b \in \mathcal{U}_{\mathcal{I}}$ y cumple que
+                    $b \notin P^1_{\mathcal{I}}$
+                    $\implies$
+                    \nota{$a = b$}%
+                    $\exists \; a \in \mathcal{U}_{\mathcal{I}} / 
+                    a \notin P^1_{\mathcal{I}}$
+                    $\implies$
+                    $V_{\mathcal{I}, v}(\alpha) = 1$
+            \end{enumerate}
+            
+            Por lo tanto, vale $\forall \mathcal{F}$, $\forall v$
+            $\implies$
+            $\alpha$ es universalmente válido.
+    \end{itemize}
 
-                    \begin{align*}
-                        X Y &= x_{11} \, \underbrace{Id \, Y}_{Y} 
-                        = x_{11} Y \\
-                        &= Y x_{11} = \underbrace{Y \, Id}_{Y} \, x_{11} 
-                        \notamath{Por conmutatividad con un escalar} \\
-                        &= Y \underbrace{(Id \, x_{11})}_{X} = YX 
-                        \notamath{Por asociatividad} \\
-                    \end{align*}
-                \end{itemize}
+    \subsection{Igualdad}
 
-                Por lo tanto $\alpha$ expresa 
-                $A = \{ M \in \mathbb{R}^{2\times 2} / 
-                M = m \, Id, m \in \mathbb{R} \}$
+    \begin{definicion}{}{}
+        $\mathcal{L}$ es un lenguaje con igualdad ($\,=\,$) si tiene un símbolo
+        de predicado binario que obligatorialemtne se interpreta con la igualdad.
+    \end{definicion}
 
+    \subsubsection{Ejemplo}
 
-            \item $\mathcal{I}_2 = (\mathbb{Z}, -)$
+    Sea $\mathcal{L}$ un lenguaje con igualdad.
 
-                \begin{gather*}
-                    V_{\mathcal{I}}(\alpha) = 1 \iff \forall y \quad x-y=y-x
-                \end{gather*}
+    Hallar 
+    $\alpha \in \mathrm{FORM} / \{ \mathcal{I} / \mathcal{I} \vDash \alpha \}$
+    es la clase de modelos cuyo universo tiene exactamente 2 elementos.
 
-                Supongo que existe $x \in \mathbb{Z} / 
-                x - y = y - x \quad \forall y$
-                \begin{align*}
-                    \iff & 2x = 2y \quad \forall y \\
-                    \iff & x = y \quad \forall y \\
-                    \implies & \text{ en particular } x = 2 \text{ y } x = 3
-                \end{align*}
-                ¡Lo cual es absurdo!
+    Propongo
+    \begin{gather*}
+        \alpha = \exists x \quad \exists y ( \underbrace{\neg x = y}_{\neg P(x,y)}
+        \wedge \forall z \quad (z = x \vee z = y)) 
+    \end{gather*}
 
-                \begin{center}
-                    Por lo tanto, $\alpha$ expresa $\varnothing = \{\}$
-                \end{center}
-        \end{enumerate}
-\end{itemize}
+    Ahora probemos que cumple con lo pedido.
+    \begin{enumerate}
+        \item Sea $\mathcal{I} / \# \mathcal{U} = 1$, $\mathcal{U} = \{ a \}$
 
-\subsection{Propiedades}
+            El único valor que puede tomar $x$ es $a$.
 
-Sea $\mathcal{L}$ un lenguaje de primer orden. 
+            El único valor que puede tomar $y$ es $a$.
+            \begin{center}
+                $\neg a = a$ es falso, por lo que $V_{\mathcal{I}}(\alpha) = 0$
+            \end{center}
 
-Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo
-$\mathcal{U}$.
+        \item Sea $\mathcal{I} / \# \mathcal{U} \geq 3$,.
 
-\begin{enumerate}
-    \item $A \subseteq \mathcal{U}$, $A$ es expresable $\implies$ $A^c$ es
-        \nota{``Si un conjunto es expresable, entonces su complemento 
-        también lo es.''}%
-        expresable.
-    \item $A, B \subseteq \mathcal{U}$ expresables $\implies$ $A \cap B$,
-        $A \cup B$, $A - B$ y $A \triangle B$ son expresables.
-    \item $\varnothing$ es expresable y $\mathcal{U}$ es expresable.
-\end{enumerate}
+            Eligiendo $z$ diferente a como elegí $x$ e $y$:
+            \begin{gather*}
+                z = x \vee z = y \text{ que es falso. }\\ 
+                \therefore ~ V_{\mathcal{I}} (\alpha) = 0
+            \end{gather*}
 
-\begin{proof} \phantom{.}
+        \item Sea $\mathcal{I}/ \# \mathcal{U} = 2$, $\mathcal{U} = \{ a,b \}$
+
+            Tomo $x = a$, $y = b$.
+            \begin{gather*}
+                \neg a = b \wedge \forall z \in \mathcal{U} \quad (z=a \vee z=b) \\
+                \therefore ~ V_{\mathcal{I}} (\alpha) =  1
+            \end{gather*}
+    \end{enumerate}
+
+    \subsection{Propiedades}
 
     \begin{enumerate}
-        \item $A$ es expresable $\implies$ $\exists \; \alpha(x)=\alpha$ que
-            expresa $A$.
-
-            Defino $\beta(x) = \neg \alpha(x)$.
-
-            \begin{align*}
-                V_{\mathcal{I}, v_{x=t}}(\beta) = 1 & \iff
-                V_{\mathcal{I},v_{x=t}} (\alpha) = 0 \\
-                &\iff \notamath{Porque $\alpha$ expresa $A$} t \notin A \\
-                &\iff t \in A^c
-            \end{align*}
-
-            Conclusión: $\beta$ expresa $A^c$ $\implies$ $A^c$ es expreasble.
-
-        \item $A$ expresable $\implies$ existe $\alpha=\alpha(x)$ que expresa
-            $A$.
-
-            $B$ expresable $\implies$ existe $\beta=\beta(x)$ 
-            que expresa $B$.
-            \begin{enumerate}
-                \item Defino $\gamma = (\alpha \wedge \beta)$.
-                    \begin{align*}
-                        V_{\mathcal{I}}(\gamma)=1 &\iff \min{\{ 
-                        V_{\mathcal{I}}(\alpha), V_{\mathcal{I}}(\beta)\}}=1\\
-                        &\iff V_{\mathcal{I}}=1 \text{ y }
-                        V_{\mathcal{I}}(\beta)=1 \\
-                        &\iff x \in A \text{ y } x \in B\\
-                        &\iff x \in A \cap B
-                    \end{align*}
-                    \begin{gather*}
-                        \therefore ~ \gamma \text{ expresa } A \cap B
-                        \implies  A \cap B \text{ es expresable.}
-                    \end{gather*}
-                \item Unión: tarea. 
-                \item Diferencia: tarea. 
-                \item Diferencia simétrica: tarea. 
-            \end{enumerate}
-
-        \item $\mathcal{L}$ de 1\textsuperscript{er.} orden $\implies$
-            $\mathcal{P} \neq \varnothing$ $\implies$ existe 
-            $P^k \in \mathcal{P}$.
-
-            Defino $\alpha(x) = \big(
-                P^k ( \overbrace{%
-                \underbrace{x,x,\dotsc,x}_{k\text{ veces}}}^{\vec{x}} )
-                \wedge 
-                \neg P^k (x, x, \dotsc,x) \big)$
-
-            Supongo que existe $t \in \mathcal{U}$ tal que:
-
-            \begin{align*}
-                V_{\mathcal{I}, v_{x=t}}(\alpha)=1 \implies&
-                \min{\left\{ V_{\mathcal{I}, v_{x=t}} \left(P^k(\vec{x})\right), 
-                1 - V_{\mathcal{I}, v_{x=t}}\left(P^k(\vec{x})\right)
-                \right\}} = 1 \\
-                &\iff V_{\mathcal{I}, v_{x=t}} \left(P^k(\vec{x})\right)=1 
-                \text{ y }
-                1 - V_{\mathcal{I}, v_{x=t}}\left(P^k(\vec{x})\right) = 1
-            \end{align*}
-
-            ¡Absurdo!
-            \begin{gather*}
-                \therefore ~ \alpha(x) \text{ expresa el } \varnothing = \{\}
-                \implies \varnothing \text{ es expresable.}
-            \end{gather*}
-
-            Por la primera propiedad, como $\varnothing$ es expresable
-            $\implies$ $\varnothing^c$ es expresable y 
-            $\varnothing^c=\mathcal{U}$.
+        \item $\vDash \alpha \iff \neg \alpha$ es insatisfacible.
+        \item $\begin{rcases*}
+                \mathcal{I} \vDash \alpha[v] & \\
+                \mathcal{I} \vDash \alpha \to \beta[v] &
+            \end{rcases*}
+            \mathcal{I} \vDash \beta[v]$
+        \item Idem anterior, sacando $v$ e $\mathcal{I}$.
+        \item $\mathcal{I} \vDash \alpha
+            \implies
+            \mathcal{I} \vDash \forall x_i \alpha$
+        \item $\vDash \alpha \implies \vDash \forall x_i \alpha$
     \end{enumerate}
-\end{proof}
 
-\section{Elementos distinguibles}
-\begin{definicion}{Elementos distinguibles}{}
-    Sea $\mathcal{L}$ un lenguaje de primer orden.
+    \begin{proof} 
+        Tarea.
+    \end{proof}
 
-    Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo 
-    $\mathcal{U}$.
+    \section{Conjuntos expresables}
 
-    \nota{Estamos expresando un conjunto que tiene un único elemento.}%
-    Sea $a \in \mathcal{U}$.
+    \begin{definicion}{Consecuencia}{}
+        Dado $\mathcal{L}$ un lenguaje de primer orden y 
+        $\Gamma \subseteq \mathrm{FORM}(\mathcal{L})$
+        y
+        $\alpha \in \mathrm{FORM}(\mathcal{L})$
+
+        \medskip
+
+        Decimos que $\alpha$ es consecuencia de $\Gamma$ si
+        $\forall \mathcal{I}$ interpretación y toda valuación 
+        $v: \mathrm{VAR} \to \mathcal{U}_{\mathcal{I}}$
+        que cumple
+        $\left(\mathcal{I} \vDash \gamma[v] ~ \forall \gamma \in \Gamma\right)$
+        \begin{gather*}
+            \implies \mathcal{I} \vDash \alpha [v]
+        \end{gather*}
+
+        \bigskip
+        \textbf{Notación:}
+        $\Gamma \vDash \alpha$
+    \end{definicion}
 
     \medskip
 
-    Decimos que $a$ es distinguible si $\{ a \}$ es expresable.
-\end{definicion}
+    \begin{definicion}{Conjuntos expresables}{}
+        Sea $\mathcal{L}$ un lenguaje de primer orden.
 
+        Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo 
+        $\mathcal{U}$.
 
-\subsubsection{Ejemplo}
+        Sea $A \subseteq \mathcal{U}$.
 
-\nota{\textit{Noni:} ``Un conjunto $A=\{a,b,c\}$ puede ser expresable y ninguno
-de sus elementos distinguible.''}%
-Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden con $=$ y $f^2$;
-$\mathcal{I} = (\mathbb{N}, +)$.
+        \medskip
 
-Probar que todo $n \in \mathbb{N}$ es distinguible.
-
-\begin{itemize}
-    \item $\alpha_0(x) = \forall y \quad f^2(x,y) = y$ distingue al $0$.
-
+        Decimos que $A$ es \textit{expresable} o \textit{definible} en 
+        $\mathcal{I}$ si existe 
+        $\alpha \in \mathrm{FORM}$ con una única  variable libre y todas las demás 
+        variables ligadas tal que
+        \nota{Decimos que $\alpha(x)$ expresa $A$.}%
         \begin{gather*}
-            V_{\mathcal{I}}(\alpha_0) = 1
-            \iff \forall y \quad x + y = y 
-            \iff \forall y \quad x = 0
+            V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff a \in A
         \end{gather*}
 
-    \item $\alpha_1(x) = \neg \alpha_0(x) \wedge 
-        \forall w \forall z \quad ((\neg \alpha_0(w) \wedge \neg \alpha_0(z))) 
-        \implies \neg x = f^2(w,z)$
+        \medskip
+
+        Dicho de otro modo:
+        \begin{gather*}
+            A = \{ a \in \mathcal{U}_{\mathcal{I}} /
+            V_{\mathcal{I}, v_{x=a}} (\alpha(x))=1 \}
+        \end{gather*}
+        Es decir
+        \begin{gather*}
+            \text{Si } x \in A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1\\
+            \text{Si } x \notin A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x))=0
+        \end{gather*}
+
+        \bigskip
+        \textbf{Notación:}
+        $\alpha(x)$, donde $x$ es la variable libre.
+    \end{definicion}
+
+    \bigskip
+    \textit{Observación:}
+    \underline{No} depende de $v$ pues las otras variables de $\alpha$ están 
+    ligadas.
+
+    \subsubsection{Ejemplos}
+
+    \begin{itemize}
+        \item $\mathcal{I} = (\mathbb{Z}, -)$,
+            $\alpha(x) = \forall y (f^2(x,y) = f^2(y,x))$
+
+            \begin{align*}
+                V_{\mathcal{I}, v_{x = a}}(\alpha(x)) = 1 
+                &\iff
+                \forall y \in \mathbb{Z} ~ (\underbrace{a - y = y - a}_{%
+                \substack{x = a\\ 2a = 2y}}) \\
+                &\iff \forall y ~ a = y
+            \end{align*}
+
+            No importa $a$: es siempre falso. Contraejemplo: $y = a - 1$
+            \begin{gather*}
+                \therefore ~ A = \varnothing
+            \end{gather*}
+
+        \item $\left(\mathbb{N}, +\right)$,
+            $\alpha(x) = \exists \; y ~ (f^2(y,y) = x)$
+
+            \begin{align*}
+                V_{\mathcal{I}, v_{x=a}}(\alpha(x)) = 1
+                &\iff \exists \; y \in \mathbb{N} / y + y = a\\
+                &\iff \exists \; y \in \mathbb{N} / 2 y = a \\
+                &\iff a \text{ es par}
+            \end{align*}
+            \begin{gather*}
+                \therefore ~ A = \{ n \in \mathbb{N} / n \text{ par} \}
+            \end{gather*}
+
+        \item Sea $\mathcal{L}$ de primer orden con $=$ y $f^2$; 
+            $\mathcal{I}=(\mathbb{R}, \cdot)$; $A = \{ 1, -1, 0 \}$.
+
+            Expresar $A$.
+
+            \begin{itemize}
+            \item Armemos la fórmula:
+            \begin{gather*}
+                \alpha_1(x) = \forall y \quad f^2(x,y) = y
+            \end{gather*}
+
+            Observemos que es una fórmula bien definida porque el $=$ es un 
+            predicado que está aplicado a dos términos, una variable y una 
+            función evaluada en dos variables; $y$ está ligada; y $x$ es 
+            una variable libre.
+
+            Interpretando $\alpha_1$:
+            \begin{align*}
+                & \forall y \in \mathbb{R} \quad x \cdot y = y 
+                \iff \forall y \in \mathbb{R} \quad (x-1) y = 0 \\
+                \implies) & \notamath{En particular para $y = 3$}
+                3 (x-1) = 0 \\
+                &\implies x = 1 \\
+                \impliedby) & \notamath{x = 1}
+                (1-1) y = 0 \quad \forall y \in \mathbb{R} \\
+            \end{align*}
+            \begin{gather*}
+                \therefore ~ V_{\mathcal{I}, v_{x=1}}(\alpha_1(x)) = 1 \iff x = 1
+            \end{gather*}
+
+            Entonces la fórmula $\alpha_1(x)$ expresa $B = \{ 1 \}$. Es decir,
+            $B$ es expresable en $\mathcal{I}$.
+
+
+            No es lo que me pedían en este ejercicio, pero nos damos cuenta que 
+            al 1 lo podemos describir de esta forma.
+
+
+            \item Supongamos que queremos expresar el 0, y propongamos:
+            \begin{gather*}
+                \alpha_0(x) = \forall y \quad f^2(x,y) = x
+            \end{gather*}
+
+            \begin{align*}
+                & \forall y \in \mathbb{R} \quad x \cdot y = x \iff \forall y \in
+                \mathbb{R} \quad x(y-1) = 0 \\
+                \implies & ) \text{ En particular, tomando } y = 1: \quad x = 0 \\
+                \impliedby & ) \text{ Si tomamos } x = 0: \quad 0(y-1) = 0 \quad
+                \forall y \in \mathbb{R}
+            \end{align*}
+            \begin{gather*}
+                \therefore ~ V_{\mathcal{I}}(\alpha_0) = 1 \iff x = 0
+            \end{gather*}
+
+
+            \item Por último, el $-1$ no lo podemos expresar utilizando la misma 
+            idea que en los otros dos casos.
+
+            Propongamos lo siguiente:
+            \begin{gather*}
+                \alpha_A(x) = f^2 (x, f^2 (x,x)) = x
+            \end{gather*}
+
+            Interpretando $\alpha_A$, notamos que tenemos:
+            \begin{gather*}
+                x \cdot x \cdot x = x \iff x(x^2-1) = 0 
+                \iff x = 0 \vee x = 1 \vee x = -1
+            \end{gather*}
+
+            \begin{gather*}
+                \therefore ~ \boxed{\alpha_A \text{ expresa } A}
+            \end{gather*}
+
+            Notemos que con este caso resolvimos el ejercicio.
+
+            \item Si insistimos con expresar el conjunto que tiene al $-1$ lo
+                hacemos del siguiente modo:
+
+                \begin{gather*}
+                    \alpha_{-1}(x) = \alpha_A (x) \wedge \neg \alpha_1(x) \wedge
+                    \neg \alpha_0 (x)
+                \end{gather*}
+                
+                Pues
+                \begin{align*}
+                    V_{\mathcal{I}}(\alpha_{-1}(x)) = 1 
+                    & \iff V_{\mathcal{I}}(\alpha_A (x)) = 1 \text{ y }
+                    V_{\mathcal{I}}(\neg \alpha_1(x)) = 1 \text{ y } \\
+                    & \phantom{\iff} V_{\mathcal{I}}(\neg \alpha_0 (x)) = 1 \\
+                    & \iff x \in A \text { y } V_{\mathcal{I}}(\alpha_1(x)) = 0
+                    \text{ y } V_{\mathcal{I}}(\alpha_0 (x)) = 0 \\
+                    & \iff x \in A \text { y } x \neq 1 \text{ y } x \neq 0 \\
+                    & \iff x = - 1
+                \end{align*}
+
+                Por lo tanto, $\alpha_{-1}(x)$ expresa $\{ -1 \}$.
+            \end{itemize}
+
+        \item Sea $\mathcal{L}$ un lenguaje de primer orden con $=$ y $f^2$.
+
+            Demostrar que $A = \{ n \in \mathbb{N} / n $ es par$\}$ es expresable
+            en $\mathcal{I}=(\mathbb{N}, +)$.
+
+
+            \nota{Notemos que no tenemos ni el `2', ni el `$*$' (``por'')}%
+            Sabemos que $n$ es par si y sólo si $\exists\; q / n = 2q = q+q$.
+
+            Una fórmula que nos sirve es:
+            \begin{gather*}
+                \alpha(x) = \exists \; q \quad f^2(q,q)=x
+            \end{gather*}
+
+            Entonces
+            \begin{align*}
+                V_{\mathcal{I}}(\alpha)=1 \iff& \exists \; q \in \mathbb{N} /
+                q+q = x \\
+                \iff & \exists \; q \in \mathbb{N} / 2q = x \\
+                \iff & x \text{ es par}
+            \end{align*}
+
+        \item Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden 
+            con $=$ y $f^2$.
+            Sea $\alpha(x) = \forall y \quad f^2(x,y) = f^2(y,x)$.
+            \nota{La variable $y$ está ligada; $x$ está libre.}%
+
+            \begin{enumerate}[label=\alph*)]
+                \item $\mathcal{I}_1 = (\mathbb{R}^{2 \times 2}, \cdot)$
+
+                    En este caso, que el universo son las matrices de $2\times 2$
+                    con coeficientes reales y tengo el producto, tenemos:
+
+                    \begin{gather*}
+                        V_{\mathbb{I}_1}(\alpha(x)) = 1 
+                        \iff \forall Y \quad XY = YX
+                    \end{gather*}
+
+                    \begin{itemize}
+                        \item $\implies)$ En particular
+
+                        \begin{align*}
+                            & \underbrace{%
+                            \begin{pmatrix}
+                                x_{11} & x_{12} \\
+                                x_{21} & x_{22}
+                            \end{pmatrix}}_{X} 
+                            \begin{pmatrix}
+                                1 & 0 \\
+                                0 & 0
+                            \end{pmatrix}
+                            =
+                            \begin{pmatrix}
+                                1 & 0 \\
+                                0 & 0
+                            \end{pmatrix}
+                            \begin{pmatrix}
+                                x_{11} & x_{12} \\
+                                x_{21} & x_{22}
+                            \end{pmatrix} \\
+                            \implies &
+                            \begin{pmatrix}
+                                x_{11} & 0 \\
+                                x_{21} & 0
+                            \end{pmatrix}
+                            =
+                            \begin{pmatrix}
+                                x_{11} & x_{12} \\
+                                0 & 0
+                            \end{pmatrix} \\
+                            \implies& x_{12} = 0 \wedge x_{21}= 0 \\
+                        \end{align*}
+
+                        En particular
+                        \begin{align*}
+                            & \begin{pmatrix}
+                                x_{11} & 0 \\
+                                0 & x_{22}
+                            \end{pmatrix}
+                            \begin{pmatrix}
+                                0 & 0 \\
+                                1 & 0
+                            \end{pmatrix} =
+                            \begin{pmatrix}
+                                0 & 0 \\
+                                1 & 0
+                            \end{pmatrix}
+                            \begin{pmatrix}
+                                x_{11} & 0 \\
+                                0 & x_{22}
+                            \end{pmatrix} \\
+                            \implies &
+                            \begin{pmatrix}
+                                0 & 0 \\ x_{22} & 0
+                            \end{pmatrix}
+                            =
+                            \begin{pmatrix}
+                                0 & 0 \\ x_{11} & 0
+                            \end{pmatrix} \\
+                            \implies & x_{11} = x_{22}
+                        \end{align*}
+
+                        \begin{gather*}
+                            \therefore ~ V_{\mathcal{I}}(\alpha)=1
+                            \implies X =
+                            \begin{pmatrix}
+                                x_{11} & 0 \\ 0 & x_{11}
+                            \end{pmatrix}
+                            \notamath{$x_{11} \in \mathbb{R}$}
+                            = x_{11}
+                            \begin{pmatrix}
+                                1 & 0 \\ 0 & 1
+                            \end{pmatrix}
+                            = x_{11} \, Id
+                        \end{gather*}
+
+                    \item $\impliedby$) Sea $X = x_{11} \, Id$. ¿Conmuta con todo
+                        $Y$?
+
+                        \begin{align*}
+                            X Y &= x_{11} \, \underbrace{Id \, Y}_{Y} 
+                            = x_{11} Y \\
+                            &= Y x_{11} = \underbrace{Y \, Id}_{Y} \, x_{11} 
+                            \notamath{Por conmutatividad con un escalar} \\
+                            &= Y \underbrace{(Id \, x_{11})}_{X} = YX 
+                            \notamath{Por asociatividad} \\
+                        \end{align*}
+                    \end{itemize}
+
+                    Por lo tanto $\alpha$ expresa 
+                    $A = \{ M \in \mathbb{R}^{2\times 2} / 
+                    M = m \, Id, m \in \mathbb{R} \}$
+
+
+                \item $\mathcal{I}_2 = (\mathbb{Z}, -)$
+
+                    \begin{gather*}
+                        V_{\mathcal{I}}(\alpha) = 1 \iff \forall y \quad x-y=y-x
+                    \end{gather*}
+
+                    Supongo que existe $x \in \mathbb{Z} / 
+                    x - y = y - x \quad \forall y$
+                    \begin{align*}
+                        \iff & 2x = 2y \quad \forall y \\
+                        \iff & x = y \quad \forall y \\
+                        \implies & \text{ en particular } x = 2 \text{ y } x = 3
+                    \end{align*}
+                    ¡Lo cual es absurdo!
+
+                    \begin{center}
+                        Por lo tanto, $\alpha$ expresa $\varnothing = \{\}$
+                    \end{center}
+            \end{enumerate}
+    \end{itemize}
+
+    \subsection{Propiedades}
+
+    Sea $\mathcal{L}$ un lenguaje de primer orden. 
+
+    Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo
+    $\mathcal{U}$.
+
+    \begin{enumerate}
+        \item $A \subseteq \mathcal{U}$, $A$ es expresable $\implies$ $A^c$ es
+            \nota{``Si un conjunto es expresable, entonces su complemento 
+            también lo es.''}%
+            expresable.
+        \item $A, B \subseteq \mathcal{U}$ expresables $\implies$ $A \cap B$,
+            $A \cup B$, $A - B$ y $A \triangle B$ son expresables.
+        \item $\varnothing$ es expresable y $\mathcal{U}$ es expresable.
+    \end{enumerate}
+
+    \begin{proof} \phantom{.}
+
+        \begin{enumerate}
+            \item $A$ es expresable $\implies$ $\exists \; \alpha(x)=\alpha$ que
+                expresa $A$.
+
+                Defino $\beta(x) = \neg \alpha(x)$.
+
+                \begin{align*}
+                    V_{\mathcal{I}, v_{x=t}}(\beta) = 1 & \iff
+                    V_{\mathcal{I},v_{x=t}} (\alpha) = 0 \\
+                    &\iff \notamath{Porque $\alpha$ expresa $A$} t \notin A \\
+                    &\iff t \in A^c
+                \end{align*}
+
+                Conclusión: $\beta$ expresa $A^c$ $\implies$ $A^c$ es expreasble.
+
+            \item $A$ expresable $\implies$ existe $\alpha=\alpha(x)$ que expresa
+                $A$.
+
+                $B$ expresable $\implies$ existe $\beta=\beta(x)$ 
+                que expresa $B$.
+                \begin{enumerate}
+                    \item Defino $\gamma = (\alpha \wedge \beta)$.
+                        \begin{align*}
+                            V_{\mathcal{I}}(\gamma)=1 &\iff \min{\{ 
+                            V_{\mathcal{I}}(\alpha), V_{\mathcal{I}}(\beta)\}}=1\\
+                            &\iff V_{\mathcal{I}}=1 \text{ y }
+                            V_{\mathcal{I}}(\beta)=1 \\
+                            &\iff x \in A \text{ y } x \in B\\
+                            &\iff x \in A \cap B
+                        \end{align*}
+                        \begin{gather*}
+                            \therefore ~ \gamma \text{ expresa } A \cap B
+                            \implies  A \cap B \text{ es expresable.}
+                        \end{gather*}
+                    \item Unión: tarea. 
+                    \item Diferencia: tarea. 
+                    \item Diferencia simétrica: tarea. 
+                \end{enumerate}
+
+            \item $\mathcal{L}$ de 1\textsuperscript{er.} orden $\implies$
+                $\mathcal{P} \neq \varnothing$ $\implies$ existe 
+                $P^k \in \mathcal{P}$.
+
+                Defino $\alpha(x) = \big(
+                    P^k ( \overbrace{%
+                    \underbrace{x,x,\dotsc,x}_{k\text{ veces}}}^{\vec{x}} )
+                    \wedge 
+                    \neg P^k (x, x, \dotsc,x) \big)$
+
+                Supongo que existe $t \in \mathcal{U}$ tal que:
+
+                \begin{align*}
+                    V_{\mathcal{I}, v_{x=t}}(\alpha)=1 \implies&
+                    \min{\left\{ V_{\mathcal{I}, v_{x=t}} \left(P^k(\vec{x})\right), 
+                    1 - V_{\mathcal{I}, v_{x=t}}\left(P^k(\vec{x})\right)
+                    \right\}} = 1 \\
+                    &\iff V_{\mathcal{I}, v_{x=t}} \left(P^k(\vec{x})\right)=1 
+                    \text{ y }
+                    1 - V_{\mathcal{I}, v_{x=t}}\left(P^k(\vec{x})\right) = 1
+                \end{align*}
+
+                ¡Absurdo!
+                \begin{gather*}
+                    \therefore ~ \alpha(x) \text{ expresa el } \varnothing = \{\}
+                    \implies \varnothing \text{ es expresable.}
+                \end{gather*}
+
+                Por la primera propiedad, como $\varnothing$ es expresable
+                $\implies$ $\varnothing^c$ es expresable y 
+                $\varnothing^c=\mathcal{U}$.
+        \end{enumerate}
+    \end{proof}
+
+    \section{Elementos distinguibles}
+    \begin{definicion}{Elementos distinguibles}{}
+        Sea $\mathcal{L}$ un lenguaje de primer orden.
+
+        Sea $\mathcal{I}$ una interpretación de $\mathcal{L}$ con universo 
+        $\mathcal{U}$.
+
+        \nota{Estamos expresando un conjunto que tiene un único elemento.}%
+        Sea $a \in \mathcal{U}$.
+
+        \medskip
+
+        Decimos que $a$ es distinguible si $\{ a \}$ es expresable.
+    \end{definicion}
+
+
+    \subsubsection{Ejemplo}
+
+    \nota{\textit{Noni:} ``Un conjunto $A=\{a,b,c\}$ puede ser expresable y ninguno
+    de sus elementos distinguible.''}%
+    Sea $\mathcal{L}$ un lenguaje de 1\textsuperscript{er.} orden con $=$ y $f^2$;
+    $\mathcal{I} = (\mathbb{N}, +)$.
+
+    Probar que todo $n \in \mathbb{N}$ es distinguible.
+
+    \begin{itemize}
+        \item $\alpha_0(x) = \forall y \quad f^2(x,y) = y$ distingue al $0$.
+
+            \begin{gather*}
+                V_{\mathcal{I}}(\alpha_0) = 1
+                \iff \forall y \quad x + y = y 
+                \iff \forall y \quad x = 0
+            \end{gather*}
+
+        \item $\alpha_1(x) = \neg \alpha_0(x) \wedge 
+            \forall w \forall z \quad ((\neg \alpha_0(w) \wedge \neg \alpha_0(z))) 
+            \implies \neg x = f^2(w,z)$
 
         \nota{Habiendo distinguido el $1$, puedo simular que tengo la 
         constante $1$. Usando esta idea distinguimos el resto.}%
@@ -1450,8 +1450,7 @@ Probar que todo $n \in \mathbb{N}$ es distinguible.
             \nota{$c \in C$ significa que $c$ es constante}%
             $c_{\mathcal{I}_2} \in \mathcal{U}_2$ son respectivas
             interpretaciones, entonces 
-            $F(c_{\mathcal{I}_1} \in \mathcal{U}_1) =
-            c_{\mathcal{I}_2} \in \mathcal{U}_2$
+            $F(c_{\mathcal{I}_1}) = c_{\mathcal{I}_2}$
         \item Dada $f^k \in \mathcal{F}$ entonces
             \begin{gather*}
                 \notamath{$u_1, \dotsc, u_k \in \mathcal{U}_1$}%
@@ -1466,7 +1465,7 @@ Probar que todo $n \in \mathbb{N}$ es distinguible.
             (\underbrace{u_1, \dotsc, u_k}_{\in \; \mathcal{U}_1^k})
             \in P^k_{\mathcal{I}_1}
             \iff
-            (\underbrace{F(u_1), \dotsc, F(u_k)}_{\in \; \mathcal{U}^k_2})
+                (\underbrace{F(u_1), \dotsc, F(u_k)}_{\in \; \mathcal{U}^k_2})
             \in P^k_{\mathcal{I}_2}
         \end{gather*}
     \end{enumerate}
@@ -1794,10 +1793,10 @@ Entonces
               $\implies tam(\beta) = tam(\alpha) - 1 = n$
               \begin{align*}
                   \mathcal{I}_1 \vDash \alpha[v] 
-                  &\iff \underline{\mathcal{I}_1 \vDash 
-                  \beta[v]}_{V_{\mathcal{I}, v}(\neg \beta) = 1} \\
-                  &\iff \underline{\mathcal{I}_1 \not\vDash 
-                  \beta[v]}_{V_{\mathcal{I}, v}(\beta) = 0} \\
+                  &\iff \underbrace{\mathcal{I}_1 \vDash 
+                  \beta[v]}_{V_{\mathcal{I}_1, v}(\neg \beta) = 1} \\
+                  &\iff \underbrace{\mathcal{I}_1 \not\vDash 
+                  \beta[v]}_{V_{\mathcal{I}_1, v}(\beta) = 0} \\
                   &\iff \mathcal{I}_2 \not\vDash \beta[h \circ v]
                   \notamath{HI}\\
                   &\iff \mathcal{I}_2 \vDash \neg \beta[h \circ v]
@@ -1811,9 +1810,9 @@ Entonces
 
               \begin{align*}
                   \mathcal{I}_1 \vDash \alpha[v] 
-                  &\iff V_{\mathcal{I}, v}(\beta_1 \wedge \beta_2)=1 \\
-                  &\iff \min{\{ V_{\mathcal{I},v}(\beta_1),
-                  V_{\mathcal{I},v}(\beta_2)\}} = 1 \\
+                  &\iff V_{\mathcal{I}_1, v}(\beta_1 \wedge \beta_2)=1 \\
+                  &\iff \min{\{ V_{\mathcal{I}_1,v}(\beta_1),
+                  V_{\mathcal{I}_1,v}(\beta_2)\}} = 1 \\
                   &\iff \mathcal{I}_1 \vDash \beta_1[v] \text{ y }
                   \mathcal{I}_1 \vDash \beta_2[v] \\
                   &\iff \mathcal{I}_2 \vDash \beta_1[h \circ v] \text{ y }
@@ -1841,7 +1840,7 @@ Entonces
       
       Entonces omitimos estos dos casos.
 
-      \item $\alpha = \exists \; x ~ \beta$ 
+      \item $\alpha = \exists \; x \quad \beta$ 
           $\implies tam(\beta) = tam(\alpha)-1 = n$
 
         \begin{align*}
@@ -1855,8 +1854,8 @@ Entonces
             &\iff \mathcal{I}_2 \vDash 
             \beta[(h \circ v)_{x=\underbrace{h(a)}_{b}}] \text{ para algún }
             b \in \mathcal{U}_2
-            \notamath{Esto se puede pues lma función es biyectiva} \\
-            &\iff \mathcal{I}_2 \vDash \exists \; x ~ \beta [h \circ v]
+            \notamath{Esto se puede pues la función es biyectiva} \\
+            &\iff \mathcal{I}_2 \vDash \exists \; x \quad \beta [h \circ v]
         \end{align*}
 
 
@@ -2036,12 +2035,6 @@ Luego
     \end{gather*}
 
 \end{proof}
-
-
-
-\pagebreak
-
-
 
 \subsubsection{Ejemplo}
 
