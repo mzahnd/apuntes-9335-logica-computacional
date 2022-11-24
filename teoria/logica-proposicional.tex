@@ -4846,8 +4846,13 @@ El maximal \underline{no} es único.
 
 \subsubsection{Ejemplo}
 
-Dado $\{ p_0 \} = \Gamma$, son maximales consistentes $\{ p_0, \neg p_1 \}$ y
-$\{ p_0, p_1 \}$.
+Dado $\Gamma$ consistente (pero no maximal), y $\phi$ una fórmula tal que ambos
+$\Gamma \cup \{ \phi \}$ y $\Gamma \cup \{ \neg \phi \}$ son consistentes,
+entonces ambos conjuntos tendrán distintas extensiones maximales consistentes.
+
+Otra manera es pensar que existen dos conjuntos maximales consistentes,
+$\Gamma '$ y $\Gamma ''$, tales que 
+$\Gamma ' - \{ \phi \} = \Gamma '' - \{ \neg \phi \}$
 
 \subsection{Lema de Lindenbaum}
 
@@ -5274,7 +5279,7 @@ maximal consistente que lo contiene.
 
         \item Sea $\alpha=(\beta_1\to\beta_2) \implies
                 \underbrace{c(\beta_1)}_{\geq 0} + 
-                \underbrace{c(\beta_2)}_{\geq 0} = 0 \implies
+                \underbrace{c(\beta_2)}_{\geq 0} = n \implies
                 c(\beta_i) \leq n$
             \nota{$i \in \{ 1,2 \}$}%
 
@@ -5300,7 +5305,7 @@ maximal consistente que lo contiene.
                         \smallskip
 
                         Tarea: 
-                        $\underbrace{\varphi \vdash 
+                        $\underbrace{\varnothing \vdash 
                         (\neg\beta_1\to(\beta_1\to\beta_2))}_{\circled{2}}$
 
                         Por \circled{1} y \circled{2} y MP:
