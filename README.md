@@ -14,7 +14,7 @@ todos los demás.
 
 Mediante
 ```
-pdftex -file-line-error main.tex
+pdflatex -file-line-error main.tex
 ``` 
 Se obtiene un archivo `main.pdf` con el documento.
 
