@@ -155,7 +155,7 @@ El conjunto $\mathbb{N}$ es infinito.
 \medskip
 
 \begin{definicion}{Comparación de cardinales}{}
-    Sean $A$ y $B$ conjuntos. $\#A=n$, $\#B=k$
+    Sean $A$ y $B$ conjuntos tales que $\#A=n$ y $\#B=k$
 
     \begin{enumerate}
         \item Decimos que $n \leq k$ $\iff$ existe $f: A \to B$ inyectiva.
@@ -165,20 +165,18 @@ El conjunto $\mathbb{N}$ es infinito.
             $A$ en $B$.}%
         \item Decimos que $n \geq k$ $\iff$ existe $f: A \to B$ sobreyectiva.
         \item Decimos que $n>k$ $\iff$ $n \geq k$ y $n \neq k$
-        \item Decimos que $n = k$ $\iff$ existe $f: A \to B$ biyectiva, es
-            decir, si $A \sim B$.
+        \item Decimos que $n = k$ $\iff$ existe $f: A \to B$ biyectiva,\\
+            \phantom{Decimos que $n = k$ $\iff$} % Hack for alingment (:
+            es decir, si $A \sim B$.
     \end{enumerate}
 \end{definicion}
 
 
-Veamos que no depende del representante elegido. 
-\nota{\textit{Noni:} ``Buena definición.''}%
 \begin{enumerate}
-    \item Veamos que está bien definido. Es decir, que no depende del 
-        representante elegido. 
+    \item Veamos que está bien definido. 
+        \nota{\textit{Noni:} ``Buena definición.''}%
+        Es decir, que no depende del representante elegido. 
         
-        
-
         Si tomo $\widetilde{A}$ y $\widetilde{B}$ conjuntos tales que 
         $\#\widetilde{A} = n$ y $\#\widetilde{B} = k$
         $\implies \exists \; g: \widetilde{A}\to A$ biyectiva y 
@@ -434,7 +432,8 @@ $H(a,b) = \left(f(a), g(b)\right)$.
             \end{align*}
 
         \item Sobrey.) Sea $(z_1, z_2) \in \mathbb{N}\times\mathbb{N}$.
-        Como $f$ es sobreyectiva, $\implies \exists \; a \in A/ f(a) = z_1$,
+
+        Como $f$ es sobreyectiva $\implies \exists \; a \in A/ f(a) = z_1$,
         y como $g$ es sobreyectiva $\exists \; b \in B/g(b)=z_2$
         \begin{gather*}
             \therefore ~ H(a,b) = \left(f(a),g(b)\right)=(z_1,z_2)
@@ -483,7 +482,8 @@ $H(a,b) = \left(f(a), g(b)\right)$.
 
 \end{enumerate}
 
-\nota{Reescrito con la Propiedad \ref{subsec:prop-card-lqeq}}%
+\nota{Reescrito con la \fullrefgeneric{subsec:prop-card-lqeq}{%
+Propiedad \ref*{subsec:prop-card-lqeq}}}%
 \begin{teorema}{Teorema de Bernstein}{bernstein-v2}
 Sea $\#A = m$, $\#B = k$.
 
@@ -502,7 +502,8 @@ inyectivas, que son más fáciles de probar que las sobreyectivas.
 
 
 \begin{proof}
-    Usando la Propiedad \ref{subsec:prop-card-lqeq}.
+    Usando la \fullrefgeneric{subsec:prop-card-lqeq}{%
+    Propiedad \ref*{subsec:prop-card-lqeq}}.
 \end{proof}
 
 
@@ -527,7 +528,7 @@ $\#(\mathbb{N}\times\mathbb{N}) = \aleph_0$
         \notamath{Por Teorema Fundamental de la Aritmética (TFA)}
     \end{align*}
     
-    Entonces, $g$ inyectiva 
+    Entonces, $g$ es inyectiva y
     $\# (\mathbb{N} \times \mathbb{N}) \leq \mathbb{N}$.
     
     Por el \nameref{teo:bernstein}, 
@@ -568,7 +569,7 @@ $\#(\mathbb{N}\times\mathbb{N}) = \aleph_0$
 
                     \nota{La función inclusión es inyectiva (tarea)}%
                     Por un lado, tenemos la función inclusión: 
-                    $A \to B/ inc(a) = a$ 
+                    $inc: A \to B/ inc(a) = a$ 
 
                     Por otro lado, como
                     $B \sim I_k \implies \exists g: B \to I_k$ biyectiva.
@@ -589,8 +590,10 @@ $\#(\mathbb{N}\times\mathbb{N}) = \aleph_0$
 
                     Pero $\tilde{h}$ es biyectiva por ser inyectiva:
 
-                    \[ \tilde{h}(a) = \tilde{h}(b)
-                        \implies h(a) = h(b) \implies a = b \]
+                    \begin{gather*}
+                        \tilde{h}(a) = \tilde{h}(b) 
+                        \implies h(a) = h(b) \implies a = b
+                    \end{gather*}
 
                     Y sobreyectiva:
 
@@ -602,11 +605,16 @@ $\#(\mathbb{N}\times\mathbb{N}) = \aleph_0$
 
                     \medskip
 
-                    Por lo tanto, por ser $\tilde{h}$ biyectiva $\implies \#A = \#Im(h)$
-                    y $Im(h) \subseteq I_k$
+                    Por lo tanto, por ser $\tilde{h}$ biyectiva,
+                    $\#A = \#Im(h)$
+                    y 
+                    $Im(h) \subseteq I_k$
 
-                $\underbrace{\implies}_{\text{Por el item 1}} Im(h)$ es finita
-                $\implies$ $A$ es finito. ¡Absurdo!
+                $\underbrace{\implies}_{\substack{\text{Por el item 1}\\%
+                \text{ de la observación}}} %
+                Im(h)$ es finita
+                $\implies$ 
+                $A$ es finito. ¡Absurdo!
             \end{enumerate}
 
             Como el absurdo vino de suponer $B$ finito, entonces $B$ es
@@ -626,25 +634,30 @@ es decir, el cardinal más chico de los conjuntos infinitos es $\aleph_0$
 
 \begin{proof}\phantom{.}
 
-    Como $X$ es infinito $\implies x \neq \varnothing \implies \exists \;
+    Como $X$ es infinito $\implies X \neq \varnothing \implies \exists \;
     x_0 \in X$.
+
     Defino $f(0) = x_0$
 
     \medskip
     Como $X \neq \{x_0\} \sim I_1$ y $X$ es infinito $\implies$ 
-    $\exists \; x_1 \in X - \{ x_0 \}$. Defino $f(1) = x_1 \neq x_0$
+    $\exists \; x_1 \in X - \{ x_0 \}$. 
+
+    Defino $f(1) = x_1 \neq x_0$
 
     Notemos que si
     $X \neq \{ x_0 \}$ fuera finito 
-    $\implies \underbrace{(X-\{x_0\})}_{\text{finito}}
-    \cup \underbrace{\{ x_0 \}}_{\text{finito}} = X $ sería finito, lo cual
+    $\implies \overbrace{(X-\{x_0\})}^{\text{finito}}
+    \cup \overbrace{\{ x_0 \}}^{\text{finito}} = X $ sería finito, lo cual
     es absurdo.
     \nota{Por el ejercicio 3 de la práctica.}%
 
     \medskip
 
     Luego $X \neq \{x_0, x_1\} \sim I_2$ y $X$ es infinito $\implies$ 
-    $\exists \; x_2 \in X - \{x_0, x_1\}$. Defino $f(2) = x_2$
+    $\exists \; x_2 \in X - \{x_0, x_1\}$. 
+
+    Defino $f(2) = x_2$
 
     Inductivamente,
     $X \neq \{\overbrace{x_0}^{f(0)}, \overbrace{x_1}^{f(1)}, \dotsc, 
@@ -904,7 +917,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
             \end{align*}
 
             \nota{Por el ejercicio 3 de la guía.}%
-            $A$ y $B$ numerables $\implies A \cup B$ numerables.
+            $A$ y $B$ numerables $\implies A \cup B$ es numerable.
 
             Como $B$ es infinito y $B \subset A \cup B \implies A \cup B$
             infinito.
@@ -1013,7 +1026,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
             \[ \underbrace{[0,1]}_{\text{Inf. no num.}} 
             - \underbrace{\{0,1\}}_{\text{Finito num.}} \sim [0,1] 
         \implies (0,1) 
-        \underbrace{\sim}_{\text{Teorema } \ref{teo:inf-nonum-cjto-num}} 
+        \underbrace{\sim}_{\fullref{teo:inf-nonum-cjto-num}}
         [0,1]\]
         \end{proof}
 
@@ -1080,7 +1093,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
 \section{Teorema de Cantor}
 
 \begin{teorema}{Teorema de Cantor}{cantor}
-    Dado $X$ un conjunto, $\# X < \# \mathcal{P} (x)$
+    Dado $X$ un conjunto, $\# X < \# \mathcal{P}(X)$
 \end{teorema}
 
 
@@ -1096,16 +1109,20 @@ infinitos.
 
 \begin{proof} \phantom{.}
 
-    Sea $F: X \to \mathcal{P}(x) / F(a) = \{a\} \subseteq X$
+    Sea $F: X \to \mathcal{P}(X) / F(a) = \{a\} \subseteq X$
     \begin{gather*}
         F(a) = F(b) \implies \{a\} = \{b\} \implies a = b \\
         \therefore ~ F\text{ es inyectiva.}
     \end{gather*}
 
-    Por esto, $\# X \leq \# \mathcal{P}(x)$
+    Por esto, $\# X \leq \# \mathcal{P}(X)$
 
+    \nota{Recordar:
+    $\#A \geq \#B$
+    $\iff$
+    $\exists \; f: A \to B$ sobreyectiva}%
     Para ver que es menor estricto, tenemos que ver que no existe ninguna 
-    función sobreyectiva de $X$ en $\mathcal{P}(x)$, ya que esto implica
+    función sobreyectiva de $X$ en $\mathcal{P}(X)$, ya que esto implica
     que no puede ser mayor o igual.
 
     Supongo que existe $g: X \to \mathcal{P}(X)$ sobreyectiva.
@@ -1135,9 +1152,9 @@ infinitos.
 
     ¡Absurdo! Vino de suponer que existe una $g$ sobreyectiva.
     \begin{align*} 
-        \therefore ~ &\nexists \; g:X \to\mathcal{P}(x) \text{ sobreyectiva}\\
-        &\implies \# X \not\geq \# \mathcal{P}(x) \\
-        &\implies \# X < \# \mathcal{P}(x)
+        \therefore ~ &\nexists \; g:X \to\mathcal{P}(X) \text{ sobreyectiva}\\
+        &\implies \# X \not\geq \# \mathcal{P}(X) \\
+        &\implies \# X < \# \mathcal{P}(X)
     \end{align*}
 \end{proof}
 
@@ -1150,8 +1167,8 @@ infinitos.
     \begin{enumerate}
         \item $a + b = \# (X \cup Y)$, con $X \cap Y = \varnothing$
         \item $a \cdot b = \# (X \times Y)$
-        \item $b^a = \# \{ f: X \to Y / f $ es función
-            $\} = \# \left({Y}^{X}\right)$
+        \item $a^b = \# \{ f: Y \to X / f $ es función
+            $\} = \# \left({X}^{Y}\right)$
             \nota{$X \neq \varnothing$, $Y \neq \varnothing$}%
     \end{enumerate}
 
@@ -1162,15 +1179,19 @@ infinitos.
     \begin{enumerate}
         \item Sea $\underbrace{\widetilde{X} \sim X}_{\# \widetilde{X} = a}$.
 
-            Sea $\underbrace{\widetilde{Y} \sim Y}_{\# \widetilde{Y} = b}$ tal que
+            Sea $\underbrace{\widetilde{Y} \sim Y}_{\# \widetilde{Y} = b}$ 
+            tal que
             $\widetilde{X} \cap \widetilde{Y} = \varnothing$
 
-            Quiero ver que $\# (\widetilde{X} \cup \widetilde{Y}) = \# (X \cup Y)$
+            Quiero ver que 
+            $\# (\widetilde{X} \cup \widetilde{Y}) = \# (X \cup Y)$
 
             \begin{align*}
-                \widetilde{X} \sim X & \implies \exists \; f: \widetilde{X} \to X
+                \widetilde{X} \sim X & \implies \exists \;
+                f: \widetilde{X} \to X
                 \text{ biyectiva}\\
-                \widetilde{Y} \sim Y & \implies \exists \; g: \widetilde{Y} \to Y
+                \widetilde{Y} \sim Y & \implies \exists \;
+                g: \widetilde{Y} \to Y
                 \text{ biyectiva}\\
             \end{align*}
 
@@ -1191,7 +1212,7 @@ infinitos.
         \item Defino $X \neq \varnothing$, $Y \neq \varnothing$.
 
             \begin{gather*}
-                m^{n} = \# \{ f: Y \to X / f \text{ es función} \} = \# X^{y}
+                m^{n} = \# \{ f: Y \to X / f \text{ es función} \} = \# X^{Y}
             \end{gather*}
 
             Veamos que está bien definida.
@@ -1310,19 +1331,18 @@ cualquier argumento y devuelven otra función.''}%
     Definamos $F(A) = \Chi_A$
 
     \begin{itemize}
-        \item Iny.) $F(A) = F(B) \implies \Chi_A = \Chi_B 
-            \implies \Chi_A (t) \underbrace{=}_{*} 
-            \Chi_B (t) $, $\forall t \in X$
-
+        \item Iny.) 
             % Puesta acá para correcta alineación con la página
             \nota{$\Chi_A$ es la función característica de A.\\
                 Recordemos que se define como: \\
             $\Chi_A: X \to \{0,1\}/$ $\Chi_A (t) = \begin{cases}
                 1 & t \in A \\ 0 & t \notin A
             \end{cases}$}%
-
+            $F(A) = F(B) \implies \Chi_A = \Chi_B 
+            \implies \Chi_A (t) \underbrace{=}_{*} 
+            \Chi_B (t) $, $\forall t \in X$
            \begin{align*}
-               \text{Sea } t \in A & \\
+               \text{Sea } t \in A \phantom{\iff} & \\
                \iff &\Chi_A (t) = 1 \\
                \underbrace{\iff}_{*} &\Chi_B (t) = 1 \\
                \iff & t \in B
@@ -1373,9 +1393,13 @@ cualquier argumento y devuelven otra función.''}%
 
 \begin{proof}\phantom{.}
 
-    Sean $U = [0,1]$, $\# U = \mathfrak{C}$, 
-    $T = {\{0,1\}}^{\mathbb{N}} 
-    = \{f:\mathbb{N} \to \{0,1\}/f \text{ es función}\}$, $\# T=2^{\aleph_0}$
+    Sea
+    $U = [0,1] \implies \# U = \mathfrak{C}$
+
+    Sea
+    $T = {\{0,1\}}^{\mathbb{N}}
+    = \{f:\mathbb{N} \to \{0,1\}/f \text{ es función}\}
+    \implies \# T=2^{\aleph_0}$
 
 
     \nota{Interpreto el número en base 2.}%
@@ -1421,8 +1445,8 @@ cualquier argumento y devuelven otra función.''}%
         &\implies \# T_0 < \# \mathbb{N} = \aleph_0 \\
         &\implies T_0 \text{ es numerable} \\
         \\
-        & \therefore ~ \# (T-T_0) = \# T = \mathfrak{C} 
-            \notamath{ $T-T_0\sim T$\\ Con $T$
+        & \therefore ~ \# (T-T_0) = \# T = 2^{\aleph_0}
+        \notamath{ $T-T_0\sim T$\\ Con $T$
             infinito no numerable, pues $2^{\aleph_0} > \aleph_0$ 
         (por el \nameref{teo:cantor}), $T_0$ numerable y, en consecuencia,
         $\# T = 2^{\aleph_0}$. }
@@ -1477,7 +1501,9 @@ cualquier argumento y devuelven otra función.''}%
         \therefore ~ F(u_0 u_1 u_2 \dots) = x
     \end{gather*}
 
-    Conclusión, $F$ es biyectiva y, entonces, $\# (T-T_0) = \# \widetilde{U}$.
+    Conclusión, $F$ es biyectiva y, en consecuencia,
+    $\# (T-T_0) = \# \widetilde{U}$.
+
     Como $\#(T-T_0) = 2^{\aleph_0}$ y $\# \widetilde{U} = \mathfrak{C}$, 
     queda probado que
 

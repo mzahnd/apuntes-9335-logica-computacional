@@ -193,7 +193,7 @@ Martín E. Zahnd%
     \fancyheadoffset[lh]{\headerovermarginoffset}%
     \fancyhead[L]{\nouppercase{\leftmark}}%
     \fancyhead[C]{\materia}%
-    \fancyhead[R]{Hoja \thepage}%
+    \fancyhead[R]{Página \thepage}%
 }
 
 % Estilo para el anexo
@@ -362,7 +362,12 @@ Martín E. Zahnd%
 
 % Definiciones
 \newtcbtheorem%
-  []% init options
+  [%
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={definición}{definiciones},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Definición}{Definiciones}
+  ]% init options
   {definicion}% name
   {Definición}% title
   {%
@@ -372,7 +377,12 @@ Martín E. Zahnd%
 
 % Teoremas
 \newtcbtheorem%
-  []% init options
+  [%
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={teorema}{teoremas},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Teorema}{Teoremas}
+  ]% init options
   {teorema}% name
   {Teorema}% title
   {%
@@ -383,7 +393,13 @@ Martín E. Zahnd%
 
 % Corolarios
 \newtcbtheorem%
-  [number within=cteoremas]% init options
+  [%
+    number within=cteoremas,
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={corolario}{corolarios},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Corolario}{Corolarios}
+  ]% init options
   {corolario}% name
   {Corolario}% title
   {%
@@ -393,7 +409,13 @@ Martín E. Zahnd%
 
 % Lemas
 \newtcbtheorem%
-  [number within=cteoremas]% init options
+  [%
+    number within=cteoremas,
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={lema}{lemas},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Lema}{Lemas}
+  ]% init options
   {lema}% name
   {Lema}% title
   {%
@@ -403,7 +425,12 @@ Martín E. Zahnd%
 
 % Proposiciones 
 \newtcbtheorem%
-  []% init options
+  [%
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={proposición}{proposiciones},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Proposición}{Proposiciones}
+  ]% init options
   {proposicion}% name
   {Proposición}% title
   {%
@@ -414,7 +441,13 @@ Martín E. Zahnd%
 
 % Corolarios de proposicion
 \newtcbtheorem%
-  [number within=cproposicion]% init options
+  [%
+    number within=cproposicion,
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={corolario}{corolarios},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Corolario}{Corolarios}
+  ]% init options
   {corolario-proposicion}% name
   {Corolario}% title
   {%
@@ -424,7 +457,12 @@ Martín E. Zahnd%
 
 % Hipótesis
 \newtcbtheorem%
-  []% init options
+  [%
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={hipótesis}{hipótesis},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Hipótesis}{Hipótesis}
+  ]% init options
   {hipotesis}% name
   {Hipótesis}% title
   {%
@@ -435,7 +473,12 @@ Martín E. Zahnd%
 
 % Tesis
 \newtcbtheorem%
-  []% init options
+  [%
+    % crefname={⟨singular⟩}{⟨plural⟩}
+    crefname={tesis}{tesis},
+    % Crefname={⟨singular⟩}{⟨plural⟩}
+    Crefname={Tesis}{Tesis}
+  ]% init options
   {tesis}% name
   {Tesis}% title
   {%
@@ -467,6 +510,13 @@ Martín E. Zahnd%
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 % Comandos propios
+
+% \fullref
+\newcommand{\fullref}[1]{\hyperref[{#1}]{\Cref*{#1}}}
+% \fullrefgeneric
+\newcommand{\fullrefgeneric}[2]{\hyperref[#1]{#2}}
+% \fullrefpage
+\newcommand{\fullrefpage}[2]{\hyperref[{#1}]{#2 \pageref*{#1}}}
 
 % \includePDFAnexo
 \newcommand{\includePDFAnexo}[2]{%

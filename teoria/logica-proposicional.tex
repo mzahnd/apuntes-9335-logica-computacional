@@ -304,7 +304,7 @@ Por lo tanto
 
     Si $long(E) = long(G) \implies long(E) \geq long(G)$.
 
-    Por lo tanto, por el Teorema \ref{teo:efgh-longe-geq-longg}, 
+    Por lo tanto, por el \fullref{teo:efgh-longe-geq-longg},
     $\exists \; H' \in A^{*}/E=GH'$
 
     Luego
@@ -403,9 +403,10 @@ por inducción}''}%
                         leftmargin=2\parindent,
                         label=Caso \arabic*)]
             \item $X_i \in \mathrm{VAR}$ \nota{$1 \leq i \leq n$}%
-            \item $\exists \; j < i / X_i = \neg X_j$ \nota{$1 \leq i, j \leq n$}%
+            \item $\exists \; j < i / X_i = \neg X_j$ 
+                \nota{$1 \leq j < i \leq n$}%
             \item $\exists \; s,t<i / X_i = (X_s * X_t)$
-                \nota{$1 \leq s, t, j \leq n$ \\
+                \nota{$1 \leq s, t < i \leq n$ \\
                     $* \in \underbrace{\{
                     \wedge, \vee, \to \}}_{\substack{
                     \text{Conectivos}\\ \text{binarios}}}$}%
@@ -817,7 +818,7 @@ Si $Y_1, \dotsc, Y_k$ es subcadena $\implies k \leq 2$
 \begin{itemize}
     \item Si $k = 2$
         \begin{gather*}
-            \implies Y_1 = X_1 ~ Y_2 = X_2 
+            \implies Y_1 = X_1, ~ Y_2 = X_2 
             \implies \text{ es la misma cadena.}
         \end{gather*}
     \item Si $k = 1$
@@ -995,7 +996,7 @@ Si tengo $\alpha = \underbrace{((p_1 \to p_2) \vee (p_3}_{E} \wedge p_4))$,
 entonces $p(E) = 3-1 = 2>0$
 
 
-\begin{proof}[Demostración del Teorema \ref{teo:peso-formula}:] \phantom{.}
+\begin{proof}[Demostración del \fullref{teo:peso-formula}:] \phantom{.}
 
     Lo vamos a demostrar por inducción en $c(\alpha)$.
 
@@ -1159,7 +1160,8 @@ Dicho de otra manera:
             \begin{enumerate}
                 \item Supongamos que $long(\beta_1) = long(\gamma_1)$.
 
-                    Entonces, por el Corolario \ref{corol:alfabeto-igual-long},
+                    Entonces, por el
+                    \fullref{corol:alfabeto-igual-long},
                     \begin{gather*}
                         \beta_1 = \gamma_1
                         ~ \text{ y } ~
@@ -1173,7 +1175,7 @@ Dicho de otra manera:
                 \item Supongamos $long(\beta_1) > long(\gamma_1)$.
 
                     Entonces 
-                    \nota{Por el Teorema \ref{teo:efgh-longe-geq-longg}}%
+                    \nota{Por el \fullref{teo:efgh-longe-geq-longg}}%
                     $\exists \; H'\in A^{*} / \beta_1 = \gamma_1 H'$
                     .
 
@@ -1184,7 +1186,7 @@ Dicho de otra manera:
                     Como $\beta_1 \in F$, la expresión a la izquierda de 
                     $\circ$ en $\beta_1$ tiene peso positivo.
                     \begin{gather*}
-                        p(\gamma_1) > 0
+                        \implies p(\gamma_1) > 0
                     \end{gather*}
 
                     ¡Absurdo!
@@ -1347,12 +1349,13 @@ Dicho de otra manera:
 
                             Entonces $\alpha = X_n = (\beta_1 * \beta_2)$.
                             Como es cadena, entonces el único caso posible
-                            es $X_n = (X_i \cdot X_j)$ \nota{$i, j < n$}%
+                            es $X_n = (X_i \bullet X_j)$ \nota{$i, j < n$}%
 
                             Luego, por unicidad de escritura, $X_i = \beta_1$,
-                            $X_j = \beta_2$ y $\cdot = *$.
+                            $X_j = \beta_2$ y $\bullet = *$.
                             Entonces $X_1, \dotsc, X_i = \beta_1$ es cadena
-                            $\implies$ $\beta = X_l$ \nota{$1 \leq l \leq i$}%
+                            \nota{$1 \leq l \leq i$}%
+                            $\implies$ $\beta = X_l$
                             $\implies$ $\beta$ aparece en la cadena de
                             $\alpha$.
                     \end{itemize}
@@ -1389,12 +1392,10 @@ Dicho de otra manera:
 \end{definicion}
 
 \subsubsection{Ejemplo}
-$v: \mathrm{FORM} \to \{ 0,1 \} / v(\alpha) = 1$ 
+Sea $v: \mathrm{FORM} \to \{ 0,1 \} / v(\alpha) = 1$
 
-No es una valuación, pues $v(p_1)=1$ y $v(\neg p_1) = 1$
-\begin{gather*}
-    \implies \text{ no verifica } v(\neg \alpha)=1-v(\alpha)
-\end{gather*}
+$v$ no es una valuación pues $v(p_1)=1$ y $v(\neg p_1) = 1$
+$\implies$ no verifica $v(\neg \alpha) = 1 - v(\alpha)$
 
 \subsection{Teorema}
 
@@ -1591,7 +1592,7 @@ Clasificar las siguientes fórmulas:
 
         Como en este caso tenemos que probar que existen dos valuaciones,
         una tal que $v(\alpha)=1$ y otra $w(\alpha)=0$, tenemos que 
-        definirlas. Para ello nos ayuda el Teorema \ref{teo:valuacion-unica}
+        definirlas. Para ello nos ayuda el \fullref{teo:valuacion-unica}
 
 
         \begin{proof} \phantom{.}
@@ -1696,8 +1697,8 @@ Clasificar las siguientes fórmulas:
 
 
 \subsection{Teorema}
-
-\begin{teorema}{Otra forma del Teorema \ref{teo:valuacion-unica}}{igualdad-valuaciones-frest}
+Otra forma del \fullref{teo:valuacion-unica}.
+\begin{teorema}{}{igualdad-valuaciones-frest}
     \nota{$var(\alpha)$ es el conjunto de variables de $\alpha$}%
     Sea $\alpha \in F$. 
 
@@ -1850,7 +1851,7 @@ Clasificar las siguientes fórmulas:
             0 & i \text{ es impar}
         \end{cases}$
  
-    Y sean $v_f$ y $v_g$ son las valuaciones que extienden a $f$ 
+    Y sean $v_f$ y $v_g$ las valuaciones que extienden a $f$ 
     y $g$ respectivamente.
  
     Sea $\alpha = (p_0 \to (\neg p_2 \wedge p_4))$, 
@@ -1865,11 +1866,11 @@ Clasificar las siguientes fórmulas:
 
          Defino $f: \mathrm{VAR} \to \{ 0, 1 \}$ tal que
          $f(p_i) = \begin{cases}
-             0 & i = 1, 2 \\
+             0 & i \in \{ 1, 2 \} \\
              1 & \text{en otro caso}
          \end{cases}$
 
-         Entonces existe una única $v_f \in \mathrm{VAL}$ tal que $v_f$ 
+         Entonces existe una única valuación $v_f$ tal que $v_f$ 
          extiende a $f$.
 
 
@@ -1956,8 +1957,8 @@ y esto siempre vale $1$.
 Sin embargo, la fórmula recuadrada es una contingencia: 
 $(p_1 \to \boxed{p_1})$
 
-Con esto vemos que si el dato de la Proposición 
-\ref{propo:p-no-varsalpha-alpha-tautologia}, $p_1 \notin var(\alpha)$, no
+Con esto vemos que si el dato de la
+\fullref{propo:p-no-varsalpha-alpha-tautologia}, $p_1 \notin var(\alpha)$, no
 se cumple entonces no es necesariamente verdad que $\alpha$ es tautología.
 
 En conclusión, si no lo escribimos en nuestra demostración, esta es una pista
@@ -2019,7 +2020,7 @@ Realicemos la prueba correcta.
         \frest{v}{var(\alpha)} = \frest{v_f}{var(\alpha)}
     \end{gather*}
 
-    Entonces, por el Teorema \ref{teo:igualdad-valuaciones-frest}:
+    Entonces, por el \fullref{teo:igualdad-valuaciones-frest}:
 
     \nota{\textit{Noni:} ``Si entienden realmente esta demostración, están 
     comenzando a entender el tema.''}%
@@ -2172,7 +2173,7 @@ conjuntos.
         Defino $f: {\{ 0,1 \}}^3 \to \{ 0,1 \}$ tal que:
        \begin{gather*}
             f(x,y,z) = \begin{cases}
-                0 & x = 1, \; y=0, \; z=1 \\
+                0 & x = 1, \; y=0, \; z=0 \\
                 1 & \text{ otro caso}
             \end{cases} 
         \end{gather*} 
@@ -2375,9 +2376,9 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
     \end{align*}
 
     Sea 
-    $\alpha = \vee_{a \in T} \beta_a 
+    $\alpha = \bigvee_{a \in T} \beta_a 
     =
-    \beta_{0, 0, \dotsc, 1, 0)} \vee \beta_{0, 0, \dotsc, 1, 1)} \vee \dots$
+    \beta_{(0, 0, \dotsc, 1, 0)} \vee \beta_{(0, 0, \dotsc, 1, 1)} \vee \dots$
 
     Sea $v \in \mathrm{Val}$ tal que $v(\alpha) = 1$.
     \begin{align*}
@@ -2438,6 +2439,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
 
     \nota{Por propiedad}%
     $\implies$ $\alpha \equiv \gamma$
+
 \end{proof}
 
 \subsection{Conectivos adecuados}
@@ -2608,7 +2610,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
         Supongamos que sí existe $\gamma \equiv \alpha$.
 
         Si $c(\gamma) = 0 \implies \gamma = p_k$.
-        Sea $f: \mathrm{VAR} \to \{ 0, 1 \} / f(p_k) = 0 ~ \forall \; k$ y
+        Sea $f: \mathrm{VAR} \to \{ 0, 1 \} / f(p_k) = 0 ~ \forall k$ y
         sea $v_f$ la valuación que la extiende.
 
         Tomando $v_f (\alpha) = 1$ y $v_f (\gamma) = f(p_k) = 0$, notamos que
@@ -2634,7 +2636,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
                 \end{gather*}
 
                 Sea 
-                $g: \mathrm{VAR} \to \{ 0, 1 \} / g(p_k) = 1 ~ \forall \; k$,
+                $g: \mathrm{VAR} \to \{ 0, 1 \} / g(p_k) = 1 ~ \forall k$,
                 y sea $v_g$ la valuación que extiende a $g$.
 
                 \begin{gather*}
@@ -2806,7 +2808,7 @@ Decidir si $\Gamma$ es satisfacible.
 
 \begin{definicion}{Consecuencias}{}
     \nota{\textit{Noni}: ``\textbf{LA} definición.''}%
-    Sean $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
+    Sean $\Gamma \subset \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
 
     \medskip
 
@@ -2928,8 +2930,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
         \begin{proof} \phantom{.}
         
             \begin{itemize}
-                \item[$\subseteq$)] $\alpha \in C(\varnothing)$.
-
+                \item[$\subseteq$)] Sea $\alpha \in C(\varnothing)$.
                     Quiero ver que $\alpha$ es tautología.
 
                     \medskip
@@ -2944,8 +2945,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                     ¡Absurdo!
                     Vino de suponer que $\alpha$ no era una tautología.
 
-                \item[$\supseteq$)] $\alpha$ tautología.
-
+                \item[$\supseteq$)] Sea $\alpha$ tautología.
                     Quiero ver que $\alpha \in C(\varnothing)$
 
                     \medskip
@@ -3031,7 +3031,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
 \subsection{Teorema}
 
-\begin{teorema}{}{}
+\begin{teorema}{}{alpha-consecuencia-iff-gamma-not-alpha-insat}
     Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
 
     \medskip
@@ -3107,7 +3107,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                 \implies& \exists \; v \text{ valuación}/ v(\beta) = 0 \\
                 \implies& \underbrace{
                     v(\gamma_1 \wedge \dots \wedge\gamma_n) = 1}_{
-                    v(\gamma_i)=1 \implies v(\Gamma)=1
+                    v(\Gamma)=1 \implies v(\gamma_i)=1
                 \notamath{$1 \leq i \leq n$}}
                 ~\wedge~ v(\alpha)=0
             \end{align*}
@@ -3224,7 +3224,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
 Probar que $\beta \in C( \{ \alpha, (\alpha\to\beta) \})$
 
-Por el Teorema \ref{teo:deduccion-semantica}:
+Por el \fullref{teo:deduccion-semantica}:
 
 \begin{gather*}
     \beta \in C( \{ \alpha, (\alpha\to\beta) \}) \iff
@@ -3393,11 +3393,12 @@ Decidir si los siguientes conjuntos son independientes.
             Por lo tanto, $v(p_1 \wedge p_2) = \min\{\underbrace{v(p_1)}_{=1},
             \underbrace{v(p_2)}_{=1}\} = 1$
             
-            Con lo cual llegamos a probar que dada una valuación que 
-            satisface el conjunto de fórmulas 
-            $\{ \Gamma - \{(p_1\wedge p_2)\} \}$, entonces satisface 
-            $(p_1\wedge p_2)$. Y eso contradice la definición de 
-            independencia.
+            Con lo cual llegamos a probar que dada una valuación que
+            satisface el conjunto de fórmulas
+            $\Gamma - \{(p_1\wedge p_2)\}$,
+            entonces la valuación satisface
+            $(p_1\wedge p_2)$.
+            Y eso contradice la definición de independencia.
 
             \begin{gather*}
                 \therefore ~ \Gamma \text{ es dependiente.}
@@ -3623,7 +3624,7 @@ Si tomamos $\Gamma \cup \{ p_2 \}$, también es f.s. (por el mismo motivo) y
 $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
 
 
-\begin{proof}[Demostración del Lema \ref{lema:gamma-pi-no-pi-esfs}] \phantom{.}
+\begin{proof}[Demostración del \fullref{lema:gamma-pi-no-pi-esfs}] \phantom{.}
 
     Supongo que existe $p_i \in \mathrm{VAR} / 
     \underbrace{\Gamma \cup \{ p_i \} \text{ no es f.s.}}_{\circled{1}} 
@@ -3634,8 +3635,8 @@ $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
     \item $\implies \exists \; X \subseteq \Gamma \cup \{ p_i \} / X$ 
         es finito e insatisfacible.
 
-        \nota{$\Gamma$ es f.s.}%
         Notemos que $X \nsubseteq \Gamma$ 
+        \nota{$\Gamma$ es f.s.}%
 
         \begin{gather*}
          \therefore ~ X=X' \cup \{ p_i \} \notamath{$X' \subseteq \Gamma$}
@@ -3644,8 +3645,8 @@ $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
     \item $\implies \exists \; Y \subseteq \Gamma \cup \{ \neg p_i \} / Y$ 
         es finito e insatisfacible.
 
-        \nota{$\Gamma$ es f.s.}%
         Notemos que $X \nsubseteq \Gamma$ 
+        \nota{$\Gamma$ es f.s.}%
 
         \begin{gather*}
          \therefore ~ Y=Y' \cup \{ \neg p_i \} \notamath{$Y' \subseteq \Gamma$}
@@ -3715,7 +3716,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
         $v(\alpha_i) = 1$, $1 \leq i \leq n$, pues $\alpha_i \in \Gamma$
         $\implies v(\Sigma)=1$
-
         \begin{gather*}
             \therefore ~ \Gamma \text{ es f.s.}
         \end{gather*}
@@ -3724,7 +3724,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
         satisfacible.
 
         Defino una sucesión creciente de conjuntos literales.
-
         \begin{align*}
             \Delta_0 =& \varnothing \\
             \Delta_{n+1} =& 
@@ -3750,7 +3749,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
             \begin{itemize}
                 \item CB) $n = 0$
-
                     \begin{gather*}
                          \Gamma \cup \Delta_0 = \Gamma \text{ es f.s.}
                          \notamath{Dato}
@@ -3758,7 +3756,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                 \item HI) $\Gamma \cup \Delta_n$ es f.s.
                 \item T) $\Gamma \cup \Delta_{n+1}$ es f.s.
             \end{itemize}
-
             \begin{align*}
                  \Gamma \cup \Delta_{n+1} =
                  \begin{cases}
@@ -3769,8 +3766,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                      \Gamma \cup \Delta_n \cup \{ \neg p_n \} & \text{sino}
                  \end{cases} \\
             \end{align*}
-
-            Utilizando el Lema \ref{lema:gamma-pi-no-pi-esfs}:
+            Utilizando el \fullref{lema:gamma-pi-no-pi-esfs}:
 
             Si $\Gamma \cup \Delta_n \cup \{ p_j \}$ es f.s. 
             $\implies \Gamma \cup \Delta_{n+1} 
@@ -3779,7 +3775,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
             Si $\Gamma \cup \Delta_n \cup \{ \neg p_j \}$ es f.s. 
             $\implies \Gamma \cup \Delta_{n+1} 
             = \Gamma \cup \Delta_n \cup \{ \neg p_n \}$ es f.s.
-
             \end{proof}
 
             \item Sea $p_j \in \mathrm{VAR} \implies p_j \in \Delta$ o 
@@ -3787,35 +3782,32 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
             \begin{proof} \phantom{.}
             
-            \begin{itemize}
-                \item \begin{align*}
-                \text{Si } \Gamma \cup \Delta_j \cup \{ p_j \}
-                \text{ es f.s.} \implies& \Delta_{j+1} 
-                = \Delta_j \cup \{ p_j \} \\
-                \implies& p_j \in \Delta_{j+1} \subseteq \Delta
-            \end{align*}
-
-                \item \begin{align*}
-                \text{Si } \Gamma \cup \Delta_j \cup \{ p_j \}
-                \text{ no es f.s.} \implies& \Delta_{j+1} 
-                = \Delta_j \cup \{ \neg p_j \} \\
-                \implies& \neg p_j \in \Delta_{j+1} \subseteq \Delta
-            \end{align*}            
-            
-            \end{itemize}
+                \begin{itemize}
+                    \item Si $\Gamma \cup \Delta_j \cup \{ p_j \}$ es f.s.
+                    \begin{align*}
+                        \implies& \Delta_{j+1} 
+                        = \Delta_j \cup \{ p_j \} \\
+                        \implies& p_j \in \Delta_{j+1} \subseteq \Delta
+                    \end{align*}
+                    
+                    \item Si $\Gamma \cup \Delta_j \cup \{ p_j \}$ no es f.s.
+                    \begin{align*}
+                        \implies& \Delta_{j+1} 
+                        = \Delta_j \cup \{ \neg p_j \} \\
+                        \implies& \neg p_j \in \Delta_{j+1} \subseteq \Delta
+                    \end{align*}            
+                \end{itemize}
             \end{proof}
 
             \item Defino $f:\mathrm{VAR} \to \{ 0,1 \} / f(p_j) = \begin{cases}
                     1 & \text{si } p_j \in \Delta \\
                     0 & \text{sino}
                     \end{cases}$
-
                 \begin{gather*}
                     v_f(\Delta)=1
                 \end{gather*}
 
                 Porque:
-                
                 \begin{itemize}
                     \item Si  $p_j \in \Delta \implies v_f(p_j) = f(p_0)=1$
                 
@@ -3836,8 +3828,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                     $\implies \exists \; \alpha \in \Gamma / v_f(\alpha)=0$
 
                     Llamemos $M = \max \{i / p_i \text{ aparece en } \alpha\}$
-
-
                 \begin{enumerate}[%
                                 labelindent=*,
                                 style=multiline,
@@ -3846,7 +3836,6 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                                 leftmargin=2\parindent,
                                 label=Caso \arabic*)]
                     \item $v_f(p_M)=1$
-
                         \begin{gather*}
                             v_f(p_M)=1 
                             \underbrace{\implies}_{*}
@@ -3854,7 +3843,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                             \text{ es insatisfacible}
                         \end{gather*}
 
-                    \bigskip
+                    \smallskip
 
                     \begin{proof}[Demostración de la implicación $*$.]
                         \phantom{.}
@@ -3868,13 +3857,12 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                     \implies p_M \in \Delta_{M+1}$
                     \begin{align*}
                         \therefore ~ 
-                    \frest{w}{var(\alpha)} =& \frest{v_f}{var(\alpha)} \\
-                    \notamath{$w(\alpha)=1$ por la suposición.\\
-                    $v_f(\alpha)=0$ por el dato en este item.}
-                    \implies \underbrace{w(\alpha)}_{=1} =& 
-                    \underbrace{v_f(\alpha)}_{=0} \\
+                        \frest{w}{var(\alpha)} =& \frest{v_f}{var(\alpha)} \\
+                        \notamath{$w(\alpha)=1$ por la suposición y
+                        $v_f(\alpha)=0$ por el dato en este item.}
+                        \implies \underbrace{w(\alpha)}_{=1} =& 
+                        \underbrace{v_f(\alpha)}_{=0} \\
                     \end{align*}
-
                     Lo cual es un absurdo que vino de suponer que existe una
                     variable que satisface  el conjunto
                     $\{ \alpha \} \cup \Delta_M \cup \{ p_M \}$. 
@@ -3883,7 +3871,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
                     \end{proof}
 
-                    \bigskip
+                    \smallskip
 
                     Por otra parte, en este caso tenemos que
                     \begin{gather*}
@@ -3893,11 +3881,9 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                         \subseteq \underbrace{\Gamma \cup 
                         \Delta_{M+1}}_{\text{Es f.s.}}
                     \end{gather*}
-
                     Lo cual es un absurdo que vino de suponer que $v_f(p_M)=1$
 
                     \item $v_f(p_M)=0$
-
                     \begin{gather*}
                         v_f(p_M)=0 
                             \underbrace{\implies}_{*}
@@ -3905,7 +3891,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                             \text{ es insatisfacible}
                     \end{gather*}
 
-                    \bigskip
+                    \medskip
 
                     \begin{proof}[Demostración de la implicación $*$.]
                         \phantom{.}
@@ -3920,7 +3906,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                     \begin{align*}
                         \therefore ~ 
                         \frest{w}{var(\alpha)} =& \frest{v_f}{var(\alpha)} \\
-                        \notamath{$w(\alpha)=1$ por la suposición.\\
+                        \notamath{$w(\alpha)=1$ por la suposición y
                         $v_f(\alpha)=0$ por el dato en este item.}
                         \implies \underbrace{w(\alpha)}_{=1} =& 
                         \underbrace{v_f(\alpha)}_{=0} \\
@@ -3934,7 +3920,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 
                     \end{proof}
 
-                    \bigskip
+                    \medskip
 
                     Por otra parte, en este caso tenemos que
                     \begin{gather*}
@@ -4073,16 +4059,17 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
                     \implies& \Gamma \cup \{ \neg \alpha \}
                     \text{ es insatisfacible.}
                     \notamath{Propiedad} \\
-                    \implies& \text{ Existe } 
+                    \implies& \text{ Existe }
                     \Gamma' \subseteq \Gamma \cup \{ \neg \alpha \}
-                    \text{ insatisfacible} 
+                    \text{ insatisfacible}
                     \notamath{Por \circled{2}}
                 \end{align*}
 
-                Como $\Gamma' \cup \{ \neg \alpha \}$ es finito 
+                Como $\Gamma' \cup \{ \neg \alpha \}$ es finito
                 e insatisfacible
-                $\implies$ $\alpha \in C(\Gamma')$ 
-                \nota{Por propiedad}%
+                $\implies$ $\alpha \in C(\Gamma')$
+                \nota{Por
+                \fullref{teo:alpha-consecuencia-iff-gamma-not-alpha-insat}}%
             \item $\impliedby$)
                 Tarea.
             \end{enumerate}
@@ -4153,7 +4140,7 @@ El absurdo vino de suponer que existe $p_i \in \mathrm{VAR} /
 \end{proof}
 
 \pagebreak
-\section{Teoría axiomática}
+\section{Teoría axiomática}\label{sec:teoria-axiomatica}
 
 \begin{definicion}{Axiomas}{axiomas}
     Sean $\alpha, \beta, \gamma \in F$, se definen los siguiente axiomas:
@@ -4266,6 +4253,7 @@ Probar que $(\gamma \to \gamma)$ es demostrable mediante una prueba.
 \end{enumerate}
 
 Entonces, $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \alpha_5=\gamma \to \gamma$
+es una prueba para $(\gamma \to \gamma)$
 
 \subsection{Teorema}
 
@@ -4413,6 +4401,8 @@ Entonces, $\alpha_1, \alpha_2, \alpha_3, \alpha_4, \alpha_5=\gamma \to \gamma$
 \textit{Observación:}
 Notemos el caso particular $\Gamma = \varnothing$.
 
+\bigskip% force page spacing
+
 $\Gamma = \varnothing \vdash \alpha$ es equivalente a decir que $\alpha$ es
 demostrable, lo cual a su vez es equivalente a decir que $\alpha$ es un
 teorema. 
@@ -4446,8 +4436,8 @@ $\Gamma = \{\alpha, (\alpha \to \beta)\}$
 \end{teorema}
 
 \bigskip
-\nota{La vamos a usar para demostrar el Teorema 
-    \ref{teo:deduccion-axiomatica}.}%
+\nota{La vamos a usar para demostrar el
+    \fullref{teo:deduccion-axiomatica}.}%
 \textit{Observación:}
 
 \begin{gather*}
@@ -4456,13 +4446,15 @@ $\Gamma = \{\alpha, (\alpha \to \beta)\}$
     \Gamma \cup \Sigma \vdash \rho
 \end{gather*}
 
+\bigskip % force page spacing
+
 Si de un conjunto de fórmulas puedo deducir una fórmula, entonces también
 puedo deducirla cuando agrando el conjunto de datos.
 Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
 
 
 \begin{proof} \phantom{.}
-    \nota{Del Teorema \ref{teo:deduccion-axiomatica}.}%
+    \nota{Del \fullref{teo:deduccion-axiomatica}.}%
 
     \begin{itemize}
         \item $\implies$) Como $\Gamma \vdash (\alpha\to\beta)$, entonces
@@ -4522,8 +4514,8 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
                                         align=left,
                                         leftmargin=2\parindent,
                                         label=Caso \arabic*)]
-                        \item \begin{align*}
-                            \beta=\alpha & \\
+                        \item $\beta=\alpha$
+                        \begin{align*}
                             \implies& \text{Ya vimos que } (\alpha\to\alpha)
                             \text{ es demostrable.} \\
                             \implies& \varnothing\vdash(\alpha\to\alpha)\\
@@ -4567,11 +4559,9 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
                 \item T) $\mathcal{P}(n+1)$
             \end{itemize}
 
-
             Sea $\gamma_1, \dotsc, \gamma_{n+1} = \beta$ una prueba a partir
             de $\Gamma \cup \{ \alpha \}$, queremos ver que
             $\Gamma \vdash (\alpha \to \beta)$
-
             \begin{enumerate}[%
                             labelindent=*,
                             style=multiline,
@@ -4616,13 +4606,11 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
                     prueba a partir de $\Gamma\cup \{ \alpha \}$, $j \leq n$,
                     entonces, por HI, $\Gamma \vdash(\alpha\to\gamma_j)$
             \end{enumerate}
-
             En resumen, ya probamos que $\Gamma \vdash (\alpha\to\gamma_j)$ y
             que $\Gamma\vdash(\alpha\to(\gamma_j\to\beta))$.
             Recordemos que queremos ver que $\Gamma\vdash(\gamma\to\beta)$.
 
             Armemos la siguiente prueba:
-
             \begin{enumerate}
                 \item $(\alpha\to(\alpha_j\to\beta)) \to 
                     ((\alpha\to\alpha_j) \to (\alpha\to\beta))$
@@ -4635,7 +4623,6 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
                     \nota{Pues $\Gamma \vdash (\alpha\to\gamma_j)$}%
                 \item $(\alpha\to\beta)$ \nota{MP entre 3 y 4}%
             \end{enumerate}
-
             \begin{gather*}
                 \therefore ~ \Gamma \vdash (\alpha \to \beta)
             \end{gather*}
@@ -4654,7 +4641,7 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
         \begin{align*}
             \varnothing \vdash (\gamma \to \gamma)
             &\iff \varnothing \cup \{ \gamma \} \vdash \gamma 
-            \notamath{Teorema \ref{teo:deduccion-axiomatica}}\\
+            \notamath{\fullref{teo:deduccion-axiomatica}}\\
             &\iff \underbrace{\{ \gamma \} \vdash \gamma}_{\text{Verdadero}}
         \end{align*}
     
@@ -4685,7 +4672,7 @@ Al reducirlo no puedo asegurar esto (por eso la vuelta no vale).
 
         \begin{enumerate}
             \item $p_3 \to (p_4 \to p_3)$ \nota{Axioma 1}%
-            \item $\alpha$ \nota{Hipótesis}%
+            \item $\alpha = p_3 \to ((p_1 \to p_6) \to p_7)$ \nota{Hipótesis}%
             \item $(p_1 \to p_6) \to p_7$ \nota{MP 1 y 2}%
             \item $p_1 \to p_6$ \nota{Hipótesis}%
             \item $p_7$ \nota{MP 3 y 4}%
@@ -4744,7 +4731,6 @@ $\implies$ tienen que hacer una prueba.
         \item $\Gamma = \varnothing$
 
             Ya lo demostramos.
-
             \begin{gather*}
                 \underbrace{\varnothing \vdash \alpha}_{%
                 \substack{\alpha \text{ es} \\ \text{demostrable}}} 
@@ -4788,9 +4774,9 @@ Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
 
 \begin{proof} \phantom{.}
 
-    Supongo $\Gamma$ inconsistente.
 
-    Entonces
+    Supongo $\Gamma$ inconsistente.
+    Entonces:
     \begin{align*}
         & \exists \; \varphi \in \mathrm{FORM} / 
         \Gamma \vdash \varphi \text{ y } \Gamma \vdash \neg \varphi \\
@@ -4803,9 +4789,8 @@ Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
         \text{ y } \underbrace{v(\neg\varphi)=1}_{\text{Por }\circled{2}} 
     \end{align*}
 
-    Lo cual es un absurdo. Y el absurdo vino de suponer que $\Gamma$ es
+    Lo cual es un absurdo que vino de suponer que $\Gamma$ es
     inconsistente.
-
     Por lo tanto, $\Gamma$ es consistente.
 
 \end{proof}
@@ -4813,7 +4798,7 @@ Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
 
 \subsection{Maximal consistente}
 
-\begin{definicion}{Maximal consistente}{}
+\begin{definicion}{Maximal consistente}{maximal-consistente}
     Sea $\Gamma \subseteq \mathrm{FORM}$.
 
     \medskip
@@ -4844,11 +4829,10 @@ Si $\Gamma$ es satisfacible $\implies \Gamma$ es consistente.
 \textit{Observación:}
 El maximal \underline{no} es único.
 
-\subsubsection{Ejemplo}
-
-Dado $\Gamma$ consistente (pero no maximal), y $\phi$ una fórmula tal que ambos
-$\Gamma \cup \{ \phi \}$ y $\Gamma \cup \{ \neg \phi \}$ son consistentes,
-entonces ambos conjuntos tendrán distintas extensiones maximales consistentes.
+Notemos que, dado $\Gamma$ consistente (pero no maximal), y $\phi$ una fórmula
+tal que ambos $\Gamma \cup \{ \phi \}$ y $\Gamma \cup \{ \neg \phi \}$ son
+consistentes, entonces ambos conjuntos tendrán distintas extensiones maximales
+consistentes.
 
 Otra manera es pensar que existen dos conjuntos maximales consistentes,
 $\Gamma '$ y $\Gamma ''$, tales que 
@@ -4866,17 +4850,17 @@ $\Gamma ' - \{ \phi \} = \Gamma '' - \{ \neg \phi \}$
 \end{lema}
 
 
-Este lema nos está diciendo que, dado cualquier cojunto, siempre existe un
-maximal consistente que lo contiene.
+Este lema nos está diciendo que, dado cualquier cojunto consistente, siempre
+existe un maximal consistente que lo contiene.
 
 
 \begin{proof} \phantom{.}
 
     \begin{enumerate}
         \item $\# \mathrm{FORM} = \aleph_0$ \nota{Ejercicio: probarlo.}%
-
             \begin{gather*}
-                \implies \exists F: \mathbb{N}\to \mathrm{FORM} / F(n) = \varphi_n
+                \implies \exists \; F: \mathbb{N}\to \mathrm{FORM} / 
+                F(n) = \varphi_n
                 \notamath{$\mathrm{FORM}=\{\varphi_n / n \in \mathbb{N}\}$
                 $=$ $\{ \varphi_0, \varphi_1, \dots\}$}
             \end{gather*}
@@ -4884,7 +4868,6 @@ maximal consistente que lo contiene.
         \item Defino \dashbox{$ \Gamma_0 = \Gamma $}
 
             Defino 
-            
             \begin{gather*}
                 \dashbox{
                 $\Gamma_{n+1} =
@@ -4968,7 +4951,6 @@ maximal consistente que lo contiene.
             \end{align*}
 
             Entonces creamos el conjunto $X$ y lo definimos
-
             \begin{gather*}
                 \notamath{$X \subseteq \Gamma'$}
                 X=\{\alpha_j / 
@@ -4978,7 +4960,6 @@ maximal consistente que lo contiene.
             \end{gather*}
 
             Sea $M = \max \{ n / \varphi_n \in X \}$.
-
             \begin{gather*}
                 \implies X \subseteq \Gamma_{M+1}
             \end{gather*}
@@ -5004,9 +4985,11 @@ maximal consistente que lo contiene.
 
         \item $\Gamma'$ es maximal.
 
-            Supongo que $\exists \varphi \in \mathrm{FORM} / \varphi \notin \Gamma'$.
+            Supongo que 
+            $\exists \varphi \in \mathrm{FORM} / \varphi \notin \Gamma'$.
 
-            Como $\varphi \in \mathrm{FORM} \implies \exists\; N \in \mathbb{N}/
+            Como 
+            $\varphi \in \mathrm{FORM} \implies \exists\; N \in \mathbb{N}/
             \varphi=\varphi_N$
 
             Luego,
@@ -5021,18 +5004,19 @@ maximal consistente que lo contiene.
             \end{align*}
 
             Como $\Gamma_N \subseteq \Gamma'$:
+        \nota{Está cumpliendo la
+        \fullrefgeneric{def:maximal-consistente}{%
+        definición de maximal consistente}.}%
             \begin{gather*}
                 \Gamma' \cup \{ \varphi_N \} \vdash \psi \text{ y }
                 \Gamma' \cup \{ \varphi_N \} \vdash \neg \psi
             \end{gather*}
 
-            \nota{Está cumpliendo la definición de maximal consistente.}%
             Por lo tanto, $\Gamma'$ es maximal. 
     \end{enumerate}
 \end{proof}
 
-
-\bigskip
+% \bigskip
 \textit{Observación:}
 \begin{enumerate}
     \item $\Gamma \cup \{ \neg \varphi \} \text{  es inconsistente} \iff
@@ -5109,22 +5093,19 @@ maximal consistente que lo contiene.
 
 \subsection{Proposición}
 
-
 \begin{proposicion}{}{}
     Sea $\Gamma'$ maximal consistente.
 
     \medskip
 
+    \nota{Notemos que el ``\Verb+o+'' de esta proposición es excluyente.
+        Si estuvieran las dos el conjunto no sería consistente.}%
     Entonces 
     \begin{gather*}
         \forall \varphi \in \mathrm{FORM}: ~
         \varphi \in \Gamma' \text{ o } \neg \varphi \in \Gamma'
     \end{gather*}    
 \end{proposicion}
-
-\nota{Notemos que el ``\Verb+o+'' de esta proposición es excluyente.
-    Si estuvieran las dos el conjunto no sería consistente.}
-
 
 \begin{proof} \phantom{.}
 
@@ -5141,14 +5122,14 @@ maximal consistente que lo contiene.
 
             Como $\varphi \notin \Gamma'$
             \begin{align*}
-                \implies& \Gamma \cup \{\varphi\} \text{ es inconsistente}\\
+                \implies& \Gamma' \cup \{\varphi\} \text{ es inconsistente}\\
                 \implies& \Gamma' \vdash \neg\varphi
                 \notamath{Por la observación anterior.} \\
             \end{align*}
 
             Por otra parte, como $\neg\varphi \notin \Gamma'$
             \begin{align*}
-                \implies& \Gamma \cup \{\neg\varphi\} 
+                \implies& \Gamma' \cup \{\neg\varphi\} 
                 \text{ es inconsistente}
                 \notamath{$\Gamma'$ m.c.} \\
                 \implies& \Gamma' \vdash \varphi
@@ -5159,7 +5140,7 @@ maximal consistente que lo contiene.
             absurdo que vino de suponer que ninguna de las dos condiciones
             de pertenencia se cumplían.
 
-        \item $\Gamma \in \Gamma'$ y $\neg \varphi \in \Gamma'$
+        \item $\varphi \in \Gamma'$ y $\neg \varphi \in \Gamma'$
 
             Como $\Gamma \in \Gamma'$ $\implies$ $\Gamma \vdash \varphi$
 
@@ -5212,7 +5193,7 @@ maximal consistente que lo contiene.
 
 \begin{proof} \phantom{.}
 
-    Dado $\Gamma$ consistente, entonces por el \nameref{lema:lindenbaum},
+    Dado $\Gamma$ consistente entonces, por el \nameref{lema:lindenbaum},
     $\exists\; \Gamma'$ m.c. tal que $\Gamma \subseteq \Gamma'$
 
 
@@ -5222,7 +5203,8 @@ maximal consistente que lo contiene.
     \end{cases}$
 
     Esta función está bien definida porque $\Gamma'$ es m.c. 
-    $\implies \alpha \in \Gamma'$ 
+    y esto implica que
+    $\alpha \in \Gamma'$ 
     $\underbrace{\text{o}}_{\text{excluyente}}$ 
     $\neg \alpha \in \Gamma'$.
     En particular, $\forall \alpha$ $p_j \in \Gamma'$ 
@@ -5298,17 +5280,17 @@ maximal consistente que lo contiene.
                                 \notamath{Por HI} \\
                                 \implies& \neg\beta_1 \in \Gamma'
                                 \notamath{$\Gamma'$ m.c.} \\
-                                \implies& \underbrace{\Gamma' \vdash 
+                                \implies& \Gamma' \vdash \underbrace{%
                                     \neg \beta_1}_{\circled{1}}
                             \end{align*}
 
                         \smallskip
 
                         Tarea: 
-                        $\underbrace{\varnothing \vdash 
+                        $\varnothing \vdash \underbrace{%
                         (\neg\beta_1\to(\beta_1\to\beta_2))}_{\circled{2}}$
 
-                        Por \circled{1} y \circled{2} y MP:
+                        Por MP entre \circled{1} y \circled{2}:
                         \begin{align*}
                             \Gamma'\vdash(\beta_1\to\beta_2) & \\
                             \implies&\underbrace{(\beta_1\to\beta_2)}_{\alpha}
@@ -5319,7 +5301,7 @@ maximal consistente que lo contiene.
                         \begin{align*}
                             \implies& \beta_2 \in \Gamma'
                             \notamath{Por HI} \\
-                            \implies& \underbrace{\Gamma' \vdash \beta_2}_{%
+                            \implies& \Gamma' \vdash \underbrace{\beta_2}_{%
                             \circled{3}}
                         \end{align*}
 
@@ -5329,7 +5311,7 @@ maximal consistente que lo contiene.
                         \underbrace{(\beta_2\to(\beta_1\to\beta_2))}_{%
                         \text{Axioma 1 } \circled{4}}$
 
-                    Por \circled{3} y \circled{4} y MP:
+                    Por MP entre \circled{3} y \circled{4}:
                     \begin{align*}
                         \Gamma' \vdash(\beta_1 \to \beta_2) & \\
                         \implies&\underbrace{(\beta_1\to\beta_2)}_{\alpha}
@@ -5355,25 +5337,25 @@ maximal consistente que lo contiene.
                         \notamath{Por HI} \\
                         \implies& \beta_1 \in \Gamma'
                         \text{ y } \neg \beta_2 \in \Gamma' \\
-                        \implies& \underbrace{\Gamma' \vdash \beta_1}_{%
+                        \implies& \Gamma' \vdash \underbrace{\beta_1}_{%
                         \circled{5}}
-                        \text{ y } \underbrace{\Gamma' \vdash \neg\beta_2}_{%
+                        \text{ y } \Gamma' \vdash \underbrace{\neg\beta_2}_{%
                         \circled{6}}
                     \end{align*}
 
-                    Tarea: $\underbrace{\varnothing \vdash 
+                    Tarea: $\varnothing \vdash \underbrace{%
                     (\beta_1\to(\neg\beta_2\to(\neg(\beta_1\to\beta_2))))}_{%
                     \circled{7}}$
 
 
-                    Por  \circled{5} y \circled{6} y MP:
+                    Por MP entre \circled{5} y \circled{7}:
                     \begin{gather*}
-                        \underbrace{\Gamma' \vdash
+                        \Gamma' \vdash \underbrace{%
                         (\neg\beta_2\to\neg(\beta_1\to\beta_2))}_{%
                         \circled{8}}
                     \end{gather*}
 
-                    Por  \circled{6} y \circled{8} y MP:
+                    Por MP entre \circled{6} y \circled{8}:
                     \begin{gather*}
                         \Gamma' \vdash \neg(\beta_1 \to \beta_2)
                     \end{gather*}
@@ -5386,6 +5368,9 @@ maximal consistente que lo contiene.
                         &\implies \alpha \notin \Gamma'
                     \end{align*}
             \end{itemize}
+
+            Por lo que 
+            $\alpha = (\beta_1 \to \beta_2) \in \Gamma' \iff v_f(\alpha) = 1$.
     \end{enumerate}
 \end{proof}
 
@@ -5409,7 +5394,6 @@ maximal consistente que lo contiene.
 \end{proof}
 
 \section{Resumen}
-
 \begin{center}
    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{c c c}
@@ -5442,15 +5426,14 @@ maximal consistente que lo contiene.
 \subsection{Teorema}
 
 \begin{teorema}{}{}
-    El sistema axiomático que vimos en \nameref{chap:logica-proposicional}
+    El sistema axiomático que vimos en
+    \fullrefgeneric{sec:teoria-axiomatica}{Lógica Proposicional}
     es consistente.
 \end{teorema}
-
 
 \begin{proof} \phantom{.}
 
     Supongo que es inconsistente. Entonces
-
     \begin{align*}
         \exists \; \varphi / \vdash \varphi \text{ y } \varphi \neg \varphi&\\
         &\implies \varphi \in c(\varnothing) \text{ y } 
@@ -5461,14 +5444,12 @@ maximal consistente que lo contiene.
 
     Lo cual es un absurdo que vino de suponer que el sistema axiomático
     es inconsistente.
-    
-    Por lo tanto el sistema axiomático presentado en 
-    \nameref{chap:logica-proposicional} es consistente.
+
+    Por lo tanto el sistema axiomático presentado en
+    \fullrefgeneric{sec:teoria-axiomatica}{Lógica Proposicional}
+    es consistente.
 
 \end{proof}
-
-% \textbf{Nota to self:} en el último video teórico de Noni, en 1:30:00 
-% empieza a hacer ejercicios de la \textbf{práctica}.
 
 \bigskip
 

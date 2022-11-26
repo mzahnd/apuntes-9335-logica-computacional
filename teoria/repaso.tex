@@ -5,7 +5,7 @@
 \chapter{Repaso de Álgebra}
 \graphicspath{ {./teoria/resources/repaso/} }
 
-Una aclaración importante previo a comenzar es que en este apunte vamos a 
+Una aclaración muy importante es que en este apunte, y en la  materia, vamos a
 considerar $0 \in \mathbb{N}$.
 
 \section{Producto cartesiano}
@@ -102,15 +102,24 @@ Sea $\mathcal{R} \subseteq A \times A$
 
 \subsection{Partición}
 
-Sea $A \neq \varnothing$. Una partición de $A$ es una familia de conjuntos
-$\mathcal{F} = \{ A_i \}_{i \in I}$ tal que:
+\begin{definicion}{Partición}{}
+    Sea $A \neq \varnothing$. 
 
-\begin{enumerate}
-    \item $A_i \neq \varnothing$ \nota{$\forall i \in I$}%
-    \item $A_i \subseteq A$ \nota{$\forall i \in I$}%
-    \item $A_i \cap A_j = \varnothing$ \nota{$i \neq j$, $\; \forall i,j \in I$}%
-    \item $\bigcup_{i \in I} A_i = A$
-\end{enumerate}
+    \medskip
+    
+    Una partición de $A$ es una familia de conjuntos
+    $\mathcal{F} = \{ A_i \}_{i \in I}$ tal que:
+    
+    \begin{enumerate}
+        \item $A_i \neq \varnothing$ 
+            \nota{$\forall i \in I$}%
+        \item $A_i \subseteq A$ 
+            \nota{$\forall i \in I$}%
+        \item $A_i \cap A_j = \varnothing$ 
+            \nota{$i \neq j$, $\; \forall i,j \in I$}%
+        \item $\bigcup_{i \in I} A_i = A$
+    \end{enumerate}
+\end{definicion}
 
 \subsubsection{Ejemplos}
 
@@ -143,7 +152,7 @@ $A_2 = \{ x \in \mathbb{N} / x \text{ es impar} \}$.
     cociente como:
 
     \begin{gather*}
-        \nicefrac{A}{R} = \{ \overline{x} / x \in A \}
+        \nicefrac{A}{\mathcal{R}} = \{ \overline{x} / x \in A \}
         \notamath{$\overline{x}$ es la partición de $A$ inducida por $\mathcal{R}$}
     \end{gather*}
 \end{definicion}
@@ -192,7 +201,7 @@ Recordemos la definición de clase de equivalencia.
         + \underbrace{\overline{4}}_{\equiv \overline{-1}} 
         = \overline{6} = \overline{1} \]
 
-        Notemos que por la congruencia, obtenemos el mismo resultado:
+        Notemos que, por la congruencia, obtenemos el mismo resultado:
         \[ \overline{7} + \overline{(-1)} = \overline{6} = \overline{1} \]
 
         \bigskip
@@ -213,7 +222,7 @@ Recordemos la definición de clase de equivalencia.
         \end{figure}
 
     \item Sean $X = \{ a,b,c,d\}$ y 
-        $\mathcal{R} = \{ (a,b), (b,b), (c,c), (d,d), (a,b), (b,a) \}$
+        $\mathcal{R} = \{ (a,a), (b,b), (c,c), (d,d), (a,b), (b,a) \}$
         
         \nota{Notemos que $\overline{a}$ cubre el par $(a,a)$ y $(b,b)$
         pues $a$ y $b$ se relacionan: $(a,b)$ y $(b,a)$}%
@@ -243,14 +252,17 @@ Recordemos la definición de clase de equivalencia.
 Tenemos las siguientes operaciones definidas en $Z_n$:
 
 \begin{itemize}
-    \item $\overline{a} + \overline{b} = \overline{a+b}$
-    \item $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$
+    % \vphantom{b} está para mostrar la recta a la misma altura en 'a' y 'b'
+    \item $\overline{a\vphantom{b}} + \overline{b} = \overline{a+b}$
+    \item $\overline{a\vphantom{b}} \cdot \overline{b} = \overline{a \cdot b}$
 \end{itemize}
 
 \section{Funciones}
 
 \begin{definicion}{Función}{}
     Sean $A$ y $B$ conjuntos.
+
+    \medskip
 
     Una función de $A$ en $B$ \nota{$f: A \to B$} es una relación $\mathcal{R}
     \subseteq A \times B$ que verifica:
@@ -268,7 +280,7 @@ Tenemos las siguientes operaciones definidas en $Z_n$:
 \subsubsection{Ejemplos}
 \begin{enumerate}
     \item $\mathcal{R} = \{(x,y) \in \mathbb{R}^2 / y = x\}$ es una función 
-        $f: \mathbb{R} \to \mathbb{R}, f(x) = x$. 
+        $f: \mathbb{R} \to \mathbb{R} / f(x) = x$. 
         \nota{Esta es la función identidad}%
 
     \item $\mathcal{R} = \{ (x,y) \in \mathbb{Z}^2 / \divides{x}{y} \}$ no es
@@ -290,7 +302,7 @@ Tenemos las siguientes operaciones definidas en $Z_n$:
         x^2 + y^2 + z = 0\}$ es función.
         
         \begin{gather*}
-            f: \mathbb{R}^2 \to \mathbb{R}, \; f(x,y) = -x^2 - y^2
+            f: \mathbb{R}^2 \to \mathbb{R} / \; f(x,y) = -x^2 - y^2
         \end{gather*}
 
     \item $\mathcal{R} = \{ (x,y,z) \in \mathbb{R}^3 / x^2 + y^2 + z^2 = 1 \}$
@@ -309,9 +321,11 @@ Tenemos las siguientes operaciones definidas en $Z_n$:
 Sean $A_1, \dotsc, A_n$ conjuntos, 
 $\mathcal{R} \subseteq A_1 \times \dots \times A_n$ relación n-aria.
 
-Se puede pensar a $\mathcal{R}$ como una relación binaria: 
-$\mathcal{R} \subseteq A \times B$ donde $A = A_1 \times \dots A_{n-1}$ y 
-$B = A_n$.
+Se puede pensar a $\mathcal{R}$ como una relación binaria:
+$\mathcal{R} \subseteq A \times B$
+donde
+$A = A_1 \times \dots \times A_{n-1}$
+y  $B = A_n$.
 
 Diremos que $\mathcal{R}$ es una función de $n-1$ variables si 
 $\mathcal{R} \subseteq A \times B$, $A$ es el producto cartesiano de $n-1$ 
@@ -394,35 +408,40 @@ Sea $f: A \to B$ una función.
 
 \subsection{Extensión y restricción de funciones}
 
-\begin{definicion}{Extensión de una función}{}
-    Sea $f: A \to B$ una función. 
+\begin{definicion}{Restricción de una función}{}
+    Sea $f: C \to B$ una función.
 
-    Sea $C$ un conjunto tal que $A \subseteq C$ y $D$ un conjunto tal que 
-    $D \subseteq B$.
+    Sea $A$ un subconjunto $A \subseteq C$.
 
     \medskip
-    
-    \nota{Defino la función $\tilde{f}$ en un conjunto más grande que $f$, pero 
-    ambas coinciden sobre $A$.}%
-    Entonces la función $\tilde{f}: C \to D$ es una extensión de $f$ si 
-    $\frest{\tilde{f}}{A} = f$, es decir, 
-    $\tilde{f}(a) = f(a)$, $\forall a \in A$
 
+    La restricción de $f$ a $A$ es la función 
+    \begin{center}
+        $\frest{f}{A}: A \to B$ tal que
+        $\frest{f}{A} (x) = f(x)$, $\forall x \in A$
+    \end{center}
 \end{definicion}
 
 \bigskip
-La restricción de $f$ a $A$ queda entonces definida como:
 
-\begin{definicion}{Restricción de una función}{}
+\begin{definicion}{Extensión de una función}{}
     Sea $f: A \to B$ una función. 
 
-    \medskip
+    Sea $C$ un conjunto tal que
+    $A \subseteq C$
+    .
 
-    \begin{center}
-        $\frest{\tilde{f}}{A}: A \to B$ es una función tal que 
-        $\frest{\tilde{f}}{A} (x) = f(x)$, $\forall x \in A$
-    \end{center}
+    \medskip
+    
+    Entonces la función $\tilde{f}: C \to B$ es una extensión de $f$ si 
+    $\frest{\tilde{f}}{A} = f$, es decir, 
+    $\tilde{f}(a) = f(a)$, $\forall a \in A$
 \end{definicion}
+
+En la restricción estamos definiendo $\tilde{f}$ a partir de un subconjunto del
+dominio de $f$;
+y en la extensión estamos definiendo la función $\tilde{f}$ en un conjunto más 
+grande que $f$, pero ambas coinciden sobre $A$.
 
 \subsubsection{Ejemplos}
 
@@ -452,8 +471,9 @@ La restricción de $f$ a $A$ queda entonces definida como:
     es continua y no derivable, y $\tilde{f}_3$ no es continua.
 
     \item Hallar extensiones a $\mathbb{R}$ de $f: \mathbb{R}-\{0\} \to
-        \mathbb{R} / f(x) = \frac{\sin{(x)}}{x}$. ¿Existe alguna extensión
-        continua?
+        \mathbb{R} / f(x) = \frac{\sin{(x)}}{x}$
+
+        ¿Existe alguna extensión continua?
 
         \begin{enumerate}
             \item $\tilde{f}_1: \mathbb{R}\to\mathbb{R} / \tilde{f}_1 (x) =
@@ -476,7 +496,9 @@ La restricción de $f$ a $A$ queda entonces definida como:
         \end{enumerate}
 
     \item Hallar extensiones a $\mathbb{R}$ de $f: \mathbb{R}-\{0\} \to
-        \mathbb{R} / f(x) = \frac{1}{x}$. ¿Existe alguna extensión continua?
+        \mathbb{R} / f(x) = \frac{1}{x}$
+
+        ¿Existe alguna extensión continua?
 
         \begin{gather*}
             \notamath{Para algún $a\in\mathbb{R}$}
@@ -506,7 +528,8 @@ escrito de la siguiente manera:
     z = e^{i\beta} = \cos{(\beta)} + i \sin{(\beta)}
 \end{gather*}
 
-\subsection{Conjunto Gn}
+% Hack para mostrar G_n sin que hyperref se queje
+\subsection{Conjunto \texorpdfstring{G\textsubscript{n}}{Gn}}
 
 \begin{definicion}{Conjunto $G_n$}{}
 
@@ -627,7 +650,7 @@ Propongo
 
 \textit{¿Existe alguna extensión que sea T.L.?}
 
-La respuesta es que sí, por el Teorema \ref{teo:base-tl}.
+La respuesta es que sí, por el \fullref{teo:base-tl}.
 
 Como $B=\{ (1,0); (1,1) \}$ es base de $\mathbb{R}^2$
 
@@ -668,7 +691,7 @@ Entonces
 
     \nota{$B$ es base pues son 3 elementos LI en un espacio de dimensión 3.}%
     \textit{Plan:} conseguir una base $B = \{ 1+x, 1, x^2 \}$
-    y después usar el Teorema \ref{teo:base-tl} para extender a todo 
+    y después usar el \fullref{teo:base-tl} para extender a todo 
     $\mathbb{R}_2[x]$.
 
     Propongamos
@@ -681,7 +704,7 @@ Entonces
         \end{cases}
     \end{gather*}
 
-    Usando el Teorema \ref{teo:base-tl}: existe una única
+    Usando el \fullref{teo:base-tl}: existe una única
     $T: \mathbb{R}_2[x] \to \mathbb{R}^3$
     y, porque extiende a \circled{$\star$} $\implies$
     $T(1+x) = (2,0,0)$
