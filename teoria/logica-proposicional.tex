@@ -2562,8 +2562,8 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
             Sea $\alpha = (p_1 \wedge \neg p_1) \in F$. Supongo $C$ adecuado.
             \begin{gather*}
                 \implies \exists \; \beta \in F_C/ \beta \equiv \alpha \\
-                \implies \underbrace{v_f(\alpha)}_{=1} 
-                = \underbrace{v_f(\beta)}_{=0} = 1
+                \implies \underbrace{v_f(\alpha)}_{=0} 
+                = \underbrace{v_f(\beta)}_{=1} = 1
             \end{gather*}
 
             ¡Absurdo!
@@ -3585,11 +3585,18 @@ Decidir si los siguiente conjuntos son bases.
                             \implies & \beta \in 
                             C(\Sigma\backslash \{ \beta \})
                         \end{align*}
+
+                        Luego, $\Sigma$ es dependiente.
+
+                        \dashbox{
+                            Entonces $\Gamma$ es maximal respecto a la 
+                            independencia.
+                        }
                 \end{enumerate}
 
-                \begin{gather*}
-                    \therefore ~ \Gamma \text{ es independiente.}
-                \end{gather*}
+                \begin{center}
+                    \boxed{\therefore ~ \Gamma \text{ es base}}
+                \end{center}
         \end{enumerate}
 \end{itemize}
 
