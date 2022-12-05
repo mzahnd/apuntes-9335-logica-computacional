@@ -308,11 +308,11 @@ programa.
         \begin{align*}
                         &Y \gets X_1 \\
                         &Z_1 \gets X_2 \\
-            [B] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ A \\
-                        &GOTO ~ E \\
-            [A] \quad &Z_1 \gets Z_1 - 1 \\
+            [B_1] \quad &IF ~ Z_1 \neq 0 \quad GOTO ~ A_1 \\
+                        &GOTO ~ E_1 \\
+            [A_1] \quad &Z_1 \gets Z_1 - 1 \\
                         &Y \gets Y + 1 \\
-                        &GOTO ~ B
+                        &GOTO ~ B_1
         \end{align*}
 
         A partir de ahora podemos usar el macro
@@ -327,12 +327,12 @@ programa.
 
         \begin{align*}
                         &Z_2 \gets X_2 \\
-            [B] \quad &IF ~ Z_2 \neq 0 \quad GOTO ~ A \\
-                        &GOTO ~ E \\
-            [A] \quad &Z_2 \gets Z_2 + 1 \\
+            [B_1] \quad &IF ~ Z_2 \neq 0 \quad GOTO ~ A_1 \\
+                        &GOTO ~ E_1 \\
+            [A_1] \quad &Z_2 \gets Z_2 + 1 \\
                         &Z_1 \gets X_1 + Y \\
                         &Y \gets Z_1 \\
-                        &GOTO ~ B
+                        &GOTO ~ B_1
         \end{align*}
 
     \item \textbf{Función sucesor} \label{ej:funcion-sucesor}
@@ -354,7 +354,6 @@ programa.
         Basta con cambiarle al programa que computa la función identidad su 
         variable $X_1$ por la variable $X_i$, 
         donde $X_i$ es la i-ésima variable que se quiere proyectar.
-
         \begin{align*}
             &Y \gets X_i
         \end{align*}
@@ -504,9 +503,9 @@ Por otra parte, las siguientes secuencias \underline{no} son estados:
 
 Para el siguiente programa $\mathcal{P}$:
 \begin{align*}
-    [A] \quad &X_1 \gets X_1 - 1 \\
+    [A_1] \quad &X_1 \gets X_1 - 1 \\
                 &Y \gets Y + 1 \\
-                &IF ~ X_1 \neq 0 \quad GOTO ~ A
+                &IF ~ X_1 \neq 0 \quad GOTO ~ A_1
 \end{align*}
 
 El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:

@@ -33,12 +33,12 @@
 \begin{proof} \phantom{.}
     \begin{align*}
         &Y \gets K \\
-        [A] \quad &IF ~ X_1 = 0 \quad GOTO ~ E 
+        [A_1] \quad &IF ~ X_1 = 0 \quad GOTO ~ E_1 
         \notamath{Def. en ej. de la práctica}\\
         &Y \gets g(Z_1, Y) \\
         &Z_1 \gets Z_1 + 1 \\
         &X_1 \gets X_1 - 1 \\
-        &GOTO ~ A
+        &GOTO ~ A_1
     \end{align*}
 
     Notemos que
@@ -123,11 +123,11 @@ $g$ es computable por ser composición de funciones computables
 \begin{proof} \phantom{.}
     \begin{align*}
         &Y \gets q(X_1, \dotsc, X_n) \\
-        [A] \quad &IF ~ X_{n+1} = 0 \quad GOTO ~ E \\
+        [A_1] \quad &IF ~ X_{n+1} = 0 \quad GOTO ~ E_1 \\
         &Y \gets g(x_1, \dotsc, x_n, Z_1, Y) \\
         &Z_1 \gets Z_1 + 1 \\
         &X_{n+1} \gets X_{n+1} - 1 \\
-        &GOTO ~ A
+        &GOTO ~ A_1
     \end{align*}
 \end{proof}
 
@@ -1371,9 +1371,9 @@ tiene que ser RP lo que está adentro de la función \textbf{y} la cota.
 \begin{proof} \phantom{.}
 
     \begin{align*}
-        [A] \quad &IF ~ C_P(\overrightarrow{x},y) \neq 0 \quad GOTO ~ E\\
+        [A_1] \quad &IF ~ C_P(\overrightarrow{x},y) \neq 0 \quad GOTO ~ E_1\\
                     &Y \gets Y + 1 \\
-                    &GOTO ~ A
+                    &GOTO ~ A_1
     \end{align*} 
 
     si $C_P(x_0, y)$ es falso, ejecuta la segunda instrucción; 

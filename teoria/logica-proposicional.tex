@@ -2342,28 +2342,30 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
 
 \begin{proof} \phantom{.}
 
-    Si $f(a) = 0$, $\forall ~ a \in {\{ 0, 1 \}}^n$
+    Si $f(a) = 0$, $\forall a \in {\{ 0, 1 \}}^n$
 
-    Sea $\alpha = p_0 \wedge \neg p_0$.
+    Sea $\alpha = (p_0 \wedge \neg p_0)$.
     Luego $f_{\alpha}(a) = 0$ pues $\alpha$ es contradicción.
-
-    Por lo tanto, $f_{\alpha} = f$.
+    \begin{gather*}
+        \implies f_{\alpha} = f
+    \end{gather*}
 
     Por otra parte, si 
-    $T = \{ a \in {\{ 0, 1 \}}^n / f(a) = 0 \} \neq \varnothing$
-
-    Entonces
-    $(a \in T \iff f(a) = 1)$
+    $T = \{ a \in {\{ 0, 1 \}}^n / f(a) = 1 \} \neq \varnothing$,
+    entonces
+    \begin{gather*}
+        (a \in T \iff f(a) = 1)
+    \end{gather*}
 
     Sea $a \in T$
-    $\implies a = (a_0, \dotsc, a_{n-1})$
-
+    $\implies a = (a_0, \dotsc, a_{n-1})$.
     Sea $x_i = \begin{cases}
         p_i & a_i = 1 \\
-        \neq p_i & a_i = 0
+        \neg p_i & a_i = 0
     \end{cases}$
 
-    Luego, $\beta_a = ( \dots ((x_0 \wedge x_1) \wedge \dots x_{n-1}) \dots)$
+    Luego,
+    $\beta_a = ( \dots (x_0 \wedge x_1 \wedge \dots \wedge x_{n-1}) \dots)$
 
     \bigskip
     \textit{Observación:}
@@ -2380,7 +2382,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
     =
     \beta_{(0, 0, \dotsc, 1, 0)} \vee \beta_{(0, 0, \dotsc, 1, 1)} \vee \dots$
 
-    Sea $v \in \mathrm{Val}$ tal que $v(\alpha) = 1$.
+    Sea $v \in \mathrm{VAL}$ tal que $v(\alpha) = 1$.
     \begin{align*}
         v(\alpha) = 1 \iff& \text{existe } a \in T: v(\beta_a) = 1 \\
         \iff& \text{existe } a \in T: v(p_i) = a_i
@@ -2419,6 +2421,8 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
     FDN
 \end{definicion}
 
+\medskip
+
 \begin{corolario}{}{}
     Sea $\alpha \in \mathrm{FORM}$
 
@@ -2431,7 +2435,7 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
 \begin{proof} \phantom{.}
 
     Dado $var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$, sea
-    $f_{\alpha} : {\{ 0, 1 \}}n \to \{ 0, 1 \}$ su función booleana asociada.
+    $f_{\alpha} : {\{ 0, 1 \}}^n \to \{ 0, 1 \}$ su función booleana asociada.
 
     $\implies$ Por el teorema anterior y la observación, existe
     $\gamma \in \mathrm{FORM}$ en FDN tal que $f_{\alpha} = f_{\gamma}$,
@@ -3032,7 +3036,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 \subsection{Teorema}
 
 \begin{teorema}{}{alpha-consecuencia-iff-gamma-not-alpha-insat}
-    Sea $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
+    Sean $\Gamma \subseteq \mathrm{FORM}$, $\alpha \in \mathrm{FORM}$
 
     \medskip
 
@@ -3097,7 +3101,7 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
             $\Gamma = \{ \gamma_1, \dotsc, \gamma_n \}$
 
             Quiero ver que 
-            $\beta = (\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha$
+            $\beta = ((\gamma_1 \wedge \dots \wedge \gamma_n) \to \alpha)$
             es tautología.
 
             \medskip
@@ -3652,7 +3656,7 @@ $\Gamma \cup \{ \neg p_2 \}$ también es f.s..
     \item $\implies \exists \; Y \subseteq \Gamma \cup \{ \neg p_i \} / Y$ 
         es finito e insatisfacible.
 
-        Notemos que $X \nsubseteq \Gamma$ 
+        Notemos que $Y \nsubseteq \Gamma$ 
         \nota{$\Gamma$ es f.s.}%
 
         \begin{gather*}
@@ -4209,7 +4213,7 @@ $\alpha$ obtenemos $\beta$.
 
     \medskip
 
-    Una prueba para $\alpha$ es una suseción finita de fórmulas 
+    Una prueba para $\alpha$ es una sucesión finita de fórmulas
     $\alpha_1, \alpha_2, \dotsc, \alpha_n$ tal que:
     \begin{enumerate}
         \item $\alpha_n = \alpha$

@@ -208,7 +208,7 @@ $\iff \exists \; g:B \to A$ sobreyectiva.
             \begin{gather*}
                 g(b) = \begin{cases}
                     f^{-1}(b) & \text{si } b \in Im(f) \\
-                    a & \text{si } b \notin Im(f)
+                    b & \text{si } b \notin Im(f)
                 \end{cases} 
             \end{gather*}
 
@@ -225,7 +225,7 @@ $\iff \exists \; g:B \to A$ sobreyectiva.
                 \text{ y }
         \end{gather*}
         \begin{align*}
-            g\left(f(a)\right) &= \\
+            g\left(f(a)\right)
                 &= f^{-1}\left(f(a)\right) \notamath{$f(a) \in Im(f)$}\\
                 &= a \notamath{$f$ es inyectiva}
         \end{align*}
@@ -646,7 +646,7 @@ es decir, el cardinal más chico de los conjuntos infinitos es $\aleph_0$
     Defino $f(1) = x_1 \neq x_0$
 
     Notemos que si
-    $X \neq \{ x_0 \}$ fuera finito 
+    $X - \{ x_0 \}$ fuera finito 
     $\implies \overbrace{(X-\{x_0\})}^{\text{finito}}
     \cup \overbrace{\{ x_0 \}}^{\text{finito}} = X $ sería finito, lo cual
     es absurdo.
@@ -906,7 +906,7 @@ Por ejemplo, $0,05\widehat{9} = 0,06\widehat{0}$.
             Como $X$ es infinito $\implies \exists \; f: \mathbb{N} \to X$
             inyectiva.
 
-            \nota{Notemos que $f: \mathbb{N} \to B$ es biyectiva.}%
+            \nota{Notemos que $g: \mathbb{N} \to B$ es biyectiva.}%
             Llamamos $B = Im(f) \sim \mathbb{N}$ y $B \subseteq X$
 
             Luego, 
@@ -1362,7 +1362,7 @@ cualquier argumento y devuelven otra función.''}%
            \bigskip
            Veamos que $\Chi_C = h$
 
-           Sea $t \in X_1$.
+           Sea $t \in X_C$.
            \begin{align*}
                \Chi_C (t) = 1 & \\
                & \iff t \in C \\
@@ -1542,8 +1542,9 @@ La hipótesis está diciendo que no hay ningún conjunto entre $\aleph_0$ y $C$.
 \section{Truco visto en la práctica}
 
 \begin{itemize}
-    \item Definimos:
+    \item En algunos problemas podemos definir 
         \begin{gather*}
-            f : A \to B / f(x) = x \text{ inyectiva}
+            f : A \to B / f(x) = x
         \end{gather*}
+        Y demostrar fácilmente que $f$ es inyectiva.
 \end{itemize}
