@@ -934,11 +934,12 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
 
         Decimos que $A$ es \textit{expresable} o \textit{definible} en 
         $\mathcal{I}$ si existe 
-        $\alpha \in \mathrm{FORM}$ con una única  variable libre y todas las demás 
+        $\alpha \in \mathrm{FORM}$
+        con una única  variable libre y todas las demás 
         variables ligadas tal que
         \nota{Decimos que $\alpha(x)$ expresa $A$.}%
         \begin{gather*}
-            V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff a \in A
+            V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \iff x \in A
         \end{gather*}
 
         \medskip
@@ -950,8 +951,10 @@ Los casos en que $\alpha$ es verdadero o falso son los siguientes:
         \end{gather*}
         Es decir
         \begin{gather*}
-            \text{Si } a \in A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1\\
-            \text{Si } a \notin A \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x))=0
+            \text{Si } x \in A
+            \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 1 \\
+            \text{Si } x \notin A
+            \implies V_{\mathcal{I}, v_{x=a}} (\alpha(x)) = 0
         \end{gather*}
 
         \bigskip
