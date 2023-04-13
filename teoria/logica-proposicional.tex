@@ -4339,14 +4339,18 @@ es una prueba para $(\gamma \to \gamma)$
             la última fórmula pues cada uno de ellos es un axioma o se obtiene
             aplicando MP a partir de fórmulas anteriores.
 
-            Entonces, por HI, como $i \leq n$, $\alpha_i$ es una tautología.
+            Como obtuvimos $\alpha_{n+1}$ por MP, entonces existen
+            $i \leq n$
+            y
+            $j \leq n$
+            tales que
+            $\alpha_i = (\alpha_j \to \alpha_{n+1})$.
+
+            Luego, por HI, como $i \leq n$ resulta que
+            $\alpha_i$ es una tautología.
             Análogamente, como $j \leq n$, $\alpha_j$ es una tautología.
 
-            Como obtuvimos $\alpha_i$ por MP, entonces 
-            $\alpha_i = (\alpha_j \to \alpha_{n+1})$.
-            Análogo con $\alpha_j$.
-
-            Quiero ver que $\alpha_{n+1}$ es tautología.
+            Por último, quiero ver que $\alpha_{n+1}$ es tautología.
 
             Sea $v$ valuación.
 
