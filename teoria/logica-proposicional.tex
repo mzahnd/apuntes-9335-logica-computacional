@@ -3175,25 +3175,47 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 \begin{proof} \phantom{.}
 
     \begin{itemize}
-        \item $\implies$) Sea $v \text{ valuación}/ 
-            v(\Gamma \cup \{ \alpha \}) = 1$.
+        \item $\implies$) 
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \arabic*)]
+            \item Supongamos $\Gamma$ satisfacible. 
+                
+                Entonces sea $v \text{ valuación}/ 
+                v(\Gamma \cup \{ \alpha \}) = 1$.
 
-            Quiero ver que $v(\beta)=1$.
+                Quiero ver que $v(\beta)=1$.
 
-            \medskip
-            \begin{align*}
-                v(\Gamma) = 1 ~ &\wedge ~ v(\alpha) = 1 \\
-                1 &= v(\alpha\to\beta) = \max \{ 1 - 
-                    \overbrace{v(\alpha)}^{=1}, v(\beta) \} 
-                \notamath{Dato: $(\alpha\to\beta)\in C(\Gamma)$} \\
-                  &= v(\beta)
-            \end{align*}
+                \medskip
+                \begin{align*}
+                    v(\Gamma) = 1 ~ &\wedge ~ v(\alpha) = 1 \\
+                    1 &= v(\alpha\to\beta) = \max \{ 1 - 
+                        \overbrace{v(\alpha)}^{=1}, v(\beta) \} 
+                    \notamath{Dato: $(\alpha\to\beta)\in C(\Gamma)$} \\
+                      &= v(\beta)
+                \end{align*}
 
-            \begin{gather*}
-                \therefore ~ v(\beta) = 1
-            \end{gather*}
+                \begin{gather*}
+                    \therefore ~ v(\beta) = 1
+                \end{gather*}
+            
+            \item Sea $\Gamma$ instatisfacible.
 
-        \item $\impliedby$) Sea $v \text{ valuación}/ v(\Gamma)=1$
+                Luego
+                \begin{align*}
+                    \phantom{\implies}& C(\Gamma) = \mathrm{FORM} \\
+                    \implies& C(\Gamma \cup \{ \beta \}) = \mathrm{FORM} 
+                    \notamath{$\forall \beta \in \mathrm{FORM}$} \\
+                    \implies& \beta \in C(\Gamma \cup \{ \alpha \})
+                \end{align*}
+        
+        \end{enumerate}
+
+        \item $\impliedby$) 
 
             \begin{enumerate}[%
                             labelindent=*,
@@ -3202,6 +3224,25 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                             align=left,
                             leftmargin=2\parindent,
                             label=Caso \arabic*)]
+            
+            \item Sea $\Gamma$ instatisfacible
+
+                Luego
+                \begin{align*}
+                    \phantom{\implies}& C(\Gamma) = \mathrm{FORM} \\
+                    \implies& (\alpha \to \beta) \in C(\Gamma)
+                \end{align*}
+
+
+            \item Sea $\Gamma$ satisfacible y sea $v \text{ valuación}/ v(\Gamma)=1$
+
+            \begin{enumerate}[%
+                            labelindent=*,
+                            style=multiline,
+                            leftmargin=*,
+                            align=left,
+                            leftmargin=2\parindent,
+                            label=Caso \alph*)]
                 \item $v(\alpha)=1 \implies v(\Gamma \cup \{ \alpha \})=1$
 
                     Como $\beta \in C(\Gamma \cup \{ \alpha \})$, $v(\beta)=1$
@@ -3219,6 +3260,13 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                         =\max \{ 1-\underbrace{v(\alpha)}_{=0}, v(\beta)\}
                         = 1
                     \end{gather*}
+
+
+                    \begin{gather*}
+                        \therefore ~ (\alpha \to \beta) \in C(\Gamma)
+                    \end{gather*}
+            \end{enumerate}
+
             \end{enumerate}
     \end{itemize}
 \end{proof}
