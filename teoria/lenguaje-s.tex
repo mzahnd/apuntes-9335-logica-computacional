@@ -553,7 +553,7 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
             \bigskip
             \textbf{Notación:}
-            $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k)$ es el valor de $Y$
+            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_k)$ es el valor de $Y$
             en la descripción instantánea $d_k$.
 
         \item Existe una secuencia infinita $d_1, d_2, \dotsc$ siendo
@@ -562,8 +562,8 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
             \bigskip
             \textbf{Notación:}
-            $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k) = \uparrow$ significa
-            que $\Psi_{\mathcal{P}}^{k} (u_1, \dotsc, u_k)$ está indefinido.
+            $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_k) = \uparrow$ significa
+            que $\Psi_{\mathcal{P}}^{m} (u_1, \dotsc, u_k)$ está indefinido.
     \end{enumerate}
 \end{definicion}
 
@@ -571,7 +571,7 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
 
 \begin{definicion}{Función parcialmente computable}{}
     Una función $f$ es parcialmente computable si existe un programa 
-    $\mathcal{P}$ tal que $f = \Psi_{\mathcal{P}}^k$
+    $\mathcal{P}$ tal que $f = \Psi_{\mathcal{P}}^m$
 
     \medskip
 
@@ -579,9 +579,9 @@ El cómputo a partir de $d_1 = \{ 1, X_1 = 2, Y = 0 \}$ es:
     \begin{itemize}
         \item Si $x \in Dom(f) \implies$
             \nota{Para todo \\$(u_1, \dotsc, u_m) \in \mathbb{N}^k$}%
-            $f(u_1, \dotsc, u_k) = \Psi_{\mathcal{P}}^k (u_1, \dotsc, u_k)$
+            $f(u_1, \dotsc, u_k) = \Psi_{\mathcal{P}}^m (u_1, \dotsc, u_k)$
     \item Si $x \notin Dom(f) \implies$
-            $\Psi_{\mathcal{P}}^k (x_1, \dotsc, x_k) = \uparrow$
+            $\Psi_{\mathcal{P}}^m (x_1, \dotsc, x_k) = \uparrow$
     \end{itemize}
 \end{definicion}
 
