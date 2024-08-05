@@ -10,3 +10,4 @@
 - David Wischñevsky
 - Felipe Mindlin
 - Jonathan Liu
+- Tomás Pietravallo
