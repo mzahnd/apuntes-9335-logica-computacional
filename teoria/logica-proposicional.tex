@@ -2318,20 +2318,21 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
     \end{itemize}
 \end{proof}
 
+\nota{Recuerdo:\\
+    $f_{\alpha} (a_0, \dotsc, a_{n-1}) 
+    = v_{f_{(a_0, \dotsc, a_{n-1})}} (\alpha)$
+
+    $f_{(a_0, \dotsc, a_{n-1})} (p_k) = \begin{cases}
+        a_i & \text{si } k=i \\
+        0 & \text{sino}
+    \end{cases}$
+}%
+
 \begin{teorema}{}{}
     Sea $f: {\{ 0, 1 \}}^n \to \{ 0, 1 \}$ función booleana.
 
     \medskip
 
-    \nota{Recuerdo:\\
-        $f_{\alpha} (a_0, \dotsc, a_{n-1}) 
-        = v_{f_{(a_0, \dotsc, a_{n-1})}} (\alpha)$
-
-        $f_{(a_0, \dotsc, a_{n-1})} (p_k) = \begin{cases}
-            a_i & \text{si } k=i \\
-            0 & \text{sino}
-        \end{cases}$
-    }%
     Existe $\alpha \in F$ tal que 
     $var(\alpha) \subseteq \{ p_0, \dotsc, p_{n-1} \}$
     y
@@ -2487,10 +2488,21 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
 
     \item $C = \{ \wedge, \vee, \neg, \to, \leftrightarrow \}$ es adecuado.
         \begin{proof} \phantom{.}
+
+    \nota{\textit{Noni:} ``Esta técnica [en el item 3] sirve para 
+        muchos ejemplos de no adecuados (pero no para todos).''\\
+        \textit{Noni:} ``Si digo «\underline{La} novia de Juan» 
+        está clarísimo que tiene una única novia; «\underline{Una} 
+        novia de Juan» implica que puede haber más.
+        Lo mismo ocurre acá: al decir «\underline{la}» 
+        es única.''}%
         
         Es trivial porque tiene más conectivos. Puedo escribir las fórmulas
         con $\{ \wedge, \vee, \neg, \to \}$ y, además, le estoy agregando
         un conectivo.
+
+        %\nota{}%
+
         \begin{gather*}
             \alpha \leftrightarrow \beta 
             \equiv (\alpha \to \beta) \wedge (\beta \to \alpha)
@@ -2498,19 +2510,12 @@ $f_\alpha(a) = v_{f_a} (\alpha)$
         \end{proof}
 
     \item $C = \{ \wedge, \to \}$ no es adecuado. 
-        \nota{\textit{Noni:} ``Esta técnica sirve para 
-        muchos ejemplos de no adecuados (pero no para todos).''}%
         \begin{proof} \phantom{.}
         
             Defino $f: \mathrm{VAR} \to \{ 0,1 \} / f(p_j) = 1$. Sea $v_f$ la 
             valuación que extiende a $f$.
 
             Veamos que $v_f(\alpha) = 1$ $\forall \alpha \in F_C$.
-            \nota{\textit{Noni:} ``Si digo «\underline{La} novia de Juan»
-                está clarísimo que tiene una única novia; «\underline{Una} 
-                novia de Juan» implica que puede haber más.
-                Lo mismo ocurre acá: al decir «\underline{la}» 
-                es única.''}%
 
             Sea $c(\alpha) = $ cantidad de veces que aparece $\wedge, \to$ en
             $\alpha$. Por inducción en $c$:
@@ -5513,10 +5518,6 @@ existe un maximal consistente que lo contiene.
     es consistente.
 
 \end{proof}
-
-\bigskip
-
-\bigskip
 
 \textbf{Importante:} En este capítulo finaliza la teoría para el primer 
 parcial. Queda por estudiar Álgebra de Boole (del apunte de la cátedra) que 
