@@ -748,9 +748,11 @@ que es una cadena de formación minimal.
 \subsection{Cadena de formación minimal}
 
 \begin{definicion}{Cadena de formación minimal}{}
-    Una cadena de formación es minimal si la única subcadena que tiene es
-    ella misma.
+        \nota{Noni: ``{Significa que no se le puede quitar ningun eslabón}''}%
+        Una cadena de formación es minimal si la única subcadena que tiene es ella misma.
 \end{definicion}
+
+
 
 \medskip
 \textit{Observación:}
@@ -3174,31 +3176,22 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
     \end{gather*}
 \end{teorema}
 
-\nota{\textit{Noni}: ``Es similar a las anteriores, inténten demostrarlo
- ustedes. Estos teoremas los tomamos mucho en los finales.''}%
+\nota{\textit{Noni}: ``Es similar a las anteriores, intenten demostrarlo 
+ustedes. Estos teoremas los tomamos mucho en los finales.''}%
 
 \begin{proof} \phantom{.}
 
     \begin{itemize}
         \item $\implies$) 
-            \begin{enumerate}[%
-                            labelindent=*,
-                            style=multiline,
-                            leftmargin=*,
-                            align=left,
-                            leftmargin=2\parindent,
-                            label=Caso \arabic*)]
-            \item Supongamos $\Gamma$ satisfacible. 
-                
-                Entonces sea $v \text{ valuación}/ 
-                v(\Gamma \cup \{ \alpha \}) = 1$.
+            Sea $v \text{ valuación}/ 
+                v(\Gamma \cup \{ \alpha \}) = 1$
 
                 Quiero ver que $v(\beta)=1$.
 
                 \medskip
                 \begin{align*}
                     v(\Gamma) = 1 ~ &\wedge ~ v(\alpha) = 1 \\
-                    1 &= v(\alpha\to\beta) = \max \{ 1 - 
+                    \text{Como } (\alpha \to \beta) \in C(\Gamma), \; 1 &= v(\alpha\to\beta) = \max \{ 1 - 
                         \overbrace{v(\alpha)}^{=1}, v(\beta) \} 
                     \notamath{Dato: $(\alpha\to\beta)\in C(\Gamma)$} \\
                       &= v(\beta)
@@ -3206,21 +3199,9 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
 
                 \begin{gather*}
                     \therefore ~ v(\beta) = 1
-                \end{gather*}
-            
-            \item Sea $\Gamma$ instatisfacible.
-
-                Luego
-                \begin{align*}
-                    \phantom{\implies}& C(\Gamma) = \mathrm{FORM} \\
-                    \implies& C(\Gamma \cup \{ \alpha \}) = \mathrm{FORM} 
-                    \notamath{$\forall \beta \in \mathrm{FORM}$} \\
-                    \implies& \beta \in C(\Gamma \cup \{ \alpha \})
-                \end{align*}
-        
-        \end{enumerate}
-
-        \item $\impliedby$) 
+                \end{gather*} \\
+                
+        \item $\impliedby$) Sea $v \text{ valuación}/ v(\Gamma)=1$
 
             \begin{enumerate}[%
                             labelindent=*,
@@ -3229,25 +3210,6 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                             align=left,
                             leftmargin=2\parindent,
                             label=Caso \arabic*)]
-            
-            \item Sea $\Gamma$ instatisfacible
-
-                Luego
-                \begin{align*}
-                    \phantom{\implies}& C(\Gamma) = \mathrm{FORM} \\
-                    \implies& (\alpha \to \beta) \in C(\Gamma)
-                \end{align*}
-
-
-            \item Sea $\Gamma$ satisfacible y sea $v \text{ valuación}/ v(\Gamma)=1$
-
-            \begin{enumerate}[%
-                            labelindent=*,
-                            style=multiline,
-                            leftmargin=*,
-                            align=left,
-                            leftmargin=2\parindent,
-                            label=Caso \alph*)]
                 \item $v(\alpha)=1 \implies v(\Gamma \cup \{ \alpha \})=1$
 
                     Como $\beta \in C(\Gamma \cup \{ \alpha \})$, $v(\beta)=1$
@@ -3270,8 +3232,6 @@ $\exists \; v \text{ valuación}/ v(\Gamma) = 1 \text{ y } v(\alpha) = 0$
                     \begin{gather*}
                         \therefore ~ (\alpha \to \beta) \in C(\Gamma)
                     \end{gather*}
-            \end{enumerate}
-
             \end{enumerate}
     \end{itemize}
 \end{proof}
